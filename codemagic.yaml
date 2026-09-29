@@ -29,7 +29,7 @@ workflows:
           done <<< "$ids"
           echo "iOS bundle identifier is com.hatemhusam.lexora"
       - name: Build iOS Simulator release
-        script: flutter build ios --simulator --release
+        script: flutter build ios --simulator --debug
       - name: Package Runner.app for Appetize
         script: |
           set -euo pipefail
