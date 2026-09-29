@@ -1,0 +1,51 @@
+workflows:
+  ios-simulator:
+    name: ios-simulator
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: 3.47.5
+      xcode: latest
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Verify iOS bundle identifier
+        script: |
+          set -euo pipefail
+          ids=$(
+            grep -E 'PRODUCT_BUNDLE_IDENTIFIER = ' ios/Runner.xcodeproj/project.pbxproj \
+              | grep -v RunnerTests \
+              | sed 's/.*PRODUCT_BUNDLE_IDENTIFIER = //; s/;//'
+          )
+          if [ -z "$ids" ]; then
+            echo "App bundle identifier was not found."
+            exit 1
+          fi
+          while IFS= read -r id; do
+            if [ "$id" != "com.hatemhusam.lexora" ]; then
+              echo "Expected com.hatemhusam.lexora, found: $id"
+              exit 1
+            fi
+          done <<< "$ids"
+          echo "iOS bundle identifier is com.hatemhusam.lexora"
+      - name: Build iOS Simulator release
+        script: flutter build ios --simulator --release
+      - name: Package Runner.app for Appetize
+        script: |
+          set -euo pipefail
+          app_path="build/ios/iphonesimulator/Runner.app"
+          if [ ! -d "$app_path" ]; then
+            echo "Missing $app_path"
+            exit 1
+          fi
+          ditto -c -k --keepParent "$app_path" "$CM_BUILD_DIR/Lexora-iOS-Simulator.zip"
+          first=$(unzip -Z1 "$CM_BUILD_DIR/Lexora-iOS-Simulator.zip" | head -n 1)
+          case "$first" in
+            Runner.app|Runner.app/*) ;;
+            *)
+              echo "Zip must contain Runner.app at its root. Found: $first"
+              exit 1
+              ;;
+          esac
+    artifacts:
+      - Lexora-iOS-Simulator.zip
