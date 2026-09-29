@@ -1,0 +1,198 @@
+# lemma|pos|cefr|arabic|definition|example|forms|links|flags
+# Practice entries only. Not an official CEFR list.
+day|noun|A1|يوم|A period of twenty-four hours.|I start my day at home.|days|daily-life:primary|-
+time|noun|A1|وقت|The moment when something happens.|What time do you eat?|times|daily-life:high|-
+week|noun|A1|أسبوع|A period of seven days.|I see my family every week.|weeks|daily-life:medium|-
+name|noun|A1|اسم|The word people use for a person or thing.|My name is on the door.|names|daily-life:high,social:low|-
+home|noun|A1|بيت|The place where a person lives.|I go home after school.|-|daily-life:medium,home:primary|-
+family|noun|A1|عائلة|Parents and children who live together.|My family eats together.|families|family:primary,daily-life:medium,social:medium|-
+mother|noun|A1|أم|A female parent.|My mother cooks in the kitchen.|mothers|family:primary|-
+father|noun|A1|أب|A male parent.|My father reads the news.|fathers|family:high|-
+child|noun|A1|طفل|A young boy or girl.|The child learns at home.|children|family:high,daily-life:medium|-
+boy|noun|A1|ولد|A male child.|The boy plays a game.|boys|family:medium|-
+girl|noun|A1|بنت|A female child.|The girl reads a book.|girls|family:medium|-
+friend|noun|A1|صديق|A person you like and spend time with.|I meet a friend after class.|friends|social:primary|-
+party|noun|A2|حفلة|A social gathering with friends.|We have a small party on Friday.|parties|social:high,entertainment:medium|-
+invitation|noun|A2|دعوة|A request for someone to come.|I send an invitation to my friend.|invitations|social:primary|-
+house|noun|A1|منزل|A building where people live.|Our house has a small kitchen.|houses|home:primary|-
+room|noun|A1|غرفة|A separate space inside a building.|The hotel room is quiet.|rooms|home:high,hotel:medium|-
+door|noun|A1|باب|The entrance you open to go in.|Please close the door.|doors|home:medium|-
+bed|noun|A1|سرير|A piece of furniture for sleeping.|The bed is in the room.|beds|home:medium|-
+kitchen|noun|A2|مطبخ|The room where people cook.|She cooks bread in the kitchen.|kitchens|home:high,food:medium|-
+table|noun|A1|طاولة|A piece of furniture with a flat top.|The menu is on the table.|tables|home:low,restaurant:low|-
+food|noun|A1|طعام|Things people eat.|Fresh food is on the table.|-|food:primary,restaurant:medium|-
+bread|noun|A1|خبز|A baked food made from flour.|I buy bread at the shop.|-|food:high,supermarket:medium|-
+water|noun|A1|ماء|The clear liquid people drink.|Please bring a glass of water.|-|food:medium,health:low|-
+milk|noun|A1|حليب|A white drink from cows.|The child drinks milk.|-|food:medium|-
+apple|noun|A1|تفاحة|A round fruit with red or green skin.|I eat an apple at lunch.|apples|food:low,supermarket:low|-
+cook|verb|A2|يطبخ|To prepare food with heat.|She cooks rice for the family.|cooks,cooked,cooking|food:high|-
+menu|noun|A2|قائمة الطعام|A list of dishes in a restaurant.|The waiter brings the menu.|menus|restaurant:primary|-
+waiter|noun|A2|نادل|A person who serves food in a restaurant.|The waiter takes our order.|waiters|restaurant:high|-
+reservation|noun|B1|حجز|A booking you make before you arrive.|I have a reservation at the hotel.|reservations|restaurant:primary,hotel:primary,travel:high|ielts
+shop|noun|A1|متجر|A place where people buy things.|The shop sells bread and milk.|shops|supermarket:primary|-
+price|noun|A1|سعر|The amount of money something costs.|The price of bread is low.|prices|supermarket:high,money:high,economy:medium|-
+customer|noun|B1|زبون|A person who buys something.|The customer pays at the shop.|customers|supermarket:high,business:medium|-
+clothes|noun|A2|ملابس|Things people wear.|These clothes are the right size.|-|fashion:primary|-
+shirt|noun|A2|قميص|A piece of clothing for the upper body.|He buys a blue shirt.|shirts|fashion:high|-
+size|noun|A2|مقاس|How big or small something is.|What size shirt do you need?|sizes|fashion:medium|-
+sport|noun|A2|رياضة|A physical game or activity.|Football is a popular sport.|sports|sports:primary|-
+team|noun|A2|فريق|A group of people who play together.|Our team wins the match.|teams|sports:high|-
+match|noun|A2|مباراة|A game between two teams.|We watch the match on television.|matches|sports:high,entertainment:medium|-
+song|noun|A2|أغنية|Music with words.|They play a song at the party.|songs|entertainment:primary|-
+game|noun|A2|لعبة|An activity with rules and a winner.|The children play a game.|games|entertainment:high,sports:medium|-
+ticket|noun|A2|تذكرة|A paper or pass that lets you enter or travel.|I buy a ticket for the train.|tickets|entertainment:medium,travel:high,airport:medium,movies:medium|-
+movie|noun|A2|فيلم|A story shown on a screen.|We watch a movie on Friday.|movies|movies:primary,entertainment:high|-
+actor|noun|A2|ممثل|A person who plays a character in a film.|The actor is famous.|actors|movies:high|-
+screen|noun|A2|شاشة|The flat surface where a film or page appears.|The movie is on the big screen.|screens|movies:medium,technology:low|-
+prayer|noun|A2|صلاة|Words people say in worship.|They meet for prayer on Friday.|prayers|religion:primary|-
+faith|noun|B1|إيمان|A strong belief, often religious.|Faith is part of daily life for many people.|-|religion:high|-
+festival|noun|B1|مهرجان|A special public celebration.|The city holds a festival every year.|festivals|religion:medium,culture:high|-
+school|noun|A1|مدرسة|A place where children learn.|She goes to school every day.|schools|education:primary,university:high,daily-life:medium|-
+student|noun|A2|طالب|A person who studies at school or university.|The student reads before class.|students|education:high,university:medium|-
+teacher|noun|A2|معلم|A person who helps students learn.|The teacher explains the lesson.|teachers|education:high|-
+book|noun|A1|كتاب|A set of pages with a story or information.|I read a book at home.|books|entertainment:medium,culture:low|-
+study|verb|B2|يدرس|To spend time learning a subject.|I study academic research at the university.|studies,studied,studying|education:high,university:high|-
+university|noun|B1|جامعة|A place for higher study after school.|The university has a large campus.|universities|university:primary,education:high|-
+lecture|noun|B1|محاضرة|A talk a teacher gives to a class.|The lecture starts at nine.|lectures|university:high,academic-research:medium|toefl
+campus|noun|B1|الحرم الجامعي|The land and buildings of a university.|Students walk across the campus.|campuses|university:high|toefl
+academic|adjective|C1|أكاديمي|Related to study and research at a university.|She writes an academic paper.|-|university:primary,academic-research:primary,education:high|academic
+research|noun|B2|بحث|Careful study to find new facts.|The research looks at climate change.|-|academic-research:primary,university:high,science:medium|academic
+theory|noun|B2|نظرية|An idea that explains how something works.|The theory needs more evidence.|theories|academic-research:high,science:medium|academic
+hypothesis|noun|C1|فرضية|An idea you test with evidence.|The hypothesis is still unproved.|hypotheses|academic-research:high,science:high|academic
+writing|noun|A2|كتابة|The activity or result of writing text.|Clear writing helps the reader.|-|education:high,university:medium|toefl
+vocabulary|noun|B2|مفردات|The words a person knows in a language.|A wide vocabulary helps you read.|-|education:high,university:medium|academic
+job|noun|A2|وظيفة|Work that a person does for pay.|She starts a new job on Monday.|jobs|work:primary|-
+office|noun|A2|مكتب|A room where people do business work.|The meeting is in the office.|offices|work:high|-
+work|verb|B2|يعمل|To do a job or task.|They work on the software every day.|works,worked,working|work:primary|-
+meeting|noun|B1|اجتماع|A time when people gather to talk about work.|The meeting starts after lunch.|meetings|work:high,business:high|-
+experience|noun|B1|خبرة|Knowledge you get by doing something.|The job needs some experience.|experiences|work:high,education:medium|-
+develop|verb|B2|يطوّر|To make something grow or become better.|They develop software for schools.|develops,developed,developing|work:high,software:high,technology:medium,education:medium|-
+development|noun|B2|تطوير|The process of making something better.|Software development takes time.|developments|work:medium,software:medium,technology:medium|academic
+interview|noun|B1|مقابلة|A formal meeting where someone asks you questions.|The interview is at the office.|interviews|job-interviews:primary,work:medium|ielts
+resume|noun|B1|سيرة ذاتية|A short written history of your work and study.|Bring your resume to the interview.|resumes|job-interviews:primary|-
+candidate|noun|B1|مرشح|A person who applies for a job or position.|The candidate answers every question.|candidates|job-interviews:high,elections:low|-
+technology|noun|B2|تكنولوجيا|Tools and systems built with science.|New technology changes daily work.|technologies|technology:primary|-
+device|noun|B2|جهاز|A small machine made for a purpose.|This device connects to the internet.|devices|technology:high|-
+internet|noun|B1|إنترنت|The global network that connects computers.|I read the news on the internet.|-|internet:primary,technology:high|-
+website|noun|A2|موقع إلكتروني|A set of pages on the internet.|The school website shows the timetable.|websites|internet:high|-
+email|noun|A2|بريد إلكتروني|A message sent through the internet.|I send an email to my teacher.|emails|internet:high,work:low|-
+software|noun|B1|برمجيات|Programs that tell a computer what to do.|The team develops new software.|-|software:primary,technology:high|-
+program|noun|B1|برنامج|A set of instructions a computer follows.|This program saves the file.|programs|software:high|-
+code|noun|B2|شفرة برمجية|The instructions written to build software.|She writes code for the app.|-|software:high,technology:medium|-
+password|noun|A2|كلمة مرور|A secret word that lets you enter a system.|Use a strong password.|passwords|cybersecurity:primary,internet:medium|-
+virus|noun|B1|فيروس|A harmful program that spreads to computers.|A virus can damage the software.|viruses|cybersecurity:high|-
+vulnerability|noun|C1|ثغرة|A weak point that an attacker can use.|The team fixes the vulnerability.|vulnerabilities|cybersecurity:primary,technology:high|-
+encryption|noun|C1|تشفير|A way to hide information so others cannot read it.|Encryption protects the password.|-|cybersecurity:high|-
+robot|noun|B1|روبوت|A machine that can do tasks by itself.|The robot moves across the room.|robots|ai:primary,technology:medium|-
+algorithm|noun|B2|خوارزمية|A set of steps a computer follows to solve a problem.|The algorithm sorts the names.|algorithms|ai:primary,software:medium|-
+intelligence|noun|B2|ذكاء|The ability to learn and solve problems.|The course explains machine intelligence.|-|ai:high|-
+doctor|noun|A1|طبيب|A person trained to treat illness.|The doctor works at the hospital.|doctors|health:primary,hospital:high|-
+health|noun|A2|صحة|The condition of a person's body.|Good food supports health.|-|health:primary|-
+medicine|noun|B1|دواء|A substance used to treat illness.|Take the medicine after food.|medicines|health:high,hospital:medium|-
+hospital|noun|A2|مستشفى|A place where doctors treat sick people.|The hospital is near the city.|hospitals|hospital:primary,health:high|-
+nurse|noun|B1|ممرض|A person who cares for patients.|The nurse checks the patient.|nurses|hospital:high|-
+emergency|noun|B1|طوارئ|A sudden dangerous situation that needs help now.|Call for help in an emergency.|emergencies|hospital:high,disasters:medium|-
+flood|noun|B1|فيضان|A large amount of water covering the land.|The flood closes the street.|floods|disasters:primary|-
+earthquake|noun|B1|زلزال|A sudden shaking of the ground.|The earthquake damages some houses.|earthquakes|disasters:primary|-
+warning|noun|B1|تحذير|A message that tells people about danger.|The warning comes before the storm.|warnings|disasters:high,news:medium|-
+money|noun|A1|مال|Coins and notes used to buy things.|I pay with cash money.|-|money:primary|-
+bank|noun|B1|بنك|A business that keeps and lends money.|She keeps her money in the bank.|banks|money:high,business:medium|-
+company|noun|B1|شركة|A business organization.|The company has an office downtown.|companies|business:primary|-
+contract|noun|B1|عقد|A written agreement between people or companies.|They sign the contract today.|contracts|business:high|-
+market|noun|B2|سوق|The system of buying and selling.|The market reacts to the news.|markets|economy:primary,business:medium|-
+tax|noun|B2|ضريبة|Money people must pay to the government.|The new tax starts next year.|taxes|economy:high,government:medium|-
+inflation|noun|B2|تضخم|A general rise in prices.|Inflation makes food more expensive.|-|economy:high|-
+news|noun|A2|أخبار|Reports about recent events.|I read the news every morning.|-|news:primary|-
+report|noun|B1|تقرير|A written or spoken account of events.|The report explains the flood.|reports|news:high|-
+journalist|noun|B2|صحفي|A person who reports the news.|The journalist asks the minister a question.|journalists|news:high|-
+culture|noun|B1|ثقافة|The shared customs and ideas of a group.|Food is part of local culture.|cultures|culture:primary|-
+tradition|noun|B1|تقليد|A custom passed from older people to younger ones.|The festival follows an old tradition.|traditions|culture:high|-
+border|noun|B1|حدود|The line between two countries.|They cross the border with a visa.|borders|immigration:primary|-
+visa|noun|B1|تأشيرة|Official permission to enter a country.|The visa is in the passport.|visas|immigration:high,travel:medium,airport:medium|-
+refugee|noun|B2|لاجئ|A person who leaves home because of danger.|The refugee needs shelter and aid.|refugees|immigration:primary,humanitarian:high|-
+police|noun|A2|شرطة|The public force that keeps order and enforces law.|The police help after the accident.|-|police:primary|-
+law|noun|B1|قانون|An official rule of a country.|The law protects people's rights.|laws|police:high,courts:medium|-
+crime|noun|B1|جريمة|An act that breaks the law.|The police investigate the crime.|crimes|police:high|-
+court|noun|B1|محكمة|The place where a judge hears a case.|The trial is in the court.|courts|courts:primary|-
+judge|noun|B2|قاض|The official who decides a case in court.|The judge listens to both sides.|judges|courts:high|-
+trial|noun|B2|محاكمة|The process of deciding a case in court.|The trial lasts three days.|trials|courts:high|-
+government|noun|B1|حكومة|The group that runs a country.|The government announces a new policy.|governments|government:primary,politics:medium|-
+minister|noun|B2|وزير|A senior member of a government.|The minister speaks to journalists.|ministers|government:high,politics:medium|-
+policy|noun|B2|سياسة عامة|An official plan for dealing with a problem.|The health policy helps hospitals.|policies|government:high|-
+politics|noun|B1|سياسة|Activities about government power and public decisions.|Students debate politics on campus.|-|politics:primary|-
+debate|noun|B2|نقاش|A formal discussion of different views.|The debate is about the election.|debates|politics:high|-
+campaign|noun|B2|حملة|Organized work to win support.|The campaign asks people to vote.|campaigns|politics:high,elections:medium|-
+election|noun|B1|انتخاب|The event when people choose their leaders.|The election is next month.|elections|elections:primary,politics:high|-
+vote|verb|B1|يصوّت|To make an official choice in an election.|Citizens vote on election day.|votes,voted,voting|elections:primary|-
+ballot|noun|B2|ورقة اقتراع|The paper or form used to vote.|Put the ballot in the box.|ballots|elections:high|-
+diplomacy|noun|C1|دبلوماسية|The work of managing relations between countries.|Diplomacy can prevent a wider conflict.|-|diplomacy:primary|-
+embassy|noun|B2|سفارة|The official office of one country in another.|The visa office is at the embassy.|embassies|diplomacy:high|-
+negotiation|noun|B2|تفاوض|A discussion that tries to reach an agreement.|The negotiation reduced the conflict.|negotiations|diplomacy:primary,peace:primary,war:high|ielts
+ceasefire|noun|C1|وقف إطلاق النار|An agreement to stop fighting for a time.|They agreed on a ceasefire.|ceasefires|war:primary,diplomacy:high,news:primary,peace:high|-
+conflict|noun|B2|نزاع|A serious fight or disagreement.|The conflict harmed many civilians.|conflicts|war:primary,news:high|-
+war|noun|B1|حرب|A long armed fight between groups or countries.|The news reports on the war.|wars|war:primary,military:medium,news:medium|-
+army|noun|B1|جيش|A country's organized armed forces.|The army protects the border.|armies|military:primary|-
+soldier|noun|B1|جندي|A person who serves in an army.|The soldier returns home.|soldiers|military:high|-
+defense|noun|B2|دفاع|The act of protecting a country or a person.|National defense is a public topic.|-|military:high|-
+peace|noun|B1|سلام|A time without war.|People hope the talks bring peace.|-|peace:primary|-
+agreement|noun|B1|اتفاق|A decision that two sides accept.|The agreement ends the dispute.|agreements|peace:high,diplomacy:medium,business:low|-
+treaty|noun|B2|معاهدة|A formal agreement between countries.|The countries sign a peace treaty.|treaties|un:primary,diplomacy:high,peace:medium|-
+charter|noun|C1|ميثاق|A formal document that states principles or rights.|The charter lists basic rights.|charters|un:primary|-
+delegation|noun|C1|وفد|A group sent to speak for a country or organization.|The delegation arrives for the talks.|delegations|un:high,diplomacy:medium|-
+rights|noun|B1|حقوق|The freedoms and protections people should have.|The law protects basic rights.|-|human-rights:primary|-
+freedom|noun|B1|حرية|The power to act and speak without unfair control.|Freedom of speech is a basic right.|-|human-rights:high|-
+equality|noun|B2|مساواة|The state of having the same rights and chances.|The policy supports equality.|-|human-rights:high|-
+aid|noun|B1|إغاثة|Help given to people in serious need.|Aid arrives after the flood.|-|humanitarian:primary|-
+shelter|noun|B2|مأوى|A safe place to stay.|The family finds shelter after the earthquake.|shelters|humanitarian:high,disasters:medium|-
+environment|noun|B1|بيئة|The natural world around us.|Pollution harms the environment.|-|environment:primary,science:high|ielts
+climate|noun|B1|مناخ|The usual weather pattern of a place.|Climate research studies rising heat.|-|environment:high|-
+pollution|noun|B1|تلوث|Dirty or harmful substances in air, water, or land.|Traffic pollution is high in the city.|-|environment:high|-
+science|noun|B1|علم|The careful study of the natural world.|Science class includes an experiment.|-|science:primary|-
+experiment|noun|B2|تجربة|A test done to learn what happens.|The students run a simple experiment.|experiments|science:high|-
+energy|noun|B1|طاقة|Power that makes things move or work.|The city wants cleaner energy.|-|science:medium,environment:medium|-
+want|verb|A1|يريد|To feel that you would like something.|I want a glass of water.|wants,wanted,wanting|daily-life:medium|-
+go|verb|A1|يذهب|To move from one place to another.|We go to school by bus.|goes,went,going|daily-life:low,travel:low|-
+travel|verb|A2|يسافر|To go from one place to another, often far away.|I travel to the airport with a hotel reservation.|travels,traveled,travelled,traveling,travelling|travel:primary,transportation:high,airport:medium|-
+train|noun|A2|قطار|A line of carriages that runs on rails.|They travel by train.|trains|transportation:primary,travel:high|-
+bus|noun|A1|حافلة|A large vehicle that carries many passengers.|The bus stops near the school.|buses|transportation:primary|-
+car|noun|A1|سيارة|A road vehicle for a small number of people.|We go to the city by car.|cars|transportation:high|-
+map|noun|A2|خريطة|A drawing that shows places and roads.|The map shows the street.|maps|directions:primary,travel:medium|-
+street|noun|A2|شارع|A road in a town with buildings along it.|The hotel is on this street.|streets|directions:high|-
+city|noun|A1|مدينة|A large town.|The city has a busy airport.|cities|directions:high,travel:medium|-
+plane|noun|A2|طائرة|A vehicle that flies.|The plane leaves in the morning.|planes|airport:primary,travel:high|-
+airport|noun|A2|مطار|A place where planes take off and land.|I travel to the airport early.|airports|airport:primary,travel:high|-
+passport|noun|A2|جواز سفر|An official book that shows who you are when you travel.|Show your passport at the airport.|passports|airport:high,travel:medium|-
+hotel|noun|A2|فندق|A building where travelers pay to stay.|The hotel reservation is for two nights.|hotels|hotel:primary,travel:high|-
+guest|noun|A2|نزيل|A person staying at a hotel or visiting a home.|The guest checks in at noon.|guests|hotel:high|-
+bag|noun|A2|حقيبة|A container you carry when you travel.|The bag is under the seat.|bags|travel:medium,airport:medium|-
+trip|noun|A2|رحلة|A journey to a place and back.|The trip includes a train ticket.|trips|travel:high|-
+enhance|verb|B2|يحسّن|To improve the quality of something.|Good examples enhance a lesson.|enhances,enhanced,enhancing|work:medium,education:medium|-
+comprehensive|adjective|C1|شامل|Including all or nearly all of the parts.|The report is comprehensive and clear.|-|academic-research:medium,education:medium|academic
+ubiquitous|adjective|C2|موجود في كل مكان|Seeming to be present everywhere.|Smartphones feel ubiquitous in the city.|-|technology:medium,internet:low|-
+paradigm|noun|C2|نموذج فكري|A widely accepted way of thinking about a field.|The paradigm shifts after new evidence.|paradigms|academic-research:low,science:low|-
+meticulous|adjective|C2|دقيق جداً|Showing very careful attention to detail.|Her meticulous notes help the research.|-|academic-research:low|-
+inevitable|adjective|C2|حتمي|Certain to happen and not avoidable.|A long conflict made talks inevitable.|-|war:low,news:low|-
+nuance|noun|C2|فارق دقيق|A small difference in meaning or feeling.|The translation misses a nuance.|nuances|culture:medium,academic-research:low|-
+unprecedented|adjective|C2|غير مسبوق|Never having happened in this way before.|The flood is unprecedented in this city.|-|news:medium|-
+quintessential|adjective|C2|النموذج الأوضح|The most typical example of something.|This festival is a quintessential local tradition.|-|culture:low|-
+esoteric|adjective|C2|متخصص وغامض|Understood by only a small specialized group.|The lecture feels esoteric to new students.|-|academic-research:low,science:low|-
+humanitarian|adjective|C1|إنساني|Concerned with reducing human suffering.|Humanitarian aid reaches the camp.|-|humanitarian:primary|-
+legislation|noun|C1|تشريع|Laws made by a government.|New legislation changes the tax rules.|-|government:medium,police:medium|-
+sovereignty|noun|C1|سيادة|A country's full right to govern itself.|The treaty respects national sovereignty.|-|diplomacy:medium,government:low|-
+civilian|noun|C1|مدني|A person who is not in the armed forces.|Civilians leave the area during the conflict.|civilians|war:high,news:medium|-
+referendum|noun|C1|استفتاء|A public vote on one political question.|The referendum asks voters about the policy.|referendums|elections:medium,politics:medium|-
+asylum|noun|C1|لجوء|Protection a country gives to a person who cannot return home safely.|She applies for asylum at the border.|-|immigration:high,humanitarian:medium|-
+infrastructure|noun|C1|بنية تحتية|Basic systems such as roads, power, and networks.|The flood damages local infrastructure.|-|technology:low,government:low,disasters:low|-
+curriculum|noun|C1|منهج|The planned subjects taught in a school or university.|The curriculum includes academic writing.|curricula|education:medium,university:medium|-
+ephemeral|adjective|C2|عابر|Lasting for only a short time.|Online trends are often ephemeral.|-|entertainment:low,internet:low|-
+juxtaposition|noun|C2|تجاور|The act of placing two things side by side to compare them.|The essay uses juxtaposition of two cities.|-|academic-research:low,culture:low|-
+write|verb|A2|يكتب|To put words on paper or a screen.|Students write a short report.|writes,wrote|education:medium|-
+speak|verb|A2|يتكلم|To say words aloud.|They speak with the guest.|speaks,spoke,speaking|social:medium,education:low|-
+listen|verb|A2|يستمع|To pay attention to a sound or a person.|We listen to the lecture.|listens,listened,listening|education:low,entertainment:low|-
+learn|verb|A2|يتعلم|To gain knowledge or a skill.|Children learn new words at school.|learns,learned,learning|education:high|-
+help|verb|A1|يساعد|To make another person's task easier.|Friends help each other.|helps,helped,helping|family:low,daily-life:low|-
+pay|verb|A2|يدفع|To give money for something.|Customers pay the price at the shop.|pays,paid,paying|money:high,supermarket:medium|-
+meet|verb|A2|يقابل|To come together with someone.|I meet my friend at the station.|meets,met|social:medium,work:low|-
+read|verb|A2|يقرأ|To look at writing and understand it.|I read the news on the train.|reads,reading|education:medium,entertainment:low|-
+play|verb|A2|يلعب|To take part in a game or sport.|The team plays on Saturday.|plays,played,playing|sports:medium,entertainment:medium|-
+watch|verb|A2|يشاهد|To look at something for a period of time.|We watch the movie at home.|watches,watched,watching|movies:medium,entertainment:medium|-

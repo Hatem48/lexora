@@ -1,0 +1,1808 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations_ar.dart';
+import 'app_localizations_en.dart';
+
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
+///
+/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'l10n/app_localizations.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// property.
+abstract class AppLocalizations {
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
+    Locale('en'),
+  ];
+
+  /// No description provided for @appName.
+  ///
+  /// In en, this message translates to:
+  /// **'Lexora'**
+  String get appName;
+
+  /// No description provided for @appTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn English your way'**
+  String get appTagline;
+
+  /// No description provided for @developedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Developed by Hatem Husam'**
+  String get developedBy;
+
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// No description provided for @navWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Words'**
+  String get navWords;
+
+  /// No description provided for @navAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get navAdd;
+
+  /// No description provided for @navSentences.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentences'**
+  String get navSentences;
+
+  /// No description provided for @navProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get navProgress;
+
+  /// No description provided for @goodMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning, {name}'**
+  String goodMorning(String name);
+
+  /// No description provided for @goodAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon, {name}'**
+  String goodAfternoon(String name);
+
+  /// No description provided for @goodEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening, {name}'**
+  String goodEvening(String name);
+
+  /// No description provided for @keepGoingTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep going to {level}'**
+  String keepGoingTo(String level);
+
+  /// No description provided for @words.
+  ///
+  /// In en, this message translates to:
+  /// **'Words'**
+  String get words;
+
+  /// No description provided for @sentences.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentences'**
+  String get sentences;
+
+  /// No description provided for @mastered.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered'**
+  String get mastered;
+
+  /// No description provided for @dueToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Due today'**
+  String get dueToday;
+
+  /// No description provided for @yourCefrProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your CEFR Progress'**
+  String get yourCefrProgress;
+
+  /// No description provided for @continueLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Learning'**
+  String get continueLearning;
+
+  /// No description provided for @itemsNeedReview.
+  ///
+  /// In en, this message translates to:
+  /// **'{words} words + {sentences} sentences need review'**
+  String itemsNeedReview(int words, int sentences);
+
+  /// No description provided for @startReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Review'**
+  String get startReview;
+
+  /// No description provided for @whatYouNeedToAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'What You Need to Add'**
+  String get whatYouNeedToAdd;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @addWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Word'**
+  String get addWord;
+
+  /// No description provided for @addSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Sentence'**
+  String get addSentence;
+
+  /// No description provided for @addPattern.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Sentence Pattern'**
+  String get addPattern;
+
+  /// No description provided for @addWordDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Build your personal vocabulary'**
+  String get addWordDescription;
+
+  /// No description provided for @addSentenceDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Save useful phrases and examples'**
+  String get addSentenceDescription;
+
+  /// No description provided for @addPatternDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Master grammar structures'**
+  String get addPatternDescription;
+
+  /// No description provided for @saveWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Word'**
+  String get saveWord;
+
+  /// No description provided for @saveAndAddAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Add Another'**
+  String get saveAndAddAnother;
+
+  /// No description provided for @saveSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Sentence'**
+  String get saveSentence;
+
+  /// No description provided for @word.
+  ///
+  /// In en, this message translates to:
+  /// **'Word'**
+  String get word;
+
+  /// No description provided for @arabicMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic Meaning'**
+  String get arabicMeaning;
+
+  /// No description provided for @cefrLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'CEFR Level'**
+  String get cefrLevel;
+
+  /// No description provided for @partOfSpeech.
+  ///
+  /// In en, this message translates to:
+  /// **'Part of Speech'**
+  String get partOfSpeech;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @exampleSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Example Sentence'**
+  String get exampleSentence;
+
+  /// No description provided for @arabicTranslation.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic Translation'**
+  String get arabicTranslation;
+
+  /// No description provided for @notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notes;
+
+  /// No description provided for @addToReviewSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to review system'**
+  String get addToReviewSystem;
+
+  /// No description provided for @requiredField.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get requiredField;
+
+  /// No description provided for @wordAlreadyExists.
+  ///
+  /// In en, this message translates to:
+  /// **'This word already exists in your library'**
+  String get wordAlreadyExists;
+
+  /// No description provided for @noWordsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No words yet'**
+  String get noWordsYet;
+
+  /// No description provided for @noWordsYetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Start building your personal vocabulary.'**
+  String get noWordsYetMessage;
+
+  /// No description provided for @addYourFirstWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first word'**
+  String get addYourFirstWord;
+
+  /// No description provided for @noSentencesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No sentences yet'**
+  String get noSentencesYet;
+
+  /// No description provided for @noSentencesYetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Save phrases you want to remember.'**
+  String get noSentencesYetMessage;
+
+  /// No description provided for @addYourFirstSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first sentence'**
+  String get addYourFirstSentence;
+
+  /// No description provided for @noReviewsToday.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews today'**
+  String get noReviewsToday;
+
+  /// No description provided for @allCaughtUp.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all caught up.'**
+  String get allCaughtUp;
+
+  /// No description provided for @review.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get review;
+
+  /// No description provided for @tapToSeeTranslation.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to see translation'**
+  String get tapToSeeTranslation;
+
+  /// No description provided for @forgot.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot'**
+  String get forgot;
+
+  /// No description provided for @difficult.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficult'**
+  String get difficult;
+
+  /// No description provided for @good.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get good;
+
+  /// No description provided for @easy.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy'**
+  String get easy;
+
+  /// No description provided for @reviewComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Review Complete!'**
+  String get reviewComplete;
+
+  /// No description provided for @reviewed.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed'**
+  String get reviewed;
+
+  /// No description provided for @correct.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get correct;
+
+  /// No description provided for @incorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect'**
+  String get incorrect;
+
+  /// No description provided for @skipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped'**
+  String get skipped;
+
+  /// No description provided for @accuracy.
+  ///
+  /// In en, this message translates to:
+  /// **'Accuracy'**
+  String get accuracy;
+
+  /// No description provided for @reviewIncorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Review Incorrect'**
+  String get reviewIncorrect;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Home'**
+  String get backToHome;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @appearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearance;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// No description provided for @pronunciation.
+  ///
+  /// In en, this message translates to:
+  /// **'Pronunciation'**
+  String get pronunciation;
+
+  /// No description provided for @accent.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent'**
+  String get accent;
+
+  /// No description provided for @american.
+  ///
+  /// In en, this message translates to:
+  /// **'American'**
+  String get american;
+
+  /// No description provided for @british.
+  ///
+  /// In en, this message translates to:
+  /// **'British'**
+  String get british;
+
+  /// No description provided for @playbackSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback speed'**
+  String get playbackSpeed;
+
+  /// No description provided for @learning.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning'**
+  String get learning;
+
+  /// No description provided for @dailyGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily goal'**
+  String get dailyGoal;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @data.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get data;
+
+  /// No description provided for @localStorageOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Local Storage Only'**
+  String get localStorageOnly;
+
+  /// No description provided for @exportData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Data'**
+  String get exportData;
+
+  /// No description provided for @importData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Data'**
+  String get importData;
+
+  /// No description provided for @backup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get backup;
+
+  /// No description provided for @privacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get privacy;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String version(String version);
+
+  /// No description provided for @signInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Lexora'**
+  String get signInTitle;
+
+  /// No description provided for @signInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your personal English companion — offline-first, bilingual, and built around how you learn.'**
+  String get signInSubtitle;
+
+  /// No description provided for @username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get username;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signIn;
+
+  /// No description provided for @invalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid username or password'**
+  String get invalidCredentials;
+
+  /// No description provided for @demoCredentialsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo: {username} / {password}'**
+  String demoCredentialsHint(String username, String password);
+
+  /// No description provided for @privacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your learning data stays on this device unless you choose to back it up.'**
+  String get privacyNote;
+
+  /// No description provided for @onboardingLanguageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Interface language'**
+  String get onboardingLanguageTitle;
+
+  /// No description provided for @onboardingLanguageSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You can change this anytime in Settings.'**
+  String get onboardingLanguageSubtitle;
+
+  /// No description provided for @onboardingLevelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your English level'**
+  String get onboardingLevelTitle;
+
+  /// No description provided for @onboardingLevelSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll tailor recommendations to this CEFR level.'**
+  String get onboardingLevelSubtitle;
+
+  /// No description provided for @onboardingAccentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred pronunciation'**
+  String get onboardingAccentTitle;
+
+  /// No description provided for @onboardingAccentSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the accent you want to hear.'**
+  String get onboardingAccentSubtitle;
+
+  /// No description provided for @onboardingGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily learning goal'**
+  String get onboardingGoalTitle;
+
+  /// No description provided for @onboardingGoalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A realistic goal keeps you consistent.'**
+  String get onboardingGoalSubtitle;
+
+  /// No description provided for @onboardingRemindersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily reminders'**
+  String get onboardingRemindersTitle;
+
+  /// No description provided for @onboardingRemindersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle nudges to keep your streak alive.'**
+  String get onboardingRemindersSubtitle;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get getStarted;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this item?'**
+  String get confirmDelete;
+
+  /// No description provided for @confirmDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get confirmDeleteMessage;
+
+  /// No description provided for @favorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get favorites;
+
+  /// No description provided for @needsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs review'**
+  String get needsReview;
+
+  /// No description provided for @patterns.
+  ///
+  /// In en, this message translates to:
+  /// **'Patterns'**
+  String get patterns;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @intermediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get intermediate;
+
+  /// No description provided for @beginner.
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get beginner;
+
+  /// No description provided for @advanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get advanced;
+
+  /// No description provided for @moreB1Vocabulary.
+  ///
+  /// In en, this message translates to:
+  /// **'B1 Vocabulary'**
+  String get moreB1Vocabulary;
+
+  /// No description provided for @needMoreWords.
+  ///
+  /// In en, this message translates to:
+  /// **'You need more words'**
+  String get needMoreWords;
+
+  /// No description provided for @sentencePatterns.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentence Patterns'**
+  String get sentencePatterns;
+
+  /// No description provided for @addMorePatterns.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more patterns'**
+  String get addMorePatterns;
+
+  /// No description provided for @speakingPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Speaking Practice'**
+  String get speakingPractice;
+
+  /// No description provided for @sentencesWithoutPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sentences without pronunciation practice'**
+  String sentencesWithoutPractice(int count);
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get errorGeneric;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading…'**
+  String get loading;
+
+  /// No description provided for @signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// No description provided for @americanNatural.
+  ///
+  /// In en, this message translates to:
+  /// **'American — Natural'**
+  String get americanNatural;
+
+  /// No description provided for @britishNatural.
+  ///
+  /// In en, this message translates to:
+  /// **'British — Natural'**
+  String get britishNatural;
+
+  /// No description provided for @normalSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get normalSpeed;
+
+  /// No description provided for @slowSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning / Slow'**
+  String get slowSpeed;
+
+  /// No description provided for @dailyReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Reminder'**
+  String get dailyReminder;
+
+  /// No description provided for @remindersPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders per day'**
+  String get remindersPerDay;
+
+  /// No description provided for @reminderType.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder Type'**
+  String get reminderType;
+
+  /// No description provided for @quietHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet Hours'**
+  String get quietHours;
+
+  /// No description provided for @wordsLearnedThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Words learned this week'**
+  String get wordsLearnedThisWeek;
+
+  /// No description provided for @sentencesLearnedThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentences learned this week'**
+  String get sentencesLearnedThisWeek;
+
+  /// No description provided for @reviewsCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews completed'**
+  String get reviewsCompleted;
+
+  /// No description provided for @currentStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Current streak'**
+  String get currentStreak;
+
+  /// No description provided for @longestStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Longest streak'**
+  String get longestStreak;
+
+  /// No description provided for @learningOverTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Over Time'**
+  String get learningOverTime;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @learned.
+  ///
+  /// In en, this message translates to:
+  /// **'Learned'**
+  String get learned;
+
+  /// No description provided for @inProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get inProgress;
+
+  /// No description provided for @needReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Need Review'**
+  String get needReview;
+
+  /// No description provided for @listen.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen'**
+  String get listen;
+
+  /// No description provided for @record.
+  ///
+  /// In en, this message translates to:
+  /// **'Record'**
+  String get record;
+
+  /// No description provided for @practicePattern.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice Pattern'**
+  String get practicePattern;
+
+  /// No description provided for @relatedWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Words'**
+  String get relatedWords;
+
+  /// No description provided for @relatedSentences.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Sentences'**
+  String get relatedSentences;
+
+  /// No description provided for @examples.
+  ///
+  /// In en, this message translates to:
+  /// **'Examples'**
+  String get examples;
+
+  /// No description provided for @related.
+  ///
+  /// In en, this message translates to:
+  /// **'Related'**
+  String get related;
+
+  /// No description provided for @generatePronunciation.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate Pronunciation'**
+  String get generatePronunciation;
+
+  /// No description provided for @addReminderNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Add reminder notification'**
+  String get addReminderNotification;
+
+  /// No description provided for @favorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite'**
+  String get favorite;
+
+  /// No description provided for @sortRecentlyAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Recently added'**
+  String get sortRecentlyAdded;
+
+  /// No description provided for @sortAlphabetical.
+  ///
+  /// In en, this message translates to:
+  /// **'Alphabetical'**
+  String get sortAlphabetical;
+
+  /// No description provided for @sortCefr.
+  ///
+  /// In en, this message translates to:
+  /// **'CEFR'**
+  String get sortCefr;
+
+  /// No description provided for @sortMostReviewed.
+  ///
+  /// In en, this message translates to:
+  /// **'Most reviewed'**
+  String get sortMostReviewed;
+
+  /// No description provided for @sortLeastReviewed.
+  ///
+  /// In en, this message translates to:
+  /// **'Least reviewed'**
+  String get sortLeastReviewed;
+
+  /// No description provided for @sortMastery.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastery'**
+  String get sortMastery;
+
+  /// No description provided for @filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filters;
+
+  /// No description provided for @mastery.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastery'**
+  String get mastery;
+
+  /// No description provided for @noun.
+  ///
+  /// In en, this message translates to:
+  /// **'Noun'**
+  String get noun;
+
+  /// No description provided for @verb.
+  ///
+  /// In en, this message translates to:
+  /// **'Verb'**
+  String get verb;
+
+  /// No description provided for @adjective.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjective'**
+  String get adjective;
+
+  /// No description provided for @adverb.
+  ///
+  /// In en, this message translates to:
+  /// **'Adverb'**
+  String get adverb;
+
+  /// No description provided for @pronoun.
+  ///
+  /// In en, this message translates to:
+  /// **'Pronoun'**
+  String get pronoun;
+
+  /// No description provided for @preposition.
+  ///
+  /// In en, this message translates to:
+  /// **'Preposition'**
+  String get preposition;
+
+  /// No description provided for @conjunction.
+  ///
+  /// In en, this message translates to:
+  /// **'Conjunction'**
+  String get conjunction;
+
+  /// No description provided for @interjection.
+  ///
+  /// In en, this message translates to:
+  /// **'Interjection'**
+  String get interjection;
+
+  /// No description provided for @phrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Phrase'**
+  String get phrase;
+
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
+  /// No description provided for @levelA1.
+  ///
+  /// In en, this message translates to:
+  /// **'A1'**
+  String get levelA1;
+
+  /// No description provided for @levelA2.
+  ///
+  /// In en, this message translates to:
+  /// **'A2'**
+  String get levelA2;
+
+  /// No description provided for @levelB1.
+  ///
+  /// In en, this message translates to:
+  /// **'B1'**
+  String get levelB1;
+
+  /// No description provided for @levelB2.
+  ///
+  /// In en, this message translates to:
+  /// **'B2'**
+  String get levelB2;
+
+  /// No description provided for @levelC1.
+  ///
+  /// In en, this message translates to:
+  /// **'C1'**
+  String get levelC1;
+
+  /// No description provided for @levelC2.
+  ///
+  /// In en, this message translates to:
+  /// **'C2'**
+  String get levelC2;
+
+  /// No description provided for @goalItems.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items / day'**
+  String goalItems(int count);
+
+  /// No description provided for @enableReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable reminders'**
+  String get enableReminders;
+
+  /// No description provided for @disableReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe later'**
+  String get disableReminders;
+
+  /// No description provided for @addCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Add category'**
+  String get addCategory;
+
+  /// No description provided for @editCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit category'**
+  String get editCategory;
+
+  /// No description provided for @categoryNameEn.
+  ///
+  /// In en, this message translates to:
+  /// **'Name (English)'**
+  String get categoryNameEn;
+
+  /// No description provided for @categoryNameAr.
+  ///
+  /// In en, this message translates to:
+  /// **'Name (Arabic)'**
+  String get categoryNameAr;
+
+  /// No description provided for @categoryIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get categoryIcon;
+
+  /// No description provided for @systemCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get systemCategory;
+
+  /// No description provided for @noCategoriesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories yet'**
+  String get noCategoriesYet;
+
+  /// No description provided for @noCategoriesYetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Create categories to organize words and sentences.'**
+  String get noCategoriesYetMessage;
+
+  /// No description provided for @categoryDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Category deleted'**
+  String get categoryDeleted;
+
+  /// No description provided for @cannotDeleteSystemCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'System categories cannot be deleted'**
+  String get cannotDeleteSystemCategory;
+
+  /// No description provided for @clearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearFilters;
+
+  /// No description provided for @applyFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get applyFilters;
+
+  /// No description provided for @sortBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get sortBy;
+
+  /// No description provided for @masteryNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get masteryNew;
+
+  /// No description provided for @masteryLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning'**
+  String get masteryLearning;
+
+  /// No description provided for @masteryReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get masteryReviewing;
+
+  /// No description provided for @remindersScheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders scheduled'**
+  String get remindersScheduled;
+
+  /// No description provided for @remindersDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders turned off'**
+  String get remindersDisabled;
+
+  /// No description provided for @notificationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification permission is required for reminders'**
+  String get notificationPermissionDenied;
+
+  /// No description provided for @manageCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage categories'**
+  String get manageCategories;
+
+  /// No description provided for @reminderWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Words'**
+  String get reminderWords;
+
+  /// No description provided for @reminderSentences.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentences'**
+  String get reminderSentences;
+
+  /// No description provided for @reminderMixed.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed'**
+  String get reminderMixed;
+
+  /// No description provided for @reminderDueReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Due reviews'**
+  String get reminderDueReviews;
+
+  /// No description provided for @quietHoursStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet hours start'**
+  String get quietHoursStart;
+
+  /// No description provided for @quietHoursEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet hours end'**
+  String get quietHoursEnd;
+
+  /// No description provided for @exportSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup ready to share'**
+  String get exportSuccess;
+
+  /// No description provided for @importSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup imported'**
+  String get importSuccess;
+
+  /// No description provided for @importFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read this backup file'**
+  String get importFailed;
+
+  /// No description provided for @confirmImport.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace learning data?'**
+  String get confirmImport;
+
+  /// No description provided for @confirmImportMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing a backup replaces words, sentences, patterns, and reviews on this device.'**
+  String get confirmImportMessage;
+
+  /// No description provided for @unsupportedBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'This backup was made by a newer version of Lexora'**
+  String get unsupportedBackup;
+
+  /// No description provided for @speakingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen, record yourself, then compare. Scoring is not available yet — nothing is guessed.'**
+  String get speakingHint;
+
+  /// No description provided for @stopRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get stopRecording;
+
+  /// No description provided for @playRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Play recording'**
+  String get playRecording;
+
+  /// No description provided for @markPracticed.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as practiced'**
+  String get markPracticed;
+
+  /// No description provided for @markedPracticed.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved as practiced'**
+  String get markedPracticed;
+
+  /// No description provided for @scoringUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Pronunciation scoring will be available in a future update.'**
+  String get scoringUnavailable;
+
+  /// No description provided for @microphonePermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone permission is required to record'**
+  String get microphonePermissionDenied;
+
+  /// No description provided for @clearerVoiceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Lexora uses the clearest English voice installed on this device.'**
+  String get clearerVoiceNote;
+
+  /// No description provided for @writeBlog.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a blog'**
+  String get writeBlog;
+
+  /// No description provided for @writeBlogDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Write in English. Lexora finds new words after you save.'**
+  String get writeBlogDescription;
+
+  /// No description provided for @editBlog.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit blog'**
+  String get editBlog;
+
+  /// No description provided for @blog.
+  ///
+  /// In en, this message translates to:
+  /// **'Blog'**
+  String get blog;
+
+  /// No description provided for @blogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get blogTitle;
+
+  /// No description provided for @blogContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get blogContent;
+
+  /// No description provided for @blogsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No blogs yet'**
+  String get blogsEmpty;
+
+  /// No description provided for @confirmDeleteBlog.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this blog?'**
+  String get confirmDeleteBlog;
+
+  /// No description provided for @confirmDeleteBlogMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The text is removed. Words you already discovered stay in your vocabulary.'**
+  String get confirmDeleteBlogMessage;
+
+  /// No description provided for @noNewWords.
+  ///
+  /// In en, this message translates to:
+  /// **'No new words this time'**
+  String get noNewWords;
+
+  /// No description provided for @newWordsDiscovered.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} new words discovered'**
+  String newWordsDiscovered(int count);
+
+  /// No description provided for @blogStatsLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{words} words · {classified} classified'**
+  String blogStatsLine(int words, int classified);
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @vocabulary.
+  ///
+  /// In en, this message translates to:
+  /// **'Vocabulary'**
+  String get vocabulary;
+
+  /// No description provided for @wordNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'This word is not in the catalog'**
+  String get wordNotFound;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @usageCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Times used'**
+  String get usageCount;
+
+  /// No description provided for @firstDiscovered.
+  ///
+  /// In en, this message translates to:
+  /// **'First discovered'**
+  String get firstDiscovered;
+
+  /// No description provided for @lastUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Last used'**
+  String get lastUsed;
+
+  /// No description provided for @academicWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Academic'**
+  String get academicWord;
+
+  /// No description provided for @ieltsRelevant.
+  ///
+  /// In en, this message translates to:
+  /// **'IELTS'**
+  String get ieltsRelevant;
+
+  /// No description provided for @toeflRelevant.
+  ///
+  /// In en, this message translates to:
+  /// **'TOEFL'**
+  String get toeflRelevant;
+
+  /// No description provided for @catalogProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Discovered vocabulary'**
+  String get catalogProgress;
+
+  /// No description provided for @catalogStatsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'These counts describe words you have met. They do not change your CEFR level.'**
+  String get catalogStatsNote;
+
+  /// No description provided for @discoveredOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{discovered} / {total}'**
+  String discoveredOf(int discovered, int total);
+
+  /// No description provided for @masteredCatalog.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered'**
+  String get masteredCatalog;
+
+  /// No description provided for @academicCatalog.
+  ///
+  /// In en, this message translates to:
+  /// **'Academic'**
+  String get academicCatalog;
+
+  /// No description provided for @discoveredThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Discovered this week'**
+  String get discoveredThisWeek;
+
+  /// No description provided for @statusDiscovered.
+  ///
+  /// In en, this message translates to:
+  /// **'Discovered'**
+  String get statusDiscovered;
+
+  /// No description provided for @statusLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning'**
+  String get statusLearning;
+
+  /// No description provided for @statusReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get statusReviewing;
+
+  /// No description provided for @statusMastered.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered'**
+  String get statusMastered;
+
+  /// No description provided for @topicsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Topics'**
+  String get topicsTitle;
+
+  /// No description provided for @topicsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn English by real-life situation.'**
+  String get topicsSubtitle;
+
+  /// No description provided for @learningPaths.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning paths'**
+  String get learningPaths;
+
+  /// No description provided for @topicVocabulary.
+  ///
+  /// In en, this message translates to:
+  /// **'Vocabulary'**
+  String get topicVocabulary;
+
+  /// No description provided for @topicSentences.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentences'**
+  String get topicSentences;
+
+  /// No description provided for @topicProgressTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get topicProgressTab;
+
+  /// No description provided for @topicDiscoveredOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{discovered} / {total} discovered'**
+  String topicDiscoveredOf(int discovered, int total);
+
+  /// No description provided for @topicMasteredCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} mastered'**
+  String topicMasteredCount(int count);
+
+  /// No description provided for @topicSentenceCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sentences'**
+  String topicSentenceCount(int count);
+
+  /// No description provided for @topicEmptyWords.
+  ///
+  /// In en, this message translates to:
+  /// **'No words for this filter'**
+  String get topicEmptyWords;
+
+  /// No description provided for @topicEmptySentences.
+  ///
+  /// In en, this message translates to:
+  /// **'No sentences for this level yet'**
+  String get topicEmptySentences;
+
+  /// No description provided for @filterLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get filterLocked;
+
+  /// No description provided for @filterDiscovered.
+  ///
+  /// In en, this message translates to:
+  /// **'Discovered'**
+  String get filterDiscovered;
+
+  /// No description provided for @filterLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning'**
+  String get filterLearning;
+
+  /// No description provided for @filterReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get filterReviewing;
+
+  /// No description provided for @filterMastered.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered'**
+  String get filterMastered;
+
+  /// No description provided for @detectedTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'Topics in this text'**
+  String get detectedTopics;
+
+  /// No description provided for @developmentDatasetNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This vocabulary is practice content for trying the app. It is not an official CEFR list, and a licensed catalog can replace it.'**
+  String get developmentDatasetNote;
+
+  /// No description provided for @blogDemoHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Try this text: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.'**
+  String get blogDemoHint;
+}
+
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
+  }
+
+  throw FlutterError(
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
+}

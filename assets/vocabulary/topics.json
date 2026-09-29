@@ -1,0 +1,3781 @@
+{
+  "version": 2,
+  "groups": [
+    {
+      "id": "everyday",
+      "nameEn": "Everyday Life",
+      "nameAr": "الحياة اليومية",
+      "sortOrder": 1
+    },
+    {
+      "id": "travel-places",
+      "nameEn": "Travel & Places",
+      "nameAr": "السفر والأماكن",
+      "sortOrder": 2
+    },
+    {
+      "id": "study-career",
+      "nameEn": "Study & Career",
+      "nameAr": "الدراسة والعمل",
+      "sortOrder": 3
+    },
+    {
+      "id": "technology",
+      "nameEn": "Technology",
+      "nameAr": "التكنولوجيا",
+      "sortOrder": 4
+    },
+    {
+      "id": "health-safety",
+      "nameEn": "Health & Safety",
+      "nameAr": "الصحة والسلامة",
+      "sortOrder": 5
+    },
+    {
+      "id": "business-economy",
+      "nameEn": "Business & Economy",
+      "nameAr": "الأعمال والاقتصاد",
+      "sortOrder": 6
+    },
+    {
+      "id": "news-society",
+      "nameEn": "News & Society",
+      "nameAr": "الأخبار والمجتمع",
+      "sortOrder": 7
+    },
+    {
+      "id": "politics-international",
+      "nameEn": "Politics & International Affairs",
+      "nameAr": "السياسة والشؤون الدولية",
+      "sortOrder": 8
+    },
+    {
+      "id": "science-environment",
+      "nameEn": "Science & Environment",
+      "nameAr": "العلوم والبيئة",
+      "sortOrder": 9
+    }
+  ],
+  "topics": [
+    {
+      "id": "daily-life",
+      "slug": "daily-life",
+      "groupId": "everyday",
+      "nameEn": "Daily Life",
+      "nameAr": "الحياة اليومية",
+      "descriptionEn": "Ordinary routines and daily activities.",
+      "descriptionAr": "الروتين والأنشطة اليومية.",
+      "iconKey": "home",
+      "sortOrder": 1
+    },
+    {
+      "id": "family",
+      "slug": "family",
+      "groupId": "everyday",
+      "nameEn": "Family",
+      "nameAr": "العائلة",
+      "descriptionEn": "Family members and home relationships.",
+      "descriptionAr": "أفراد العائلة والعلاقات في البيت.",
+      "iconKey": "family",
+      "sortOrder": 2
+    },
+    {
+      "id": "social",
+      "slug": "social",
+      "groupId": "everyday",
+      "nameEn": "Social & Relationships",
+      "nameAr": "العلاقات والأصدقاء",
+      "descriptionEn": "Friends, invitations, and social life.",
+      "descriptionAr": "الأصدقاء والدعوات والحياة الاجتماعية.",
+      "iconKey": "people",
+      "sortOrder": 3
+    },
+    {
+      "id": "home",
+      "slug": "home",
+      "groupId": "everyday",
+      "nameEn": "Home",
+      "nameAr": "المنزل",
+      "descriptionEn": "Rooms, furniture, and household tasks.",
+      "descriptionAr": "الغرف والأثاث وأعمال المنزل.",
+      "iconKey": "home",
+      "sortOrder": 4
+    },
+    {
+      "id": "food",
+      "slug": "food",
+      "groupId": "everyday",
+      "nameEn": "Food",
+      "nameAr": "الطعام",
+      "descriptionEn": "Meals, ingredients, and cooking.",
+      "descriptionAr": "الوجبات والمكونات والطبخ.",
+      "iconKey": "food",
+      "sortOrder": 5
+    },
+    {
+      "id": "restaurant",
+      "slug": "restaurant",
+      "groupId": "everyday",
+      "nameEn": "Restaurant",
+      "nameAr": "المطعم",
+      "descriptionEn": "Ordering, menus, and dining out.",
+      "descriptionAr": "الطلب وقائمة الطعام والأكل خارج المنزل.",
+      "iconKey": "restaurant",
+      "sortOrder": 6
+    },
+    {
+      "id": "supermarket",
+      "slug": "supermarket",
+      "groupId": "everyday",
+      "nameEn": "Supermarket & Shopping",
+      "nameAr": "السوبرماركت والتسوق",
+      "descriptionEn": "Shops, prices, and buying things.",
+      "descriptionAr": "المتاجر والأسعار والشراء.",
+      "iconKey": "cart",
+      "sortOrder": 7
+    },
+    {
+      "id": "fashion",
+      "slug": "fashion",
+      "groupId": "everyday",
+      "nameEn": "Fashion & Clothing",
+      "nameAr": "الملابس",
+      "descriptionEn": "Clothes, sizes, and style.",
+      "descriptionAr": "الملابس والمقاسات والأناقة.",
+      "iconKey": "shirt",
+      "sortOrder": 8
+    },
+    {
+      "id": "sports",
+      "slug": "sports",
+      "groupId": "everyday",
+      "nameEn": "Sports",
+      "nameAr": "الرياضة",
+      "descriptionEn": "Games, teams, and exercise.",
+      "descriptionAr": "الألعاب والفرق والتمرين.",
+      "iconKey": "sports",
+      "sortOrder": 12
+    },
+    {
+      "id": "entertainment",
+      "slug": "entertainment",
+      "groupId": "everyday",
+      "nameEn": "Entertainment",
+      "nameAr": "الترفيه",
+      "descriptionEn": "Free time, hobbies, and fun.",
+      "descriptionAr": "وقت الفراغ والهوايات والترفيه.",
+      "iconKey": "movie",
+      "sortOrder": 13
+    },
+    {
+      "id": "movies",
+      "slug": "movies",
+      "groupId": "everyday",
+      "nameEn": "Movies & TV",
+      "nameAr": "الأفلام والمسلسلات",
+      "descriptionEn": "Films, series, and screens.",
+      "descriptionAr": "الأفلام والمسلسلات والشاشات.",
+      "iconKey": "movie",
+      "sortOrder": 14
+    },
+    {
+      "id": "religion",
+      "slug": "religion",
+      "groupId": "everyday",
+      "nameEn": "Religion & Beliefs",
+      "nameAr": "الدين والمعتقدات",
+      "descriptionEn": "Faith, worship, and beliefs.",
+      "descriptionAr": "الإيمان والعبادة والمعتقدات.",
+      "iconKey": "book",
+      "sortOrder": 48
+    },
+    {
+      "id": "travel",
+      "slug": "travel",
+      "groupId": "travel-places",
+      "nameEn": "Travel",
+      "nameAr": "السفر",
+      "descriptionEn": "Trips, tickets, and journeys.",
+      "descriptionAr": "الرحلات والتذاكر والتنقل.",
+      "iconKey": "flight",
+      "sortOrder": 27
+    },
+    {
+      "id": "airport",
+      "slug": "airport",
+      "groupId": "travel-places",
+      "nameEn": "Airport & Aviation",
+      "nameAr": "المطار والطيران",
+      "descriptionEn": "Flights, gates, and airports.",
+      "descriptionAr": "الرحلات والبوابات والمطارات.",
+      "iconKey": "flight",
+      "sortOrder": 28
+    },
+    {
+      "id": "hotel",
+      "slug": "hotel",
+      "groupId": "travel-places",
+      "nameEn": "Hotel",
+      "nameAr": "الفندق",
+      "descriptionEn": "Check-in, rooms, and stays.",
+      "descriptionAr": "تسجيل الوصول والغرف والإقامة.",
+      "iconKey": "hotel",
+      "sortOrder": 29
+    },
+    {
+      "id": "transportation",
+      "slug": "transportation",
+      "groupId": "travel-places",
+      "nameEn": "Transportation",
+      "nameAr": "المواصلات",
+      "descriptionEn": "Buses, trains, and getting around.",
+      "descriptionAr": "الحافلات والقطارات والتنقل.",
+      "iconKey": "bus",
+      "sortOrder": 30
+    },
+    {
+      "id": "directions",
+      "slug": "directions",
+      "groupId": "travel-places",
+      "nameEn": "Directions & Places",
+      "nameAr": "الاتجاهات والأماكن",
+      "descriptionEn": "Asking the way and naming places.",
+      "descriptionAr": "السؤال عن الطريق وأسماء الأماكن.",
+      "iconKey": "map",
+      "sortOrder": 31
+    },
+    {
+      "id": "education",
+      "slug": "education",
+      "groupId": "study-career",
+      "nameEn": "Education",
+      "nameAr": "التعليم",
+      "descriptionEn": "School, learning, and study.",
+      "descriptionAr": "المدرسة والتعلم والدراسة.",
+      "iconKey": "school",
+      "sortOrder": 20
+    },
+    {
+      "id": "university",
+      "slug": "university",
+      "groupId": "study-career",
+      "nameEn": "University",
+      "nameAr": "الجامعة",
+      "descriptionEn": "Campus, lectures, and degrees.",
+      "descriptionAr": "الحرم الجامعي والمحاضرات والشهادات.",
+      "iconKey": "school",
+      "sortOrder": 21
+    },
+    {
+      "id": "academic-research",
+      "slug": "academic-research",
+      "groupId": "study-career",
+      "nameEn": "Academic Research",
+      "nameAr": "البحث العلمي",
+      "descriptionEn": "Papers, studies, and research.",
+      "descriptionAr": "الأوراق والدراسات والبحث.",
+      "iconKey": "book",
+      "sortOrder": 22
+    },
+    {
+      "id": "work",
+      "slug": "work",
+      "groupId": "study-career",
+      "nameEn": "Work & Careers",
+      "nameAr": "العمل والوظائف",
+      "descriptionEn": "Jobs, offices, and careers.",
+      "descriptionAr": "الوظائف والمكاتب والمسار المهني.",
+      "iconKey": "work",
+      "sortOrder": 23
+    },
+    {
+      "id": "job-interviews",
+      "slug": "job-interviews",
+      "groupId": "study-career",
+      "nameEn": "Job Interviews",
+      "nameAr": "مقابلات العمل",
+      "descriptionEn": "Applications and interviews.",
+      "descriptionAr": "طلبات التوظيف والمقابلات.",
+      "iconKey": "work",
+      "sortOrder": 24
+    },
+    {
+      "id": "technology",
+      "slug": "technology",
+      "groupId": "technology",
+      "nameEn": "Technology",
+      "nameAr": "التكنولوجيا",
+      "descriptionEn": "Devices, tools, and tech life.",
+      "descriptionAr": "الأجهزة والأدوات والحياة التقنية.",
+      "iconKey": "devices",
+      "sortOrder": 15
+    },
+    {
+      "id": "internet",
+      "slug": "internet",
+      "groupId": "technology",
+      "nameEn": "Internet & Social Media",
+      "nameAr": "الإنترنت ووسائل التواصل",
+      "descriptionEn": "Online life and social networks.",
+      "descriptionAr": "الحياة على الإنترنت وشبكات التواصل.",
+      "iconKey": "wifi",
+      "sortOrder": 16
+    },
+    {
+      "id": "software",
+      "slug": "software",
+      "groupId": "technology",
+      "nameEn": "Software & Programming",
+      "nameAr": "البرمجة",
+      "descriptionEn": "Code, software, and building apps.",
+      "descriptionAr": "البرمجة والبرمجيات وبناء التطبيقات.",
+      "iconKey": "code",
+      "sortOrder": 17
+    },
+    {
+      "id": "cybersecurity",
+      "slug": "cybersecurity",
+      "groupId": "technology",
+      "nameEn": "Cybersecurity",
+      "nameAr": "الأمن السيبراني",
+      "descriptionEn": "Protecting systems and data.",
+      "descriptionAr": "حماية الأنظمة والبيانات.",
+      "iconKey": "shield",
+      "sortOrder": 18
+    },
+    {
+      "id": "ai",
+      "slug": "ai",
+      "groupId": "technology",
+      "nameEn": "Artificial Intelligence",
+      "nameAr": "الذكاء الاصطناعي",
+      "descriptionEn": "Machines that learn and generate.",
+      "descriptionAr": "آلات تتعلم وتولّد.",
+      "iconKey": "ai",
+      "sortOrder": 19
+    },
+    {
+      "id": "health",
+      "slug": "health",
+      "groupId": "health-safety",
+      "nameEn": "Health",
+      "nameAr": "الصحة",
+      "descriptionEn": "Body, illness, and feeling well.",
+      "descriptionAr": "الجسم والمرض والعافية.",
+      "iconKey": "health",
+      "sortOrder": 10
+    },
+    {
+      "id": "hospital",
+      "slug": "hospital",
+      "groupId": "health-safety",
+      "nameEn": "Hospital & Emergency",
+      "nameAr": "المستشفى والطوارئ",
+      "descriptionEn": "Hospitals, doctors, and emergencies.",
+      "descriptionAr": "المستشفيات والأطباء والطوارئ.",
+      "iconKey": "hospital",
+      "sortOrder": 11
+    },
+    {
+      "id": "disasters",
+      "slug": "disasters",
+      "groupId": "health-safety",
+      "nameEn": "Disasters & Emergencies",
+      "nameAr": "الكوارث والطوارئ",
+      "descriptionEn": "Disasters and emergency response.",
+      "descriptionAr": "الكوارث والاستجابة للطوارئ.",
+      "iconKey": "warning",
+      "sortOrder": 50
+    },
+    {
+      "id": "money",
+      "slug": "money",
+      "groupId": "business-economy",
+      "nameEn": "Money & Banking",
+      "nameAr": "المال والبنوك",
+      "descriptionEn": "Money, banks, and payments.",
+      "descriptionAr": "المال والبنوك والمدفوعات.",
+      "iconKey": "money",
+      "sortOrder": 9
+    },
+    {
+      "id": "business",
+      "slug": "business",
+      "groupId": "business-economy",
+      "nameEn": "Business",
+      "nameAr": "الأعمال والشركات",
+      "descriptionEn": "Companies, meetings, and trade.",
+      "descriptionAr": "الشركات والاجتماعات والتجارة.",
+      "iconKey": "work",
+      "sortOrder": 25
+    },
+    {
+      "id": "economy",
+      "slug": "economy",
+      "groupId": "business-economy",
+      "nameEn": "Economy",
+      "nameAr": "الاقتصاد",
+      "descriptionEn": "Markets, prices, and the economy.",
+      "descriptionAr": "الأسواق والأسعار والاقتصاد.",
+      "iconKey": "chart",
+      "sortOrder": 26
+    },
+    {
+      "id": "news",
+      "slug": "news",
+      "groupId": "news-society",
+      "nameEn": "News & Media",
+      "nameAr": "الأخبار والإعلام",
+      "descriptionEn": "News, reports, and the media.",
+      "descriptionAr": "الأخبار والتقارير والإعلام.",
+      "iconKey": "news",
+      "sortOrder": 44
+    },
+    {
+      "id": "culture",
+      "slug": "culture",
+      "groupId": "news-society",
+      "nameEn": "Culture & Society",
+      "nameAr": "الثقافة والمجتمع",
+      "descriptionEn": "Customs, society, and culture.",
+      "descriptionAr": "العادات والمجتمع والثقافة.",
+      "iconKey": "culture",
+      "sortOrder": 47
+    },
+    {
+      "id": "immigration",
+      "slug": "immigration",
+      "groupId": "news-society",
+      "nameEn": "Immigration & Refugees",
+      "nameAr": "الهجرة واللجوء",
+      "descriptionEn": "Migration, borders, and refuge.",
+      "descriptionAr": "الهجرة والحدود واللجوء.",
+      "iconKey": "people",
+      "sortOrder": 49
+    },
+    {
+      "id": "police",
+      "slug": "police",
+      "groupId": "politics-international",
+      "nameEn": "Police & Law",
+      "nameAr": "الشرطة والقانون",
+      "descriptionEn": "Police, laws, and rules.",
+      "descriptionAr": "الشرطة والقوانين والأنظمة.",
+      "iconKey": "law",
+      "sortOrder": 32
+    },
+    {
+      "id": "courts",
+      "slug": "courts",
+      "groupId": "politics-international",
+      "nameEn": "Courts & Justice",
+      "nameAr": "المحاكم والعدالة",
+      "descriptionEn": "Courts, trials, and justice.",
+      "descriptionAr": "المحاكم والمحاكمات والعدالة.",
+      "iconKey": "law",
+      "sortOrder": 33
+    },
+    {
+      "id": "government",
+      "slug": "government",
+      "groupId": "politics-international",
+      "nameEn": "Government",
+      "nameAr": "الحكومة",
+      "descriptionEn": "Governments and public office.",
+      "descriptionAr": "الحكومات والمناصب العامة.",
+      "iconKey": "gov",
+      "sortOrder": 34
+    },
+    {
+      "id": "politics",
+      "slug": "politics",
+      "groupId": "politics-international",
+      "nameEn": "Politics",
+      "nameAr": "السياسة",
+      "descriptionEn": "Political life and debate.",
+      "descriptionAr": "الحياة السياسية والنقاش.",
+      "iconKey": "gov",
+      "sortOrder": 35
+    },
+    {
+      "id": "elections",
+      "slug": "elections",
+      "groupId": "politics-international",
+      "nameEn": "Elections",
+      "nameAr": "الانتخابات",
+      "descriptionEn": "Voting and elections.",
+      "descriptionAr": "التصويت والانتخابات.",
+      "iconKey": "vote",
+      "sortOrder": 36
+    },
+    {
+      "id": "diplomacy",
+      "slug": "diplomacy",
+      "groupId": "politics-international",
+      "nameEn": "Diplomacy",
+      "nameAr": "الدبلوماسية",
+      "descriptionEn": "Talks between countries.",
+      "descriptionAr": "الحوار بين الدول.",
+      "iconKey": "flag",
+      "sortOrder": 37
+    },
+    {
+      "id": "un",
+      "slug": "un",
+      "groupId": "politics-international",
+      "nameEn": "UN & International Organizations",
+      "nameAr": "الأمم المتحدة والمنظمات الدولية",
+      "descriptionEn": "The UN and international bodies.",
+      "descriptionAr": "الأمم المتحدة والهيئات الدولية.",
+      "iconKey": "flag",
+      "sortOrder": 38
+    },
+    {
+      "id": "human-rights",
+      "slug": "human-rights",
+      "groupId": "politics-international",
+      "nameEn": "Human Rights",
+      "nameAr": "حقوق الإنسان",
+      "descriptionEn": "Rights and protections.",
+      "descriptionAr": "الحقوق والحماية.",
+      "iconKey": "law",
+      "sortOrder": 39
+    },
+    {
+      "id": "war",
+      "slug": "war",
+      "groupId": "politics-international",
+      "nameEn": "War & Conflict",
+      "nameAr": "الحروب والنزاعات",
+      "descriptionEn": "Conflict and its language.",
+      "descriptionAr": "النزاع ولغته.",
+      "iconKey": "war",
+      "sortOrder": 40
+    },
+    {
+      "id": "military",
+      "slug": "military",
+      "groupId": "politics-international",
+      "nameEn": "Military & Defense",
+      "nameAr": "الجيش والدفاع",
+      "descriptionEn": "Armed forces and defense.",
+      "descriptionAr": "القوات المسلحة والدفاع.",
+      "iconKey": "war",
+      "sortOrder": 41
+    },
+    {
+      "id": "peace",
+      "slug": "peace",
+      "groupId": "politics-international",
+      "nameEn": "Peace & Negotiations",
+      "nameAr": "السلام والمفاوضات",
+      "descriptionEn": "Peace talks and agreements.",
+      "descriptionAr": "محادثات السلام والاتفاقات.",
+      "iconKey": "flag",
+      "sortOrder": 42
+    },
+    {
+      "id": "humanitarian",
+      "slug": "humanitarian",
+      "groupId": "politics-international",
+      "nameEn": "Humanitarian Crises",
+      "nameAr": "الأزمات الإنسانية",
+      "descriptionEn": "Aid and humanitarian crises.",
+      "descriptionAr": "الإغاثة والأزمات الإنسانية.",
+      "iconKey": "health",
+      "sortOrder": 43
+    },
+    {
+      "id": "environment",
+      "slug": "environment",
+      "groupId": "science-environment",
+      "nameEn": "Environment & Climate",
+      "nameAr": "البيئة والمناخ",
+      "descriptionEn": "Climate, nature, and the environment.",
+      "descriptionAr": "المناخ والطبيعة والبيئة.",
+      "iconKey": "eco",
+      "sortOrder": 45
+    },
+    {
+      "id": "science",
+      "slug": "science",
+      "groupId": "science-environment",
+      "nameEn": "Science",
+      "nameAr": "العلوم",
+      "descriptionEn": "Scientific study and discovery.",
+      "descriptionAr": "الدراسة العلمية والاكتشاف.",
+      "iconKey": "science",
+      "sortOrder": 46
+    }
+  ],
+  "links": [
+    {
+      "entryId": "day-noun",
+      "topicId": "daily-life",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "time-noun",
+      "topicId": "daily-life",
+      "relevance": "high"
+    },
+    {
+      "entryId": "week-noun",
+      "topicId": "daily-life",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "name-noun",
+      "topicId": "daily-life",
+      "relevance": "high"
+    },
+    {
+      "entryId": "name-noun",
+      "topicId": "social",
+      "relevance": "low"
+    },
+    {
+      "entryId": "home-noun",
+      "topicId": "daily-life",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "home-noun",
+      "topicId": "home",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "family-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "family-noun",
+      "topicId": "daily-life",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "family-noun",
+      "topicId": "social",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "mother-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "father-noun",
+      "topicId": "family",
+      "relevance": "high"
+    },
+    {
+      "entryId": "child-noun",
+      "topicId": "family",
+      "relevance": "high"
+    },
+    {
+      "entryId": "child-noun",
+      "topicId": "daily-life",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "boy-noun",
+      "topicId": "family",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "girl-noun",
+      "topicId": "family",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "friend-noun",
+      "topicId": "social",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "party-noun",
+      "topicId": "social",
+      "relevance": "high"
+    },
+    {
+      "entryId": "party-noun",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "invitation-noun",
+      "topicId": "social",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "house-noun",
+      "topicId": "home",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "room-noun",
+      "topicId": "home",
+      "relevance": "high"
+    },
+    {
+      "entryId": "room-noun",
+      "topicId": "hotel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "door-noun",
+      "topicId": "home",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "bed-noun",
+      "topicId": "home",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "kitchen-noun",
+      "topicId": "home",
+      "relevance": "high"
+    },
+    {
+      "entryId": "kitchen-noun",
+      "topicId": "food",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "table-noun",
+      "topicId": "home",
+      "relevance": "low"
+    },
+    {
+      "entryId": "table-noun",
+      "topicId": "restaurant",
+      "relevance": "low"
+    },
+    {
+      "entryId": "food-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "food-noun",
+      "topicId": "restaurant",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "bread-noun",
+      "topicId": "food",
+      "relevance": "high"
+    },
+    {
+      "entryId": "bread-noun",
+      "topicId": "supermarket",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "water-noun",
+      "topicId": "food",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "water-noun",
+      "topicId": "health",
+      "relevance": "low"
+    },
+    {
+      "entryId": "milk-noun",
+      "topicId": "food",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "apple-noun",
+      "topicId": "food",
+      "relevance": "low"
+    },
+    {
+      "entryId": "apple-noun",
+      "topicId": "supermarket",
+      "relevance": "low"
+    },
+    {
+      "entryId": "cook-verb",
+      "topicId": "food",
+      "relevance": "high"
+    },
+    {
+      "entryId": "menu-noun",
+      "topicId": "restaurant",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "waiter-noun",
+      "topicId": "restaurant",
+      "relevance": "high"
+    },
+    {
+      "entryId": "reservation-noun",
+      "topicId": "restaurant",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "reservation-noun",
+      "topicId": "hotel",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "reservation-noun",
+      "topicId": "travel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "shop-noun",
+      "topicId": "supermarket",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "price-noun",
+      "topicId": "supermarket",
+      "relevance": "high"
+    },
+    {
+      "entryId": "price-noun",
+      "topicId": "money",
+      "relevance": "high"
+    },
+    {
+      "entryId": "price-noun",
+      "topicId": "economy",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "customer-noun",
+      "topicId": "supermarket",
+      "relevance": "high"
+    },
+    {
+      "entryId": "customer-noun",
+      "topicId": "business",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "clothes-noun",
+      "topicId": "fashion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "shirt-noun",
+      "topicId": "fashion",
+      "relevance": "high"
+    },
+    {
+      "entryId": "size-noun",
+      "topicId": "fashion",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "sport-noun",
+      "topicId": "sports",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "team-noun",
+      "topicId": "sports",
+      "relevance": "high"
+    },
+    {
+      "entryId": "match-noun",
+      "topicId": "sports",
+      "relevance": "high"
+    },
+    {
+      "entryId": "match-noun",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "song-noun",
+      "topicId": "entertainment",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "game-noun",
+      "topicId": "entertainment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "game-noun",
+      "topicId": "sports",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "ticket-noun",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "ticket-noun",
+      "topicId": "travel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "ticket-noun",
+      "topicId": "airport",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "ticket-noun",
+      "topicId": "movies",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "movie-noun",
+      "topicId": "movies",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "movie-noun",
+      "topicId": "entertainment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "actor-noun",
+      "topicId": "movies",
+      "relevance": "high"
+    },
+    {
+      "entryId": "screen-noun",
+      "topicId": "movies",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "screen-noun",
+      "topicId": "technology",
+      "relevance": "low"
+    },
+    {
+      "entryId": "prayer-noun",
+      "topicId": "religion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "faith-noun",
+      "topicId": "religion",
+      "relevance": "high"
+    },
+    {
+      "entryId": "festival-noun",
+      "topicId": "religion",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "festival-noun",
+      "topicId": "culture",
+      "relevance": "high"
+    },
+    {
+      "entryId": "school-noun",
+      "topicId": "education",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "school-noun",
+      "topicId": "university",
+      "relevance": "high"
+    },
+    {
+      "entryId": "school-noun",
+      "topicId": "daily-life",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "student-noun",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "student-noun",
+      "topicId": "university",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "teacher-noun",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "book-noun",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "book-noun",
+      "topicId": "culture",
+      "relevance": "low"
+    },
+    {
+      "entryId": "study-verb",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "study-verb",
+      "topicId": "university",
+      "relevance": "high"
+    },
+    {
+      "entryId": "university-noun",
+      "topicId": "university",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "university-noun",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "lecture-noun",
+      "topicId": "university",
+      "relevance": "high"
+    },
+    {
+      "entryId": "lecture-noun",
+      "topicId": "academic-research",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "campus-noun",
+      "topicId": "university",
+      "relevance": "high"
+    },
+    {
+      "entryId": "academic-adjective",
+      "topicId": "university",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "academic-adjective",
+      "topicId": "academic-research",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "academic-adjective",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "research-noun",
+      "topicId": "academic-research",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "research-noun",
+      "topicId": "university",
+      "relevance": "high"
+    },
+    {
+      "entryId": "research-noun",
+      "topicId": "science",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "theory-noun",
+      "topicId": "academic-research",
+      "relevance": "high"
+    },
+    {
+      "entryId": "theory-noun",
+      "topicId": "science",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "hypothesis-noun",
+      "topicId": "academic-research",
+      "relevance": "high"
+    },
+    {
+      "entryId": "hypothesis-noun",
+      "topicId": "science",
+      "relevance": "high"
+    },
+    {
+      "entryId": "writing-noun",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "writing-noun",
+      "topicId": "university",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "vocabulary-noun",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "vocabulary-noun",
+      "topicId": "university",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "job-noun",
+      "topicId": "work",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "office-noun",
+      "topicId": "work",
+      "relevance": "high"
+    },
+    {
+      "entryId": "work-verb",
+      "topicId": "work",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "meeting-noun",
+      "topicId": "work",
+      "relevance": "high"
+    },
+    {
+      "entryId": "meeting-noun",
+      "topicId": "business",
+      "relevance": "high"
+    },
+    {
+      "entryId": "experience-noun",
+      "topicId": "work",
+      "relevance": "high"
+    },
+    {
+      "entryId": "experience-noun",
+      "topicId": "education",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "develop-verb",
+      "topicId": "work",
+      "relevance": "high"
+    },
+    {
+      "entryId": "develop-verb",
+      "topicId": "software",
+      "relevance": "high"
+    },
+    {
+      "entryId": "develop-verb",
+      "topicId": "technology",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "develop-verb",
+      "topicId": "education",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "development-noun",
+      "topicId": "work",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "development-noun",
+      "topicId": "software",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "development-noun",
+      "topicId": "technology",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "interview-noun",
+      "topicId": "job-interviews",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "interview-noun",
+      "topicId": "work",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "resume-noun",
+      "topicId": "job-interviews",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "candidate-noun",
+      "topicId": "job-interviews",
+      "relevance": "high"
+    },
+    {
+      "entryId": "candidate-noun",
+      "topicId": "elections",
+      "relevance": "low"
+    },
+    {
+      "entryId": "technology-noun",
+      "topicId": "technology",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "device-noun",
+      "topicId": "technology",
+      "relevance": "high"
+    },
+    {
+      "entryId": "internet-noun",
+      "topicId": "internet",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "internet-noun",
+      "topicId": "technology",
+      "relevance": "high"
+    },
+    {
+      "entryId": "website-noun",
+      "topicId": "internet",
+      "relevance": "high"
+    },
+    {
+      "entryId": "email-noun",
+      "topicId": "internet",
+      "relevance": "high"
+    },
+    {
+      "entryId": "email-noun",
+      "topicId": "work",
+      "relevance": "low"
+    },
+    {
+      "entryId": "software-noun",
+      "topicId": "software",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "software-noun",
+      "topicId": "technology",
+      "relevance": "high"
+    },
+    {
+      "entryId": "program-noun",
+      "topicId": "software",
+      "relevance": "high"
+    },
+    {
+      "entryId": "code-noun",
+      "topicId": "software",
+      "relevance": "high"
+    },
+    {
+      "entryId": "code-noun",
+      "topicId": "technology",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "password-noun",
+      "topicId": "cybersecurity",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "password-noun",
+      "topicId": "internet",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "virus-noun",
+      "topicId": "cybersecurity",
+      "relevance": "high"
+    },
+    {
+      "entryId": "vulnerability-noun",
+      "topicId": "cybersecurity",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "vulnerability-noun",
+      "topicId": "technology",
+      "relevance": "high"
+    },
+    {
+      "entryId": "encryption-noun",
+      "topicId": "cybersecurity",
+      "relevance": "high"
+    },
+    {
+      "entryId": "robot-noun",
+      "topicId": "ai",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "robot-noun",
+      "topicId": "technology",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "algorithm-noun",
+      "topicId": "ai",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "algorithm-noun",
+      "topicId": "software",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "intelligence-noun",
+      "topicId": "ai",
+      "relevance": "high"
+    },
+    {
+      "entryId": "doctor-noun",
+      "topicId": "health",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "doctor-noun",
+      "topicId": "hospital",
+      "relevance": "high"
+    },
+    {
+      "entryId": "health-noun",
+      "topicId": "health",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "medicine-noun",
+      "topicId": "health",
+      "relevance": "high"
+    },
+    {
+      "entryId": "medicine-noun",
+      "topicId": "hospital",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "hospital-noun",
+      "topicId": "hospital",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "hospital-noun",
+      "topicId": "health",
+      "relevance": "high"
+    },
+    {
+      "entryId": "nurse-noun",
+      "topicId": "hospital",
+      "relevance": "high"
+    },
+    {
+      "entryId": "emergency-noun",
+      "topicId": "hospital",
+      "relevance": "high"
+    },
+    {
+      "entryId": "emergency-noun",
+      "topicId": "disasters",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "flood-noun",
+      "topicId": "disasters",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "earthquake-noun",
+      "topicId": "disasters",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "warning-noun",
+      "topicId": "disasters",
+      "relevance": "high"
+    },
+    {
+      "entryId": "warning-noun",
+      "topicId": "news",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "money-noun",
+      "topicId": "money",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "bank-noun",
+      "topicId": "money",
+      "relevance": "high"
+    },
+    {
+      "entryId": "bank-noun",
+      "topicId": "business",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "company-noun",
+      "topicId": "business",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "contract-noun",
+      "topicId": "business",
+      "relevance": "high"
+    },
+    {
+      "entryId": "market-noun",
+      "topicId": "economy",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "market-noun",
+      "topicId": "business",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "tax-noun",
+      "topicId": "economy",
+      "relevance": "high"
+    },
+    {
+      "entryId": "tax-noun",
+      "topicId": "government",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "inflation-noun",
+      "topicId": "economy",
+      "relevance": "high"
+    },
+    {
+      "entryId": "news-noun",
+      "topicId": "news",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "report-noun",
+      "topicId": "news",
+      "relevance": "high"
+    },
+    {
+      "entryId": "journalist-noun",
+      "topicId": "news",
+      "relevance": "high"
+    },
+    {
+      "entryId": "culture-noun",
+      "topicId": "culture",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "tradition-noun",
+      "topicId": "culture",
+      "relevance": "high"
+    },
+    {
+      "entryId": "border-noun",
+      "topicId": "immigration",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "visa-noun",
+      "topicId": "immigration",
+      "relevance": "high"
+    },
+    {
+      "entryId": "visa-noun",
+      "topicId": "travel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "visa-noun",
+      "topicId": "airport",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "refugee-noun",
+      "topicId": "immigration",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "refugee-noun",
+      "topicId": "humanitarian",
+      "relevance": "high"
+    },
+    {
+      "entryId": "police-noun",
+      "topicId": "police",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "law-noun",
+      "topicId": "police",
+      "relevance": "high"
+    },
+    {
+      "entryId": "law-noun",
+      "topicId": "courts",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "crime-noun",
+      "topicId": "police",
+      "relevance": "high"
+    },
+    {
+      "entryId": "court-noun",
+      "topicId": "courts",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "judge-noun",
+      "topicId": "courts",
+      "relevance": "high"
+    },
+    {
+      "entryId": "trial-noun",
+      "topicId": "courts",
+      "relevance": "high"
+    },
+    {
+      "entryId": "government-noun",
+      "topicId": "government",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "government-noun",
+      "topicId": "politics",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "minister-noun",
+      "topicId": "government",
+      "relevance": "high"
+    },
+    {
+      "entryId": "minister-noun",
+      "topicId": "politics",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "policy-noun",
+      "topicId": "government",
+      "relevance": "high"
+    },
+    {
+      "entryId": "politics-noun",
+      "topicId": "politics",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "debate-noun",
+      "topicId": "politics",
+      "relevance": "high"
+    },
+    {
+      "entryId": "campaign-noun",
+      "topicId": "politics",
+      "relevance": "high"
+    },
+    {
+      "entryId": "campaign-noun",
+      "topicId": "elections",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "election-noun",
+      "topicId": "elections",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "election-noun",
+      "topicId": "politics",
+      "relevance": "high"
+    },
+    {
+      "entryId": "vote-verb",
+      "topicId": "elections",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "ballot-noun",
+      "topicId": "elections",
+      "relevance": "high"
+    },
+    {
+      "entryId": "diplomacy-noun",
+      "topicId": "diplomacy",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "embassy-noun",
+      "topicId": "diplomacy",
+      "relevance": "high"
+    },
+    {
+      "entryId": "negotiation-noun",
+      "topicId": "diplomacy",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "negotiation-noun",
+      "topicId": "peace",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "negotiation-noun",
+      "topicId": "war",
+      "relevance": "high"
+    },
+    {
+      "entryId": "ceasefire-noun",
+      "topicId": "war",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "ceasefire-noun",
+      "topicId": "diplomacy",
+      "relevance": "high"
+    },
+    {
+      "entryId": "ceasefire-noun",
+      "topicId": "news",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "ceasefire-noun",
+      "topicId": "peace",
+      "relevance": "high"
+    },
+    {
+      "entryId": "conflict-noun",
+      "topicId": "war",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "conflict-noun",
+      "topicId": "news",
+      "relevance": "high"
+    },
+    {
+      "entryId": "war-noun",
+      "topicId": "war",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "war-noun",
+      "topicId": "military",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "war-noun",
+      "topicId": "news",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "army-noun",
+      "topicId": "military",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "soldier-noun",
+      "topicId": "military",
+      "relevance": "high"
+    },
+    {
+      "entryId": "defense-noun",
+      "topicId": "military",
+      "relevance": "high"
+    },
+    {
+      "entryId": "peace-noun",
+      "topicId": "peace",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "agreement-noun",
+      "topicId": "peace",
+      "relevance": "high"
+    },
+    {
+      "entryId": "agreement-noun",
+      "topicId": "diplomacy",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "agreement-noun",
+      "topicId": "business",
+      "relevance": "low"
+    },
+    {
+      "entryId": "treaty-noun",
+      "topicId": "un",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "treaty-noun",
+      "topicId": "diplomacy",
+      "relevance": "high"
+    },
+    {
+      "entryId": "treaty-noun",
+      "topicId": "peace",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "charter-noun",
+      "topicId": "un",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "delegation-noun",
+      "topicId": "un",
+      "relevance": "high"
+    },
+    {
+      "entryId": "delegation-noun",
+      "topicId": "diplomacy",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "rights-noun",
+      "topicId": "human-rights",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "freedom-noun",
+      "topicId": "human-rights",
+      "relevance": "high"
+    },
+    {
+      "entryId": "equality-noun",
+      "topicId": "human-rights",
+      "relevance": "high"
+    },
+    {
+      "entryId": "aid-noun",
+      "topicId": "humanitarian",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "shelter-noun",
+      "topicId": "humanitarian",
+      "relevance": "high"
+    },
+    {
+      "entryId": "shelter-noun",
+      "topicId": "disasters",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "environment-noun",
+      "topicId": "environment",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "environment-noun",
+      "topicId": "science",
+      "relevance": "high"
+    },
+    {
+      "entryId": "climate-noun",
+      "topicId": "environment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "pollution-noun",
+      "topicId": "environment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "science-noun",
+      "topicId": "science",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "experiment-noun",
+      "topicId": "science",
+      "relevance": "high"
+    },
+    {
+      "entryId": "energy-noun",
+      "topicId": "science",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "energy-noun",
+      "topicId": "environment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "want-verb",
+      "topicId": "daily-life",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "go-verb",
+      "topicId": "daily-life",
+      "relevance": "low"
+    },
+    {
+      "entryId": "go-verb",
+      "topicId": "travel",
+      "relevance": "low"
+    },
+    {
+      "entryId": "travel-verb",
+      "topicId": "travel",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "travel-verb",
+      "topicId": "transportation",
+      "relevance": "high"
+    },
+    {
+      "entryId": "travel-verb",
+      "topicId": "airport",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "train-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "train-noun",
+      "topicId": "travel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "bus-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "car-noun",
+      "topicId": "transportation",
+      "relevance": "high"
+    },
+    {
+      "entryId": "map-noun",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "map-noun",
+      "topicId": "travel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "street-noun",
+      "topicId": "directions",
+      "relevance": "high"
+    },
+    {
+      "entryId": "city-noun",
+      "topicId": "directions",
+      "relevance": "high"
+    },
+    {
+      "entryId": "city-noun",
+      "topicId": "travel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "plane-noun",
+      "topicId": "airport",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "plane-noun",
+      "topicId": "travel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "airport-noun",
+      "topicId": "airport",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "airport-noun",
+      "topicId": "travel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "passport-noun",
+      "topicId": "airport",
+      "relevance": "high"
+    },
+    {
+      "entryId": "passport-noun",
+      "topicId": "travel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "hotel-noun",
+      "topicId": "hotel",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "hotel-noun",
+      "topicId": "travel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "guest-noun",
+      "topicId": "hotel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "bag-noun",
+      "topicId": "travel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "bag-noun",
+      "topicId": "airport",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "trip-noun",
+      "topicId": "travel",
+      "relevance": "high"
+    },
+    {
+      "entryId": "enhance-verb",
+      "topicId": "work",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "enhance-verb",
+      "topicId": "education",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "comprehensive-adjective",
+      "topicId": "academic-research",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "comprehensive-adjective",
+      "topicId": "education",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "ubiquitous-adjective",
+      "topicId": "technology",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "ubiquitous-adjective",
+      "topicId": "internet",
+      "relevance": "low"
+    },
+    {
+      "entryId": "paradigm-noun",
+      "topicId": "academic-research",
+      "relevance": "low"
+    },
+    {
+      "entryId": "paradigm-noun",
+      "topicId": "science",
+      "relevance": "low"
+    },
+    {
+      "entryId": "meticulous-adjective",
+      "topicId": "academic-research",
+      "relevance": "low"
+    },
+    {
+      "entryId": "inevitable-adjective",
+      "topicId": "war",
+      "relevance": "low"
+    },
+    {
+      "entryId": "inevitable-adjective",
+      "topicId": "news",
+      "relevance": "low"
+    },
+    {
+      "entryId": "nuance-noun",
+      "topicId": "culture",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "nuance-noun",
+      "topicId": "academic-research",
+      "relevance": "low"
+    },
+    {
+      "entryId": "unprecedented-adjective",
+      "topicId": "news",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "quintessential-adjective",
+      "topicId": "culture",
+      "relevance": "low"
+    },
+    {
+      "entryId": "esoteric-adjective",
+      "topicId": "academic-research",
+      "relevance": "low"
+    },
+    {
+      "entryId": "esoteric-adjective",
+      "topicId": "science",
+      "relevance": "low"
+    },
+    {
+      "entryId": "humanitarian-adjective",
+      "topicId": "humanitarian",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "legislation-noun",
+      "topicId": "government",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "legislation-noun",
+      "topicId": "police",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "sovereignty-noun",
+      "topicId": "diplomacy",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "sovereignty-noun",
+      "topicId": "government",
+      "relevance": "low"
+    },
+    {
+      "entryId": "civilian-noun",
+      "topicId": "war",
+      "relevance": "high"
+    },
+    {
+      "entryId": "civilian-noun",
+      "topicId": "news",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "referendum-noun",
+      "topicId": "elections",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "referendum-noun",
+      "topicId": "politics",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "asylum-noun",
+      "topicId": "immigration",
+      "relevance": "high"
+    },
+    {
+      "entryId": "asylum-noun",
+      "topicId": "humanitarian",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "infrastructure-noun",
+      "topicId": "technology",
+      "relevance": "low"
+    },
+    {
+      "entryId": "infrastructure-noun",
+      "topicId": "government",
+      "relevance": "low"
+    },
+    {
+      "entryId": "infrastructure-noun",
+      "topicId": "disasters",
+      "relevance": "low"
+    },
+    {
+      "entryId": "curriculum-noun",
+      "topicId": "education",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "curriculum-noun",
+      "topicId": "university",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "ephemeral-adjective",
+      "topicId": "entertainment",
+      "relevance": "low"
+    },
+    {
+      "entryId": "ephemeral-adjective",
+      "topicId": "internet",
+      "relevance": "low"
+    },
+    {
+      "entryId": "juxtaposition-noun",
+      "topicId": "academic-research",
+      "relevance": "low"
+    },
+    {
+      "entryId": "juxtaposition-noun",
+      "topicId": "culture",
+      "relevance": "low"
+    },
+    {
+      "entryId": "write-verb",
+      "topicId": "education",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "speak-verb",
+      "topicId": "social",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "speak-verb",
+      "topicId": "education",
+      "relevance": "low"
+    },
+    {
+      "entryId": "listen-verb",
+      "topicId": "education",
+      "relevance": "low"
+    },
+    {
+      "entryId": "listen-verb",
+      "topicId": "entertainment",
+      "relevance": "low"
+    },
+    {
+      "entryId": "learn-verb",
+      "topicId": "education",
+      "relevance": "high"
+    },
+    {
+      "entryId": "help-verb",
+      "topicId": "family",
+      "relevance": "low"
+    },
+    {
+      "entryId": "help-verb",
+      "topicId": "daily-life",
+      "relevance": "low"
+    },
+    {
+      "entryId": "pay-verb",
+      "topicId": "money",
+      "relevance": "high"
+    },
+    {
+      "entryId": "pay-verb",
+      "topicId": "supermarket",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "meet-verb",
+      "topicId": "social",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "meet-verb",
+      "topicId": "work",
+      "relevance": "low"
+    },
+    {
+      "entryId": "read-verb",
+      "topicId": "education",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "read-verb",
+      "topicId": "entertainment",
+      "relevance": "low"
+    },
+    {
+      "entryId": "play-verb",
+      "topicId": "sports",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "play-verb",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "watch-verb",
+      "topicId": "movies",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "watch-verb",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    }
+  ],
+  "sentences": [
+    {
+      "id": "daily-life-1",
+      "en": "I start my day at home.",
+      "ar": "أبدأ يومي في البيت.",
+      "cefr": "A1",
+      "sortOrder": 1,
+      "topics": [
+        "daily-life"
+      ]
+    },
+    {
+      "id": "daily-life-2",
+      "en": "What time does the week start?",
+      "ar": "في أي وقت يبدأ الأسبوع؟",
+      "cefr": "A2",
+      "sortOrder": 2,
+      "topics": [
+        "daily-life"
+      ]
+    },
+    {
+      "id": "daily-life-3",
+      "en": "The child helps the family every day.",
+      "ar": "يساعد الطفل العائلة كل يوم.",
+      "cefr": "B1",
+      "sortOrder": 3,
+      "topics": [
+        "daily-life"
+      ]
+    },
+    {
+      "id": "family-1",
+      "en": "My mother and father are at home.",
+      "ar": "أمي وأبي في البيت.",
+      "cefr": "A1",
+      "sortOrder": 4,
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "id": "family-2",
+      "en": "The boy and the girl play together.",
+      "ar": "يلعب الولد والبنت معاً.",
+      "cefr": "A2",
+      "sortOrder": 5,
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "id": "family-3",
+      "en": "A child learns first from family.",
+      "ar": "يتعلم الطفل أولاً من العائلة.",
+      "cefr": "B1",
+      "sortOrder": 6,
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "id": "social-1",
+      "en": "I meet a friend after school.",
+      "ar": "أقابل صديقاً بعد المدرسة.",
+      "cefr": "A1",
+      "sortOrder": 7,
+      "topics": [
+        "social"
+      ]
+    },
+    {
+      "id": "social-2",
+      "en": "She sends an invitation to the party.",
+      "ar": "ترسل دعوة إلى الحفلة.",
+      "cefr": "A2",
+      "sortOrder": 8,
+      "topics": [
+        "social"
+      ]
+    },
+    {
+      "id": "social-3",
+      "en": "Friends speak and listen to each other.",
+      "ar": "يتكلم الأصدقاء ويستمع بعضهم إلى بعض.",
+      "cefr": "B1",
+      "sortOrder": 9,
+      "topics": [
+        "social"
+      ]
+    },
+    {
+      "id": "home-1",
+      "en": "Our house has a quiet room.",
+      "ar": "في منزلنا غرفة هادئة.",
+      "cefr": "A1",
+      "sortOrder": 10,
+      "topics": [
+        "home"
+      ]
+    },
+    {
+      "id": "home-2",
+      "en": "Please close the door and sit at the table.",
+      "ar": "أغلق الباب واجلس إلى الطاولة.",
+      "cefr": "A2",
+      "sortOrder": 11,
+      "topics": [
+        "home"
+      ]
+    },
+    {
+      "id": "home-3",
+      "en": "She cooks in the kitchen before bed.",
+      "ar": "تطبخ في المطبخ قبل النوم.",
+      "cefr": "B1",
+      "sortOrder": 12,
+      "topics": [
+        "home"
+      ]
+    },
+    {
+      "id": "food-1",
+      "en": "I eat bread and drink water.",
+      "ar": "آكل خبزاً وأشرب ماء.",
+      "cefr": "A1",
+      "sortOrder": 13,
+      "topics": [
+        "food"
+      ]
+    },
+    {
+      "id": "food-2",
+      "en": "The child wants milk and an apple.",
+      "ar": "يريد الطفل حليباً وتفاحة.",
+      "cefr": "A2",
+      "sortOrder": 14,
+      "topics": [
+        "food"
+      ]
+    },
+    {
+      "id": "food-3",
+      "en": "Fresh food is ready in the kitchen.",
+      "ar": "الطعام الطازج جاهز في المطبخ.",
+      "cefr": "B1",
+      "sortOrder": 15,
+      "topics": [
+        "food"
+      ]
+    },
+    {
+      "id": "restaurant-1",
+      "en": "The waiter brings the menu.",
+      "ar": "يحضر النادل قائمة الطعام.",
+      "cefr": "A2",
+      "sortOrder": 16,
+      "topics": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-2",
+      "en": "I have a reservation at the restaurant.",
+      "ar": "لدي حجز في المطعم.",
+      "cefr": "B1",
+      "sortOrder": 17,
+      "topics": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-3",
+      "en": "We pay the price after the meal.",
+      "ar": "ندفع السعر بعد الوجبة.",
+      "cefr": "B2",
+      "sortOrder": 18,
+      "topics": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "supermarket-1",
+      "en": "The shop sells bread and milk.",
+      "ar": "يبيع المتجر الخبز والحليب.",
+      "cefr": "A1",
+      "sortOrder": 19,
+      "topics": [
+        "supermarket"
+      ]
+    },
+    {
+      "id": "supermarket-2",
+      "en": "What is the price of this shirt?",
+      "ar": "ما سعر هذا القميص؟",
+      "cefr": "A2",
+      "sortOrder": 20,
+      "topics": [
+        "supermarket"
+      ]
+    },
+    {
+      "id": "supermarket-3",
+      "en": "The customer pays before leaving the shop.",
+      "ar": "يدفع الزبون قبل مغادرة المتجر.",
+      "cefr": "B1",
+      "sortOrder": 21,
+      "topics": [
+        "supermarket"
+      ]
+    },
+    {
+      "id": "fashion-1",
+      "en": "These clothes are a good size.",
+      "ar": "هذه الملابس بمقاس مناسب.",
+      "cefr": "A2",
+      "sortOrder": 22,
+      "topics": [
+        "fashion"
+      ]
+    },
+    {
+      "id": "fashion-2",
+      "en": "He buys a blue shirt for work.",
+      "ar": "يشتري قميصاً أزرق للعمل.",
+      "cefr": "B1",
+      "sortOrder": 23,
+      "topics": [
+        "fashion"
+      ]
+    },
+    {
+      "id": "fashion-3",
+      "en": "She chooses simple clothes for the interview.",
+      "ar": "تختار ملابس بسيطة للمقابلة.",
+      "cefr": "B2",
+      "sortOrder": 24,
+      "topics": [
+        "fashion"
+      ]
+    },
+    {
+      "id": "sports-1",
+      "en": "Our team plays a match on Saturday.",
+      "ar": "يلعب فريقنا مباراة يوم السبت.",
+      "cefr": "A2",
+      "sortOrder": 25,
+      "topics": [
+        "sports"
+      ]
+    },
+    {
+      "id": "sports-2",
+      "en": "Football is a popular sport in the city.",
+      "ar": "كرة القدم رياضة شائعة في المدينة.",
+      "cefr": "B1",
+      "sortOrder": 26,
+      "topics": [
+        "sports"
+      ]
+    },
+    {
+      "id": "sports-3",
+      "en": "The children play a game after school.",
+      "ar": "يلعب الأطفال لعبة بعد المدرسة.",
+      "cefr": "B2",
+      "sortOrder": 27,
+      "topics": [
+        "sports"
+      ]
+    },
+    {
+      "id": "entertainment-1",
+      "en": "They play a song at the party.",
+      "ar": "يعزفون أغنية في الحفلة.",
+      "cefr": "A2",
+      "sortOrder": 28,
+      "topics": [
+        "entertainment"
+      ]
+    },
+    {
+      "id": "entertainment-2",
+      "en": "We watch a movie on Friday night.",
+      "ar": "نشاهد فيلماً مساء الجمعة.",
+      "cefr": "B1",
+      "sortOrder": 29,
+      "topics": [
+        "entertainment"
+      ]
+    },
+    {
+      "id": "entertainment-3",
+      "en": "A ticket lets you enter the show.",
+      "ar": "تسمح لك التذكرة بدخول العرض.",
+      "cefr": "B2",
+      "sortOrder": 30,
+      "topics": [
+        "entertainment"
+      ]
+    },
+    {
+      "id": "movies-1",
+      "en": "The actor appears on the screen.",
+      "ar": "يظهر الممثل على الشاشة.",
+      "cefr": "A2",
+      "sortOrder": 31,
+      "topics": [
+        "movies"
+      ]
+    },
+    {
+      "id": "movies-2",
+      "en": "We buy a ticket for the movie.",
+      "ar": "نشتري تذكرة للفيلم.",
+      "cefr": "B1",
+      "sortOrder": 32,
+      "topics": [
+        "movies"
+      ]
+    },
+    {
+      "id": "movies-3",
+      "en": "The story on screen feels short but clear.",
+      "ar": "تبدو القصة على الشاشة قصيرة وواضحة.",
+      "cefr": "B2",
+      "sortOrder": 33,
+      "topics": [
+        "movies"
+      ]
+    },
+    {
+      "id": "religion-1",
+      "en": "They meet for prayer on Friday.",
+      "ar": "يلتقون للصلاة يوم الجمعة.",
+      "cefr": "A2",
+      "sortOrder": 34,
+      "topics": [
+        "religion"
+      ]
+    },
+    {
+      "id": "religion-2",
+      "en": "Faith guides many daily choices.",
+      "ar": "يوجّه الإيمان كثيراً من الاختيارات اليومية.",
+      "cefr": "B1",
+      "sortOrder": 35,
+      "topics": [
+        "religion"
+      ]
+    },
+    {
+      "id": "religion-3",
+      "en": "The festival brings the community together.",
+      "ar": "يجمع المهرجان المجتمع معاً.",
+      "cefr": "B2",
+      "sortOrder": 36,
+      "topics": [
+        "religion"
+      ]
+    },
+    {
+      "id": "travel-1",
+      "en": "I travel by train with one bag.",
+      "ar": "أسافر بالقطار بحقيبة واحدة.",
+      "cefr": "A2",
+      "sortOrder": 37,
+      "topics": [
+        "travel"
+      ]
+    },
+    {
+      "id": "travel-2",
+      "en": "The trip includes a hotel reservation.",
+      "ar": "تشمل الرحلة حجز فندق.",
+      "cefr": "B1",
+      "sortOrder": 38,
+      "topics": [
+        "travel"
+      ]
+    },
+    {
+      "id": "travel-3",
+      "en": "Show your passport before you travel.",
+      "ar": "أظهر جواز سفرك قبل أن تسافر.",
+      "cefr": "B2",
+      "sortOrder": 39,
+      "topics": [
+        "travel"
+      ]
+    },
+    {
+      "id": "airport-1",
+      "en": "The plane leaves from the airport.",
+      "ar": "تغادر الطائرة من المطار.",
+      "cefr": "A2",
+      "sortOrder": 40,
+      "topics": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-2",
+      "en": "Passengers show a passport and a ticket.",
+      "ar": "يُظهر المسافرون جواز السفر والتذكرة.",
+      "cefr": "B1",
+      "sortOrder": 41,
+      "topics": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-3",
+      "en": "A visa is sometimes checked at the airport.",
+      "ar": "تُفحص التأشيرة أحياناً في المطار.",
+      "cefr": "B2",
+      "sortOrder": 42,
+      "topics": [
+        "airport"
+      ]
+    },
+    {
+      "id": "hotel-1",
+      "en": "The guest arrives at the hotel.",
+      "ar": "يصل النزيل إلى الفندق.",
+      "cefr": "A2",
+      "sortOrder": 43,
+      "topics": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-2",
+      "en": "I have a reservation for a quiet room.",
+      "ar": "لدي حجز لغرفة هادئة.",
+      "cefr": "B1",
+      "sortOrder": 44,
+      "topics": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-3",
+      "en": "The hotel is on a busy street.",
+      "ar": "الفندق في شارع مزدحم.",
+      "cefr": "B2",
+      "sortOrder": 45,
+      "topics": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "transportation-1",
+      "en": "We go to school by bus.",
+      "ar": "نذهب إلى المدرسة بالحافلة.",
+      "cefr": "A1",
+      "sortOrder": 46,
+      "topics": [
+        "transportation"
+      ]
+    },
+    {
+      "id": "transportation-2",
+      "en": "They travel by train to the city.",
+      "ar": "يسافرون بالقطار إلى المدينة.",
+      "cefr": "A2",
+      "sortOrder": 47,
+      "topics": [
+        "transportation"
+      ]
+    },
+    {
+      "id": "transportation-3",
+      "en": "A car is useful when the bus is late.",
+      "ar": "تكون السيارة مفيدة عندما تتأخر الحافلة.",
+      "cefr": "B1",
+      "sortOrder": 48,
+      "topics": [
+        "transportation"
+      ]
+    },
+    {
+      "id": "directions-1",
+      "en": "The city is north of the river.",
+      "ar": "المدينة شمال النهر.",
+      "cefr": "A1",
+      "sortOrder": 49,
+      "topics": [
+        "directions"
+      ]
+    },
+    {
+      "id": "directions-2",
+      "en": "This map shows the right street.",
+      "ar": "تُظهر هذه الخريطة الشارع الصحيح.",
+      "cefr": "A2",
+      "sortOrder": 50,
+      "topics": [
+        "directions"
+      ]
+    },
+    {
+      "id": "directions-3",
+      "en": "Ask for directions near the station.",
+      "ar": "اسأل عن الاتجاهات قرب المحطة.",
+      "cefr": "B1",
+      "sortOrder": 51,
+      "topics": [
+        "directions"
+      ]
+    },
+    {
+      "id": "education-1",
+      "en": "She goes to school every day.",
+      "ar": "تذهب إلى المدرسة كل يوم.",
+      "cefr": "A1",
+      "sortOrder": 52,
+      "topics": [
+        "education"
+      ]
+    },
+    {
+      "id": "education-2",
+      "en": "The teacher helps the student read.",
+      "ar": "يساعد المعلم الطالب على القراءة.",
+      "cefr": "A2",
+      "sortOrder": 53,
+      "topics": [
+        "education"
+      ]
+    },
+    {
+      "id": "education-3",
+      "en": "Students study and write short reports.",
+      "ar": "يدرس الطلاب ويكتبون تقارير قصيرة.",
+      "cefr": "B2",
+      "sortOrder": 54,
+      "topics": [
+        "education"
+      ]
+    },
+    {
+      "id": "university-1",
+      "en": "The lecture starts on the campus.",
+      "ar": "تبدأ المحاضرة في الحرم الجامعي.",
+      "cefr": "B1",
+      "sortOrder": 55,
+      "topics": [
+        "university"
+      ]
+    },
+    {
+      "id": "university-2",
+      "en": "I study research methods at the university.",
+      "ar": "أدرس مناهج البحث في الجامعة.",
+      "cefr": "B2",
+      "sortOrder": 56,
+      "topics": [
+        "university"
+      ]
+    },
+    {
+      "id": "university-3",
+      "en": "Academic writing needs a clear structure.",
+      "ar": "تحتاج الكتابة الأكاديمية إلى بنية واضحة.",
+      "cefr": "C1",
+      "sortOrder": 57,
+      "topics": [
+        "university"
+      ]
+    },
+    {
+      "id": "academic-research-1",
+      "en": "The research tests a simple theory.",
+      "ar": "يختبر البحث نظرية بسيطة.",
+      "cefr": "B2",
+      "sortOrder": 58,
+      "topics": [
+        "academic-research"
+      ]
+    },
+    {
+      "id": "academic-research-2",
+      "en": "The hypothesis still needs evidence.",
+      "ar": "ما زالت الفرضية تحتاج إلى دليل.",
+      "cefr": "C1",
+      "sortOrder": 59,
+      "topics": [
+        "academic-research"
+      ]
+    },
+    {
+      "id": "academic-research-3",
+      "en": "A meticulous note can change the conclusion.",
+      "ar": "قد تغيّر ملاحظة دقيقة جداً الاستنتاج.",
+      "cefr": "C2",
+      "sortOrder": 60,
+      "topics": [
+        "academic-research"
+      ]
+    },
+    {
+      "id": "work-1",
+      "en": "She starts a new job on Monday.",
+      "ar": "تبدأ وظيفة جديدة يوم الاثنين.",
+      "cefr": "A2",
+      "sortOrder": 61,
+      "topics": [
+        "work"
+      ]
+    },
+    {
+      "id": "work-2",
+      "en": "The meeting is in the office after lunch.",
+      "ar": "الاجتماع في المكتب بعد الغداء.",
+      "cefr": "B1",
+      "sortOrder": 62,
+      "topics": [
+        "work"
+      ]
+    },
+    {
+      "id": "work-3",
+      "en": "They work together to develop the plan.",
+      "ar": "يعملون معاً لتطوير الخطة.",
+      "cefr": "B2",
+      "sortOrder": 63,
+      "topics": [
+        "work"
+      ]
+    },
+    {
+      "id": "job-interviews-1",
+      "en": "Bring your resume to the interview.",
+      "ar": "أحضر سيرتك الذاتية إلى المقابلة.",
+      "cefr": "B1",
+      "sortOrder": 64,
+      "topics": [
+        "job-interviews"
+      ]
+    },
+    {
+      "id": "job-interviews-2",
+      "en": "The candidate explains some work experience.",
+      "ar": "يشرح المرشح بعض الخبرة العملية.",
+      "cefr": "B2",
+      "sortOrder": 65,
+      "topics": [
+        "job-interviews"
+      ]
+    },
+    {
+      "id": "job-interviews-3",
+      "en": "A calm answer can strengthen the interview.",
+      "ar": "يمكن لإجابة هادئة أن تقوّي المقابلة.",
+      "cefr": "C1",
+      "sortOrder": 66,
+      "topics": [
+        "job-interviews"
+      ]
+    },
+    {
+      "id": "technology-1",
+      "en": "This device connects to the internet.",
+      "ar": "يتصل هذا الجهاز بالإنترنت.",
+      "cefr": "B1",
+      "sortOrder": 67,
+      "topics": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology-2",
+      "en": "New technology changes daily work.",
+      "ar": "تغيّر التكنولوجيا الجديدة العمل اليومي.",
+      "cefr": "B2",
+      "sortOrder": 68,
+      "topics": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology-3",
+      "en": "The team fixes a vulnerability in the system.",
+      "ar": "يصلح الفريق ثغرة في النظام.",
+      "cefr": "C1",
+      "sortOrder": 69,
+      "topics": [
+        "technology"
+      ]
+    },
+    {
+      "id": "internet-1",
+      "en": "I send an email from the school website.",
+      "ar": "أرسل بريداً إلكترونياً من موقع المدرسة.",
+      "cefr": "A2",
+      "sortOrder": 70,
+      "topics": [
+        "internet"
+      ]
+    },
+    {
+      "id": "internet-2",
+      "en": "People read the news on the internet.",
+      "ar": "يقرأ الناس الأخبار على الإنترنت.",
+      "cefr": "B1",
+      "sortOrder": 71,
+      "topics": [
+        "internet"
+      ]
+    },
+    {
+      "id": "internet-3",
+      "en": "Use a strong password on every website.",
+      "ar": "استخدم كلمة مرور قوية في كل موقع.",
+      "cefr": "B2",
+      "sortOrder": 72,
+      "topics": [
+        "internet"
+      ]
+    },
+    {
+      "id": "software-1",
+      "en": "The team develops new software.",
+      "ar": "يطوّر الفريق برمجيات جديدة.",
+      "cefr": "B1",
+      "sortOrder": 73,
+      "topics": [
+        "software"
+      ]
+    },
+    {
+      "id": "software-2",
+      "en": "She writes code for the program.",
+      "ar": "تكتب شفرة للبرنامج.",
+      "cefr": "B2",
+      "sortOrder": 74,
+      "topics": [
+        "software"
+      ]
+    },
+    {
+      "id": "software-3",
+      "en": "Software development needs careful testing.",
+      "ar": "يحتاج تطوير البرمجيات إلى اختبار دقيق.",
+      "cefr": "C1",
+      "sortOrder": 75,
+      "topics": [
+        "software"
+      ]
+    },
+    {
+      "id": "cybersecurity-1",
+      "en": "Never share your password.",
+      "ar": "لا تشارك كلمة المرور أبداً.",
+      "cefr": "A2",
+      "sortOrder": 76,
+      "topics": [
+        "cybersecurity"
+      ]
+    },
+    {
+      "id": "cybersecurity-2",
+      "en": "A virus can damage the software.",
+      "ar": "يمكن لفيروس أن يتلف البرمجيات.",
+      "cefr": "B1",
+      "sortOrder": 77,
+      "topics": [
+        "cybersecurity"
+      ]
+    },
+    {
+      "id": "cybersecurity-3",
+      "en": "Encryption protects data from a vulnerability.",
+      "ar": "يحمي التشفير البيانات من ثغرة.",
+      "cefr": "C1",
+      "sortOrder": 78,
+      "topics": [
+        "cybersecurity"
+      ]
+    },
+    {
+      "id": "ai-1",
+      "en": "The robot moves across the room.",
+      "ar": "يتحرك الروبوت عبر الغرفة.",
+      "cefr": "B1",
+      "sortOrder": 79,
+      "topics": [
+        "ai"
+      ]
+    },
+    {
+      "id": "ai-2",
+      "en": "The algorithm sorts the names.",
+      "ar": "ترتّب الخوارزمية الأسماء.",
+      "cefr": "B2",
+      "sortOrder": 80,
+      "topics": [
+        "ai"
+      ]
+    },
+    {
+      "id": "ai-3",
+      "en": "Machine intelligence still needs human review.",
+      "ar": "ما زال ذكاء الآلة يحتاج إلى مراجعة بشرية.",
+      "cefr": "C1",
+      "sortOrder": 81,
+      "topics": [
+        "ai"
+      ]
+    },
+    {
+      "id": "health-1",
+      "en": "The doctor asks about your health.",
+      "ar": "يسأل الطبيب عن صحتك.",
+      "cefr": "A1",
+      "sortOrder": 82,
+      "topics": [
+        "health"
+      ]
+    },
+    {
+      "id": "health-2",
+      "en": "Drink water and rest today.",
+      "ar": "اشرب ماء واسترح اليوم.",
+      "cefr": "A2",
+      "sortOrder": 83,
+      "topics": [
+        "health"
+      ]
+    },
+    {
+      "id": "health-3",
+      "en": "Take the medicine after food.",
+      "ar": "خذ الدواء بعد الطعام.",
+      "cefr": "B1",
+      "sortOrder": 84,
+      "topics": [
+        "health"
+      ]
+    },
+    {
+      "id": "hospital-1",
+      "en": "The hospital is near the city center.",
+      "ar": "المستشفى قرب وسط المدينة.",
+      "cefr": "A2",
+      "sortOrder": 85,
+      "topics": [
+        "hospital"
+      ]
+    },
+    {
+      "id": "hospital-2",
+      "en": "The nurse checks the patient.",
+      "ar": "يفحص الممرض المريض.",
+      "cefr": "B1",
+      "sortOrder": 86,
+      "topics": [
+        "hospital"
+      ]
+    },
+    {
+      "id": "hospital-3",
+      "en": "Call the hospital in an emergency.",
+      "ar": "اتصل بالمستشفى في حالة طوارئ.",
+      "cefr": "B2",
+      "sortOrder": 87,
+      "topics": [
+        "hospital"
+      ]
+    },
+    {
+      "id": "disasters-1",
+      "en": "The flood closes the street.",
+      "ar": "يغلق الفيضان الشارع.",
+      "cefr": "B1",
+      "sortOrder": 88,
+      "topics": [
+        "disasters"
+      ]
+    },
+    {
+      "id": "disasters-2",
+      "en": "A warning comes before the earthquake.",
+      "ar": "يأتي تحذير قبل الزلزال.",
+      "cefr": "B2",
+      "sortOrder": 89,
+      "topics": [
+        "disasters"
+      ]
+    },
+    {
+      "id": "disasters-3",
+      "en": "People need shelter after a major disaster.",
+      "ar": "يحتاج الناس إلى مأوى بعد كارثة كبيرة.",
+      "cefr": "C1",
+      "sortOrder": 90,
+      "topics": [
+        "disasters"
+      ]
+    },
+    {
+      "id": "money-1",
+      "en": "I pay with cash money.",
+      "ar": "أدفع بمال نقدي.",
+      "cefr": "A1",
+      "sortOrder": 91,
+      "topics": [
+        "money"
+      ]
+    },
+    {
+      "id": "money-2",
+      "en": "She keeps her savings in the bank.",
+      "ar": "تحتفظ بمدخراتها في البنك.",
+      "cefr": "B1",
+      "sortOrder": 92,
+      "topics": [
+        "money"
+      ]
+    },
+    {
+      "id": "money-3",
+      "en": "The price rises when money is short.",
+      "ar": "يرتفع السعر عندما يقل المال.",
+      "cefr": "B2",
+      "sortOrder": 93,
+      "topics": [
+        "money"
+      ]
+    },
+    {
+      "id": "business-1",
+      "en": "The company signs a new contract.",
+      "ar": "توقّع الشركة عقداً جديداً.",
+      "cefr": "B1",
+      "sortOrder": 94,
+      "topics": [
+        "business"
+      ]
+    },
+    {
+      "id": "business-2",
+      "en": "The meeting reviews the market plan.",
+      "ar": "يراجع الاجتماع خطة السوق.",
+      "cefr": "B2",
+      "sortOrder": 95,
+      "topics": [
+        "business"
+      ]
+    },
+    {
+      "id": "business-3",
+      "en": "A clear agreement protects both companies.",
+      "ar": "يحمي اتفاق واضح الشركتين.",
+      "cefr": "C1",
+      "sortOrder": 96,
+      "topics": [
+        "business"
+      ]
+    },
+    {
+      "id": "economy-1",
+      "en": "Inflation makes food more expensive.",
+      "ar": "يجعل التضخم الطعام أغلى.",
+      "cefr": "B2",
+      "sortOrder": 97,
+      "topics": [
+        "economy"
+      ]
+    },
+    {
+      "id": "economy-2",
+      "en": "The tax changes next year.",
+      "ar": "تتغير الضريبة في السنة القادمة.",
+      "cefr": "C1",
+      "sortOrder": 98,
+      "topics": [
+        "economy"
+      ]
+    },
+    {
+      "id": "economy-3",
+      "en": "The market reacts quickly to the news.",
+      "ar": "يتفاعل السوق بسرعة مع الأخبار.",
+      "cefr": "C2",
+      "sortOrder": 99,
+      "topics": [
+        "economy"
+      ]
+    },
+    {
+      "id": "news-1",
+      "en": "I read the news every morning.",
+      "ar": "أقرأ الأخبار كل صباح.",
+      "cefr": "A2",
+      "sortOrder": 100,
+      "topics": [
+        "news"
+      ]
+    },
+    {
+      "id": "news-2",
+      "en": "The report explains the flood.",
+      "ar": "يشرح التقرير الفيضان.",
+      "cefr": "B1",
+      "sortOrder": 101,
+      "topics": [
+        "news"
+      ]
+    },
+    {
+      "id": "news-3",
+      "en": "Journalists report the ceasefire.",
+      "ar": "ينقل الصحفيون خبر وقف إطلاق النار.",
+      "cefr": "C1",
+      "sortOrder": 102,
+      "topics": [
+        "news"
+      ]
+    },
+    {
+      "id": "culture-1",
+      "en": "Food is part of local culture.",
+      "ar": "الطعام جزء من الثقافة المحلية.",
+      "cefr": "B1",
+      "sortOrder": 103,
+      "topics": [
+        "culture"
+      ]
+    },
+    {
+      "id": "culture-2",
+      "en": "The festival follows an old tradition.",
+      "ar": "يتبع المهرجان تقليداً قديماً.",
+      "cefr": "B2",
+      "sortOrder": 104,
+      "topics": [
+        "culture"
+      ]
+    },
+    {
+      "id": "culture-3",
+      "en": "A translation can miss a cultural nuance.",
+      "ar": "قد تفوّت الترجمة فارقاً ثقافياً دقيقاً.",
+      "cefr": "C2",
+      "sortOrder": 105,
+      "topics": [
+        "culture"
+      ]
+    },
+    {
+      "id": "immigration-1",
+      "en": "They cross the border with a visa.",
+      "ar": "يعبرون الحدود بتأشيرة.",
+      "cefr": "B1",
+      "sortOrder": 106,
+      "topics": [
+        "immigration"
+      ]
+    },
+    {
+      "id": "immigration-2",
+      "en": "The refugee needs shelter and aid.",
+      "ar": "يحتاج اللاجئ إلى مأوى وإغاثة.",
+      "cefr": "B2",
+      "sortOrder": 107,
+      "topics": [
+        "immigration"
+      ]
+    },
+    {
+      "id": "immigration-3",
+      "en": "She applies for asylum at the border.",
+      "ar": "تتقدم بطلب لجوء عند الحدود.",
+      "cefr": "C1",
+      "sortOrder": 108,
+      "topics": [
+        "immigration"
+      ]
+    },
+    {
+      "id": "police-1",
+      "en": "The police help after the accident.",
+      "ar": "تساعد الشرطة بعد الحادث.",
+      "cefr": "A2",
+      "sortOrder": 109,
+      "topics": [
+        "police"
+      ]
+    },
+    {
+      "id": "police-2",
+      "en": "The law says this act is a crime.",
+      "ar": "يقول القانون إن هذا الفعل جريمة.",
+      "cefr": "B1",
+      "sortOrder": 110,
+      "topics": [
+        "police"
+      ]
+    },
+    {
+      "id": "police-3",
+      "en": "New legislation changes police powers.",
+      "ar": "يغيّر التشريع الجديد صلاحيات الشرطة.",
+      "cefr": "B2",
+      "sortOrder": 111,
+      "topics": [
+        "police"
+      ]
+    },
+    {
+      "id": "courts-1",
+      "en": "The trial is in the court today.",
+      "ar": "المحاكمة في المحكمة اليوم.",
+      "cefr": "B1",
+      "sortOrder": 112,
+      "topics": [
+        "courts"
+      ]
+    },
+    {
+      "id": "courts-2",
+      "en": "The judge listens to both sides.",
+      "ar": "يستمع القاضي إلى الطرفين.",
+      "cefr": "B2",
+      "sortOrder": 113,
+      "topics": [
+        "courts"
+      ]
+    },
+    {
+      "id": "courts-3",
+      "en": "The court explains how the law applies.",
+      "ar": "تشرح المحكمة كيف يُطبَّق القانون.",
+      "cefr": "C1",
+      "sortOrder": 114,
+      "topics": [
+        "courts"
+      ]
+    },
+    {
+      "id": "government-1",
+      "en": "The government announces a new policy.",
+      "ar": "تعلن الحكومة سياسة جديدة.",
+      "cefr": "B1",
+      "sortOrder": 115,
+      "topics": [
+        "government"
+      ]
+    },
+    {
+      "id": "government-2",
+      "en": "The minister speaks to journalists.",
+      "ar": "يتحدّث الوزير إلى الصحفيين.",
+      "cefr": "B2",
+      "sortOrder": 116,
+      "topics": [
+        "government"
+      ]
+    },
+    {
+      "id": "government-3",
+      "en": "Tax legislation is debated in public.",
+      "ar": "يُناقش تشريع الضريبة علناً.",
+      "cefr": "C1",
+      "sortOrder": 117,
+      "topics": [
+        "government"
+      ]
+    },
+    {
+      "id": "politics-1",
+      "en": "Students debate politics on campus.",
+      "ar": "يناقش الطلاب السياسة في الحرم الجامعي.",
+      "cefr": "B1",
+      "sortOrder": 118,
+      "topics": [
+        "politics"
+      ]
+    },
+    {
+      "id": "politics-2",
+      "en": "The campaign asks people to vote.",
+      "ar": "تطلب الحملة من الناس أن يصوّتوا.",
+      "cefr": "B2",
+      "sortOrder": 119,
+      "topics": [
+        "politics"
+      ]
+    },
+    {
+      "id": "politics-3",
+      "en": "A referendum puts one question to the public.",
+      "ar": "يطرح الاستفتاء سؤالاً واحداً على الجمهور.",
+      "cefr": "C1",
+      "sortOrder": 120,
+      "topics": [
+        "politics"
+      ]
+    },
+    {
+      "id": "elections-1",
+      "en": "Citizens vote on election day.",
+      "ar": "يصوّت المواطنون يوم الانتخاب.",
+      "cefr": "B1",
+      "sortOrder": 121,
+      "topics": [
+        "elections"
+      ]
+    },
+    {
+      "id": "elections-2",
+      "en": "Put the ballot in the box.",
+      "ar": "ضع ورقة الاقتراع في الصندوق.",
+      "cefr": "B2",
+      "sortOrder": 122,
+      "topics": [
+        "elections"
+      ]
+    },
+    {
+      "id": "elections-3",
+      "en": "The candidate speaks before the referendum.",
+      "ar": "يلقي المرشح كلمة قبل الاستفتاء.",
+      "cefr": "C1",
+      "sortOrder": 123,
+      "topics": [
+        "elections"
+      ]
+    },
+    {
+      "id": "diplomacy-1",
+      "en": "The visa office is at the embassy.",
+      "ar": "مكتب التأشيرات في السفارة.",
+      "cefr": "B2",
+      "sortOrder": 124,
+      "topics": [
+        "diplomacy"
+      ]
+    },
+    {
+      "id": "diplomacy-2",
+      "en": "Diplomacy can prevent a wider conflict.",
+      "ar": "يمكن للدبلوماسية أن تمنع نزاعاً أوسع.",
+      "cefr": "C1",
+      "sortOrder": 125,
+      "topics": [
+        "diplomacy"
+      ]
+    },
+    {
+      "id": "diplomacy-3",
+      "en": "The negotiation produced a careful agreement.",
+      "ar": "أنتج التفاوض اتفاقاً دقيقاً.",
+      "cefr": "C2",
+      "sortOrder": 126,
+      "topics": [
+        "diplomacy"
+      ]
+    },
+    {
+      "id": "un-1",
+      "en": "The countries sign a peace treaty.",
+      "ar": "توقّع الدول معاهدة سلام.",
+      "cefr": "B2",
+      "sortOrder": 127,
+      "topics": [
+        "un"
+      ]
+    },
+    {
+      "id": "un-2",
+      "en": "The charter lists basic rights.",
+      "ar": "يسرد الميثاق الحقوق الأساسية.",
+      "cefr": "C1",
+      "sortOrder": 128,
+      "topics": [
+        "un"
+      ]
+    },
+    {
+      "id": "un-3",
+      "en": "The delegation arrives for the talks.",
+      "ar": "يصل الوفد من أجل المحادثات.",
+      "cefr": "C2",
+      "sortOrder": 129,
+      "topics": [
+        "un"
+      ]
+    },
+    {
+      "id": "human-rights-1",
+      "en": "The law protects basic rights.",
+      "ar": "يحمي القانون الحقوق الأساسية.",
+      "cefr": "B1",
+      "sortOrder": 130,
+      "topics": [
+        "human-rights"
+      ]
+    },
+    {
+      "id": "human-rights-2",
+      "en": "Freedom of speech is a basic right.",
+      "ar": "حرية الكلام حق أساسي.",
+      "cefr": "B2",
+      "sortOrder": 131,
+      "topics": [
+        "human-rights"
+      ]
+    },
+    {
+      "id": "human-rights-3",
+      "en": "The policy supports equality before the law.",
+      "ar": "تدعم السياسة المساواة أمام القانون.",
+      "cefr": "C1",
+      "sortOrder": 132,
+      "topics": [
+        "human-rights"
+      ]
+    },
+    {
+      "id": "war-1",
+      "en": "The news reports on the war.",
+      "ar": "تنقل الأخبار أخبار الحرب.",
+      "cefr": "B1",
+      "sortOrder": 133,
+      "topics": [
+        "war"
+      ]
+    },
+    {
+      "id": "war-2",
+      "en": "The conflict harmed many civilians.",
+      "ar": "أضر النزاع بكثير من المدنيين.",
+      "cefr": "B2",
+      "sortOrder": 134,
+      "topics": [
+        "war"
+      ]
+    },
+    {
+      "id": "war-3",
+      "en": "They agreed on a ceasefire.",
+      "ar": "اتفقوا على وقف إطلاق النار.",
+      "cefr": "C1",
+      "sortOrder": 135,
+      "topics": [
+        "war"
+      ]
+    },
+    {
+      "id": "military-1",
+      "en": "The soldier returns home.",
+      "ar": "يعود الجندي إلى البيت.",
+      "cefr": "B1",
+      "sortOrder": 136,
+      "topics": [
+        "military"
+      ]
+    },
+    {
+      "id": "military-2",
+      "en": "The army protects the border.",
+      "ar": "يحمي الجيش الحدود.",
+      "cefr": "B2",
+      "sortOrder": 137,
+      "topics": [
+        "military"
+      ]
+    },
+    {
+      "id": "military-3",
+      "en": "Defense planning is a public topic.",
+      "ar": "التخطيط الدفاعي موضوع عام.",
+      "cefr": "C1",
+      "sortOrder": 138,
+      "topics": [
+        "military"
+      ]
+    },
+    {
+      "id": "peace-1",
+      "en": "People hope the talks bring peace.",
+      "ar": "يأمل الناس أن تجلب المحادثات السلام.",
+      "cefr": "B1",
+      "sortOrder": 139,
+      "topics": [
+        "peace"
+      ]
+    },
+    {
+      "id": "peace-2",
+      "en": "The agreement ends the dispute.",
+      "ar": "ينهي الاتفاق الخلاف.",
+      "cefr": "B2",
+      "sortOrder": 140,
+      "topics": [
+        "peace"
+      ]
+    },
+    {
+      "id": "peace-3",
+      "en": "The negotiation keeps the ceasefire in place.",
+      "ar": "يبقي التفاوض وقف إطلاق النار قائماً.",
+      "cefr": "C1",
+      "sortOrder": 141,
+      "topics": [
+        "peace"
+      ]
+    },
+    {
+      "id": "humanitarian-1",
+      "en": "Aid arrives after the flood.",
+      "ar": "تصل الإغاثة بعد الفيضان.",
+      "cefr": "B1",
+      "sortOrder": 142,
+      "topics": [
+        "humanitarian"
+      ]
+    },
+    {
+      "id": "humanitarian-2",
+      "en": "The family finds shelter after the earthquake.",
+      "ar": "تجد العائلة مأوى بعد الزلزال.",
+      "cefr": "B2",
+      "sortOrder": 143,
+      "topics": [
+        "humanitarian"
+      ]
+    },
+    {
+      "id": "humanitarian-3",
+      "en": "Humanitarian aid reaches the camp.",
+      "ar": "تصل المساعدات الإنسانية إلى المخيم.",
+      "cefr": "C1",
+      "sortOrder": 144,
+      "topics": [
+        "humanitarian"
+      ]
+    },
+    {
+      "id": "environment-1",
+      "en": "Pollution harms the environment.",
+      "ar": "يضر التلوث بالبيئة.",
+      "cefr": "B1",
+      "sortOrder": 145,
+      "topics": [
+        "environment"
+      ]
+    },
+    {
+      "id": "environment-2",
+      "en": "Climate research studies rising heat.",
+      "ar": "يدرس بحث المناخ ارتفاع الحرارة.",
+      "cefr": "B2",
+      "sortOrder": 146,
+      "topics": [
+        "environment"
+      ]
+    },
+    {
+      "id": "environment-3",
+      "en": "Cleaner energy can reduce pollution.",
+      "ar": "يمكن لطاقة أنظف أن تقلل التلوث.",
+      "cefr": "C1",
+      "sortOrder": 147,
+      "topics": [
+        "environment"
+      ]
+    },
+    {
+      "id": "science-1",
+      "en": "Science class includes an experiment.",
+      "ar": "يتضمن درس العلوم تجربة.",
+      "cefr": "B1",
+      "sortOrder": 148,
+      "topics": [
+        "science"
+      ]
+    },
+    {
+      "id": "science-2",
+      "en": "The students run a simple experiment.",
+      "ar": "يجري الطلاب تجربة بسيطة.",
+      "cefr": "B2",
+      "sortOrder": 149,
+      "topics": [
+        "science"
+      ]
+    },
+    {
+      "id": "science-3",
+      "en": "The hypothesis comes from earlier research.",
+      "ar": "تأتي الفرضية من بحث سابق.",
+      "cefr": "C1",
+      "sortOrder": 150,
+      "topics": [
+        "science"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "travel-english",
+      "slug": "travel-english",
+      "nameEn": "Travel English",
+      "nameAr": "إنجليزية السفر",
+      "descriptionEn": "Airport, hotel, restaurant, and getting around.",
+      "descriptionAr": "المطار والفندق والمطعم والتنقل.",
+      "sortOrder": 1,
+      "topics": [
+        "airport",
+        "hotel",
+        "restaurant",
+        "transportation",
+        "directions",
+        "travel"
+      ]
+    },
+    {
+      "id": "tech-english",
+      "slug": "tech-english",
+      "nameEn": "Tech English",
+      "nameAr": "إنجليزية التقنية",
+      "descriptionEn": "Technology, programming, security, and AI.",
+      "descriptionAr": "التكنولوجيا والبرمجة والأمن والذكاء الاصطناعي.",
+      "sortOrder": 2,
+      "topics": [
+        "technology",
+        "software",
+        "cybersecurity",
+        "ai",
+        "internet"
+      ]
+    },
+    {
+      "id": "international-news",
+      "slug": "international-news",
+      "nameEn": "International News English",
+      "nameAr": "إنجليزية الأخبار الدولية",
+      "descriptionEn": "News, politics, conflict, and diplomacy.",
+      "descriptionAr": "الأخبار والسياسة والنزاع والدبلوماسية.",
+      "sortOrder": 3,
+      "topics": [
+        "news",
+        "politics",
+        "economy",
+        "war",
+        "diplomacy",
+        "un",
+        "humanitarian"
+      ]
+    }
+  ],
+  "ranks": [],
+  "datasetType": "development",
+  "note": "Practice topic links and sentences for the development vocabulary. Not an official topic word list. Links whose entry ids are absent are skipped on import."
+}

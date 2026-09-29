@@ -1,0 +1,2266 @@
+{
+  "version": 2,
+  "datasetType": "development",
+  "note": "Original practice entries for trying the app. Not an official CEFR word list. The vocabulary pipeline replaces this file and writes datasetType production.",
+  "entries": [
+    {
+      "id": "day-noun",
+      "lemma": "day",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A period of twenty-four hours.",
+      "arabicMeaning": "يوم",
+      "example": "I start my day at home.",
+      "forms": [
+        "days"
+      ]
+    },
+    {
+      "id": "time-noun",
+      "lemma": "time",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "The moment when something happens.",
+      "arabicMeaning": "وقت",
+      "example": "What time do you eat?",
+      "forms": [
+        "times"
+      ]
+    },
+    {
+      "id": "week-noun",
+      "lemma": "week",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A period of seven days.",
+      "arabicMeaning": "أسبوع",
+      "example": "I see my family every week.",
+      "forms": [
+        "weeks"
+      ]
+    },
+    {
+      "id": "name-noun",
+      "lemma": "name",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "The word people use for a person or thing.",
+      "arabicMeaning": "اسم",
+      "example": "My name is on the door.",
+      "forms": [
+        "names"
+      ]
+    },
+    {
+      "id": "home-noun",
+      "lemma": "home",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "The place where a person lives.",
+      "arabicMeaning": "بيت",
+      "example": "I go home after school."
+    },
+    {
+      "id": "family-noun",
+      "lemma": "family",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "Parents and children who live together.",
+      "arabicMeaning": "عائلة",
+      "example": "My family eats together.",
+      "forms": [
+        "families"
+      ]
+    },
+    {
+      "id": "mother-noun",
+      "lemma": "mother",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A female parent.",
+      "arabicMeaning": "أم",
+      "example": "My mother cooks in the kitchen.",
+      "forms": [
+        "mothers"
+      ]
+    },
+    {
+      "id": "father-noun",
+      "lemma": "father",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A male parent.",
+      "arabicMeaning": "أب",
+      "example": "My father reads the news.",
+      "forms": [
+        "fathers"
+      ]
+    },
+    {
+      "id": "child-noun",
+      "lemma": "child",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A young boy or girl.",
+      "arabicMeaning": "طفل",
+      "example": "The child learns at home.",
+      "forms": [
+        "children"
+      ]
+    },
+    {
+      "id": "boy-noun",
+      "lemma": "boy",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A male child.",
+      "arabicMeaning": "ولد",
+      "example": "The boy plays a game.",
+      "forms": [
+        "boys"
+      ]
+    },
+    {
+      "id": "girl-noun",
+      "lemma": "girl",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A female child.",
+      "arabicMeaning": "بنت",
+      "example": "The girl reads a book.",
+      "forms": [
+        "girls"
+      ]
+    },
+    {
+      "id": "friend-noun",
+      "lemma": "friend",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A person you like and spend time with.",
+      "arabicMeaning": "صديق",
+      "example": "I meet a friend after class.",
+      "forms": [
+        "friends"
+      ]
+    },
+    {
+      "id": "party-noun",
+      "lemma": "party",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A social gathering with friends.",
+      "arabicMeaning": "حفلة",
+      "example": "We have a small party on Friday.",
+      "forms": [
+        "parties"
+      ]
+    },
+    {
+      "id": "invitation-noun",
+      "lemma": "invitation",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A request for someone to come.",
+      "arabicMeaning": "دعوة",
+      "example": "I send an invitation to my friend.",
+      "forms": [
+        "invitations"
+      ]
+    },
+    {
+      "id": "house-noun",
+      "lemma": "house",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A building where people live.",
+      "arabicMeaning": "منزل",
+      "example": "Our house has a small kitchen.",
+      "forms": [
+        "houses"
+      ]
+    },
+    {
+      "id": "room-noun",
+      "lemma": "room",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A separate space inside a building.",
+      "arabicMeaning": "غرفة",
+      "example": "The hotel room is quiet.",
+      "forms": [
+        "rooms"
+      ]
+    },
+    {
+      "id": "door-noun",
+      "lemma": "door",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "The entrance you open to go in.",
+      "arabicMeaning": "باب",
+      "example": "Please close the door.",
+      "forms": [
+        "doors"
+      ]
+    },
+    {
+      "id": "bed-noun",
+      "lemma": "bed",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A piece of furniture for sleeping.",
+      "arabicMeaning": "سرير",
+      "example": "The bed is in the room.",
+      "forms": [
+        "beds"
+      ]
+    },
+    {
+      "id": "kitchen-noun",
+      "lemma": "kitchen",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "The room where people cook.",
+      "arabicMeaning": "مطبخ",
+      "example": "She cooks bread in the kitchen.",
+      "forms": [
+        "kitchens"
+      ]
+    },
+    {
+      "id": "table-noun",
+      "lemma": "table",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A piece of furniture with a flat top.",
+      "arabicMeaning": "طاولة",
+      "example": "The menu is on the table.",
+      "forms": [
+        "tables"
+      ]
+    },
+    {
+      "id": "food-noun",
+      "lemma": "food",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "Things people eat.",
+      "arabicMeaning": "طعام",
+      "example": "Fresh food is on the table."
+    },
+    {
+      "id": "bread-noun",
+      "lemma": "bread",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A baked food made from flour.",
+      "arabicMeaning": "خبز",
+      "example": "I buy bread at the shop."
+    },
+    {
+      "id": "water-noun",
+      "lemma": "water",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "The clear liquid people drink.",
+      "arabicMeaning": "ماء",
+      "example": "Please bring a glass of water."
+    },
+    {
+      "id": "milk-noun",
+      "lemma": "milk",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A white drink from cows.",
+      "arabicMeaning": "حليب",
+      "example": "The child drinks milk."
+    },
+    {
+      "id": "apple-noun",
+      "lemma": "apple",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A round fruit with red or green skin.",
+      "arabicMeaning": "تفاحة",
+      "example": "I eat an apple at lunch.",
+      "forms": [
+        "apples"
+      ]
+    },
+    {
+      "id": "cook-verb",
+      "lemma": "cook",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To prepare food with heat.",
+      "arabicMeaning": "يطبخ",
+      "example": "She cooks rice for the family.",
+      "forms": [
+        "cooks",
+        "cooked",
+        "cooking"
+      ]
+    },
+    {
+      "id": "menu-noun",
+      "lemma": "menu",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A list of dishes in a restaurant.",
+      "arabicMeaning": "قائمة الطعام",
+      "example": "The waiter brings the menu.",
+      "forms": [
+        "menus"
+      ]
+    },
+    {
+      "id": "waiter-noun",
+      "lemma": "waiter",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A person who serves food in a restaurant.",
+      "arabicMeaning": "نادل",
+      "example": "The waiter takes our order.",
+      "forms": [
+        "waiters"
+      ]
+    },
+    {
+      "id": "reservation-noun",
+      "lemma": "reservation",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A booking you make before you arrive.",
+      "arabicMeaning": "حجز",
+      "example": "I have a reservation at the hotel.",
+      "forms": [
+        "reservations"
+      ],
+      "ielts": true
+    },
+    {
+      "id": "shop-noun",
+      "lemma": "shop",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A place where people buy things.",
+      "arabicMeaning": "متجر",
+      "example": "The shop sells bread and milk.",
+      "forms": [
+        "shops"
+      ]
+    },
+    {
+      "id": "price-noun",
+      "lemma": "price",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "The amount of money something costs.",
+      "arabicMeaning": "سعر",
+      "example": "The price of bread is low.",
+      "forms": [
+        "prices"
+      ]
+    },
+    {
+      "id": "customer-noun",
+      "lemma": "customer",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A person who buys something.",
+      "arabicMeaning": "زبون",
+      "example": "The customer pays at the shop.",
+      "forms": [
+        "customers"
+      ]
+    },
+    {
+      "id": "clothes-noun",
+      "lemma": "clothes",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "Things people wear.",
+      "arabicMeaning": "ملابس",
+      "example": "These clothes are the right size."
+    },
+    {
+      "id": "shirt-noun",
+      "lemma": "shirt",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A piece of clothing for the upper body.",
+      "arabicMeaning": "قميص",
+      "example": "He buys a blue shirt.",
+      "forms": [
+        "shirts"
+      ]
+    },
+    {
+      "id": "size-noun",
+      "lemma": "size",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "How big or small something is.",
+      "arabicMeaning": "مقاس",
+      "example": "What size shirt do you need?",
+      "forms": [
+        "sizes"
+      ]
+    },
+    {
+      "id": "sport-noun",
+      "lemma": "sport",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A physical game or activity.",
+      "arabicMeaning": "رياضة",
+      "example": "Football is a popular sport.",
+      "forms": [
+        "sports"
+      ]
+    },
+    {
+      "id": "team-noun",
+      "lemma": "team",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A group of people who play together.",
+      "arabicMeaning": "فريق",
+      "example": "Our team wins the match.",
+      "forms": [
+        "teams"
+      ]
+    },
+    {
+      "id": "match-noun",
+      "lemma": "match",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A game between two teams.",
+      "arabicMeaning": "مباراة",
+      "example": "We watch the match on television.",
+      "forms": [
+        "matches"
+      ]
+    },
+    {
+      "id": "song-noun",
+      "lemma": "song",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "Music with words.",
+      "arabicMeaning": "أغنية",
+      "example": "They play a song at the party.",
+      "forms": [
+        "songs"
+      ]
+    },
+    {
+      "id": "game-noun",
+      "lemma": "game",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "An activity with rules and a winner.",
+      "arabicMeaning": "لعبة",
+      "example": "The children play a game.",
+      "forms": [
+        "games"
+      ]
+    },
+    {
+      "id": "ticket-noun",
+      "lemma": "ticket",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A paper or pass that lets you enter or travel.",
+      "arabicMeaning": "تذكرة",
+      "example": "I buy a ticket for the train.",
+      "forms": [
+        "tickets"
+      ]
+    },
+    {
+      "id": "movie-noun",
+      "lemma": "movie",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A story shown on a screen.",
+      "arabicMeaning": "فيلم",
+      "example": "We watch a movie on Friday.",
+      "forms": [
+        "movies"
+      ]
+    },
+    {
+      "id": "actor-noun",
+      "lemma": "actor",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A person who plays a character in a film.",
+      "arabicMeaning": "ممثل",
+      "example": "The actor is famous.",
+      "forms": [
+        "actors"
+      ]
+    },
+    {
+      "id": "screen-noun",
+      "lemma": "screen",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "The flat surface where a film or page appears.",
+      "arabicMeaning": "شاشة",
+      "example": "The movie is on the big screen.",
+      "forms": [
+        "screens"
+      ]
+    },
+    {
+      "id": "prayer-noun",
+      "lemma": "prayer",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "Words people say in worship.",
+      "arabicMeaning": "صلاة",
+      "example": "They meet for prayer on Friday.",
+      "forms": [
+        "prayers"
+      ]
+    },
+    {
+      "id": "faith-noun",
+      "lemma": "faith",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A strong belief, often religious.",
+      "arabicMeaning": "إيمان",
+      "example": "Faith is part of daily life for many people."
+    },
+    {
+      "id": "festival-noun",
+      "lemma": "festival",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A special public celebration.",
+      "arabicMeaning": "مهرجان",
+      "example": "The city holds a festival every year.",
+      "forms": [
+        "festivals"
+      ]
+    },
+    {
+      "id": "school-noun",
+      "lemma": "school",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A place where children learn.",
+      "arabicMeaning": "مدرسة",
+      "example": "She goes to school every day.",
+      "forms": [
+        "schools"
+      ]
+    },
+    {
+      "id": "student-noun",
+      "lemma": "student",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A person who studies at school or university.",
+      "arabicMeaning": "طالب",
+      "example": "The student reads before class.",
+      "forms": [
+        "students"
+      ]
+    },
+    {
+      "id": "teacher-noun",
+      "lemma": "teacher",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A person who helps students learn.",
+      "arabicMeaning": "معلم",
+      "example": "The teacher explains the lesson.",
+      "forms": [
+        "teachers"
+      ]
+    },
+    {
+      "id": "book-noun",
+      "lemma": "book",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A set of pages with a story or information.",
+      "arabicMeaning": "كتاب",
+      "example": "I read a book at home.",
+      "forms": [
+        "books"
+      ]
+    },
+    {
+      "id": "study-verb",
+      "lemma": "study",
+      "cefr": "B2",
+      "pos": "verb",
+      "definitionEn": "To spend time learning a subject.",
+      "arabicMeaning": "يدرس",
+      "example": "I study academic research at the university.",
+      "forms": [
+        "studies",
+        "studied",
+        "studying"
+      ]
+    },
+    {
+      "id": "university-noun",
+      "lemma": "university",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A place for higher study after school.",
+      "arabicMeaning": "جامعة",
+      "example": "The university has a large campus.",
+      "forms": [
+        "universities"
+      ]
+    },
+    {
+      "id": "lecture-noun",
+      "lemma": "lecture",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A talk a teacher gives to a class.",
+      "arabicMeaning": "محاضرة",
+      "example": "The lecture starts at nine.",
+      "forms": [
+        "lectures"
+      ],
+      "toefl": true
+    },
+    {
+      "id": "campus-noun",
+      "lemma": "campus",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The land and buildings of a university.",
+      "arabicMeaning": "الحرم الجامعي",
+      "example": "Students walk across the campus.",
+      "forms": [
+        "campuses"
+      ],
+      "toefl": true
+    },
+    {
+      "id": "academic-adjective",
+      "lemma": "academic",
+      "cefr": "C1",
+      "pos": "adjective",
+      "definitionEn": "Related to study and research at a university.",
+      "arabicMeaning": "أكاديمي",
+      "example": "She writes an academic paper.",
+      "academic": true
+    },
+    {
+      "id": "research-noun",
+      "lemma": "research",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "Careful study to find new facts.",
+      "arabicMeaning": "بحث",
+      "example": "The research looks at climate change.",
+      "academic": true
+    },
+    {
+      "id": "theory-noun",
+      "lemma": "theory",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "An idea that explains how something works.",
+      "arabicMeaning": "نظرية",
+      "example": "The theory needs more evidence.",
+      "forms": [
+        "theories"
+      ],
+      "academic": true
+    },
+    {
+      "id": "hypothesis-noun",
+      "lemma": "hypothesis",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "An idea you test with evidence.",
+      "arabicMeaning": "فرضية",
+      "example": "The hypothesis is still unproved.",
+      "forms": [
+        "hypotheses"
+      ],
+      "academic": true
+    },
+    {
+      "id": "writing-noun",
+      "lemma": "writing",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "The activity or result of writing text.",
+      "arabicMeaning": "كتابة",
+      "example": "Clear writing helps the reader.",
+      "toefl": true
+    },
+    {
+      "id": "vocabulary-noun",
+      "lemma": "vocabulary",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The words a person knows in a language.",
+      "arabicMeaning": "مفردات",
+      "example": "A wide vocabulary helps you read.",
+      "academic": true
+    },
+    {
+      "id": "job-noun",
+      "lemma": "job",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "Work that a person does for pay.",
+      "arabicMeaning": "وظيفة",
+      "example": "She starts a new job on Monday.",
+      "forms": [
+        "jobs"
+      ]
+    },
+    {
+      "id": "office-noun",
+      "lemma": "office",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A room where people do business work.",
+      "arabicMeaning": "مكتب",
+      "example": "The meeting is in the office.",
+      "forms": [
+        "offices"
+      ]
+    },
+    {
+      "id": "work-verb",
+      "lemma": "work",
+      "cefr": "B2",
+      "pos": "verb",
+      "definitionEn": "To do a job or task.",
+      "arabicMeaning": "يعمل",
+      "example": "They work on the software every day.",
+      "forms": [
+        "works",
+        "worked",
+        "working"
+      ]
+    },
+    {
+      "id": "meeting-noun",
+      "lemma": "meeting",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A time when people gather to talk about work.",
+      "arabicMeaning": "اجتماع",
+      "example": "The meeting starts after lunch.",
+      "forms": [
+        "meetings"
+      ]
+    },
+    {
+      "id": "experience-noun",
+      "lemma": "experience",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "Knowledge you get by doing something.",
+      "arabicMeaning": "خبرة",
+      "example": "The job needs some experience.",
+      "forms": [
+        "experiences"
+      ]
+    },
+    {
+      "id": "develop-verb",
+      "lemma": "develop",
+      "cefr": "B2",
+      "pos": "verb",
+      "definitionEn": "To make something grow or become better.",
+      "arabicMeaning": "يطوّر",
+      "example": "They develop software for schools.",
+      "forms": [
+        "develops",
+        "developed",
+        "developing"
+      ]
+    },
+    {
+      "id": "development-noun",
+      "lemma": "development",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The process of making something better.",
+      "arabicMeaning": "تطوير",
+      "example": "Software development takes time.",
+      "forms": [
+        "developments"
+      ],
+      "academic": true
+    },
+    {
+      "id": "interview-noun",
+      "lemma": "interview",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A formal meeting where someone asks you questions.",
+      "arabicMeaning": "مقابلة",
+      "example": "The interview is at the office.",
+      "forms": [
+        "interviews"
+      ],
+      "ielts": true
+    },
+    {
+      "id": "resume-noun",
+      "lemma": "resume",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A short written history of your work and study.",
+      "arabicMeaning": "سيرة ذاتية",
+      "example": "Bring your resume to the interview.",
+      "forms": [
+        "resumes"
+      ]
+    },
+    {
+      "id": "candidate-noun",
+      "lemma": "candidate",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A person who applies for a job or position.",
+      "arabicMeaning": "مرشح",
+      "example": "The candidate answers every question.",
+      "forms": [
+        "candidates"
+      ]
+    },
+    {
+      "id": "technology-noun",
+      "lemma": "technology",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "Tools and systems built with science.",
+      "arabicMeaning": "تكنولوجيا",
+      "example": "New technology changes daily work.",
+      "forms": [
+        "technologies"
+      ]
+    },
+    {
+      "id": "device-noun",
+      "lemma": "device",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A small machine made for a purpose.",
+      "arabicMeaning": "جهاز",
+      "example": "This device connects to the internet.",
+      "forms": [
+        "devices"
+      ]
+    },
+    {
+      "id": "internet-noun",
+      "lemma": "internet",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The global network that connects computers.",
+      "arabicMeaning": "إنترنت",
+      "example": "I read the news on the internet."
+    },
+    {
+      "id": "website-noun",
+      "lemma": "website",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A set of pages on the internet.",
+      "arabicMeaning": "موقع إلكتروني",
+      "example": "The school website shows the timetable.",
+      "forms": [
+        "websites"
+      ]
+    },
+    {
+      "id": "email-noun",
+      "lemma": "email",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A message sent through the internet.",
+      "arabicMeaning": "بريد إلكتروني",
+      "example": "I send an email to my teacher.",
+      "forms": [
+        "emails"
+      ]
+    },
+    {
+      "id": "software-noun",
+      "lemma": "software",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "Programs that tell a computer what to do.",
+      "arabicMeaning": "برمجيات",
+      "example": "The team develops new software."
+    },
+    {
+      "id": "program-noun",
+      "lemma": "program",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A set of instructions a computer follows.",
+      "arabicMeaning": "برنامج",
+      "example": "This program saves the file.",
+      "forms": [
+        "programs"
+      ]
+    },
+    {
+      "id": "code-noun",
+      "lemma": "code",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The instructions written to build software.",
+      "arabicMeaning": "شفرة برمجية",
+      "example": "She writes code for the app."
+    },
+    {
+      "id": "password-noun",
+      "lemma": "password",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A secret word that lets you enter a system.",
+      "arabicMeaning": "كلمة مرور",
+      "example": "Use a strong password.",
+      "forms": [
+        "passwords"
+      ]
+    },
+    {
+      "id": "virus-noun",
+      "lemma": "virus",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A harmful program that spreads to computers.",
+      "arabicMeaning": "فيروس",
+      "example": "A virus can damage the software.",
+      "forms": [
+        "viruses"
+      ]
+    },
+    {
+      "id": "vulnerability-noun",
+      "lemma": "vulnerability",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "A weak point that an attacker can use.",
+      "arabicMeaning": "ثغرة",
+      "example": "The team fixes the vulnerability.",
+      "forms": [
+        "vulnerabilities"
+      ]
+    },
+    {
+      "id": "encryption-noun",
+      "lemma": "encryption",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "A way to hide information so others cannot read it.",
+      "arabicMeaning": "تشفير",
+      "example": "Encryption protects the password."
+    },
+    {
+      "id": "robot-noun",
+      "lemma": "robot",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A machine that can do tasks by itself.",
+      "arabicMeaning": "روبوت",
+      "example": "The robot moves across the room.",
+      "forms": [
+        "robots"
+      ]
+    },
+    {
+      "id": "algorithm-noun",
+      "lemma": "algorithm",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A set of steps a computer follows to solve a problem.",
+      "arabicMeaning": "خوارزمية",
+      "example": "The algorithm sorts the names.",
+      "forms": [
+        "algorithms"
+      ]
+    },
+    {
+      "id": "intelligence-noun",
+      "lemma": "intelligence",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The ability to learn and solve problems.",
+      "arabicMeaning": "ذكاء",
+      "example": "The course explains machine intelligence."
+    },
+    {
+      "id": "doctor-noun",
+      "lemma": "doctor",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A person trained to treat illness.",
+      "arabicMeaning": "طبيب",
+      "example": "The doctor works at the hospital.",
+      "forms": [
+        "doctors"
+      ]
+    },
+    {
+      "id": "health-noun",
+      "lemma": "health",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "The condition of a person's body.",
+      "arabicMeaning": "صحة",
+      "example": "Good food supports health."
+    },
+    {
+      "id": "medicine-noun",
+      "lemma": "medicine",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A substance used to treat illness.",
+      "arabicMeaning": "دواء",
+      "example": "Take the medicine after food.",
+      "forms": [
+        "medicines"
+      ]
+    },
+    {
+      "id": "hospital-noun",
+      "lemma": "hospital",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A place where doctors treat sick people.",
+      "arabicMeaning": "مستشفى",
+      "example": "The hospital is near the city.",
+      "forms": [
+        "hospitals"
+      ]
+    },
+    {
+      "id": "nurse-noun",
+      "lemma": "nurse",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A person who cares for patients.",
+      "arabicMeaning": "ممرض",
+      "example": "The nurse checks the patient.",
+      "forms": [
+        "nurses"
+      ]
+    },
+    {
+      "id": "emergency-noun",
+      "lemma": "emergency",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A sudden dangerous situation that needs help now.",
+      "arabicMeaning": "طوارئ",
+      "example": "Call for help in an emergency.",
+      "forms": [
+        "emergencies"
+      ]
+    },
+    {
+      "id": "flood-noun",
+      "lemma": "flood",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A large amount of water covering the land.",
+      "arabicMeaning": "فيضان",
+      "example": "The flood closes the street.",
+      "forms": [
+        "floods"
+      ]
+    },
+    {
+      "id": "earthquake-noun",
+      "lemma": "earthquake",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A sudden shaking of the ground.",
+      "arabicMeaning": "زلزال",
+      "example": "The earthquake damages some houses.",
+      "forms": [
+        "earthquakes"
+      ]
+    },
+    {
+      "id": "warning-noun",
+      "lemma": "warning",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A message that tells people about danger.",
+      "arabicMeaning": "تحذير",
+      "example": "The warning comes before the storm.",
+      "forms": [
+        "warnings"
+      ]
+    },
+    {
+      "id": "money-noun",
+      "lemma": "money",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "Coins and notes used to buy things.",
+      "arabicMeaning": "مال",
+      "example": "I pay with cash money."
+    },
+    {
+      "id": "bank-noun",
+      "lemma": "bank",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A business that keeps and lends money.",
+      "arabicMeaning": "بنك",
+      "example": "She keeps her money in the bank.",
+      "forms": [
+        "banks"
+      ]
+    },
+    {
+      "id": "company-noun",
+      "lemma": "company",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A business organization.",
+      "arabicMeaning": "شركة",
+      "example": "The company has an office downtown.",
+      "forms": [
+        "companies"
+      ]
+    },
+    {
+      "id": "contract-noun",
+      "lemma": "contract",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A written agreement between people or companies.",
+      "arabicMeaning": "عقد",
+      "example": "They sign the contract today.",
+      "forms": [
+        "contracts"
+      ]
+    },
+    {
+      "id": "market-noun",
+      "lemma": "market",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The system of buying and selling.",
+      "arabicMeaning": "سوق",
+      "example": "The market reacts to the news.",
+      "forms": [
+        "markets"
+      ]
+    },
+    {
+      "id": "tax-noun",
+      "lemma": "tax",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "Money people must pay to the government.",
+      "arabicMeaning": "ضريبة",
+      "example": "The new tax starts next year.",
+      "forms": [
+        "taxes"
+      ]
+    },
+    {
+      "id": "inflation-noun",
+      "lemma": "inflation",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A general rise in prices.",
+      "arabicMeaning": "تضخم",
+      "example": "Inflation makes food more expensive."
+    },
+    {
+      "id": "news-noun",
+      "lemma": "news",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "Reports about recent events.",
+      "arabicMeaning": "أخبار",
+      "example": "I read the news every morning."
+    },
+    {
+      "id": "report-noun",
+      "lemma": "report",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A written or spoken account of events.",
+      "arabicMeaning": "تقرير",
+      "example": "The report explains the flood.",
+      "forms": [
+        "reports"
+      ]
+    },
+    {
+      "id": "journalist-noun",
+      "lemma": "journalist",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A person who reports the news.",
+      "arabicMeaning": "صحفي",
+      "example": "The journalist asks the minister a question.",
+      "forms": [
+        "journalists"
+      ]
+    },
+    {
+      "id": "culture-noun",
+      "lemma": "culture",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The shared customs and ideas of a group.",
+      "arabicMeaning": "ثقافة",
+      "example": "Food is part of local culture.",
+      "forms": [
+        "cultures"
+      ]
+    },
+    {
+      "id": "tradition-noun",
+      "lemma": "tradition",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A custom passed from older people to younger ones.",
+      "arabicMeaning": "تقليد",
+      "example": "The festival follows an old tradition.",
+      "forms": [
+        "traditions"
+      ]
+    },
+    {
+      "id": "border-noun",
+      "lemma": "border",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The line between two countries.",
+      "arabicMeaning": "حدود",
+      "example": "They cross the border with a visa.",
+      "forms": [
+        "borders"
+      ]
+    },
+    {
+      "id": "visa-noun",
+      "lemma": "visa",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "Official permission to enter a country.",
+      "arabicMeaning": "تأشيرة",
+      "example": "The visa is in the passport.",
+      "forms": [
+        "visas"
+      ]
+    },
+    {
+      "id": "refugee-noun",
+      "lemma": "refugee",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A person who leaves home because of danger.",
+      "arabicMeaning": "لاجئ",
+      "example": "The refugee needs shelter and aid.",
+      "forms": [
+        "refugees"
+      ]
+    },
+    {
+      "id": "police-noun",
+      "lemma": "police",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "The public force that keeps order and enforces law.",
+      "arabicMeaning": "شرطة",
+      "example": "The police help after the accident."
+    },
+    {
+      "id": "law-noun",
+      "lemma": "law",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "An official rule of a country.",
+      "arabicMeaning": "قانون",
+      "example": "The law protects people's rights.",
+      "forms": [
+        "laws"
+      ]
+    },
+    {
+      "id": "crime-noun",
+      "lemma": "crime",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "An act that breaks the law.",
+      "arabicMeaning": "جريمة",
+      "example": "The police investigate the crime.",
+      "forms": [
+        "crimes"
+      ]
+    },
+    {
+      "id": "court-noun",
+      "lemma": "court",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The place where a judge hears a case.",
+      "arabicMeaning": "محكمة",
+      "example": "The trial is in the court.",
+      "forms": [
+        "courts"
+      ]
+    },
+    {
+      "id": "judge-noun",
+      "lemma": "judge",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The official who decides a case in court.",
+      "arabicMeaning": "قاض",
+      "example": "The judge listens to both sides.",
+      "forms": [
+        "judges"
+      ]
+    },
+    {
+      "id": "trial-noun",
+      "lemma": "trial",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The process of deciding a case in court.",
+      "arabicMeaning": "محاكمة",
+      "example": "The trial lasts three days.",
+      "forms": [
+        "trials"
+      ]
+    },
+    {
+      "id": "government-noun",
+      "lemma": "government",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The group that runs a country.",
+      "arabicMeaning": "حكومة",
+      "example": "The government announces a new policy.",
+      "forms": [
+        "governments"
+      ]
+    },
+    {
+      "id": "minister-noun",
+      "lemma": "minister",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A senior member of a government.",
+      "arabicMeaning": "وزير",
+      "example": "The minister speaks to journalists.",
+      "forms": [
+        "ministers"
+      ]
+    },
+    {
+      "id": "policy-noun",
+      "lemma": "policy",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "An official plan for dealing with a problem.",
+      "arabicMeaning": "سياسة عامة",
+      "example": "The health policy helps hospitals.",
+      "forms": [
+        "policies"
+      ]
+    },
+    {
+      "id": "politics-noun",
+      "lemma": "politics",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "Activities about government power and public decisions.",
+      "arabicMeaning": "سياسة",
+      "example": "Students debate politics on campus."
+    },
+    {
+      "id": "debate-noun",
+      "lemma": "debate",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A formal discussion of different views.",
+      "arabicMeaning": "نقاش",
+      "example": "The debate is about the election.",
+      "forms": [
+        "debates"
+      ]
+    },
+    {
+      "id": "campaign-noun",
+      "lemma": "campaign",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "Organized work to win support.",
+      "arabicMeaning": "حملة",
+      "example": "The campaign asks people to vote.",
+      "forms": [
+        "campaigns"
+      ]
+    },
+    {
+      "id": "election-noun",
+      "lemma": "election",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The event when people choose their leaders.",
+      "arabicMeaning": "انتخاب",
+      "example": "The election is next month.",
+      "forms": [
+        "elections"
+      ]
+    },
+    {
+      "id": "vote-verb",
+      "lemma": "vote",
+      "cefr": "B1",
+      "pos": "verb",
+      "definitionEn": "To make an official choice in an election.",
+      "arabicMeaning": "يصوّت",
+      "example": "Citizens vote on election day.",
+      "forms": [
+        "votes",
+        "voted",
+        "voting"
+      ]
+    },
+    {
+      "id": "ballot-noun",
+      "lemma": "ballot",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The paper or form used to vote.",
+      "arabicMeaning": "ورقة اقتراع",
+      "example": "Put the ballot in the box.",
+      "forms": [
+        "ballots"
+      ]
+    },
+    {
+      "id": "diplomacy-noun",
+      "lemma": "diplomacy",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "The work of managing relations between countries.",
+      "arabicMeaning": "دبلوماسية",
+      "example": "Diplomacy can prevent a wider conflict."
+    },
+    {
+      "id": "embassy-noun",
+      "lemma": "embassy",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The official office of one country in another.",
+      "arabicMeaning": "سفارة",
+      "example": "The visa office is at the embassy.",
+      "forms": [
+        "embassies"
+      ]
+    },
+    {
+      "id": "negotiation-noun",
+      "lemma": "negotiation",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A discussion that tries to reach an agreement.",
+      "arabicMeaning": "تفاوض",
+      "example": "The negotiation reduced the conflict.",
+      "forms": [
+        "negotiations"
+      ],
+      "ielts": true
+    },
+    {
+      "id": "ceasefire-noun",
+      "lemma": "ceasefire",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "An agreement to stop fighting for a time.",
+      "arabicMeaning": "وقف إطلاق النار",
+      "example": "They agreed on a ceasefire.",
+      "forms": [
+        "ceasefires"
+      ]
+    },
+    {
+      "id": "conflict-noun",
+      "lemma": "conflict",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A serious fight or disagreement.",
+      "arabicMeaning": "نزاع",
+      "example": "The conflict harmed many civilians.",
+      "forms": [
+        "conflicts"
+      ]
+    },
+    {
+      "id": "war-noun",
+      "lemma": "war",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A long armed fight between groups or countries.",
+      "arabicMeaning": "حرب",
+      "example": "The news reports on the war.",
+      "forms": [
+        "wars"
+      ]
+    },
+    {
+      "id": "army-noun",
+      "lemma": "army",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A country's organized armed forces.",
+      "arabicMeaning": "جيش",
+      "example": "The army protects the border.",
+      "forms": [
+        "armies"
+      ]
+    },
+    {
+      "id": "soldier-noun",
+      "lemma": "soldier",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A person who serves in an army.",
+      "arabicMeaning": "جندي",
+      "example": "The soldier returns home.",
+      "forms": [
+        "soldiers"
+      ]
+    },
+    {
+      "id": "defense-noun",
+      "lemma": "defense",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The act of protecting a country or a person.",
+      "arabicMeaning": "دفاع",
+      "example": "National defense is a public topic."
+    },
+    {
+      "id": "peace-noun",
+      "lemma": "peace",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A time without war.",
+      "arabicMeaning": "سلام",
+      "example": "People hope the talks bring peace."
+    },
+    {
+      "id": "agreement-noun",
+      "lemma": "agreement",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "A decision that two sides accept.",
+      "arabicMeaning": "اتفاق",
+      "example": "The agreement ends the dispute.",
+      "forms": [
+        "agreements"
+      ]
+    },
+    {
+      "id": "treaty-noun",
+      "lemma": "treaty",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A formal agreement between countries.",
+      "arabicMeaning": "معاهدة",
+      "example": "The countries sign a peace treaty.",
+      "forms": [
+        "treaties"
+      ]
+    },
+    {
+      "id": "charter-noun",
+      "lemma": "charter",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "A formal document that states principles or rights.",
+      "arabicMeaning": "ميثاق",
+      "example": "The charter lists basic rights.",
+      "forms": [
+        "charters"
+      ]
+    },
+    {
+      "id": "delegation-noun",
+      "lemma": "delegation",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "A group sent to speak for a country or organization.",
+      "arabicMeaning": "وفد",
+      "example": "The delegation arrives for the talks.",
+      "forms": [
+        "delegations"
+      ]
+    },
+    {
+      "id": "rights-noun",
+      "lemma": "rights",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The freedoms and protections people should have.",
+      "arabicMeaning": "حقوق",
+      "example": "The law protects basic rights."
+    },
+    {
+      "id": "freedom-noun",
+      "lemma": "freedom",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The power to act and speak without unfair control.",
+      "arabicMeaning": "حرية",
+      "example": "Freedom of speech is a basic right."
+    },
+    {
+      "id": "equality-noun",
+      "lemma": "equality",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "The state of having the same rights and chances.",
+      "arabicMeaning": "مساواة",
+      "example": "The policy supports equality."
+    },
+    {
+      "id": "aid-noun",
+      "lemma": "aid",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "Help given to people in serious need.",
+      "arabicMeaning": "إغاثة",
+      "example": "Aid arrives after the flood."
+    },
+    {
+      "id": "shelter-noun",
+      "lemma": "shelter",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A safe place to stay.",
+      "arabicMeaning": "مأوى",
+      "example": "The family finds shelter after the earthquake.",
+      "forms": [
+        "shelters"
+      ]
+    },
+    {
+      "id": "environment-noun",
+      "lemma": "environment",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The natural world around us.",
+      "arabicMeaning": "بيئة",
+      "example": "Pollution harms the environment.",
+      "ielts": true
+    },
+    {
+      "id": "climate-noun",
+      "lemma": "climate",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The usual weather pattern of a place.",
+      "arabicMeaning": "مناخ",
+      "example": "Climate research studies rising heat."
+    },
+    {
+      "id": "pollution-noun",
+      "lemma": "pollution",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "Dirty or harmful substances in air, water, or land.",
+      "arabicMeaning": "تلوث",
+      "example": "Traffic pollution is high in the city."
+    },
+    {
+      "id": "science-noun",
+      "lemma": "science",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "The careful study of the natural world.",
+      "arabicMeaning": "علم",
+      "example": "Science class includes an experiment."
+    },
+    {
+      "id": "experiment-noun",
+      "lemma": "experiment",
+      "cefr": "B2",
+      "pos": "noun",
+      "definitionEn": "A test done to learn what happens.",
+      "arabicMeaning": "تجربة",
+      "example": "The students run a simple experiment.",
+      "forms": [
+        "experiments"
+      ]
+    },
+    {
+      "id": "energy-noun",
+      "lemma": "energy",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "Power that makes things move or work.",
+      "arabicMeaning": "طاقة",
+      "example": "The city wants cleaner energy."
+    },
+    {
+      "id": "want-verb",
+      "lemma": "want",
+      "cefr": "A1",
+      "pos": "verb",
+      "definitionEn": "To feel that you would like something.",
+      "arabicMeaning": "يريد",
+      "example": "I want a glass of water.",
+      "forms": [
+        "wants",
+        "wanted",
+        "wanting"
+      ]
+    },
+    {
+      "id": "go-verb",
+      "lemma": "go",
+      "cefr": "A1",
+      "pos": "verb",
+      "definitionEn": "To move from one place to another.",
+      "arabicMeaning": "يذهب",
+      "example": "We go to school by bus.",
+      "forms": [
+        "goes",
+        "went",
+        "going"
+      ]
+    },
+    {
+      "id": "travel-verb",
+      "lemma": "travel",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To go from one place to another, often far away.",
+      "arabicMeaning": "يسافر",
+      "example": "I travel to the airport with a hotel reservation.",
+      "forms": [
+        "travels",
+        "traveled",
+        "travelled",
+        "traveling",
+        "travelling"
+      ]
+    },
+    {
+      "id": "train-noun",
+      "lemma": "train",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A line of carriages that runs on rails.",
+      "arabicMeaning": "قطار",
+      "example": "They travel by train.",
+      "forms": [
+        "trains"
+      ]
+    },
+    {
+      "id": "bus-noun",
+      "lemma": "bus",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A large vehicle that carries many passengers.",
+      "arabicMeaning": "حافلة",
+      "example": "The bus stops near the school.",
+      "forms": [
+        "buses"
+      ]
+    },
+    {
+      "id": "car-noun",
+      "lemma": "car",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A road vehicle for a small number of people.",
+      "arabicMeaning": "سيارة",
+      "example": "We go to the city by car.",
+      "forms": [
+        "cars"
+      ]
+    },
+    {
+      "id": "map-noun",
+      "lemma": "map",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A drawing that shows places and roads.",
+      "arabicMeaning": "خريطة",
+      "example": "The map shows the street.",
+      "forms": [
+        "maps"
+      ]
+    },
+    {
+      "id": "street-noun",
+      "lemma": "street",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A road in a town with buildings along it.",
+      "arabicMeaning": "شارع",
+      "example": "The hotel is on this street.",
+      "forms": [
+        "streets"
+      ]
+    },
+    {
+      "id": "city-noun",
+      "lemma": "city",
+      "cefr": "A1",
+      "pos": "noun",
+      "definitionEn": "A large town.",
+      "arabicMeaning": "مدينة",
+      "example": "The city has a busy airport.",
+      "forms": [
+        "cities"
+      ]
+    },
+    {
+      "id": "plane-noun",
+      "lemma": "plane",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A vehicle that flies.",
+      "arabicMeaning": "طائرة",
+      "example": "The plane leaves in the morning.",
+      "forms": [
+        "planes"
+      ]
+    },
+    {
+      "id": "airport-noun",
+      "lemma": "airport",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A place where planes take off and land.",
+      "arabicMeaning": "مطار",
+      "example": "I travel to the airport early.",
+      "forms": [
+        "airports"
+      ]
+    },
+    {
+      "id": "passport-noun",
+      "lemma": "passport",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "An official book that shows who you are when you travel.",
+      "arabicMeaning": "جواز سفر",
+      "example": "Show your passport at the airport.",
+      "forms": [
+        "passports"
+      ]
+    },
+    {
+      "id": "hotel-noun",
+      "lemma": "hotel",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A building where travelers pay to stay.",
+      "arabicMeaning": "فندق",
+      "example": "The hotel reservation is for two nights.",
+      "forms": [
+        "hotels"
+      ]
+    },
+    {
+      "id": "guest-noun",
+      "lemma": "guest",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A person staying at a hotel or visiting a home.",
+      "arabicMeaning": "نزيل",
+      "example": "The guest checks in at noon.",
+      "forms": [
+        "guests"
+      ]
+    },
+    {
+      "id": "bag-noun",
+      "lemma": "bag",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A container you carry when you travel.",
+      "arabicMeaning": "حقيبة",
+      "example": "The bag is under the seat.",
+      "forms": [
+        "bags"
+      ]
+    },
+    {
+      "id": "trip-noun",
+      "lemma": "trip",
+      "cefr": "A2",
+      "pos": "noun",
+      "definitionEn": "A journey to a place and back.",
+      "arabicMeaning": "رحلة",
+      "example": "The trip includes a train ticket.",
+      "forms": [
+        "trips"
+      ]
+    },
+    {
+      "id": "enhance-verb",
+      "lemma": "enhance",
+      "cefr": "B2",
+      "pos": "verb",
+      "definitionEn": "To improve the quality of something.",
+      "arabicMeaning": "يحسّن",
+      "example": "Good examples enhance a lesson.",
+      "forms": [
+        "enhances",
+        "enhanced",
+        "enhancing"
+      ]
+    },
+    {
+      "id": "comprehensive-adjective",
+      "lemma": "comprehensive",
+      "cefr": "C1",
+      "pos": "adjective",
+      "definitionEn": "Including all or nearly all of the parts.",
+      "arabicMeaning": "شامل",
+      "example": "The report is comprehensive and clear.",
+      "academic": true
+    },
+    {
+      "id": "ubiquitous-adjective",
+      "lemma": "ubiquitous",
+      "cefr": "C2",
+      "pos": "adjective",
+      "definitionEn": "Seeming to be present everywhere.",
+      "arabicMeaning": "موجود في كل مكان",
+      "example": "Smartphones feel ubiquitous in the city."
+    },
+    {
+      "id": "paradigm-noun",
+      "lemma": "paradigm",
+      "cefr": "C2",
+      "pos": "noun",
+      "definitionEn": "A widely accepted way of thinking about a field.",
+      "arabicMeaning": "نموذج فكري",
+      "example": "The paradigm shifts after new evidence.",
+      "forms": [
+        "paradigms"
+      ]
+    },
+    {
+      "id": "meticulous-adjective",
+      "lemma": "meticulous",
+      "cefr": "C2",
+      "pos": "adjective",
+      "definitionEn": "Showing very careful attention to detail.",
+      "arabicMeaning": "دقيق جداً",
+      "example": "Her meticulous notes help the research."
+    },
+    {
+      "id": "inevitable-adjective",
+      "lemma": "inevitable",
+      "cefr": "C2",
+      "pos": "adjective",
+      "definitionEn": "Certain to happen and not avoidable.",
+      "arabicMeaning": "حتمي",
+      "example": "A long conflict made talks inevitable."
+    },
+    {
+      "id": "nuance-noun",
+      "lemma": "nuance",
+      "cefr": "C2",
+      "pos": "noun",
+      "definitionEn": "A small difference in meaning or feeling.",
+      "arabicMeaning": "فارق دقيق",
+      "example": "The translation misses a nuance.",
+      "forms": [
+        "nuances"
+      ]
+    },
+    {
+      "id": "unprecedented-adjective",
+      "lemma": "unprecedented",
+      "cefr": "C2",
+      "pos": "adjective",
+      "definitionEn": "Never having happened in this way before.",
+      "arabicMeaning": "غير مسبوق",
+      "example": "The flood is unprecedented in this city."
+    },
+    {
+      "id": "quintessential-adjective",
+      "lemma": "quintessential",
+      "cefr": "C2",
+      "pos": "adjective",
+      "definitionEn": "The most typical example of something.",
+      "arabicMeaning": "النموذج الأوضح",
+      "example": "This festival is a quintessential local tradition."
+    },
+    {
+      "id": "esoteric-adjective",
+      "lemma": "esoteric",
+      "cefr": "C2",
+      "pos": "adjective",
+      "definitionEn": "Understood by only a small specialized group.",
+      "arabicMeaning": "متخصص وغامض",
+      "example": "The lecture feels esoteric to new students."
+    },
+    {
+      "id": "humanitarian-adjective",
+      "lemma": "humanitarian",
+      "cefr": "C1",
+      "pos": "adjective",
+      "definitionEn": "Concerned with reducing human suffering.",
+      "arabicMeaning": "إنساني",
+      "example": "Humanitarian aid reaches the camp."
+    },
+    {
+      "id": "legislation-noun",
+      "lemma": "legislation",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "Laws made by a government.",
+      "arabicMeaning": "تشريع",
+      "example": "New legislation changes the tax rules."
+    },
+    {
+      "id": "sovereignty-noun",
+      "lemma": "sovereignty",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "A country's full right to govern itself.",
+      "arabicMeaning": "سيادة",
+      "example": "The treaty respects national sovereignty."
+    },
+    {
+      "id": "civilian-noun",
+      "lemma": "civilian",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "A person who is not in the armed forces.",
+      "arabicMeaning": "مدني",
+      "example": "Civilians leave the area during the conflict.",
+      "forms": [
+        "civilians"
+      ]
+    },
+    {
+      "id": "referendum-noun",
+      "lemma": "referendum",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "A public vote on one political question.",
+      "arabicMeaning": "استفتاء",
+      "example": "The referendum asks voters about the policy.",
+      "forms": [
+        "referendums"
+      ]
+    },
+    {
+      "id": "asylum-noun",
+      "lemma": "asylum",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "Protection a country gives to a person who cannot return home safely.",
+      "arabicMeaning": "لجوء",
+      "example": "She applies for asylum at the border."
+    },
+    {
+      "id": "infrastructure-noun",
+      "lemma": "infrastructure",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "Basic systems such as roads, power, and networks.",
+      "arabicMeaning": "بنية تحتية",
+      "example": "The flood damages local infrastructure."
+    },
+    {
+      "id": "curriculum-noun",
+      "lemma": "curriculum",
+      "cefr": "C1",
+      "pos": "noun",
+      "definitionEn": "The planned subjects taught in a school or university.",
+      "arabicMeaning": "منهج",
+      "example": "The curriculum includes academic writing.",
+      "forms": [
+        "curricula"
+      ]
+    },
+    {
+      "id": "ephemeral-adjective",
+      "lemma": "ephemeral",
+      "cefr": "C2",
+      "pos": "adjective",
+      "definitionEn": "Lasting for only a short time.",
+      "arabicMeaning": "عابر",
+      "example": "Online trends are often ephemeral."
+    },
+    {
+      "id": "juxtaposition-noun",
+      "lemma": "juxtaposition",
+      "cefr": "C2",
+      "pos": "noun",
+      "definitionEn": "The act of placing two things side by side to compare them.",
+      "arabicMeaning": "تجاور",
+      "example": "The essay uses juxtaposition of two cities."
+    },
+    {
+      "id": "write-verb",
+      "lemma": "write",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To put words on paper or a screen.",
+      "arabicMeaning": "يكتب",
+      "example": "Students write a short report.",
+      "forms": [
+        "writes",
+        "wrote"
+      ]
+    },
+    {
+      "id": "speak-verb",
+      "lemma": "speak",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To say words aloud.",
+      "arabicMeaning": "يتكلم",
+      "example": "They speak with the guest.",
+      "forms": [
+        "speaks",
+        "spoke",
+        "speaking"
+      ]
+    },
+    {
+      "id": "listen-verb",
+      "lemma": "listen",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To pay attention to a sound or a person.",
+      "arabicMeaning": "يستمع",
+      "example": "We listen to the lecture.",
+      "forms": [
+        "listens",
+        "listened",
+        "listening"
+      ]
+    },
+    {
+      "id": "learn-verb",
+      "lemma": "learn",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To gain knowledge or a skill.",
+      "arabicMeaning": "يتعلم",
+      "example": "Children learn new words at school.",
+      "forms": [
+        "learns",
+        "learned",
+        "learning"
+      ]
+    },
+    {
+      "id": "help-verb",
+      "lemma": "help",
+      "cefr": "A1",
+      "pos": "verb",
+      "definitionEn": "To make another person's task easier.",
+      "arabicMeaning": "يساعد",
+      "example": "Friends help each other.",
+      "forms": [
+        "helps",
+        "helped",
+        "helping"
+      ]
+    },
+    {
+      "id": "pay-verb",
+      "lemma": "pay",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To give money for something.",
+      "arabicMeaning": "يدفع",
+      "example": "Customers pay the price at the shop.",
+      "forms": [
+        "pays",
+        "paid",
+        "paying"
+      ]
+    },
+    {
+      "id": "meet-verb",
+      "lemma": "meet",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To come together with someone.",
+      "arabicMeaning": "يقابل",
+      "example": "I meet my friend at the station.",
+      "forms": [
+        "meets",
+        "met"
+      ]
+    },
+    {
+      "id": "read-verb",
+      "lemma": "read",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To look at writing and understand it.",
+      "arabicMeaning": "يقرأ",
+      "example": "I read the news on the train.",
+      "forms": [
+        "reads",
+        "reading"
+      ]
+    },
+    {
+      "id": "play-verb",
+      "lemma": "play",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To take part in a game or sport.",
+      "arabicMeaning": "يلعب",
+      "example": "The team plays on Saturday.",
+      "forms": [
+        "plays",
+        "played",
+        "playing"
+      ]
+    },
+    {
+      "id": "watch-verb",
+      "lemma": "watch",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "To look at something for a period of time.",
+      "arabicMeaning": "يشاهد",
+      "example": "We watch the movie at home.",
+      "forms": [
+        "watches",
+        "watched",
+        "watching"
+      ]
+    }
+  ]
+}

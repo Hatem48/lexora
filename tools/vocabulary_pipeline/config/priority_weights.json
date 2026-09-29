@@ -1,0 +1,21 @@
+{
+  "catalogVersion": 2,
+  "weights": {
+    "generalFrequency": 0.40,
+    "spokenFrequency": 0.25,
+    "academic": 0.20,
+    "cefr": 0.15,
+    "newsRelevance": 0,
+    "ielts": 0,
+    "toefl": 0,
+    "topicRelevance": 0
+  },
+  "cefrScores": {
+    "A1": 1.0,
+    "A2": 0.85,
+    "B1": 0.70,
+    "B2": 0.55,
+    "C1": 0.40,
+    "C2": 0.25
+  }
+}
