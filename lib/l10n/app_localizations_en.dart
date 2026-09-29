@@ -899,6 +899,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legal => 'Legal';
 
   @override
+  String get support => 'Support';
+
+  @override
   String get termsOfUse => 'Terms of use';
 
   @override

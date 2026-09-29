@@ -474,6 +474,12 @@ class SettingsScreen extends ConsumerWidget {
               children: [
                 ListTile(
                   contentPadding: EdgeInsets.zero,
+                  title: Text(l10n.support),
+                  trailing: const Icon(Icons.open_in_new),
+                  onTap: () => _openPage(context, AppInfo.supportUrl),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
                   title: Text(l10n.termsOfUse),
                   trailing: const Icon(Icons.open_in_new),
                   onTap: () => _openPage(context, AppInfo.termsOfUseUrl),

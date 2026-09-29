@@ -891,6 +891,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get legal => 'قانوني';
 
   @override
+  String get support => 'الدعم';
+
+  @override
   String get termsOfUse => 'سياسة الاستخدام';
 
   @override

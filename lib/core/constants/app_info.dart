@@ -5,4 +5,7 @@ abstract final class AppInfo {
       'https://hatem48.github.io/lexora/terms.html';
   static const String privacyPolicyUrl =
       'https://hatem48.github.io/lexora/privacy.html';
+  static const String supportUrl =
+      'https://hatem48.github.io/lexora/support.html';
+  static const String supportEmail = 'h420254427@gmail.com';
 }
