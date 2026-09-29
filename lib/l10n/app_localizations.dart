@@ -1771,6 +1771,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try this text: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.'**
   String get blogDemoHint;
+
+  /// No description provided for @legal.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get legal;
+
+  /// No description provided for @termsOfUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get termsOfUse;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This erases your words, sentences, blogs, reviews, and settings on this device. The shared vocabulary catalog stays. This cannot be undone.'**
+  String get deleteAccountMessage;
+
+  /// No description provided for @linkOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the page'**
+  String get linkOpenFailed;
 }
 
 class _AppLocalizationsDelegate

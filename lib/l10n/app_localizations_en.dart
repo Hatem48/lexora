@@ -894,4 +894,23 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get blogDemoHint =>
       'Try this text: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.';
+
+  @override
+  String get legal => 'Legal';
+
+  @override
+  String get termsOfUse => 'Terms of use';
+
+  @override
+  String get privacyPolicy => 'Privacy policy';
+
+  @override
+  String get deleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountMessage =>
+      'This erases your words, sentences, blogs, reviews, and settings on this device. The shared vocabulary catalog stays. This cannot be undone.';
+
+  @override
+  String get linkOpenFailed => 'Could not open the page';
 }

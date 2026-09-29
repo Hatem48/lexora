@@ -358,5 +358,11 @@
   "filterMastered": "Mastered",
   "detectedTopics": "Topics in this text",
   "developmentDatasetNote": "This vocabulary is practice content for trying the app. It is not an official CEFR list, and a licensed catalog can replace it.",
-  "blogDemoHint": "Try this text: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict."
+  "blogDemoHint": "Try this text: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.",
+  "legal": "Legal",
+  "termsOfUse": "Terms of use",
+  "privacyPolicy": "Privacy policy",
+  "deleteAccount": "Delete account",
+  "deleteAccountMessage": "This erases your words, sentences, blogs, reviews, and settings on this device. The shared vocabulary catalog stays. This cannot be undone.",
+  "linkOpenFailed": "Could not open the page"
 }

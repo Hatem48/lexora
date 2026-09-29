@@ -311,5 +311,11 @@
   "filterMastered": "متقنة",
   "detectedTopics": "مواضيع هذا النص",
   "developmentDatasetNote": "هذه المفردات محتوى تدريبي لتجربة التطبيق. ليست قائمة CEFR رسمية، ويمكن استبدالها بكتالوج مرخّص.",
-  "blogDemoHint": "جرّب هذا النص: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict."
+  "blogDemoHint": "جرّب هذا النص: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.",
+  "legal": "قانوني",
+  "termsOfUse": "سياسة الاستخدام",
+  "privacyPolicy": "سياسة الخصوصية",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountMessage": "يمسح هذا كلماتك وجملك وتدويناتك ومراجعاتك وإعداداتك على هذا الجهاز. كتالوج المفردات المشترك يبقى. لا يمكن التراجع.",
+  "linkOpenFailed": "تعذّر فتح الصفحة"
 }

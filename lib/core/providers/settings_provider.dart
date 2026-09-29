@@ -187,6 +187,11 @@ class SettingsController extends Notifier<AppSettings> {
     state = draft.copyWith(onboardingCompleted: true);
     await _persist();
   }
+
+  Future<void> reset() async {
+    state = const AppSettings();
+    await _persist();
+  }
 }
 
 final settingsProvider =

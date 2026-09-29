@@ -9,6 +9,7 @@ import 'package:lexora/l10n/app_localizations.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
@@ -16,6 +17,7 @@ import '../../../core/constants/app_info.dart';
 import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/services/account/account_deletion.dart';
 import '../../../core/services/backup/lexora_backup_store.dart';
 import '../../../core/services/topics/topic_catalog_importer.dart';
 import '../../../core/services/vocabulary/vocabulary_catalog_importer.dart';
@@ -81,6 +83,45 @@ class SettingsScreen extends ConsumerWidget {
     }
   }
 
+  Future<void> _openPage(BuildContext context, String url) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final opened = await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    );
+    if (!opened) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.linkOpenFailed)));
+    }
+  }
+
+  Future<void> _deleteAccount(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.deleteAccount),
+        content: Text(l10n.deleteAccountMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.deleteAccount),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !context.mounted) return;
+
+    await AccountDeletion(ref.read(appDatabaseProvider)).deletePersonalData();
+    await ref.read(settingsProvider.notifier).reset();
+    await ReminderScheduler.instance.sync(ref.read(settingsProvider));
+    await ref.read(authProvider.notifier).signOut();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
@@ -96,20 +137,36 @@ class SettingsScreen extends ConsumerWidget {
           Text(l10n.account, style: theme.textTheme.titleSmall),
           const SizedBox(height: 8),
           LexoraCard(
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: CircleAvatar(
-                backgroundColor: AppColors.primary.withValues(alpha: 0.15),
-                child: Text(
-                  (auth.user?.firstName ?? 'H')[0].toUpperCase(),
-                  style: const TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w700,
+            child: Column(
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: CircleAvatar(
+                    backgroundColor: AppColors.primary.withValues(alpha: 0.15),
+                    child: Text(
+                      (auth.user?.firstName ?? 'H')[0].toUpperCase(),
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
+                  title: Text(auth.user?.displayName ?? settings.displayName),
+                  subtitle: Text(auth.user?.email ?? l10n.localStorageOnly),
                 ),
-              ),
-              title: Text(auth.user?.displayName ?? settings.displayName),
-              subtitle: Text(auth.user?.email ?? l10n.localStorageOnly),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: Icon(
+                    Icons.delete_outline,
+                    color: theme.colorScheme.error,
+                  ),
+                  title: Text(
+                    l10n.deleteAccount,
+                    style: TextStyle(color: theme.colorScheme.error),
+                  ),
+                  onTap: () => _deleteAccount(context, ref),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
@@ -405,6 +462,27 @@ class SettingsScreen extends ConsumerWidget {
                   title: Text(l10n.importData),
                   trailing: const Icon(Icons.file_open_outlined),
                   onTap: () => _import(context, ref),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Text(l10n.legal, style: theme.textTheme.titleSmall),
+          const SizedBox(height: 8),
+          LexoraCard(
+            child: Column(
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(l10n.termsOfUse),
+                  trailing: const Icon(Icons.open_in_new),
+                  onTap: () => _openPage(context, AppInfo.termsOfUseUrl),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(l10n.privacyPolicy),
+                  trailing: const Icon(Icons.open_in_new),
+                  onTap: () => _openPage(context, AppInfo.privacyPolicyUrl),
                 ),
               ],
             ),

@@ -886,4 +886,23 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get blogDemoHint =>
       'جرّب هذا النص: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.';
+
+  @override
+  String get legal => 'قانوني';
+
+  @override
+  String get termsOfUse => 'سياسة الاستخدام';
+
+  @override
+  String get privacyPolicy => 'سياسة الخصوصية';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get deleteAccountMessage =>
+      'يمسح هذا كلماتك وجملك وتدويناتك ومراجعاتك وإعداداتك على هذا الجهاز. كتالوج المفردات المشترك يبقى. لا يمكن التراجع.';
+
+  @override
+  String get linkOpenFailed => 'تعذّر فتح الصفحة';
 }
