@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lexora/l10n/app_localizations.dart';
@@ -12,45 +11,50 @@ import '../../../core/widgets/lexora_widgets.dart';
 import '../data/auth_repository.dart';
 import 'auth_messages.dart';
 
-class SignInScreen extends ConsumerStatefulWidget {
-  const SignInScreen({super.key});
+class RegisterScreen extends ConsumerStatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  ConsumerState<SignInScreen> createState() => _SignInScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _SignInScreenState extends ConsumerState<SignInScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _usernameCtrl;
-  late final TextEditingController _passwordCtrl;
+  final _nameCtrl = TextEditingController();
+  final _usernameCtrl = TextEditingController();
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+  final _confirmCtrl = TextEditingController();
   bool _obscure = true;
 
   @override
-  void initState() {
-    super.initState();
-    _usernameCtrl = TextEditingController();
-    _passwordCtrl = TextEditingController();
-  }
-
-  @override
   void dispose() {
+    _nameCtrl.dispose();
     _usernameCtrl.dispose();
+    _emailCtrl.dispose();
     _passwordCtrl.dispose();
+    _confirmCtrl.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
+    if (_passwordCtrl.text != _confirmCtrl.text) {
+      ref.read(authProvider.notifier).reportError('password_mismatch');
+      return;
+    }
 
-    await ref.read(authProvider.notifier).signInWithPassword(
+    await ref.read(authProvider.notifier).register(
           username: _usernameCtrl.text,
           password: _passwordCtrl.text,
+          displayName: _nameCtrl.text,
+          email: _emailCtrl.text,
         );
 
-    final auth = ref.read(authProvider);
-    if (auth.user != null) {
+    final user = ref.read(authProvider).user;
+    if (user != null) {
       await ref.read(settingsProvider.notifier).update(
-            (s) => s.copyWith(displayName: auth.user!.firstName),
+            (s) => s.copyWith(displayName: user.firstName),
           );
     }
   }
@@ -61,7 +65,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final auth = ref.watch(authProvider);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-
     final errorText = auth.errorMessage == null
         ? null
         : authErrorText(l10n, auth.errorMessage);
@@ -86,29 +89,41 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  const SizedBox(height: AppSpacing.xxl),
-                  const LexoraLogo(size: 88, showWordmark: true),
                   const SizedBox(height: AppSpacing.xl),
+                  const LexoraLogo(size: 72, showWordmark: true),
+                  const SizedBox(height: AppSpacing.lg),
                   Text(
-                    l10n.signInTitle,
+                    l10n.createAccountTitle,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.headlineLarge,
-                  ).animate().fadeIn(delay: 80.ms),
+                  ),
                   const SizedBox(height: AppSpacing.sm),
                   Text(
-                    l10n.signInSubtitle,
+                    l10n.createAccountSubtitle,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                       height: 1.5,
                     ),
-                  ).animate().fadeIn(delay: 140.ms),
-                  const SizedBox(height: AppSpacing.xxl),
+                  ),
+                  const SizedBox(height: AppSpacing.xl),
                   LexoraCard(
                     padding: const EdgeInsets.all(AppSpacing.lg),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        TextFormField(
+                          controller: _nameCtrl,
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            labelText: l10n.displayName,
+                            prefixIcon: const Icon(Icons.badge_outlined),
+                          ),
+                          validator: (v) => (v == null || v.trim().isEmpty)
+                              ? l10n.nameRequired
+                              : null,
+                        ),
+                        const SizedBox(height: AppSpacing.md),
                         TextFormField(
                           controller: _usernameCtrl,
                           textInputAction: TextInputAction.next,
@@ -123,11 +138,22 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ),
                         const SizedBox(height: AppSpacing.md),
                         TextFormField(
+                          controller: _emailCtrl,
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: const [AutofillHints.email],
+                          decoration: InputDecoration(
+                            labelText: l10n.email,
+                            hintText: l10n.optional,
+                            prefixIcon: const Icon(Icons.mail_outline_rounded),
+                          ),
+                        ),
+                        const SizedBox(height: AppSpacing.md),
+                        TextFormField(
                           controller: _passwordCtrl,
                           obscureText: _obscure,
-                          textInputAction: TextInputAction.done,
-                          onFieldSubmitted: (_) => _submit(),
-                          autofillHints: const [AutofillHints.password],
+                          textInputAction: TextInputAction.next,
+                          autofillHints: const [AutofillHints.newPassword],
                           decoration: InputDecoration(
                             labelText: l10n.password,
                             prefixIcon: const Icon(Icons.lock_outline_rounded),
@@ -145,7 +171,25 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               ? l10n.requiredField
                               : null,
                         ),
-                        if (errorText != null) ...[
+                        const SizedBox(height: AppSpacing.md),
+                        TextFormField(
+                          controller: _confirmCtrl,
+                          obscureText: _obscure,
+                          textInputAction: TextInputAction.done,
+                          onFieldSubmitted: (_) => _submit(),
+                          decoration: InputDecoration(
+                            labelText: l10n.confirmPassword,
+                            prefixIcon: const Icon(Icons.lock_outline_rounded),
+                          ),
+                          validator: (v) {
+                            if (v == null || v.isEmpty) return l10n.requiredField;
+                            if (v != _passwordCtrl.text) {
+                              return l10n.passwordMismatch;
+                            }
+                            return null;
+                          },
+                        ),
+                        if (errorText != null && errorText.isNotEmpty) ...[
                           const SizedBox(height: AppSpacing.sm),
                           Text(
                             errorText,
@@ -156,23 +200,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ],
                         const SizedBox(height: AppSpacing.lg),
                         LexoraPrimaryButton(
-                          label: l10n.signIn,
+                          label: l10n.createAccount,
                           isLoading: auth.isLoading,
                           onPressed: _submit,
                         ),
-                        const SizedBox(height: AppSpacing.sm),
                         TextButton(
-                          onPressed: () => context.push('/register'),
-                          child: Text(l10n.createAccount),
+                          onPressed: () => context.go('/sign-in'),
+                          child: Text(l10n.alreadyHaveAccount),
                         ),
                       ],
                     ),
-                  ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.06, end: 0),
-                  const SizedBox(height: AppSpacing.lg),
-                  Text(
-                    l10n.privacyNote,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodySmall,
                   ),
                   const SizedBox(height: AppSpacing.xxl),
                 ],

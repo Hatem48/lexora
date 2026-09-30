@@ -57,7 +57,12 @@ class HomeScreen extends ConsumerWidget {
     final settings = ref.watch(settingsProvider);
     final auth = ref.watch(authProvider);
     final statsAsync = ref.watch(dashboardStatsProvider);
-    final name = auth.user?.firstName ?? settings.displayName;
+    final accountName = auth.user?.displayName.trim() ?? '';
+    final name = accountName.isNotEmpty
+        ? auth.user!.firstName
+        : (settings.displayName.trim().isEmpty
+            ? l10n.appName
+            : settings.displayName.trim());
 
     return Scaffold(
       body: SafeArea(

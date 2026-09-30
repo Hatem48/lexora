@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/data/auth_repository.dart';
+import '../../features/auth/presentation/edit_account_screen.dart';
+import '../../features/auth/presentation/register_screen.dart';
 import '../../features/auth/presentation/sign_in_screen.dart';
 import '../../features/categories/presentation/categories_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
@@ -37,7 +39,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       final auth = ref.read(authProvider);
       final settings = ref.read(settingsProvider);
 
-      final loggingIn = state.matchedLocation == '/sign-in';
+      final loggingIn = state.matchedLocation == '/sign-in' ||
+          state.matchedLocation == '/register';
       final onboarding = state.matchedLocation == '/onboarding';
       final isAuth = auth.status == AuthStatus.authenticated;
       final unknown = auth.status == AuthStatus.unknown;
@@ -66,6 +69,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/sign-in',
         builder: (context, state) => const SignInScreen(),
+      ),
+      GoRoute(
+        path: '/register',
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         path: '/onboarding',
@@ -140,6 +147,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         parentNavigatorKey: _rootNavigatorKey,
         path: '/settings',
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/account',
+        builder: (context, state) => const EditAccountScreen(),
       ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,

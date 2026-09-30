@@ -238,11 +238,7 @@ class _BlogEditorScreenState extends ConsumerState<BlogEditorScreen> {
                     textDirection: TextDirection.ltr,
                     minLines: 8,
                     maxLines: 16,
-                    decoration: InputDecoration(
-                      labelText: l10n.blogContent,
-                      helperText: l10n.blogDemoHint,
-                      helperMaxLines: 6,
-                    ),
+                    decoration: InputDecoration(labelText: l10n.blogContent),
                     validator: (value) =>
                         (value == null || value.trim().isEmpty)
                             ? l10n.requiredField

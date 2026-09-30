@@ -25,6 +25,7 @@ import '../../../core/providers/settings_reminder_helpers.dart';
 import '../../../core/services/notifications/reminder_scheduler.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../auth/presentation/account_avatar.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -119,7 +120,7 @@ class SettingsScreen extends ConsumerWidget {
     await AccountDeletion(ref.read(appDatabaseProvider)).deletePersonalData();
     await ref.read(settingsProvider.notifier).reset();
     await ReminderScheduler.instance.sync(ref.read(settingsProvider));
-    await ref.read(authProvider.notifier).signOut();
+    await ref.read(authProvider.notifier).deleteAccount();
   }
 
   @override
@@ -141,18 +142,19 @@ class SettingsScreen extends ConsumerWidget {
               children: [
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: CircleAvatar(
-                    backgroundColor: AppColors.primary.withValues(alpha: 0.15),
-                    child: Text(
-                      (auth.user?.firstName ?? 'H')[0].toUpperCase(),
-                      style: const TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                  leading: AccountAvatar(user: auth.user),
+                  title: Text(
+                    auth.user?.displayName.isNotEmpty == true
+                        ? auth.user!.displayName
+                        : settings.displayName,
                   ),
-                  title: Text(auth.user?.displayName ?? settings.displayName),
-                  subtitle: Text(auth.user?.email ?? l10n.localStorageOnly),
+                  subtitle: Text(
+                    auth.user?.email ??
+                        auth.user?.username ??
+                        l10n.localStorageOnly,
+                  ),
+                  trailing: const Icon(Icons.edit_outlined),
+                  onTap: () => context.push('/account'),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,

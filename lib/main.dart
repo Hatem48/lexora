@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app.dart';
 import 'core/database/app_database.dart';
-import 'core/database/demo_data_seeder.dart';
+import 'core/database/demo_data_cleanup.dart';
 import 'core/providers/settings_provider.dart';
 import 'core/providers/startup_provider.dart';
 import 'core/services/notifications/reminder_scheduler.dart';
@@ -48,11 +48,7 @@ Future<void> _startLexora(ProviderContainer container) async {
     final db = container.read(appDatabaseProvider);
     // SharedPreferences loads just after the settings notifier starts.
     await Future<void>.delayed(const Duration(milliseconds: 150));
-    final settings = container.read(settingsProvider);
-
-    if (settings.seedDemoData) {
-      await DemoDataSeeder(db).seedIfNeeded();
-    }
+    await DemoDataCleanup(db).clearIfPresent();
     await VocabularyCatalogImporter(db).importAssetIfNeeded();
     await TopicCatalogImporter(db).importAssetIfNeeded();
     await ReminderScheduler.instance.sync(container.read(settingsProvider));

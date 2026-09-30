@@ -305,9 +305,75 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalidCredentials => 'اسم المستخدم أو كلمة المرور غير صحيحة';
 
   @override
-  String demoCredentialsHint(String username, String password) {
-    return 'تجريبي: $username / $password';
-  }
+  String get createAccount => 'إنشاء حساب';
+
+  @override
+  String get createAccountTitle => 'أنشئ حسابك';
+
+  @override
+  String get createAccountSubtitle => 'يبقى حسابك على هذا الجهاز.';
+
+  @override
+  String get alreadyHaveAccount => 'لدي حساب بالفعل';
+
+  @override
+  String get displayName => 'الاسم';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get optional => 'اختياري';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get passwordMismatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get usernameInvalid =>
+      'استخدم من 3 إلى 32 حرفاً أو رقماً أو نقطة أو شرطة سفلية';
+
+  @override
+  String get passwordShort => 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+
+  @override
+  String get accountExists =>
+      'يوجد حساب على هذا الجهاز. سجّل الدخول أو احذفه أولاً.';
+
+  @override
+  String get nameRequired => 'الاسم مطلوب';
+
+  @override
+  String get emailInvalid => 'أدخل بريداً إلكترونياً صالحاً';
+
+  @override
+  String get editAccount => 'تعديل الحساب';
+
+  @override
+  String get choosePhoto => 'اختيار صورة';
+
+  @override
+  String get removePhoto => 'إزالة الصورة';
+
+  @override
+  String get profileSaved => 'تم حفظ بيانات الحساب';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get currentPassword => 'كلمة المرور الحالية';
+
+  @override
+  String get newPassword => 'كلمة المرور الجديدة';
+
+  @override
+  String get passwordChanged => 'تم تغيير كلمة المرور';
+
+  @override
+  String get wrongPassword => 'كلمة المرور الحالية غير صحيحة';
 
   @override
   String get privacyNote =>
@@ -882,10 +948,6 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get developmentDatasetNote =>
       'هذه المفردات محتوى تدريبي لتجربة التطبيق. ليست قائمة CEFR رسمية، ويمكن استبدالها بكتالوج مرخّص.';
-
-  @override
-  String get blogDemoHint =>
-      'جرّب هذا النص: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.';
 
   @override
   String get legal => 'قانوني';

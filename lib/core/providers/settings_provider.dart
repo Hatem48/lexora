@@ -21,8 +21,8 @@ class AppSettings {
     this.quietHoursStart = '22:00',
     this.quietHoursEnd = '07:00',
     this.onboardingCompleted = false,
-    this.displayName = 'Hatem',
-    this.seedDemoData = true,
+    this.displayName = '',
+    this.seedDemoData = false,
   });
 
   final String localeCode;
@@ -126,8 +126,8 @@ class AppSettings {
       quietHoursStart: json['quietHoursStart'] as String? ?? '22:00',
       quietHoursEnd: json['quietHoursEnd'] as String? ?? '07:00',
       onboardingCompleted: json['onboardingCompleted'] as bool? ?? false,
-      displayName: json['displayName'] as String? ?? 'Hatem',
-      seedDemoData: json['seedDemoData'] as bool? ?? true,
+      displayName: json['displayName'] as String? ?? '',
+      seedDemoData: json['seedDemoData'] as bool? ?? false,
     );
   }
 }

@@ -305,9 +305,75 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidCredentials => 'Invalid username or password';
 
   @override
-  String demoCredentialsHint(String username, String password) {
-    return 'Demo: $username / $password';
-  }
+  String get createAccount => 'Create account';
+
+  @override
+  String get createAccountTitle => 'Create your account';
+
+  @override
+  String get createAccountSubtitle => 'Your account stays on this device.';
+
+  @override
+  String get alreadyHaveAccount => 'I already have an account';
+
+  @override
+  String get displayName => 'Name';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get optional => 'Optional';
+
+  @override
+  String get confirmPassword => 'Confirm password';
+
+  @override
+  String get passwordMismatch => 'The passwords do not match';
+
+  @override
+  String get usernameInvalid =>
+      'Use 3 to 32 letters, numbers, dots, or underscores';
+
+  @override
+  String get passwordShort => 'Password must be at least 6 characters';
+
+  @override
+  String get accountExists =>
+      'An account already exists on this device. Sign in, or delete it first.';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get emailInvalid => 'Enter a valid email';
+
+  @override
+  String get editAccount => 'Edit account';
+
+  @override
+  String get choosePhoto => 'Choose photo';
+
+  @override
+  String get removePhoto => 'Remove photo';
+
+  @override
+  String get profileSaved => 'Account details saved';
+
+  @override
+  String get changePassword => 'Change password';
+
+  @override
+  String get currentPassword => 'Current password';
+
+  @override
+  String get newPassword => 'New password';
+
+  @override
+  String get passwordChanged => 'Password changed';
+
+  @override
+  String get wrongPassword => 'Current password is incorrect';
 
   @override
   String get privacyNote =>
@@ -890,10 +956,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get developmentDatasetNote =>
       'This vocabulary is practice content for trying the app. It is not an official CEFR list, and a licensed catalog can replace it.';
-
-  @override
-  String get blogDemoHint =>
-      'Try this text: I study academic research at the university and develop software technology on the internet. I travel to the airport with a hotel reservation. The ceasefire and the negotiation reduced the conflict.';
 
   @override
   String get legal => 'Legal';
