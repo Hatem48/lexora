@@ -53,7 +53,7 @@ workflows:
   ios-production:
     name: ios-production
     integrations:
-      app_store_connect: Apple_Auto_SIgning
+      app_store_connect: Lexora_Codemagic
     instance_type: mac_mini_m2
     max_build_duration: 120
     environment:
