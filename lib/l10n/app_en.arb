@@ -141,6 +141,7 @@
   "emailInvalid": "Enter a valid email",
   "editAccount": "Edit account",
   "choosePhoto": "Choose photo",
+  "photoPermissionDenied": "Photo library access is needed to choose a profile photo.",
   "removePhoto": "Remove photo",
   "profileSaved": "Account details saved",
   "changePassword": "Change password",

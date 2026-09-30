@@ -10,6 +10,7 @@ import '../../../core/constants/enums.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../auth/presentation/account_avatar.dart';
 import '../domain/dashboard_stats.dart';
 import 'dashboard_providers.dart';
 
@@ -103,18 +104,7 @@ class HomeScreen extends ConsumerWidget {
                       ),
                       GestureDetector(
                         onTap: () => context.push('/settings'),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor:
-                              AppColors.primary.withValues(alpha: 0.15),
-                          child: Text(
-                            name.isNotEmpty ? name[0].toUpperCase() : 'H',
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
+                        child: AccountAvatar(user: auth.user, radius: 20),
                       ),
                     ],
                   ).animate().fadeIn(duration: 350.ms),

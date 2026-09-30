@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lexora/l10n/app_localizations.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
@@ -56,10 +57,33 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
     super.dispose();
   }
 
+  Future<bool> _allowPhotoLibrary() async {
+    var status = await Permission.photos.status;
+    if (status.isGranted || status.isLimited) return true;
+    status = await Permission.photos.request();
+    if (status.isGranted || status.isLimited) return true;
+    if (status.isPermanentlyDenied || status.isRestricted) {
+      await openAppSettings();
+    }
+    return false;
+  }
+
   Future<void> _pickPhoto() async {
-    final picked = await FilePicker.pickFile(
-      type: FileType.custom,
-      allowedExtensions: const ['jpg', 'jpeg', 'png', 'webp'],
+    final allowed = await _allowPhotoLibrary();
+    if (!allowed) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context).photoPermissionDenied),
+        ),
+      );
+      return;
+    }
+
+    final picked = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 85,
+      maxWidth: 1200,
     );
     if (picked == null) return;
     final bytes = await picked.readAsBytes();
@@ -80,22 +104,25 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
     if (bytes == null) return current;
 
     final dir = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dir.path, 'profile_photo.jpg'));
     await _deleteStoredPhotos();
+    final file = File(
+      p.join(
+        dir.path,
+        'profile_photo_${DateTime.now().millisecondsSinceEpoch}.jpg',
+      ),
+    );
     await file.writeAsBytes(bytes, flush: true);
     return file.path;
   }
 
   Future<void> _deleteStoredPhotos() async {
     final dir = await getApplicationDocumentsDirectory();
-    for (final name in const [
-      'profile_photo.jpg',
-      'profile_photo.jpeg',
-      'profile_photo.png',
-      'profile_photo.webp',
-    ]) {
-      final file = File(p.join(dir.path, name));
-      if (await file.exists()) await file.delete();
+    final entries = dir.listSync();
+    for (final entry in entries) {
+      if (entry is! File) continue;
+      if (p.basename(entry.path).startsWith('profile_photo_')) {
+        await entry.delete();
+      }
     }
     final current = ref.read(authProvider).user?.photoPath;
     if (current != null && current.isNotEmpty) {

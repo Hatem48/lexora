@@ -355,6 +355,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get choosePhoto => 'اختيار صورة';
 
   @override
+  String get photoPermissionDenied =>
+      'يلزم السماح بالوصول إلى الصور لاختيار صورة الحساب.';
+
+  @override
   String get removePhoto => 'إزالة الصورة';
 
   @override

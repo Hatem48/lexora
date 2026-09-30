@@ -110,6 +110,7 @@
   "emailInvalid": "أدخل بريداً إلكترونياً صالحاً",
   "editAccount": "تعديل الحساب",
   "choosePhoto": "اختيار صورة",
+  "photoPermissionDenied": "يلزم السماح بالوصول إلى الصور لاختيار صورة الحساب.",
   "removePhoto": "إزالة الصورة",
   "profileSaved": "تم حفظ بيانات الحساب",
   "changePassword": "تغيير كلمة المرور",

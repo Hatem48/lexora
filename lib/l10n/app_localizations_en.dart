@@ -355,6 +355,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get choosePhoto => 'Choose photo';
 
   @override
+  String get photoPermissionDenied =>
+      'Photo library access is needed to choose a profile photo.';
+
+  @override
   String get removePhoto => 'Remove photo';
 
   @override

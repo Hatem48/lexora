@@ -7,7 +7,6 @@ import 'package:lexora/l10n/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/providers/settings_provider.dart';
-import '../../../core/widgets/lexora_logo.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../data/auth_repository.dart';
 import 'auth_messages.dart';
@@ -87,7 +86,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               child: Column(
                 children: [
                   const SizedBox(height: AppSpacing.xxl),
-                  const LexoraLogo(size: 88, showWordmark: true),
+                  Image.asset(
+                    'assets/branding/lexora_mark.png',
+                    height: 88,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
+                  )
+                      .animate()
+                      .fadeIn(duration: 500.ms)
+                      .slideY(begin: 0.08, end: 0, curve: Curves.easeOutCubic),
                   const SizedBox(height: AppSpacing.xl),
                   Text(
                     l10n.signInTitle,

@@ -758,6 +758,12 @@ abstract class AppLocalizations {
   /// **'Choose photo'**
   String get choosePhoto;
 
+  /// No description provided for @photoPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo library access is needed to choose a profile photo.'**
+  String get photoPermissionDenied;
+
   /// No description provided for @removePhoto.
   ///
   /// In en, this message translates to:
