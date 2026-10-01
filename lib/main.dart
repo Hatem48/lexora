@@ -10,6 +10,7 @@ import 'core/database/demo_data_cleanup.dart';
 import 'core/providers/settings_provider.dart';
 import 'core/providers/startup_provider.dart';
 import 'core/services/notifications/reminder_scheduler.dart';
+import 'core/services/learning/development_samples.dart';
 import 'core/services/topics/topic_catalog_importer.dart';
 import 'core/services/vocabulary/vocabulary_catalog_importer.dart';
 
@@ -51,6 +52,7 @@ Future<void> _startLexora(ProviderContainer container) async {
     await DemoDataCleanup(db).clearIfPresent();
     await VocabularyCatalogImporter(db).importAssetIfNeeded();
     await TopicCatalogImporter(db).importAssetIfNeeded();
+    await DevelopmentSampleSeeder(db).seedIfMissing();
     await ReminderScheduler.instance.sync(container.read(settingsProvider));
   } catch (error, stack) {
     debugPrint('Lexora startup failed: $error\n$stack');

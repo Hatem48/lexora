@@ -35,6 +35,14 @@ part 'app_database.g.dart';
     TopicSentenceTopics,
     LearningPaths,
     LearningPathTopics,
+    GrammarTopics,
+    GrammarLessons,
+    GrammarExercises,
+    UserGrammarProgress,
+    TopicQuestions,
+    UserTopicAnswers,
+    UserAchievements,
+    LearningDays,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -42,7 +50,7 @@ class AppDatabase extends _$AppDatabase {
       : super(executor ?? driftDatabase(name: 'lexora'));
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -71,6 +79,9 @@ class AppDatabase extends _$AppDatabase {
           );
           await customStatement(
             'CREATE INDEX IF NOT EXISTS idx_vocab_cefr ON vocabulary_entries(cefr_level)',
+          );
+          await customStatement(
+            'CREATE INDEX IF NOT EXISTS idx_vocab_lemma ON vocabulary_entries(lemma)',
           );
           await customStatement(
             'CREATE INDEX IF NOT EXISTS idx_user_vocab_discovered ON user_vocabulary(first_discovered_at)',
@@ -117,6 +128,33 @@ class AppDatabase extends _$AppDatabase {
               vocabularyEntryRanks,
               vocabularyEntryRanks.academicRank,
             );
+          }
+          if (from >= 2 && from < 5) {
+            await m.addColumn(userVocabulary, userVocabulary.userArabicMeaning);
+            await m.addColumn(userVocabulary, userVocabulary.userExample);
+            await m.addColumn(
+              userVocabulary,
+              userVocabulary.userExampleTranslation,
+            );
+            await m.addColumn(userVocabulary, userVocabulary.userNotes);
+          }
+          if (from < 5) {
+            await m.createTable(grammarTopics);
+            await m.createTable(grammarLessons);
+            await m.createTable(grammarExercises);
+            await m.createTable(userGrammarProgress);
+            await m.createTable(topicQuestions);
+            await m.createTable(userTopicAnswers);
+            await m.createTable(userAchievements);
+            await m.createTable(learningDays);
+            final lemmaTable = await customSelect(
+              "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'",
+            ).get();
+            if (lemmaTable.isNotEmpty) {
+              await customStatement(
+                'CREATE INDEX IF NOT EXISTS idx_vocab_lemma ON vocabulary_entries(lemma)',
+              );
+            }
           }
         },
         beforeOpen: (details) async {

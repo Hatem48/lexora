@@ -85,6 +85,9 @@ class VocabularyCatalogImporter {
                 catalogVersion: Value(document.version),
               ),
           ],
+          // INSERT OR REPLACE rewrites the catalog row in one statement.
+          // user_vocabulary keeps its foreign key because SQLite checks
+          // NO ACTION at the end of that statement, when the same id exists again.
           mode: InsertMode.insertOrReplace,
         );
         batch.insertAll(

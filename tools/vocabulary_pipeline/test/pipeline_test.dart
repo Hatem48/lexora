@@ -287,6 +287,56 @@ void main() {
     expect(result.entries, isEmpty);
   });
 
+  test('CEFR-J latter adverb stays adverb and stays distinct from later', () {
+    final cefr = readCefrCsv(
+      'headword,pos,CEFR\n'
+      'later,adjective,B2\n'
+      'later,adverb,A1\n'
+      'latter,adjective,B2\n'
+      'latter,adverb,A2\n'
+      'latter,pronoun,A2\n',
+      cefrFileName,
+      sourceCefrJ,
+    );
+    expect(canonicalPos('adverb'), 'adverb');
+    expect(
+      cefr.map((row) => '${row.lemma}/${row.pos}/${row.cefr}').toList(),
+      [
+        'later/adjective/B2',
+        'later/adverb/A1',
+        'latter/adjective/B2',
+        'latter/adverb/A2',
+        'latter/pronoun/A2',
+      ],
+    );
+    final result = buildCatalog(
+      RawSources(
+        cefr: cefr,
+        generalRanks: const [],
+        spokenRanks: const [],
+        academicRanks: const [],
+        forms: const [],
+        topicMappings: const [],
+        ngslLoaded: false,
+        spokenLoaded: false,
+        nawlLoaded: false,
+      ),
+      PriorityConfig.parse(configRaw),
+    );
+    expect(result.conflicts, isEmpty);
+    expect(result.issues, isEmpty);
+    expect(
+      result.entries.map((entry) => '${entry.id}:${entry.pos}:${entry.cefr}'),
+      [
+        'later-adjective:adjective:B2',
+        'later-adverb:adverb:A1',
+        'latter-adjective:adjective:B2',
+        'latter-adverb:adverb:A2',
+        'latter-pronoun:pronoun:A2',
+      ],
+    );
+  });
+
   test('CEFR-J auxiliary labels map and a blank spoken rank is rejected', () {
     expect(canonicalPos('do-verb'), 'auxiliary');
     expect(canonicalPos('have-verb'), 'auxiliary');

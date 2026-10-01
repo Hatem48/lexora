@@ -18,6 +18,8 @@ import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/account/account_deletion.dart';
+import '../../../core/services/account/profile_image_store.dart';
+import '../../../core/services/backup/lexora_backup.dart';
 import '../../../core/services/backup/lexora_backup_store.dart';
 import '../../../core/services/topics/topic_catalog_importer.dart';
 import '../../../core/services/vocabulary/vocabulary_catalog_importer.dart';
@@ -33,7 +35,22 @@ class SettingsScreen extends ConsumerWidget {
   Future<void> _export(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    final backup = await LexoraBackupStore(ref.read(appDatabaseProvider)).export();
+    final exported = await LexoraBackupStore(ref.read(appDatabaseProvider)).export();
+    final user = ref.read(authProvider).user;
+    final photo = await ProfileImageStore.resolve(user?.photoPath);
+    final backup = photo == null || user?.photoPath == null
+        ? exported
+        : LexoraBackup(
+            schemaVersion: exported.schemaVersion,
+            exportedAt: exported.exportedAt,
+            payload: {
+              ...exported.payload,
+              'profileImage': {
+                'path': user!.photoPath,
+                'bytes': base64Encode(await photo.readAsBytes()),
+              },
+            },
+          );
     final dir = await getTemporaryDirectory();
     final file = File(
       p.join(dir.path, 'lexora-backup-${DateTime.now().millisecondsSinceEpoch}.json'),
@@ -74,8 +91,22 @@ class SettingsScreen extends ConsumerWidget {
     try {
       final raw = utf8.decode(await picked.readAsBytes());
       await LexoraBackupStore(ref.read(appDatabaseProvider)).importEncoded(raw);
-      await TopicCatalogImporter(ref.read(appDatabaseProvider))
-          .importAssetIfNeeded();
+      final image = LexoraBackup.decode(raw).payload['profileImage'];
+      final account = ref.read(authProvider).user;
+      if (image is Map && image['bytes'] is String && account != null) {
+        final relative = await ProfileImageStore.saveBytes(
+          base64Decode(image['bytes'] as String),
+        );
+        await ref.read(authProvider.notifier).updateProfile(
+              username: account.username ?? '',
+              displayName: account.displayName,
+              email: account.email ?? '',
+              photoPath: relative,
+            );
+      }
+      final db = ref.read(appDatabaseProvider);
+      await VocabularyCatalogImporter(db).importAssetIfNeeded();
+      await TopicCatalogImporter(db).importAssetIfNeeded();
       messenger.showSnackBar(SnackBar(content: Text(l10n.importSuccess)));
     } on BackupException {
       messenger.showSnackBar(SnackBar(content: Text(l10n.unsupportedBackup)));

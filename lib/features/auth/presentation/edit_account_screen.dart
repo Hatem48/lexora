@@ -1,13 +1,12 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lexora/l10n/app_localizations.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../../../core/services/account/profile_image_store.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
@@ -103,32 +102,13 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
     final bytes = _newPhoto;
     if (bytes == null) return current;
 
-    final dir = await getApplicationDocumentsDirectory();
     await _deleteStoredPhotos();
-    final file = File(
-      p.join(
-        dir.path,
-        'profile_photo_${DateTime.now().millisecondsSinceEpoch}.jpg',
-      ),
-    );
-    await file.writeAsBytes(bytes, flush: true);
-    return file.path;
+    return ProfileImageStore.saveBytes(bytes);
   }
 
   Future<void> _deleteStoredPhotos() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final entries = dir.listSync();
-    for (final entry in entries) {
-      if (entry is! File) continue;
-      if (p.basename(entry.path).startsWith('profile_photo_')) {
-        await entry.delete();
-      }
-    }
     final current = ref.read(authProvider).user?.photoPath;
-    if (current != null && current.isNotEmpty) {
-      final file = File(current);
-      if (await file.exists()) await file.delete();
-    }
+    await ProfileImageStore.deleteStored(current);
   }
 
   Future<void> _saveProfile() async {

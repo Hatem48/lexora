@@ -1,6 +1,6 @@
 # Vocabulary source attribution
 
-Retrieved on 1 October 2026. `assets/vocabulary/catalog.json` is the generated production catalog (`datasetType: production`, version 2). Definitions, Arabic meanings, example sentences, and inflections were not added, because none of these sources supply a licensed English definition, Arabic gloss, or inflection list for the app. Topic links were not generated. The previous practice catalog is kept at `data/vocabulary/catalog.development.json` and is not loaded by the app.
+Retrieved on 1 October 2026. `assets/vocabulary/catalog.json` is the production catalog (`datasetType: production`, version 3). Lemma, part of speech, CEFR, ranks, and evidence tags come only from the sources below. English definitions, Arabic meanings, example sentences, inflections, and high-confidence topic links were added in Lexora for in-app learning; they are not copied from CEFR-J, Octanove, NGSL, NGSL-Spoken, or NAWL. The previous practice catalog is kept at `data/vocabulary/catalog.development.json` and is not loaded by the app.
 
 CEFR levels come only from CEFR-J (A1–B2) and Octanove (C1–C2). When those sources disagree, or when one source lists two levels for the same lemma and part of speech, the entry is left out of the catalog and recorded in `build/vocabulary/conflicts.json`. NGSL, NGSL-Spoken, and NAWL add rank and the tags general, spoken, and academic. They do not set CEFR level.
 
@@ -69,6 +69,8 @@ Suggested citation: Browne, C., Culligan, B. & Phillips, J. (2013). The New Gene
 
 ## What Lexora adds
 
-Nothing was invented for a missing definition, Arabic meaning, example, inflection, or topic. A headword whose part of speech is not a real category in these files is rejected instead of assigned a guessed category. The rejected rows are `to` marked `infinitive-to` in CEFR-J, `batter` with an empty part of speech in Octanove, and `remonstrate` marked `vern` in Octanove. `to` remains in the catalog as a preposition because that separate CEFR-J row is valid.
+Lemma, POS, and CEFR are never invented from these source files. A headword whose part of speech is not a real category in these files is rejected instead of assigned a guessed category. The rejected rows are `to` marked `infinitive-to` in CEFR-J, `batter` with an empty part of speech in Octanove, and `remonstrate` marked `vern` in Octanove. `to` remains in the catalog as a preposition because that separate CEFR-J row is valid.
+
+English definitions, Arabic meanings, example sentences, and inflection lists in version 3 are Lexora learning content. They are not taken from the datasets above. High-confidence topic links in `topics.json` were added the same way.
 
 Because Octanove, NGSL, NGSL-Spoken, and NAWL use CC BY-SA 4.0, a published catalog that contains those entries needs this attribution and the ShareAlike terms. The app UI does not paste the license text.

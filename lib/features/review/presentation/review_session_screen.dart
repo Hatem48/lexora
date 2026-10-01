@@ -11,6 +11,8 @@ import '../../../app/app.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/enums.dart';
+import '../../../core/services/progress/learning_activity_store.dart';
+import '../../../core/services/vocabulary/mastery_policy.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/review/review_engine.dart';
@@ -118,6 +120,25 @@ class ReviewSessionController extends Notifier<ReviewSessionState> {
             ),
           );
         }
+      } else if (item.itemType == ReviewItemType.vocabulary.storageValue) {
+        final entry = await (db.select(db.vocabularyEntries)
+              ..where((row) => row.id.equals(item.itemId)))
+            .getSingleOrNull();
+        if (entry != null) {
+          final progress = await (db.select(db.userVocabulary)
+                ..where((row) => row.entryId.equals(entry.id)))
+              .getSingleOrNull();
+          cards.add(
+            ReviewCardData(
+              reviewItem: item,
+              prompt: entry.lemma,
+              answer: progress?.userArabicMeaning?.isNotEmpty == true
+                  ? progress!.userArabicMeaning!
+                  : entry.arabicMeaning,
+              itemType: item.itemType,
+            ),
+          );
+        }
       } else if (item.itemType == ReviewItemType.sentence.storageValue) {
         final sentence = await (db.select(db.sentences)
               ..where((t) => t.id.equals(item.itemId)))
@@ -178,6 +199,7 @@ class ReviewSessionController extends Notifier<ReviewSessionState> {
             reviewedAt: now,
           ),
         );
+    await LearningActivityStore(db).add(reviews: 1);
 
     if (item.itemType == ReviewItemType.word.storageValue) {
       await (db.update(db.words)..where((t) => t.id.equals(item.itemId)))
@@ -187,6 +209,17 @@ class ReviewSessionController extends Notifier<ReviewSessionState> {
           reviewCount: Value(item.repetitions + 1),
           lastReviewedAt: Value(now),
           updatedAt: Value(now),
+        ),
+      );
+    } else if (item.itemType == ReviewItemType.vocabulary.storageValue) {
+      await (db.update(db.userVocabulary)
+            ..where((row) => row.entryId.equals(item.itemId)))
+          .write(
+        UserVocabularyCompanion(
+          status: Value(
+            const MasteryPolicy().statusAfterReview(result.masteryStatus),
+          ),
+          lastUsedAt: Value(now),
         ),
       );
     } else if (item.itemType == ReviewItemType.sentence.storageValue) {

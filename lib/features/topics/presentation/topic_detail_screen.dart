@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,8 +7,10 @@ import 'package:lexora/l10n/app_localizations.dart';
 import '../../../app/app.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/enums.dart';
+import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/topics/topic_repository.dart';
+import '../../../core/services/vocabulary/vocabulary_discovery_repository.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import 'topic_icons.dart';
 import 'topic_providers.dart';
@@ -38,7 +41,7 @@ class _TopicDetailScreenState extends ConsumerState<TopicDetailScreen> {
     }
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -51,6 +54,7 @@ class _TopicDetailScreenState extends ConsumerState<TopicDetailScreen> {
               Tab(text: l10n.topicVocabulary),
               Tab(text: l10n.topicSentences),
               Tab(text: l10n.topicProgressTab),
+              Tab(text: l10n.topicQuestions),
             ],
           ),
         ),
@@ -93,6 +97,7 @@ class _TopicDetailScreenState extends ConsumerState<TopicDetailScreen> {
                   ),
                   _SentencesTab(topicId: widget.topicId, cefr: _cefr),
                   _ProgressTab(topicId: widget.topicId),
+                  _QuestionsTab(topicId: widget.topicId, cefr: _cefr),
                 ],
               ),
             ),
@@ -316,6 +321,113 @@ class _ProgressTab extends ConsumerWidget {
         );
       },
     );
+  }
+}
+
+class _QuestionsTab extends ConsumerStatefulWidget {
+  const _QuestionsTab({required this.topicId, required this.cefr});
+
+  final String topicId;
+  final String? cefr;
+
+  @override
+  ConsumerState<_QuestionsTab> createState() => _QuestionsTabState();
+}
+
+class _QuestionsTabState extends ConsumerState<_QuestionsTab> {
+  final _answers = <String, TextEditingController>{};
+  List<String> _found = [];
+
+  @override
+  void dispose() {
+    for (final controller in _answers.values) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  TextEditingController _controller(String id) =>
+      _answers.putIfAbsent(id, TextEditingController.new);
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final db = ref.watch(appDatabaseProvider);
+    final arabic = Localizations.localeOf(context).languageCode == 'ar';
+    final query = db.select(db.topicQuestions)
+      ..where((row) => row.topicId.equals(widget.topicId));
+    if (widget.cefr != null) {
+      query.where((row) => row.cefrLevel.equals(widget.cefr!));
+    }
+    query.orderBy([(row) => OrderingTerm.asc(row.sortOrder)]);
+    return StreamBuilder(
+      stream: query.watch(),
+      builder: (context, snapshot) {
+        final questions = snapshot.data ?? const <TopicQuestionRow>[];
+        if (questions.isEmpty) {
+          return EmptyState(
+            title: l10n.topicQuestions,
+            message: l10n.grammarSampleNote,
+          );
+        }
+        return ListView(
+          padding: const EdgeInsets.all(AppSpacing.screenPadding),
+          children: [
+            for (final question in questions) ...[
+              if (question.isDevelopmentSample) Text(l10n.developmentSample),
+              Text(
+                arabic ? question.promptAr : question.promptEn,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: _controller(question.id),
+                textDirection: TextDirection.ltr,
+                minLines: 2,
+                maxLines: 4,
+                decoration: InputDecoration(labelText: l10n.yourAnswer),
+              ),
+              const SizedBox(height: 8),
+              LexoraPrimaryButton(
+                label: l10n.submitAnswer,
+                onPressed: () => _submit(question),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '${l10n.suggestedAnswer}: ${question.suggestedAnswer}',
+                textDirection: TextDirection.ltr,
+              ),
+              const SizedBox(height: 16),
+            ],
+            if (_found.isNotEmpty)
+              Text('${l10n.wordsFound}: ${_found.join(', ')}'),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _submit(TopicQuestionRow question) async {
+    final db = ref.read(appDatabaseProvider);
+    final text = _controller(question.id).text.trim();
+    if (text.isEmpty) return;
+    await db.into(db.userTopicAnswers).insert(
+          UserTopicAnswersCompanion.insert(
+            id: DateTime.now().microsecondsSinceEpoch.toString(),
+            questionId: question.id,
+            answerText: text,
+            createdAt: DateTime.now(),
+          ),
+        );
+    final summary = await VocabularyDiscoveryRepository(db).analyzeAndRecord(
+      text: text,
+      discoveredIn: 'topic',
+      sourceId: question.id,
+    );
+    if (!mounted) return;
+    setState(() {
+      _found = summary.newlyDiscovered.map((word) => word.lemma).toList();
+    });
   }
 }
 

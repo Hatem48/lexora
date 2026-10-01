@@ -381,5 +381,73 @@
   "privacyPolicy": "Privacy policy",
   "deleteAccount": "Delete account",
   "deleteAccountMessage": "This erases your words, sentences, blogs, reviews, and settings on this device. The shared vocabulary catalog stays. This cannot be undone.",
-  "linkOpenFailed": "Could not open the page"
+  "linkOpenFailed": "Could not open the page",
+  "needsCompletion": "Needs completion",
+  "needsCompletionCount": "Needs completion ({count})",
+  "@needsCompletionCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "catalogRecognized": "Found in the vocabulary catalog",
+  "generalTag": "General",
+  "spokenTag": "Spoken",
+  "formsUnavailable": "Word forms are not available yet.",
+  "definitionUnavailable": "No licensed definition yet.",
+  "exampleUnavailable": "No example yet.",
+  "grammarUsageUnavailable": "Usage notes are not available yet.",
+  "saveCompletion": "Save completion",
+  "grammarTitle": "Grammar",
+  "grammarSampleNote": "Development sample. Not an official CEFR grammar list.",
+  "grammarUse": "Use",
+  "grammarStructure": "Structure",
+  "grammarPositive": "Positive",
+  "grammarNegative": "Negative",
+  "grammarQuestion": "Question",
+  "grammarMistake": "Common mistake",
+  "grammarPractice": "Practice",
+  "grammarCheck": "Check",
+  "grammarCorrect": "Correct",
+  "grammarTryAgain": "Not quite. Read the short note and try again.",
+  "advancedPracticeLocked": "Extra practice unlocks after 10 mastered words. Word levels stay the same.",
+  "advancedPracticeUnlocked": "Extra practice is available.",
+  "topicQuestions": "Questions",
+  "yourAnswer": "Your answer",
+  "suggestedAnswer": "Suggested answer",
+  "submitAnswer": "Submit answer",
+  "wordsFound": "Words found",
+  "masteredProgress": "Mastered: {mastered} / {total}",
+  "@masteredProgress": {
+    "placeholders": {
+      "mastered": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "learningProgressCount": "Learning: {count}",
+  "@learningProgressCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "discoveredProgressCount": "Discovered: {count}",
+  "@discoveredProgressCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "levelCollectionNote": "Mastered means completed reviews, not an official CEFR level.",
+  "achievements": "Achievements",
+  "congratulations": "Congratulations",
+  "achievementUnlocked": "Achievement unlocked",
+  "learningTimeTitle": "Learning time",
+  "learningTimeValue": "{hours} h {minutes} min",
+  "@learningTimeValue": {
+    "placeholders": {
+      "hours": { "type": "int" },
+      "minutes": { "type": "int" }
+    }
+  },
+  "developmentSample": "Development sample",
+  "definition": "Definition",
+  "wordForms": "Word forms"
 }

@@ -13,6 +13,8 @@ class CatalogProgress {
   const CatalogProgress({
     required this.totals,
     required this.discovered,
+    required this.learning,
+    required this.masteredByLevel,
     required this.mastered,
     required this.academic,
     required this.ielts,
@@ -22,6 +24,8 @@ class CatalogProgress {
 
   final Map<String, int> totals;
   final Map<String, int> discovered;
+  final Map<String, int> learning;
+  final Map<String, int> masteredByLevel;
   final int mastered;
   final int academic;
   final int ielts;
@@ -52,6 +56,25 @@ final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
     SELECT e.cefr_level AS level, COUNT(*) AS c
     FROM user_vocabulary u
     JOIN vocabulary_entries e ON e.id = u.entry_id
+    WHERE u.status = 'discovered'
+    GROUP BY e.cefr_level
+    ''',
+  );
+  final learning = await grouped(
+    '''
+    SELECT e.cefr_level AS level, COUNT(*) AS c
+    FROM user_vocabulary u
+    JOIN vocabulary_entries e ON e.id = u.entry_id
+    WHERE u.status IN ('learning', 'reviewing')
+    GROUP BY e.cefr_level
+    ''',
+  );
+  final masteredByLevel = await grouped(
+    '''
+    SELECT e.cefr_level AS level, COUNT(*) AS c
+    FROM user_vocabulary u
+    JOIN vocabulary_entries e ON e.id = u.entry_id
+    WHERE u.status = 'mastered'
     GROUP BY e.cefr_level
     ''',
   );
@@ -68,6 +91,8 @@ final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
   return CatalogProgress(
     totals: totals,
     discovered: discovered,
+    learning: learning,
+    masteredByLevel: masteredByLevel,
     mastered: await count(
       "SELECT COUNT(*) AS c FROM user_vocabulary WHERE status = 'mastered'",
     ),
@@ -126,15 +151,37 @@ class CatalogProgressSection extends ConsumerWidget {
             child: Column(
               children: [
                 for (final level in CefrLevel.values) ...[
-                  _Metric(
-                    label: level.code.toUpperCase(),
-                    value: l10n.discoveredOf(
-                      data.discovered[level.code] ?? 0,
-                      data.totals[level.code] ?? 0,
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      level.code,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
-                  if (level != CefrLevel.c2) const Divider(height: 24),
+                  const SizedBox(height: 4),
+                  _Metric(
+                    label: l10n.masteredProgress(
+                      data.masteredByLevel[level.code] ?? 0,
+                      data.totals[level.code] ?? 0,
+                    ),
+                    value: '',
+                  ),
+                  _Metric(
+                    label: l10n.learningProgressCount(
+                      data.learning[level.code] ?? 0,
+                    ),
+                    value: '',
+                  ),
+                  _Metric(
+                    label: l10n.discoveredProgressCount(
+                      data.discovered[level.code] ?? 0,
+                    ),
+                    value: '',
+                  ),
+                  if (level != CefrLevel.c2) const Divider(height: 20),
                 ],
+                const SizedBox(height: 8),
+                Text(l10n.levelCollectionNote),
               ],
             ),
           ),

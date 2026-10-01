@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "groups": [
     {
       "id": "everyday",
@@ -2218,6 +2218,1006 @@
       "entryId": "watch-verb",
       "topicId": "entertainment",
       "relevance": "medium"
+    },
+    {
+      "entryId": "account-noun",
+      "topicId": "money",
+      "relevance": "high"
+    },
+    {
+      "entryId": "account-verb",
+      "topicId": "money",
+      "relevance": "high"
+    },
+    {
+      "entryId": "aid-verb",
+      "topicId": "humanitarian",
+      "relevance": "high"
+    },
+    {
+      "entryId": "ambassador-noun",
+      "topicId": "diplomacy",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "apartment-noun",
+      "topicId": "home",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "athlete-noun",
+      "topicId": "sports",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "baby-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "bank-account-noun",
+      "topicId": "money",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "bank-verb",
+      "topicId": "money",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "bedroom-noun",
+      "topicId": "home",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "biology-noun",
+      "topicId": "science",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "breakfast-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "brother-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "bus-station-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "bus-stop-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "business-noun",
+      "topicId": "business",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "car-park-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "carbon-dioxide-noun",
+      "topicId": "environment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "carbon-footprint-noun",
+      "topicId": "environment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "carbon-monoxide-noun",
+      "topicId": "environment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "carbon-noun",
+      "topicId": "environment",
+      "relevance": "high"
+    },
+    {
+      "entryId": "career-noun",
+      "topicId": "work",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "cash-noun",
+      "topicId": "money",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "chef-noun",
+      "topicId": "restaurant",
+      "relevance": "high"
+    },
+    {
+      "entryId": "chef-noun",
+      "topicId": "work",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "chemistry-noun",
+      "topicId": "science",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "church-noun",
+      "topicId": "religion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "cinema-noun",
+      "topicId": "movies",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "cinema-noun",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "climate-change-noun",
+      "topicId": "environment",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "clothing-noun",
+      "topicId": "fashion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "computer-noun",
+      "topicId": "technology",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "concert-noun",
+      "topicId": "entertainment",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "crime-noun",
+      "topicId": "courts",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "cv-noun",
+      "topicId": "job-interviews",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "daughter-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "defense-defence-noun",
+      "topicId": "military",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "degree-noun",
+      "topicId": "university",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "dinner-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "disaster-noun",
+      "topicId": "disasters",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "disease-noun",
+      "topicId": "health",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "doctor-dr-dr-noun",
+      "topicId": "health",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "doctor-dr-dr-noun",
+      "topicId": "hospital",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "dress-noun",
+      "topicId": "fashion",
+      "relevance": "high"
+    },
+    {
+      "entryId": "dress-verb",
+      "topicId": "fashion",
+      "relevance": "high"
+    },
+    {
+      "entryId": "east-adjective",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "east-adverb",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "east-noun",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "economy-noun",
+      "topicId": "economy",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "email-e-mail-e-mail-noun",
+      "topicId": "internet",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "email-verb",
+      "topicId": "internet",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "exercise-noun",
+      "topicId": "health",
+      "relevance": "high"
+    },
+    {
+      "entryId": "exercise-noun",
+      "topicId": "sports",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "exercise-verb",
+      "topicId": "health",
+      "relevance": "high"
+    },
+    {
+      "entryId": "exercise-verb",
+      "topicId": "sports",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "experiment-verb",
+      "topicId": "science",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "fashion-noun",
+      "topicId": "fashion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "film-noun",
+      "topicId": "movies",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "film-verb",
+      "topicId": "movies",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "fire-brigade-noun",
+      "topicId": "disasters",
+      "relevance": "high"
+    },
+    {
+      "entryId": "fire-noun",
+      "topicId": "disasters",
+      "relevance": "high"
+    },
+    {
+      "entryId": "fire-station-noun",
+      "topicId": "disasters",
+      "relevance": "high"
+    },
+    {
+      "entryId": "fire-verb",
+      "topicId": "disasters",
+      "relevance": "high"
+    },
+    {
+      "entryId": "flight-noun",
+      "topicId": "airport",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "flight-noun",
+      "topicId": "travel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "flood-noun",
+      "topicId": "environment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "flood-verb",
+      "topicId": "disasters",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "flood-verb",
+      "topicId": "environment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "football-noun",
+      "topicId": "sports",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "freedom-noun",
+      "topicId": "politics",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "friendship-noun",
+      "topicId": "social",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "fruit-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "furniture-noun",
+      "topicId": "home",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "god-noun",
+      "topicId": "religion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "grandfather-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "grandmother-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "guest-noun",
+      "topicId": "social",
+      "relevance": "low"
+    },
+    {
+      "entryId": "hack-noun",
+      "topicId": "cybersecurity",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "hack-verb",
+      "topicId": "cybersecurity",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "health-care-noun",
+      "topicId": "health",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "home-adverb",
+      "topicId": "home",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "homework-noun",
+      "topicId": "education",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "house-verb",
+      "topicId": "home",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "husband-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "immigrant-noun",
+      "topicId": "immigration",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "immigration-noun",
+      "topicId": "immigration",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "internet-internet-noun",
+      "topicId": "internet",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "internet-internet-noun",
+      "topicId": "technology",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "interview-verb",
+      "topicId": "job-interviews",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "interview-verb",
+      "topicId": "work",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "journal-noun",
+      "topicId": "academic-research",
+      "relevance": "high"
+    },
+    {
+      "entryId": "journal-noun",
+      "topicId": "news",
+      "relevance": "low"
+    },
+    {
+      "entryId": "judge-verb",
+      "topicId": "courts",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "justice-noun",
+      "topicId": "courts",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "justice-noun",
+      "topicId": "human-rights",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "lesson-noun",
+      "topicId": "education",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "loan-noun",
+      "topicId": "money",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "luggage-noun",
+      "topicId": "airport",
+      "relevance": "high"
+    },
+    {
+      "entryId": "luggage-noun",
+      "topicId": "travel",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "lunch-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "market-verb",
+      "topicId": "business",
+      "relevance": "high"
+    },
+    {
+      "entryId": "market-verb",
+      "topicId": "economy",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "marriage-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "marriage-noun",
+      "topicId": "social",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "meal-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "media-noun",
+      "topicId": "news",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "menu-noun",
+      "topicId": "food",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "morning-noun",
+      "topicId": "daily-life",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "mosque-noun",
+      "topicId": "religion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "music-noun",
+      "topicId": "entertainment",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "neighbor-neighbour-noun",
+      "topicId": "social",
+      "relevance": "high"
+    },
+    {
+      "entryId": "neighbor-neighbour-noun",
+      "topicId": "home",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "newspaper-noun",
+      "topicId": "news",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "north-adjective",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "north-adverb",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "north-noun",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "nurse-noun",
+      "topicId": "health",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "nurse-verb",
+      "topicId": "hospital",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "nurse-verb",
+      "topicId": "health",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "parent-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "physics-noun",
+      "topicId": "science",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "pilot-noun",
+      "topicId": "airport",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "pilot-noun",
+      "topicId": "work",
+      "relevance": "low"
+    },
+    {
+      "entryId": "police-officer-noun",
+      "topicId": "police",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "police-station-noun",
+      "topicId": "police",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "policy-noun",
+      "topicId": "politics",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "political-adjective",
+      "topicId": "politics",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "professor-noun",
+      "topicId": "university",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "professor-noun",
+      "topicId": "academic-research",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "program-programme-noun",
+      "topicId": "software",
+      "relevance": "high"
+    },
+    {
+      "entryId": "program-programme-verb",
+      "topicId": "software",
+      "relevance": "high"
+    },
+    {
+      "entryId": "relationship-noun",
+      "topicId": "social",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "relative-adjective",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "relative-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "religion-noun",
+      "topicId": "religion",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "rent-noun",
+      "topicId": "home",
+      "relevance": "high"
+    },
+    {
+      "entryId": "rent-noun",
+      "topicId": "money",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "rent-verb",
+      "topicId": "home",
+      "relevance": "high"
+    },
+    {
+      "entryId": "rent-verb",
+      "topicId": "money",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "research-verb",
+      "topicId": "academic-research",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "restaurant-noun",
+      "topicId": "restaurant",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "restaurant-noun",
+      "topicId": "food",
+      "relevance": "high"
+    },
+    {
+      "entryId": "resume-verb",
+      "topicId": "job-interviews",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "rice-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "routine-noun",
+      "topicId": "daily-life",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "salary-noun",
+      "topicId": "work",
+      "relevance": "high"
+    },
+    {
+      "entryId": "salary-noun",
+      "topicId": "money",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "science-fiction-noun",
+      "topicId": "science",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "scientist-noun",
+      "topicId": "science",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "shop-assistant-noun",
+      "topicId": "supermarket",
+      "relevance": "high"
+    },
+    {
+      "entryId": "shop-verb",
+      "topicId": "supermarket",
+      "relevance": "high"
+    },
+    {
+      "entryId": "shopping-noun",
+      "topicId": "supermarket",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "sister-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "sleep-noun",
+      "topicId": "daily-life",
+      "relevance": "high"
+    },
+    {
+      "entryId": "sleep-noun",
+      "topicId": "health",
+      "relevance": "low"
+    },
+    {
+      "entryId": "sleep-verb",
+      "topicId": "daily-life",
+      "relevance": "high"
+    },
+    {
+      "entryId": "sleep-verb",
+      "topicId": "health",
+      "relevance": "low"
+    },
+    {
+      "entryId": "soccer-noun",
+      "topicId": "sports",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "society-noun",
+      "topicId": "culture",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "son-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "south-adjective",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "south-adverb",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "south-noun",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "stadium-noun",
+      "topicId": "sports",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "station-noun",
+      "topicId": "transportation",
+      "relevance": "high"
+    },
+    {
+      "entryId": "store-noun",
+      "topicId": "supermarket",
+      "relevance": "high"
+    },
+    {
+      "entryId": "store-verb",
+      "topicId": "supermarket",
+      "relevance": "high"
+    },
+    {
+      "entryId": "supermarket-noun",
+      "topicId": "supermarket",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "surgery-noun",
+      "topicId": "hospital",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "taxi-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "teacher-noun",
+      "topicId": "work",
+      "relevance": "low"
+    },
+    {
+      "entryId": "television-noun",
+      "topicId": "movies",
+      "relevance": "high"
+    },
+    {
+      "entryId": "television-noun",
+      "topicId": "entertainment",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "tennis-noun",
+      "topicId": "sports",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "thesis-noun",
+      "topicId": "academic-research",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "tourism-noun",
+      "topicId": "travel",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "trade-noun",
+      "topicId": "business",
+      "relevance": "high"
+    },
+    {
+      "entryId": "trade-noun",
+      "topicId": "economy",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "trade-verb",
+      "topicId": "business",
+      "relevance": "high"
+    },
+    {
+      "entryId": "trade-verb",
+      "topicId": "economy",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "traffic-jam-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "traffic-light-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "traffic-noun",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "train-verb",
+      "topicId": "transportation",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "travel-agent-noun",
+      "topicId": "travel",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "travel-noun",
+      "topicId": "travel",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "trip-verb",
+      "topicId": "travel",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "united-adjective",
+      "topicId": "un",
+      "relevance": "high"
+    },
+    {
+      "entryId": "vegetable-noun",
+      "topicId": "food",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "virus-noun",
+      "topicId": "health",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "vote-noun",
+      "topicId": "elections",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "weapon-noun",
+      "topicId": "war",
+      "relevance": "high"
+    },
+    {
+      "entryId": "weapon-noun",
+      "topicId": "military",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "wedding-noun",
+      "topicId": "family",
+      "relevance": "high"
+    },
+    {
+      "entryId": "wedding-noun",
+      "topicId": "social",
+      "relevance": "medium"
+    },
+    {
+      "entryId": "west-adjective",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "west-adverb",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "west-noun",
+      "topicId": "directions",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "wife-noun",
+      "topicId": "family",
+      "relevance": "primary"
+    },
+    {
+      "entryId": "work-noun",
+      "topicId": "work",
+      "relevance": "primary"
     }
   ],
   "sentences": [

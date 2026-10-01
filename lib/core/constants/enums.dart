@@ -94,7 +94,8 @@ enum TopicRelevance {
 enum ReviewItemType {
   word,
   sentence,
-  pattern;
+  pattern,
+  vocabulary;
 
   String get storageValue => name;
 }

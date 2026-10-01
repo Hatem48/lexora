@@ -12,7 +12,7 @@ class LexoraBackup {
   final DateTime exportedAt;
   final Map<String, dynamic> payload;
 
-  static const currentSchemaVersion = 2;
+  static const currentSchemaVersion = 3;
 
   Map<String, dynamic> toJson() => {
         'schemaVersion': schemaVersion,

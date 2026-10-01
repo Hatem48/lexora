@@ -2,12 +2,14 @@ import 'package:drift/drift.dart' hide Column;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lexora/l10n/app_localizations.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
+import '../../../core/services/progress/activity_policy.dart';
 import '../../../core/services/progress/streak.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../progress/presentation/catalog_progress_section.dart';
@@ -73,8 +75,32 @@ final progressSnapshotProvider = FutureProvider.autoDispose
         ..addColumns([db.reviewHistory.reviewedAt]))
       .map((row) => row.read(db.reviewHistory.reviewedAt)!)
       .get();
-  final streaks = streakStats(reviewed);
-
+  final learningDays = await db.select(db.learningDays).get();
+  final activity = <DateTime, ({int reviews, int exercises, int activeSeconds})>{};
+  for (final value in reviewed) {
+    final day = DateTime(value.year, value.month, value.day);
+    activity[day] = (reviews: 1, exercises: 0, activeSeconds: 0);
+  }
+  for (final row in learningDays) {
+    final day = DateTime.parse(row.day);
+    final current = activity[day];
+    activity[day] = (
+      reviews: (current?.reviews ?? 0) + row.reviews,
+      exercises: row.exercises,
+      activeSeconds: row.activeSeconds,
+    );
+  }
+  final streaks = const ActivityStreakPolicy().fromDays(
+    [
+      for (final entry in activity.entries)
+        (
+          day: entry.key,
+          reviews: entry.value.reviews,
+          exercises: entry.value.exercises,
+          activeSeconds: entry.value.activeSeconds,
+        ),
+    ],
+  );
   return ProgressSnapshot(
     wordsPct: words.total == 0 ? 0 : words.learned / words.total,
     sentencesPct: sentences.total == 0 ? 0 : sentences.learned / sentences.total,
@@ -216,6 +242,18 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
               ),
               const SizedBox(height: AppSpacing.sectionGap),
               const CatalogProgressSection(),
+              const SizedBox(height: AppSpacing.sectionGap),
+              LexoraCard(
+                onTap: () => context.push('/grammar'),
+                child: Row(
+                  children: [
+                    const Icon(Icons.school_outlined),
+                    const SizedBox(width: 12),
+                    Expanded(child: Text(l10n.grammarTitle)),
+                    const Icon(Icons.chevron_right),
+                  ],
+                ),
+              ),
             ],
           );
         },

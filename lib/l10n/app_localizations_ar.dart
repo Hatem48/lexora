@@ -974,4 +974,140 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get linkOpenFailed => 'تعذّر فتح الصفحة';
+
+  @override
+  String get needsCompletion => 'تحتاج إكمال';
+
+  @override
+  String needsCompletionCount(int count) {
+    return 'تحتاج إكمال ($count)';
+  }
+
+  @override
+  String get catalogRecognized => 'موجودة في كتالوج المفردات';
+
+  @override
+  String get generalTag => 'عامة';
+
+  @override
+  String get spokenTag => 'محكية';
+
+  @override
+  String get formsUnavailable => 'صيغ الكلمة غير متوفرة بعد.';
+
+  @override
+  String get definitionUnavailable => 'لا يوجد تعريف مرخّص بعد.';
+
+  @override
+  String get exampleUnavailable => 'لا يوجد مثال بعد.';
+
+  @override
+  String get grammarUsageUnavailable => 'ملاحظات الاستخدام غير متوفرة بعد.';
+
+  @override
+  String get saveCompletion => 'حفظ الإكمال';
+
+  @override
+  String get grammarTitle => 'القواعد';
+
+  @override
+  String get grammarSampleNote => 'عينة تطوير. ليست قائمة قواعد CEFR رسمية.';
+
+  @override
+  String get grammarUse => 'الاستخدام';
+
+  @override
+  String get grammarStructure => 'التركيب';
+
+  @override
+  String get grammarPositive => 'إثبات';
+
+  @override
+  String get grammarNegative => 'نفي';
+
+  @override
+  String get grammarQuestion => 'سؤال';
+
+  @override
+  String get grammarMistake => 'خطأ شائع';
+
+  @override
+  String get grammarPractice => 'تدريب';
+
+  @override
+  String get grammarCheck => 'تحقق';
+
+  @override
+  String get grammarCorrect => 'صحيح';
+
+  @override
+  String get grammarTryAgain =>
+      'ليس بعد. اقرأ الملاحظة القصيرة وحاول مرة أخرى.';
+
+  @override
+  String get advancedPracticeLocked =>
+      'التدريب الإضافي يُفتح بعد إتقان 10 كلمات. مستويات الكلمات تبقى كما هي.';
+
+  @override
+  String get advancedPracticeUnlocked => 'التدريب الإضافي متاح.';
+
+  @override
+  String get topicQuestions => 'أسئلة';
+
+  @override
+  String get yourAnswer => 'إجابتك';
+
+  @override
+  String get suggestedAnswer => 'إجابة مقترحة';
+
+  @override
+  String get submitAnswer => 'إرسال الإجابة';
+
+  @override
+  String get wordsFound => 'كلمات وُجدت';
+
+  @override
+  String masteredProgress(int mastered, int total) {
+    return 'متقنة: $mastered / $total';
+  }
+
+  @override
+  String learningProgressCount(int count) {
+    return 'قيد التعلم: $count';
+  }
+
+  @override
+  String discoveredProgressCount(int count) {
+    return 'مكتشفة: $count';
+  }
+
+  @override
+  String get levelCollectionNote =>
+      'الإتقان يعني مراجعات مكتملة، وليس مستوى CEFR رسميًا.';
+
+  @override
+  String get achievements => 'الإنجازات';
+
+  @override
+  String get congratulations => 'تهانينا';
+
+  @override
+  String get achievementUnlocked => 'تم فتح إنجاز';
+
+  @override
+  String get learningTimeTitle => 'وقت التعلم';
+
+  @override
+  String learningTimeValue(int hours, int minutes) {
+    return '$hours س $minutes د';
+  }
+
+  @override
+  String get developmentSample => 'عينة تطوير';
+
+  @override
+  String get definition => 'التعريف';
+
+  @override
+  String get wordForms => 'صيغ الكلمة';
 }

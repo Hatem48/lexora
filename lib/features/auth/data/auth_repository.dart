@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+
+import '../../../core/services/account/profile_image_store.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
@@ -232,6 +234,19 @@ class LocalAuthRepository implements AuthRepository {
     if (session == null || session.isEmpty || account == null || account.id != session) {
       if (session != null) await _storage.delete(key: _sessionKey);
       return null;
+    }
+    final migrated = await ProfileImageStore.migrate(account.photoPath);
+    if (migrated != account.photoPath) {
+      final updated = _LocalAccount(
+        id: account.id,
+        username: account.username,
+        password: account.password,
+        displayName: account.displayName,
+        email: account.email,
+        photoPath: migrated,
+      );
+      await _writeAccount(updated);
+      return updated.toUser();
     }
     return account.toUser();
   }

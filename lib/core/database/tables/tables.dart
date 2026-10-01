@@ -264,6 +264,10 @@ class UserVocabulary extends Table {
   TextColumn get sourceId => text().nullable()();
   IntColumn get usageCount => integer().withDefault(const Constant(1))();
   DateTimeColumn get lastUsedAt => dateTime()();
+  TextColumn get userArabicMeaning => text().nullable()();
+  TextColumn get userExample => text().nullable()();
+  TextColumn get userExampleTranslation => text().nullable()();
+  TextColumn get userNotes => text().nullable()();
 
   @override
   Set<Column> get primaryKey => {entryId};
@@ -380,6 +384,117 @@ class LearningPathTopics extends Table {
 
   @override
   Set<Column> get primaryKey => {pathId, topicId};
+}
+
+@DataClassName('GrammarTopicRow')
+class GrammarTopics extends Table {
+  TextColumn get id => text()();
+  TextColumn get category => text()();
+  TextColumn get titleEn => text()();
+  TextColumn get titleAr => text()();
+  TextColumn get cefrLevel => text().nullable()();
+  TextColumn get classificationNote => text()();
+  IntColumn get sortOrder => integer().withDefault(const Constant(0))();
+  BoolColumn get isDevelopmentSample =>
+      boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName('GrammarLessonRow')
+class GrammarLessons extends Table {
+  TextColumn get id => text()();
+  TextColumn get topicId => text().references(GrammarTopics, #id)();
+  TextColumn get useEn => text()();
+  TextColumn get useAr => text()();
+  TextColumn get structure => text()();
+  TextColumn get positiveExample => text()();
+  TextColumn get negativeExample => text()();
+  TextColumn get questionExample => text()();
+  TextColumn get mistakeWrong => text()();
+  TextColumn get mistakeRight => text()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName('GrammarExerciseRow')
+class GrammarExercises extends Table {
+  TextColumn get id => text()();
+  TextColumn get lessonId => text().references(GrammarLessons, #id)();
+  TextColumn get kind => text()();
+  TextColumn get prompt => text()();
+  TextColumn get choicesJson => text().withDefault(const Constant('[]'))();
+  TextColumn get answer => text()();
+  TextColumn get explanationEn => text()();
+  TextColumn get explanationAr => text()();
+  IntColumn get sortOrder => integer().withDefault(const Constant(0))();
+  BoolColumn get isAdvanced => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName('UserGrammarProgressRow')
+class UserGrammarProgress extends Table {
+  TextColumn get topicId => text().references(GrammarTopics, #id)();
+  TextColumn get status => text().withDefault(const Constant('available'))();
+  IntColumn get bestScore => integer().withDefault(const Constant(0))();
+  IntColumn get attempts => integer().withDefault(const Constant(0))();
+  DateTimeColumn get completedAt => dateTime().nullable()();
+  DateTimeColumn get updatedAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {topicId};
+}
+
+@DataClassName('TopicQuestionRow')
+class TopicQuestions extends Table {
+  TextColumn get id => text()();
+  TextColumn get topicId => text().references(Topics, #id)();
+  TextColumn get cefrLevel => text()();
+  TextColumn get promptEn => text()();
+  TextColumn get promptAr => text()();
+  TextColumn get suggestedAnswer => text()();
+  IntColumn get sortOrder => integer().withDefault(const Constant(0))();
+  BoolColumn get isDevelopmentSample =>
+      boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName('UserTopicAnswerRow')
+class UserTopicAnswers extends Table {
+  TextColumn get id => text()();
+  TextColumn get questionId => text().references(TopicQuestions, #id)();
+  TextColumn get answerText => text()();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName('UserAchievementRow')
+class UserAchievements extends Table {
+  TextColumn get id => text()();
+  DateTimeColumn get unlockedAt => dateTime()();
+  BoolColumn get celebrated => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName('LearningDayRow')
+class LearningDays extends Table {
+  TextColumn get day => text()();
+  IntColumn get activeSeconds => integer().withDefault(const Constant(0))();
+  IntColumn get reviews => integer().withDefault(const Constant(0))();
+  IntColumn get exercises => integer().withDefault(const Constant(0))();
+
+  @override
+  Set<Column> get primaryKey => {day};
 }
 
 @DataClassName('AppStatisticRow')

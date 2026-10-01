@@ -16,85 +16,11 @@ import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/widgets/content_filter_sheet.dart';
 import '../../../core/widgets/lexora_widgets.dart';
+import '../../../core/services/progress/learning_activity_store.dart';
+import '../../../core/services/vocabulary/mastery_policy.dart';
 import '../../categories/data/category_repository.dart';
 import '../../categories/presentation/categories_screen.dart';
-
-final wordsListProvider =
-    StreamProvider.autoDispose.family<List<WordRow>, WordsQuery>((ref, query) {
-  final db = ref.watch(appDatabaseProvider);
-  final select = db.select(db.words);
-
-  if (query.cefr != null) {
-    select.where((t) => t.cefrLevel.equals(query.cefr!));
-  }
-  if (query.favoritesOnly) {
-    select.where((t) => t.isFavorite.equals(true));
-  }
-  if (query.mastery != null) {
-    select.where((t) => t.masteryStatus.equals(query.mastery!.storageValue));
-  }
-  if (query.search.trim().isNotEmpty) {
-    final term = '%${query.search.trim()}%';
-    select.where(
-      (t) => t.word.like(term) | t.arabicMeaning.like(term),
-    );
-  }
-  if (query.categoryId != null) {
-    final sub = db.selectOnly(db.wordCategories)
-      ..addColumns([db.wordCategories.wordId])
-      ..where(db.wordCategories.categoryId.equals(query.categoryId!));
-    select.where((t) => t.id.isInQuery(sub));
-  }
-
-  switch (query.sort) {
-    case ContentSort.alphabetical:
-      select.orderBy([(t) => OrderingTerm.asc(t.word)]);
-    case ContentSort.cefr:
-      select.orderBy([(t) => OrderingTerm.asc(t.cefrLevel)]);
-    case ContentSort.mostReviewed:
-      select.orderBy([(t) => OrderingTerm.desc(t.reviewCount)]);
-    case ContentSort.leastReviewed:
-      select.orderBy([(t) => OrderingTerm.asc(t.reviewCount)]);
-    case ContentSort.mastery:
-      select.orderBy([(t) => OrderingTerm.asc(t.masteryStatus)]);
-    case ContentSort.recentlyAdded:
-      select.orderBy([(t) => OrderingTerm.desc(t.createdAt)]);
-  }
-
-  return select.watch();
-});
-
-class WordsQuery {
-  const WordsQuery({
-    this.search = '',
-    this.cefr,
-    this.categoryId,
-    this.mastery,
-    this.favoritesOnly = false,
-    this.sort = ContentSort.recentlyAdded,
-  });
-
-  final String search;
-  final String? cefr;
-  final String? categoryId;
-  final MasteryStatus? mastery;
-  final bool favoritesOnly;
-  final ContentSort sort;
-
-  @override
-  bool operator ==(Object other) =>
-      other is WordsQuery &&
-      other.search == search &&
-      other.cefr == cefr &&
-      other.categoryId == categoryId &&
-      other.mastery == mastery &&
-      other.favoritesOnly == favoritesOnly &&
-      other.sort == sort;
-
-  @override
-  int get hashCode =>
-      Object.hash(search, cefr, categoryId, mastery, favoritesOnly, sort);
-}
+import '../data/learning_words.dart';
 
 class WordsScreen extends ConsumerStatefulWidget {
   const WordsScreen({super.key});
@@ -107,6 +33,7 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
   final _searchController = TextEditingController();
   String _search = '';
   ContentFilterState _filters = const ContentFilterState();
+  bool _needsCompletion = false;
   Timer? _debounce;
 
   @override
@@ -139,15 +66,15 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final query = WordsQuery(
+    final query = LearningWordQuery(
       search: _search,
       cefr: _filters.cefr,
       categoryId: _filters.categoryId,
-      mastery: _filters.mastery,
       favoritesOnly: _filters.favoritesOnly,
-      sort: _filters.sort,
+      needsCompletionOnly: _needsCompletion,
     );
-    final wordsAsync = ref.watch(wordsListProvider(query));
+    final wordsAsync = ref.watch(learningWordsProvider(query));
+    final needsCount = ref.watch(needsCompletionCountProvider).asData?.value ?? 0;
     final pronunciation = ref.watch(pronunciationServiceProvider);
     final accent = ref.watch(settingsProvider).accent;
 
@@ -224,6 +151,16 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: FilterChip(
+                    avatar: const Icon(Icons.edit_outlined, size: 16),
+                    label: Text(l10n.needsCompletionCount(needsCount)),
+                    selected: _needsCompletion,
+                    onSelected: (value) =>
+                        setState(() => _needsCompletion = value),
+                  ),
+                ),
               ],
             ),
           ),
@@ -235,7 +172,7 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
                 title: l10n.errorGeneric,
                 message: e.toString(),
                 actionLabel: l10n.retry,
-                onAction: () => ref.invalidate(wordsListProvider(query)),
+                onAction: () => ref.invalidate(learningWordsProvider(query)),
               ),
               data: (words) {
                 if (words.isEmpty) {
@@ -260,7 +197,11 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
                   itemBuilder: (context, index) {
                     final word = words[index];
                     return LexoraCard(
-                      onTap: () => context.push('/words/${word.id}'),
+                      onTap: () => context.push(
+                        word.fromCatalog
+                            ? '/vocabulary/${word.id}'
+                            : '/words/${word.id}',
+                      ),
                       child: Row(
                         children: [
                           Expanded(
@@ -272,23 +213,40 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
                                   style:
                                       Theme.of(context).textTheme.titleLarge,
                                 ),
-                                const SizedBox(height: 4),
-                                RtlText(
-                                  word.arabicMeaning,
-                                  style:
-                                      Theme.of(context).textTheme.bodyMedium,
-                                ),
+                                if (word.arabicMeaning.isNotEmpty) ...[
+                                  const SizedBox(height: 4),
+                                  RtlText(
+                                    word.arabicMeaning,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ],
                                 const SizedBox(height: 8),
-                                Row(
+                                Wrap(
+                                  spacing: 8,
+                                  runSpacing: 4,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
                                   children: [
-                                    CefrBadge(level: word.cefrLevel),
-                                    const SizedBox(width: 8),
+                                    CefrBadge(level: word.cefr),
                                     Text(
-                                      word.partOfSpeech,
+                                      word.pos,
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelMedium,
                                     ),
+                                    Text(word.status),
+                                    if (word.needsCompletion)
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Icon(
+                                            Icons.edit_outlined,
+                                            size: 14,
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(l10n.needsCompletion),
+                                        ],
+                                      ),
                                   ],
                                 ),
                               ],
@@ -344,6 +302,12 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
   bool _inReview = true;
   bool _saving = false;
   Set<String> _categoryIds = {};
+  List<VocabularyEntryRow> _catalogMatches = [];
+  VocabularyEntryRow? _catalogMatch;
+  List<String> _catalogForms = [];
+  bool _catalogGeneral = false;
+  bool _catalogSpoken = false;
+  Timer? _lookupTimer;
 
   @override
   void dispose() {
@@ -352,7 +316,83 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
     _exampleCtrl.dispose();
     _exampleArCtrl.dispose();
     _notesCtrl.dispose();
+    _lookupTimer?.cancel();
     super.dispose();
+  }
+
+  void _onWordChanged(String value) {
+    _lookupTimer?.cancel();
+    _lookupTimer = Timer(const Duration(milliseconds: 250), () async {
+      final lemma = value.trim().toLowerCase();
+      if (lemma.isEmpty) {
+        if (mounted) {
+          setState(() {
+            _catalogMatches = [];
+            _catalogMatch = null;
+            _catalogForms = [];
+            _catalogGeneral = false;
+            _catalogSpoken = false;
+          });
+        }
+        return;
+      }
+      final db = ref.read(appDatabaseProvider);
+      final matches = await (db.select(db.vocabularyEntries)
+            ..where((row) => row.lemma.lower().equals(lemma))
+            ..limit(8))
+          .get();
+      if (!mounted) return;
+      setState(() {
+        _catalogMatches = matches;
+        _catalogMatch = matches.length == 1 ? matches.single : null;
+        _catalogForms = [];
+        _catalogGeneral = false;
+        _catalogSpoken = false;
+      });
+      if (_catalogMatch != null) {
+        _applyCatalogMatch(_catalogMatch!);
+      }
+    });
+  }
+
+  void _applyCatalogMatch(VocabularyEntryRow match) {
+    final previous = _catalogMatch;
+    final meaning = _meaningCtrl.text.trim();
+    final example = _exampleCtrl.text.trim();
+    if (meaning.isEmpty ||
+        (previous != null && meaning == previous.arabicMeaning.trim())) {
+      _meaningCtrl.text = match.arabicMeaning;
+    }
+    if (example.isEmpty ||
+        (previous != null && example == previous.exampleSentence.trim())) {
+      _exampleCtrl.text = match.exampleSentence;
+    }
+    setState(() => _catalogMatch = match);
+    _loadCatalogTags(match);
+    _loadCatalogForms(match);
+  }
+
+  Future<void> _loadCatalogForms(VocabularyEntryRow entry) async {
+    final db = ref.read(appDatabaseProvider);
+    final forms = await (db.select(db.vocabularyForms)
+          ..where((row) => row.entryId.equals(entry.id)))
+        .get();
+    if (!mounted || _catalogMatch?.id != entry.id) return;
+    setState(() {
+      _catalogForms = [for (final row in forms) row.surface];
+    });
+  }
+
+  Future<void> _loadCatalogTags(VocabularyEntryRow entry) async {
+    final db = ref.read(appDatabaseProvider);
+    final rank = await (db.select(db.vocabularyEntryRanks)
+          ..where((row) => row.entryId.equals(entry.id)))
+        .getSingleOrNull();
+    if (!mounted || _catalogMatch?.id != entry.id) return;
+    setState(() {
+      _catalogGeneral = rank?.frequencyRank != null;
+      _catalogSpoken = rank?.spokenRelevance != null;
+    });
   }
 
   Future<void> _save({required bool addAnother}) async {
@@ -362,6 +402,98 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
     setState(() => _saving = true);
     final db = ref.read(appDatabaseProvider);
     final word = _wordCtrl.text.trim();
+
+    final catalog = _catalogMatch;
+    if (catalog != null) {
+      final meaning = _meaningCtrl.text.trim();
+      final now = DateTime.now();
+      final status = const MasteryPolicy().statusAfterCompletion(
+        hasMeaning: meaning.isNotEmpty,
+      );
+      final current = await (db.select(db.userVocabulary)
+            ..where((row) => row.entryId.equals(catalog.id)))
+          .getSingleOrNull();
+      if (current == null) {
+        await db.into(db.userVocabulary).insert(
+              UserVocabularyCompanion.insert(
+                entryId: catalog.id,
+                status: Value(status),
+                firstDiscoveredAt: now,
+                discoveredIn: 'word',
+                lastUsedAt: now,
+                userArabicMeaning: Value(meaning.isEmpty ? null : meaning),
+                userExample: Value(
+                  _exampleCtrl.text.trim().isEmpty
+                      ? null
+                      : _exampleCtrl.text.trim(),
+                ),
+                userExampleTranslation: Value(
+                  _exampleArCtrl.text.trim().isEmpty
+                      ? null
+                      : _exampleArCtrl.text.trim(),
+                ),
+                userNotes: Value(
+                  _notesCtrl.text.trim().isEmpty ? null : _notesCtrl.text.trim(),
+                ),
+              ),
+            );
+      } else {
+        await (db.update(db.userVocabulary)
+              ..where((row) => row.entryId.equals(catalog.id)))
+            .write(
+          UserVocabularyCompanion(
+            status: Value(
+              current.status == VocabularyStatus.mastered.storageValue
+                  ? current.status
+                  : status,
+            ),
+            lastUsedAt: Value(now),
+            userArabicMeaning: Value(meaning.isEmpty ? null : meaning),
+            userExample: Value(
+              _exampleCtrl.text.trim().isEmpty ? null : _exampleCtrl.text.trim(),
+            ),
+            userExampleTranslation: Value(
+              _exampleArCtrl.text.trim().isEmpty
+                  ? null
+                  : _exampleArCtrl.text.trim(),
+            ),
+            userNotes: Value(
+              _notesCtrl.text.trim().isEmpty ? null : _notesCtrl.text.trim(),
+            ),
+          ),
+        );
+      }
+      if (_inReview) {
+        final review = await (db.select(db.reviewItems)
+              ..where(
+                (row) =>
+                    row.itemId.equals(catalog.id) &
+                    row.itemType.equals(ReviewItemType.vocabulary.storageValue),
+              ))
+            .getSingleOrNull();
+        if (review == null) {
+          await db.into(db.reviewItems).insert(
+                ReviewItemsCompanion.insert(
+                  id: const Uuid().v4(),
+                  itemType: ReviewItemType.vocabulary.storageValue,
+                  itemId: catalog.id,
+                  nextReviewAt: now,
+                  createdAt: now,
+                  updatedAt: now,
+                ),
+              );
+        }
+      }
+      await LearningActivityStore(db).add(exercises: 1);
+      if (!mounted) return;
+      setState(() => _saving = false);
+      if (addAnother) {
+        _clearAddForm();
+      } else {
+        context.pop();
+      }
+      return;
+    }
 
     final existing = await (db.select(db.words)
           ..where((t) => t.word.lower().equals(word.toLowerCase())))
@@ -424,16 +556,27 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
     if (!mounted) return;
     setState(() => _saving = false);
     if (addAnother) {
-      _formKey.currentState!.reset();
-      _wordCtrl.clear();
-      _meaningCtrl.clear();
-      _exampleCtrl.clear();
-      _exampleArCtrl.clear();
-      _notesCtrl.clear();
-      setState(() => _categoryIds = {});
+      _clearAddForm();
     } else {
       context.pop();
     }
+  }
+
+  void _clearAddForm() {
+    _formKey.currentState!.reset();
+    _wordCtrl.clear();
+    _meaningCtrl.clear();
+    _exampleCtrl.clear();
+    _exampleArCtrl.clear();
+    _notesCtrl.clear();
+    setState(() {
+      _categoryIds = {};
+      _catalogMatches = [];
+      _catalogMatch = null;
+      _catalogForms = [];
+      _catalogGeneral = false;
+      _catalogSpoken = false;
+    });
   }
 
   @override
@@ -450,16 +593,60 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
               controller: _wordCtrl,
               textDirection: TextDirection.ltr,
               decoration: InputDecoration(labelText: l10n.word),
+              onChanged: _onWordChanged,
               validator: (v) =>
                   (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
             ),
+            if (_catalogMatches.isNotEmpty) ...[
+              const SizedBox(height: AppSpacing.sm),
+              Text(l10n.catalogRecognized),
+              const SizedBox(height: AppSpacing.sm),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (final match in _catalogMatches)
+                    ChoiceChip(
+                      label: Text('${match.cefrLevel} · ${match.partOfSpeech}'),
+                      selected: _catalogMatch?.id == match.id,
+                      onSelected: (_) => _applyCatalogMatch(match),
+                    ),
+                  if (_catalogGeneral) Chip(label: Text(l10n.generalTag)),
+                  if (_catalogSpoken) Chip(label: Text(l10n.spokenTag)),
+                  if (_catalogMatch?.academic == true)
+                    Chip(label: Text(l10n.academicWord)),
+                ],
+              ),
+              if (_catalogMatch != null) ...[
+                if (_catalogMatch!.definitionEn.trim().isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    l10n.definition,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: 4),
+                  LtrText(_catalogMatch!.definitionEn),
+                ],
+                if (_catalogForms.isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    l10n.wordForms,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: 4),
+                  LtrText(_catalogForms.join(', ')),
+                ],
+              ],
+            ],
             const SizedBox(height: AppSpacing.md),
             TextFormField(
               controller: _meaningCtrl,
               textDirection: TextDirection.rtl,
               decoration: InputDecoration(labelText: l10n.arabicMeaning),
-              validator: (v) =>
-                  (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
+              validator: (v) {
+                if (_catalogMatch != null) return null;
+                return (v == null || v.trim().isEmpty) ? l10n.requiredField : null;
+              },
             ),
             const SizedBox(height: AppSpacing.lg),
             Text(l10n.cefrLevel, style: Theme.of(context).textTheme.titleSmall),
@@ -468,28 +655,39 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
               spacing: 8,
               runSpacing: 8,
               children: CefrLevel.values.map((level) {
+                final locked = _catalogMatch != null;
                 return ChoiceChip(
                   label: Text(level.code),
-                  selected: _cefr == level,
-                  onSelected: (_) => setState(() => _cefr = level),
+                  selected: locked
+                      ? _catalogMatch!.cefrLevel == level.code
+                      : _cefr == level,
+                  onSelected: locked
+                      ? null
+                      : (_) => setState(() => _cefr = level),
                 );
               }).toList(),
             ),
             const SizedBox(height: AppSpacing.lg),
-            DropdownButtonFormField<PartOfSpeech>(
-              // ignore: deprecated_member_use
-              value: _pos,
-              decoration: InputDecoration(labelText: l10n.partOfSpeech),
-              items: PartOfSpeech.values
-                  .map(
-                    (p) => DropdownMenuItem(
-                      value: p,
-                      child: Text(partOfSpeechLabel(l10n, p.storageValue)),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (v) => setState(() => _pos = v ?? _pos),
-            ),
+            if (_catalogMatch != null)
+              InputDecorator(
+                decoration: InputDecoration(labelText: l10n.partOfSpeech),
+                child: Text(_catalogMatch!.partOfSpeech),
+              )
+            else
+              DropdownButtonFormField<PartOfSpeech>(
+                // ignore: deprecated_member_use
+                value: _pos,
+                decoration: InputDecoration(labelText: l10n.partOfSpeech),
+                items: PartOfSpeech.values
+                    .map(
+                      (p) => DropdownMenuItem(
+                        value: p,
+                        child: Text(partOfSpeechLabel(l10n, p.storageValue)),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (v) => setState(() => _pos = v ?? _pos),
+              ),
             const SizedBox(height: AppSpacing.md),
             TextFormField(
               controller: _exampleCtrl,

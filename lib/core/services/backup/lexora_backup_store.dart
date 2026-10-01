@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 
 import '../topics/topic_catalog_importer.dart';
+import '../vocabulary/vocabulary_catalog_importer.dart';
 import '../../database/app_database.dart';
 import 'lexora_backup.dart';
 
@@ -42,11 +43,17 @@ class LexoraBackupStore {
         'reviewItems': await dump(_db.select(_db.reviewItems).get()),
         'reviewHistory': await dump(_db.select(_db.reviewHistory).get()),
         'learningSessions': await dump(_db.select(_db.learningSessions).get()),
-        'vocabularyEntries': await dump(_db.select(_db.vocabularyEntries).get()),
-        'vocabularyForms': await dump(_db.select(_db.vocabularyForms).get()),
         'userVocabulary': await dump(_db.select(_db.userVocabulary).get()),
         'blogEntries': await dump(_db.select(_db.blogEntries).get()),
         'blogVocabulary': await dump(_db.select(_db.blogVocabulary).get()),
+        'grammarTopics': await dump(_db.select(_db.grammarTopics).get()),
+        'grammarLessons': await dump(_db.select(_db.grammarLessons).get()),
+        'grammarExercises': await dump(_db.select(_db.grammarExercises).get()),
+        'userGrammarProgress': await dump(_db.select(_db.userGrammarProgress).get()),
+        'topicQuestions': await dump(_db.select(_db.topicQuestions).get()),
+        'userTopicAnswers': await dump(_db.select(_db.userTopicAnswers).get()),
+        'userAchievements': await dump(_db.select(_db.userAchievements).get()),
+        'learningDays': await dump(_db.select(_db.learningDays).get()),
       },
     );
   }
@@ -61,13 +68,24 @@ class LexoraBackupStore {
 
   Future<void> _restore(Map<String, dynamic> payload) async {
     await _db.transaction(() async {
+      await _db.delete(_db.userTopicAnswers).go();
+      await _db.delete(_db.topicQuestions).go();
+      await _db.delete(_db.userGrammarProgress).go();
+      await _db.delete(_db.grammarExercises).go();
+      await _db.delete(_db.grammarLessons).go();
+      await _db.delete(_db.grammarTopics).go();
+      await _db.delete(_db.userAchievements).go();
+      await _db.delete(_db.learningDays).go();
       await _db.delete(_db.vocabularyTopics).go();
-      await _db.delete(_db.vocabularyEntryRanks).go();
       await _db.delete(_db.blogVocabulary).go();
       await _db.delete(_db.userVocabulary).go();
-      await _db.delete(_db.vocabularyForms).go();
+      final restoreCatalog = payload['vocabularyEntries'] is List;
+      if (restoreCatalog) {
+        await _db.delete(_db.vocabularyEntryRanks).go();
+        await _db.delete(_db.vocabularyForms).go();
+        await _db.delete(_db.vocabularyEntries).go();
+      }
       await _db.delete(_db.blogEntries).go();
-      await _db.delete(_db.vocabularyEntries).go();
       await _db.delete(_db.reviewHistory).go();
       await _db.delete(_db.reviewItems).go();
       await _db.delete(_db.sentenceWords).go();
@@ -146,18 +164,20 @@ class LexoraBackupStore {
         LearningSessionRow.fromJson,
         (row) => row.toCompanion(false),
       );
-      await _insert(
-        _db.vocabularyEntries,
-        payload['vocabularyEntries'],
-        VocabularyEntryRow.fromJson,
-        (row) => row.toCompanion(false),
-      );
-      await _insert(
-        _db.vocabularyForms,
-        payload['vocabularyForms'],
-        VocabularyFormRow.fromJson,
-        (row) => row.toCompanion(false),
-      );
+      if (restoreCatalog) {
+        await _insert(
+          _db.vocabularyEntries,
+          payload['vocabularyEntries'],
+          VocabularyEntryRow.fromJson,
+          (row) => row.toCompanion(false),
+        );
+        await _insert(
+          _db.vocabularyForms,
+          payload['vocabularyForms'],
+          VocabularyFormRow.fromJson,
+          (row) => row.toCompanion(false),
+        );
+      }
       await _insert(
         _db.userVocabulary,
         payload['userVocabulary'],
@@ -176,9 +196,62 @@ class LexoraBackupStore {
         BlogVocabularyRow.fromJson,
         (row) => row.toCompanion(false),
       );
+      await _insert(
+        _db.grammarTopics,
+        payload['grammarTopics'],
+        GrammarTopicRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
+      await _insert(
+        _db.grammarLessons,
+        payload['grammarLessons'],
+        GrammarLessonRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
+      await _insert(
+        _db.grammarExercises,
+        payload['grammarExercises'],
+        GrammarExerciseRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
+      await _insert(
+        _db.userGrammarProgress,
+        payload['userGrammarProgress'],
+        UserGrammarProgressRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
+      await _insert(
+        _db.topicQuestions,
+        payload['topicQuestions'],
+        TopicQuestionRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
+      await _insert(
+        _db.userTopicAnswers,
+        payload['userTopicAnswers'],
+        UserTopicAnswerRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
+      await _insert(
+        _db.userAchievements,
+        payload['userAchievements'],
+        UserAchievementRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
+      await _insert(
+        _db.learningDays,
+        payload['learningDays'],
+        LearningDayRow.fromJson,
+        (row) => row.toCompanion(false),
+      );
       await (_db.delete(_db.appStatistics)
             ..where((row) => row.key.equals(topicsCatalogVersionKey)))
           .go();
+      if (restoreCatalog) {
+        await (_db.delete(_db.appStatistics)
+              ..where((row) => row.key.equals(vocabularyCatalogVersionKey)))
+            .go();
+      }
     });
   }
 

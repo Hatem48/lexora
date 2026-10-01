@@ -7,6 +7,7 @@ import '../../features/auth/presentation/edit_account_screen.dart';
 import '../../features/auth/presentation/register_screen.dart';
 import '../../features/auth/presentation/sign_in_screen.dart';
 import '../../features/categories/presentation/categories_screen.dart';
+import '../../features/grammar/presentation/grammar_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/patterns/presentation/patterns_screen.dart';
@@ -207,6 +208,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             parentNavigatorKey: _rootNavigatorKey,
             path: ':id',
             builder: (context, state) => TopicDetailScreen(
+              topicId: state.pathParameters['id']!,
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/grammar',
+        builder: (context, state) => const GrammarListScreen(),
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (context, state) => GrammarLessonScreen(
               topicId: state.pathParameters['id']!,
             ),
           ),

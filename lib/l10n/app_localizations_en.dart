@@ -982,4 +982,140 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get linkOpenFailed => 'Could not open the page';
+
+  @override
+  String get needsCompletion => 'Needs completion';
+
+  @override
+  String needsCompletionCount(int count) {
+    return 'Needs completion ($count)';
+  }
+
+  @override
+  String get catalogRecognized => 'Found in the vocabulary catalog';
+
+  @override
+  String get generalTag => 'General';
+
+  @override
+  String get spokenTag => 'Spoken';
+
+  @override
+  String get formsUnavailable => 'Word forms are not available yet.';
+
+  @override
+  String get definitionUnavailable => 'No licensed definition yet.';
+
+  @override
+  String get exampleUnavailable => 'No example yet.';
+
+  @override
+  String get grammarUsageUnavailable => 'Usage notes are not available yet.';
+
+  @override
+  String get saveCompletion => 'Save completion';
+
+  @override
+  String get grammarTitle => 'Grammar';
+
+  @override
+  String get grammarSampleNote =>
+      'Development sample. Not an official CEFR grammar list.';
+
+  @override
+  String get grammarUse => 'Use';
+
+  @override
+  String get grammarStructure => 'Structure';
+
+  @override
+  String get grammarPositive => 'Positive';
+
+  @override
+  String get grammarNegative => 'Negative';
+
+  @override
+  String get grammarQuestion => 'Question';
+
+  @override
+  String get grammarMistake => 'Common mistake';
+
+  @override
+  String get grammarPractice => 'Practice';
+
+  @override
+  String get grammarCheck => 'Check';
+
+  @override
+  String get grammarCorrect => 'Correct';
+
+  @override
+  String get grammarTryAgain => 'Not quite. Read the short note and try again.';
+
+  @override
+  String get advancedPracticeLocked =>
+      'Extra practice unlocks after 10 mastered words. Word levels stay the same.';
+
+  @override
+  String get advancedPracticeUnlocked => 'Extra practice is available.';
+
+  @override
+  String get topicQuestions => 'Questions';
+
+  @override
+  String get yourAnswer => 'Your answer';
+
+  @override
+  String get suggestedAnswer => 'Suggested answer';
+
+  @override
+  String get submitAnswer => 'Submit answer';
+
+  @override
+  String get wordsFound => 'Words found';
+
+  @override
+  String masteredProgress(int mastered, int total) {
+    return 'Mastered: $mastered / $total';
+  }
+
+  @override
+  String learningProgressCount(int count) {
+    return 'Learning: $count';
+  }
+
+  @override
+  String discoveredProgressCount(int count) {
+    return 'Discovered: $count';
+  }
+
+  @override
+  String get levelCollectionNote =>
+      'Mastered means completed reviews, not an official CEFR level.';
+
+  @override
+  String get achievements => 'Achievements';
+
+  @override
+  String get congratulations => 'Congratulations';
+
+  @override
+  String get achievementUnlocked => 'Achievement unlocked';
+
+  @override
+  String get learningTimeTitle => 'Learning time';
+
+  @override
+  String learningTimeValue(int hours, int minutes) {
+    return '$hours h $minutes min';
+  }
+
+  @override
+  String get developmentSample => 'Development sample';
+
+  @override
+  String get definition => 'Definition';
+
+  @override
+  String get wordForms => 'Word forms';
 }

@@ -1945,6 +1945,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not open the page'**
   String get linkOpenFailed;
+
+  /// No description provided for @needsCompletion.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs completion'**
+  String get needsCompletion;
+
+  /// No description provided for @needsCompletionCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs completion ({count})'**
+  String needsCompletionCount(int count);
+
+  /// No description provided for @catalogRecognized.
+  ///
+  /// In en, this message translates to:
+  /// **'Found in the vocabulary catalog'**
+  String get catalogRecognized;
+
+  /// No description provided for @generalTag.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get generalTag;
+
+  /// No description provided for @spokenTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Spoken'**
+  String get spokenTag;
+
+  /// No description provided for @formsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Word forms are not available yet.'**
+  String get formsUnavailable;
+
+  /// No description provided for @definitionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No licensed definition yet.'**
+  String get definitionUnavailable;
+
+  /// No description provided for @exampleUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No example yet.'**
+  String get exampleUnavailable;
+
+  /// No description provided for @grammarUsageUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage notes are not available yet.'**
+  String get grammarUsageUnavailable;
+
+  /// No description provided for @saveCompletion.
+  ///
+  /// In en, this message translates to:
+  /// **'Save completion'**
+  String get saveCompletion;
+
+  /// No description provided for @grammarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Grammar'**
+  String get grammarTitle;
+
+  /// No description provided for @grammarSampleNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Development sample. Not an official CEFR grammar list.'**
+  String get grammarSampleNote;
+
+  /// No description provided for @grammarUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Use'**
+  String get grammarUse;
+
+  /// No description provided for @grammarStructure.
+  ///
+  /// In en, this message translates to:
+  /// **'Structure'**
+  String get grammarStructure;
+
+  /// No description provided for @grammarPositive.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive'**
+  String get grammarPositive;
+
+  /// No description provided for @grammarNegative.
+  ///
+  /// In en, this message translates to:
+  /// **'Negative'**
+  String get grammarNegative;
+
+  /// No description provided for @grammarQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get grammarQuestion;
+
+  /// No description provided for @grammarMistake.
+  ///
+  /// In en, this message translates to:
+  /// **'Common mistake'**
+  String get grammarMistake;
+
+  /// No description provided for @grammarPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice'**
+  String get grammarPractice;
+
+  /// No description provided for @grammarCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get grammarCheck;
+
+  /// No description provided for @grammarCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get grammarCorrect;
+
+  /// No description provided for @grammarTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Not quite. Read the short note and try again.'**
+  String get grammarTryAgain;
+
+  /// No description provided for @advancedPracticeLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra practice unlocks after 10 mastered words. Word levels stay the same.'**
+  String get advancedPracticeLocked;
+
+  /// No description provided for @advancedPracticeUnlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra practice is available.'**
+  String get advancedPracticeUnlocked;
+
+  /// No description provided for @topicQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions'**
+  String get topicQuestions;
+
+  /// No description provided for @yourAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answer'**
+  String get yourAnswer;
+
+  /// No description provided for @suggestedAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested answer'**
+  String get suggestedAnswer;
+
+  /// No description provided for @submitAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit answer'**
+  String get submitAnswer;
+
+  /// No description provided for @wordsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Words found'**
+  String get wordsFound;
+
+  /// No description provided for @masteredProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered: {mastered} / {total}'**
+  String masteredProgress(int mastered, int total);
+
+  /// No description provided for @learningProgressCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning: {count}'**
+  String learningProgressCount(int count);
+
+  /// No description provided for @discoveredProgressCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discovered: {count}'**
+  String discoveredProgressCount(int count);
+
+  /// No description provided for @levelCollectionNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered means completed reviews, not an official CEFR level.'**
+  String get levelCollectionNote;
+
+  /// No description provided for @achievements.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get achievements;
+
+  /// No description provided for @congratulations.
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations'**
+  String get congratulations;
+
+  /// No description provided for @achievementUnlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievement unlocked'**
+  String get achievementUnlocked;
+
+  /// No description provided for @learningTimeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning time'**
+  String get learningTimeTitle;
+
+  /// No description provided for @learningTimeValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} h {minutes} min'**
+  String learningTimeValue(int hours, int minutes);
+
+  /// No description provided for @developmentSample.
+  ///
+  /// In en, this message translates to:
+  /// **'Development sample'**
+  String get developmentSample;
+
+  /// No description provided for @definition.
+  ///
+  /// In en, this message translates to:
+  /// **'Definition'**
+  String get definition;
+
+  /// No description provided for @wordForms.
+  ///
+  /// In en, this message translates to:
+  /// **'Word forms'**
+  String get wordForms;
 }
 
 class _AppLocalizationsDelegate

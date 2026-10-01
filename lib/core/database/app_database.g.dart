@@ -7744,6 +7744,51 @@ class $UserVocabularyTable extends UserVocabulary
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _userArabicMeaningMeta = const VerificationMeta(
+    'userArabicMeaning',
+  );
+  @override
+  late final GeneratedColumn<String> userArabicMeaning =
+      GeneratedColumn<String>(
+        'user_arabic_meaning',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _userExampleMeta = const VerificationMeta(
+    'userExample',
+  );
+  @override
+  late final GeneratedColumn<String> userExample = GeneratedColumn<String>(
+    'user_example',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _userExampleTranslationMeta =
+      const VerificationMeta('userExampleTranslation');
+  @override
+  late final GeneratedColumn<String> userExampleTranslation =
+      GeneratedColumn<String>(
+        'user_example_translation',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
+  static const VerificationMeta _userNotesMeta = const VerificationMeta(
+    'userNotes',
+  );
+  @override
+  late final GeneratedColumn<String> userNotes = GeneratedColumn<String>(
+    'user_notes',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     entryId,
@@ -7753,6 +7798,10 @@ class $UserVocabularyTable extends UserVocabulary
     sourceId,
     usageCount,
     lastUsedAt,
+    userArabicMeaning,
+    userExample,
+    userExampleTranslation,
+    userNotes,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -7825,6 +7874,39 @@ class $UserVocabularyTable extends UserVocabulary
     } else if (isInserting) {
       context.missing(_lastUsedAtMeta);
     }
+    if (data.containsKey('user_arabic_meaning')) {
+      context.handle(
+        _userArabicMeaningMeta,
+        userArabicMeaning.isAcceptableOrUnknown(
+          data['user_arabic_meaning']!,
+          _userArabicMeaningMeta,
+        ),
+      );
+    }
+    if (data.containsKey('user_example')) {
+      context.handle(
+        _userExampleMeta,
+        userExample.isAcceptableOrUnknown(
+          data['user_example']!,
+          _userExampleMeta,
+        ),
+      );
+    }
+    if (data.containsKey('user_example_translation')) {
+      context.handle(
+        _userExampleTranslationMeta,
+        userExampleTranslation.isAcceptableOrUnknown(
+          data['user_example_translation']!,
+          _userExampleTranslationMeta,
+        ),
+      );
+    }
+    if (data.containsKey('user_notes')) {
+      context.handle(
+        _userNotesMeta,
+        userNotes.isAcceptableOrUnknown(data['user_notes']!, _userNotesMeta),
+      );
+    }
     return context;
   }
 
@@ -7862,6 +7944,22 @@ class $UserVocabularyTable extends UserVocabulary
         DriftSqlType.dateTime,
         data['${effectivePrefix}last_used_at'],
       )!,
+      userArabicMeaning: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_arabic_meaning'],
+      ),
+      userExample: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_example'],
+      ),
+      userExampleTranslation: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_example_translation'],
+      ),
+      userNotes: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}user_notes'],
+      ),
     );
   }
 
@@ -7880,6 +7978,10 @@ class UserVocabularyRow extends DataClass
   final String? sourceId;
   final int usageCount;
   final DateTime lastUsedAt;
+  final String? userArabicMeaning;
+  final String? userExample;
+  final String? userExampleTranslation;
+  final String? userNotes;
   const UserVocabularyRow({
     required this.entryId,
     required this.status,
@@ -7888,6 +7990,10 @@ class UserVocabularyRow extends DataClass
     this.sourceId,
     required this.usageCount,
     required this.lastUsedAt,
+    this.userArabicMeaning,
+    this.userExample,
+    this.userExampleTranslation,
+    this.userNotes,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -7901,6 +8007,20 @@ class UserVocabularyRow extends DataClass
     }
     map['usage_count'] = Variable<int>(usageCount);
     map['last_used_at'] = Variable<DateTime>(lastUsedAt);
+    if (!nullToAbsent || userArabicMeaning != null) {
+      map['user_arabic_meaning'] = Variable<String>(userArabicMeaning);
+    }
+    if (!nullToAbsent || userExample != null) {
+      map['user_example'] = Variable<String>(userExample);
+    }
+    if (!nullToAbsent || userExampleTranslation != null) {
+      map['user_example_translation'] = Variable<String>(
+        userExampleTranslation,
+      );
+    }
+    if (!nullToAbsent || userNotes != null) {
+      map['user_notes'] = Variable<String>(userNotes);
+    }
     return map;
   }
 
@@ -7915,6 +8035,18 @@ class UserVocabularyRow extends DataClass
           : Value(sourceId),
       usageCount: Value(usageCount),
       lastUsedAt: Value(lastUsedAt),
+      userArabicMeaning: userArabicMeaning == null && nullToAbsent
+          ? const Value.absent()
+          : Value(userArabicMeaning),
+      userExample: userExample == null && nullToAbsent
+          ? const Value.absent()
+          : Value(userExample),
+      userExampleTranslation: userExampleTranslation == null && nullToAbsent
+          ? const Value.absent()
+          : Value(userExampleTranslation),
+      userNotes: userNotes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(userNotes),
     );
   }
 
@@ -7933,6 +8065,14 @@ class UserVocabularyRow extends DataClass
       sourceId: serializer.fromJson<String?>(json['sourceId']),
       usageCount: serializer.fromJson<int>(json['usageCount']),
       lastUsedAt: serializer.fromJson<DateTime>(json['lastUsedAt']),
+      userArabicMeaning: serializer.fromJson<String?>(
+        json['userArabicMeaning'],
+      ),
+      userExample: serializer.fromJson<String?>(json['userExample']),
+      userExampleTranslation: serializer.fromJson<String?>(
+        json['userExampleTranslation'],
+      ),
+      userNotes: serializer.fromJson<String?>(json['userNotes']),
     );
   }
   @override
@@ -7946,6 +8086,12 @@ class UserVocabularyRow extends DataClass
       'sourceId': serializer.toJson<String?>(sourceId),
       'usageCount': serializer.toJson<int>(usageCount),
       'lastUsedAt': serializer.toJson<DateTime>(lastUsedAt),
+      'userArabicMeaning': serializer.toJson<String?>(userArabicMeaning),
+      'userExample': serializer.toJson<String?>(userExample),
+      'userExampleTranslation': serializer.toJson<String?>(
+        userExampleTranslation,
+      ),
+      'userNotes': serializer.toJson<String?>(userNotes),
     };
   }
 
@@ -7957,6 +8103,10 @@ class UserVocabularyRow extends DataClass
     Value<String?> sourceId = const Value.absent(),
     int? usageCount,
     DateTime? lastUsedAt,
+    Value<String?> userArabicMeaning = const Value.absent(),
+    Value<String?> userExample = const Value.absent(),
+    Value<String?> userExampleTranslation = const Value.absent(),
+    Value<String?> userNotes = const Value.absent(),
   }) => UserVocabularyRow(
     entryId: entryId ?? this.entryId,
     status: status ?? this.status,
@@ -7965,6 +8115,14 @@ class UserVocabularyRow extends DataClass
     sourceId: sourceId.present ? sourceId.value : this.sourceId,
     usageCount: usageCount ?? this.usageCount,
     lastUsedAt: lastUsedAt ?? this.lastUsedAt,
+    userArabicMeaning: userArabicMeaning.present
+        ? userArabicMeaning.value
+        : this.userArabicMeaning,
+    userExample: userExample.present ? userExample.value : this.userExample,
+    userExampleTranslation: userExampleTranslation.present
+        ? userExampleTranslation.value
+        : this.userExampleTranslation,
+    userNotes: userNotes.present ? userNotes.value : this.userNotes,
   );
   UserVocabularyRow copyWithCompanion(UserVocabularyCompanion data) {
     return UserVocabularyRow(
@@ -7983,6 +8141,16 @@ class UserVocabularyRow extends DataClass
       lastUsedAt: data.lastUsedAt.present
           ? data.lastUsedAt.value
           : this.lastUsedAt,
+      userArabicMeaning: data.userArabicMeaning.present
+          ? data.userArabicMeaning.value
+          : this.userArabicMeaning,
+      userExample: data.userExample.present
+          ? data.userExample.value
+          : this.userExample,
+      userExampleTranslation: data.userExampleTranslation.present
+          ? data.userExampleTranslation.value
+          : this.userExampleTranslation,
+      userNotes: data.userNotes.present ? data.userNotes.value : this.userNotes,
     );
   }
 
@@ -7995,7 +8163,11 @@ class UserVocabularyRow extends DataClass
           ..write('discoveredIn: $discoveredIn, ')
           ..write('sourceId: $sourceId, ')
           ..write('usageCount: $usageCount, ')
-          ..write('lastUsedAt: $lastUsedAt')
+          ..write('lastUsedAt: $lastUsedAt, ')
+          ..write('userArabicMeaning: $userArabicMeaning, ')
+          ..write('userExample: $userExample, ')
+          ..write('userExampleTranslation: $userExampleTranslation, ')
+          ..write('userNotes: $userNotes')
           ..write(')'))
         .toString();
   }
@@ -8009,6 +8181,10 @@ class UserVocabularyRow extends DataClass
     sourceId,
     usageCount,
     lastUsedAt,
+    userArabicMeaning,
+    userExample,
+    userExampleTranslation,
+    userNotes,
   );
   @override
   bool operator ==(Object other) =>
@@ -8020,7 +8196,11 @@ class UserVocabularyRow extends DataClass
           other.discoveredIn == this.discoveredIn &&
           other.sourceId == this.sourceId &&
           other.usageCount == this.usageCount &&
-          other.lastUsedAt == this.lastUsedAt);
+          other.lastUsedAt == this.lastUsedAt &&
+          other.userArabicMeaning == this.userArabicMeaning &&
+          other.userExample == this.userExample &&
+          other.userExampleTranslation == this.userExampleTranslation &&
+          other.userNotes == this.userNotes);
 }
 
 class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
@@ -8031,6 +8211,10 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
   final Value<String?> sourceId;
   final Value<int> usageCount;
   final Value<DateTime> lastUsedAt;
+  final Value<String?> userArabicMeaning;
+  final Value<String?> userExample;
+  final Value<String?> userExampleTranslation;
+  final Value<String?> userNotes;
   final Value<int> rowid;
   const UserVocabularyCompanion({
     this.entryId = const Value.absent(),
@@ -8040,6 +8224,10 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
     this.sourceId = const Value.absent(),
     this.usageCount = const Value.absent(),
     this.lastUsedAt = const Value.absent(),
+    this.userArabicMeaning = const Value.absent(),
+    this.userExample = const Value.absent(),
+    this.userExampleTranslation = const Value.absent(),
+    this.userNotes = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   UserVocabularyCompanion.insert({
@@ -8050,6 +8238,10 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
     this.sourceId = const Value.absent(),
     this.usageCount = const Value.absent(),
     required DateTime lastUsedAt,
+    this.userArabicMeaning = const Value.absent(),
+    this.userExample = const Value.absent(),
+    this.userExampleTranslation = const Value.absent(),
+    this.userNotes = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : entryId = Value(entryId),
        firstDiscoveredAt = Value(firstDiscoveredAt),
@@ -8063,6 +8255,10 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
     Expression<String>? sourceId,
     Expression<int>? usageCount,
     Expression<DateTime>? lastUsedAt,
+    Expression<String>? userArabicMeaning,
+    Expression<String>? userExample,
+    Expression<String>? userExampleTranslation,
+    Expression<String>? userNotes,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -8073,6 +8269,11 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
       if (sourceId != null) 'source_id': sourceId,
       if (usageCount != null) 'usage_count': usageCount,
       if (lastUsedAt != null) 'last_used_at': lastUsedAt,
+      if (userArabicMeaning != null) 'user_arabic_meaning': userArabicMeaning,
+      if (userExample != null) 'user_example': userExample,
+      if (userExampleTranslation != null)
+        'user_example_translation': userExampleTranslation,
+      if (userNotes != null) 'user_notes': userNotes,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -8085,6 +8286,10 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
     Value<String?>? sourceId,
     Value<int>? usageCount,
     Value<DateTime>? lastUsedAt,
+    Value<String?>? userArabicMeaning,
+    Value<String?>? userExample,
+    Value<String?>? userExampleTranslation,
+    Value<String?>? userNotes,
     Value<int>? rowid,
   }) {
     return UserVocabularyCompanion(
@@ -8095,6 +8300,11 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
       sourceId: sourceId ?? this.sourceId,
       usageCount: usageCount ?? this.usageCount,
       lastUsedAt: lastUsedAt ?? this.lastUsedAt,
+      userArabicMeaning: userArabicMeaning ?? this.userArabicMeaning,
+      userExample: userExample ?? this.userExample,
+      userExampleTranslation:
+          userExampleTranslation ?? this.userExampleTranslation,
+      userNotes: userNotes ?? this.userNotes,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -8123,6 +8333,20 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
     if (lastUsedAt.present) {
       map['last_used_at'] = Variable<DateTime>(lastUsedAt.value);
     }
+    if (userArabicMeaning.present) {
+      map['user_arabic_meaning'] = Variable<String>(userArabicMeaning.value);
+    }
+    if (userExample.present) {
+      map['user_example'] = Variable<String>(userExample.value);
+    }
+    if (userExampleTranslation.present) {
+      map['user_example_translation'] = Variable<String>(
+        userExampleTranslation.value,
+      );
+    }
+    if (userNotes.present) {
+      map['user_notes'] = Variable<String>(userNotes.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -8139,6 +8363,10 @@ class UserVocabularyCompanion extends UpdateCompanion<UserVocabularyRow> {
           ..write('sourceId: $sourceId, ')
           ..write('usageCount: $usageCount, ')
           ..write('lastUsedAt: $lastUsedAt, ')
+          ..write('userArabicMeaning: $userArabicMeaning, ')
+          ..write('userExample: $userExample, ')
+          ..write('userExampleTranslation: $userExampleTranslation, ')
+          ..write('userNotes: $userNotes, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -12126,6 +12354,3635 @@ class LearningPathTopicsCompanion
   }
 }
 
+class $GrammarTopicsTable extends GrammarTopics
+    with TableInfo<$GrammarTopicsTable, GrammarTopicRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GrammarTopicsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _categoryMeta = const VerificationMeta(
+    'category',
+  );
+  @override
+  late final GeneratedColumn<String> category = GeneratedColumn<String>(
+    'category',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleEnMeta = const VerificationMeta(
+    'titleEn',
+  );
+  @override
+  late final GeneratedColumn<String> titleEn = GeneratedColumn<String>(
+    'title_en',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleArMeta = const VerificationMeta(
+    'titleAr',
+  );
+  @override
+  late final GeneratedColumn<String> titleAr = GeneratedColumn<String>(
+    'title_ar',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _cefrLevelMeta = const VerificationMeta(
+    'cefrLevel',
+  );
+  @override
+  late final GeneratedColumn<String> cefrLevel = GeneratedColumn<String>(
+    'cefr_level',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _classificationNoteMeta =
+      const VerificationMeta('classificationNote');
+  @override
+  late final GeneratedColumn<String> classificationNote =
+      GeneratedColumn<String>(
+        'classification_note',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _isDevelopmentSampleMeta =
+      const VerificationMeta('isDevelopmentSample');
+  @override
+  late final GeneratedColumn<bool> isDevelopmentSample = GeneratedColumn<bool>(
+    'is_development_sample',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_development_sample" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    category,
+    titleEn,
+    titleAr,
+    cefrLevel,
+    classificationNote,
+    sortOrder,
+    isDevelopmentSample,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'grammar_topics';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<GrammarTopicRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('category')) {
+      context.handle(
+        _categoryMeta,
+        category.isAcceptableOrUnknown(data['category']!, _categoryMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_categoryMeta);
+    }
+    if (data.containsKey('title_en')) {
+      context.handle(
+        _titleEnMeta,
+        titleEn.isAcceptableOrUnknown(data['title_en']!, _titleEnMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleEnMeta);
+    }
+    if (data.containsKey('title_ar')) {
+      context.handle(
+        _titleArMeta,
+        titleAr.isAcceptableOrUnknown(data['title_ar']!, _titleArMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleArMeta);
+    }
+    if (data.containsKey('cefr_level')) {
+      context.handle(
+        _cefrLevelMeta,
+        cefrLevel.isAcceptableOrUnknown(data['cefr_level']!, _cefrLevelMeta),
+      );
+    }
+    if (data.containsKey('classification_note')) {
+      context.handle(
+        _classificationNoteMeta,
+        classificationNote.isAcceptableOrUnknown(
+          data['classification_note']!,
+          _classificationNoteMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_classificationNoteMeta);
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('is_development_sample')) {
+      context.handle(
+        _isDevelopmentSampleMeta,
+        isDevelopmentSample.isAcceptableOrUnknown(
+          data['is_development_sample']!,
+          _isDevelopmentSampleMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GrammarTopicRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GrammarTopicRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      category: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}category'],
+      )!,
+      titleEn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title_en'],
+      )!,
+      titleAr: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title_ar'],
+      )!,
+      cefrLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}cefr_level'],
+      ),
+      classificationNote: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}classification_note'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      isDevelopmentSample: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_development_sample'],
+      )!,
+    );
+  }
+
+  @override
+  $GrammarTopicsTable createAlias(String alias) {
+    return $GrammarTopicsTable(attachedDatabase, alias);
+  }
+}
+
+class GrammarTopicRow extends DataClass implements Insertable<GrammarTopicRow> {
+  final String id;
+  final String category;
+  final String titleEn;
+  final String titleAr;
+  final String? cefrLevel;
+  final String classificationNote;
+  final int sortOrder;
+  final bool isDevelopmentSample;
+  const GrammarTopicRow({
+    required this.id,
+    required this.category,
+    required this.titleEn,
+    required this.titleAr,
+    this.cefrLevel,
+    required this.classificationNote,
+    required this.sortOrder,
+    required this.isDevelopmentSample,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['category'] = Variable<String>(category);
+    map['title_en'] = Variable<String>(titleEn);
+    map['title_ar'] = Variable<String>(titleAr);
+    if (!nullToAbsent || cefrLevel != null) {
+      map['cefr_level'] = Variable<String>(cefrLevel);
+    }
+    map['classification_note'] = Variable<String>(classificationNote);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['is_development_sample'] = Variable<bool>(isDevelopmentSample);
+    return map;
+  }
+
+  GrammarTopicsCompanion toCompanion(bool nullToAbsent) {
+    return GrammarTopicsCompanion(
+      id: Value(id),
+      category: Value(category),
+      titleEn: Value(titleEn),
+      titleAr: Value(titleAr),
+      cefrLevel: cefrLevel == null && nullToAbsent
+          ? const Value.absent()
+          : Value(cefrLevel),
+      classificationNote: Value(classificationNote),
+      sortOrder: Value(sortOrder),
+      isDevelopmentSample: Value(isDevelopmentSample),
+    );
+  }
+
+  factory GrammarTopicRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GrammarTopicRow(
+      id: serializer.fromJson<String>(json['id']),
+      category: serializer.fromJson<String>(json['category']),
+      titleEn: serializer.fromJson<String>(json['titleEn']),
+      titleAr: serializer.fromJson<String>(json['titleAr']),
+      cefrLevel: serializer.fromJson<String?>(json['cefrLevel']),
+      classificationNote: serializer.fromJson<String>(
+        json['classificationNote'],
+      ),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      isDevelopmentSample: serializer.fromJson<bool>(
+        json['isDevelopmentSample'],
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'category': serializer.toJson<String>(category),
+      'titleEn': serializer.toJson<String>(titleEn),
+      'titleAr': serializer.toJson<String>(titleAr),
+      'cefrLevel': serializer.toJson<String?>(cefrLevel),
+      'classificationNote': serializer.toJson<String>(classificationNote),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'isDevelopmentSample': serializer.toJson<bool>(isDevelopmentSample),
+    };
+  }
+
+  GrammarTopicRow copyWith({
+    String? id,
+    String? category,
+    String? titleEn,
+    String? titleAr,
+    Value<String?> cefrLevel = const Value.absent(),
+    String? classificationNote,
+    int? sortOrder,
+    bool? isDevelopmentSample,
+  }) => GrammarTopicRow(
+    id: id ?? this.id,
+    category: category ?? this.category,
+    titleEn: titleEn ?? this.titleEn,
+    titleAr: titleAr ?? this.titleAr,
+    cefrLevel: cefrLevel.present ? cefrLevel.value : this.cefrLevel,
+    classificationNote: classificationNote ?? this.classificationNote,
+    sortOrder: sortOrder ?? this.sortOrder,
+    isDevelopmentSample: isDevelopmentSample ?? this.isDevelopmentSample,
+  );
+  GrammarTopicRow copyWithCompanion(GrammarTopicsCompanion data) {
+    return GrammarTopicRow(
+      id: data.id.present ? data.id.value : this.id,
+      category: data.category.present ? data.category.value : this.category,
+      titleEn: data.titleEn.present ? data.titleEn.value : this.titleEn,
+      titleAr: data.titleAr.present ? data.titleAr.value : this.titleAr,
+      cefrLevel: data.cefrLevel.present ? data.cefrLevel.value : this.cefrLevel,
+      classificationNote: data.classificationNote.present
+          ? data.classificationNote.value
+          : this.classificationNote,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      isDevelopmentSample: data.isDevelopmentSample.present
+          ? data.isDevelopmentSample.value
+          : this.isDevelopmentSample,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GrammarTopicRow(')
+          ..write('id: $id, ')
+          ..write('category: $category, ')
+          ..write('titleEn: $titleEn, ')
+          ..write('titleAr: $titleAr, ')
+          ..write('cefrLevel: $cefrLevel, ')
+          ..write('classificationNote: $classificationNote, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('isDevelopmentSample: $isDevelopmentSample')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    category,
+    titleEn,
+    titleAr,
+    cefrLevel,
+    classificationNote,
+    sortOrder,
+    isDevelopmentSample,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GrammarTopicRow &&
+          other.id == this.id &&
+          other.category == this.category &&
+          other.titleEn == this.titleEn &&
+          other.titleAr == this.titleAr &&
+          other.cefrLevel == this.cefrLevel &&
+          other.classificationNote == this.classificationNote &&
+          other.sortOrder == this.sortOrder &&
+          other.isDevelopmentSample == this.isDevelopmentSample);
+}
+
+class GrammarTopicsCompanion extends UpdateCompanion<GrammarTopicRow> {
+  final Value<String> id;
+  final Value<String> category;
+  final Value<String> titleEn;
+  final Value<String> titleAr;
+  final Value<String?> cefrLevel;
+  final Value<String> classificationNote;
+  final Value<int> sortOrder;
+  final Value<bool> isDevelopmentSample;
+  final Value<int> rowid;
+  const GrammarTopicsCompanion({
+    this.id = const Value.absent(),
+    this.category = const Value.absent(),
+    this.titleEn = const Value.absent(),
+    this.titleAr = const Value.absent(),
+    this.cefrLevel = const Value.absent(),
+    this.classificationNote = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.isDevelopmentSample = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GrammarTopicsCompanion.insert({
+    required String id,
+    required String category,
+    required String titleEn,
+    required String titleAr,
+    this.cefrLevel = const Value.absent(),
+    required String classificationNote,
+    this.sortOrder = const Value.absent(),
+    this.isDevelopmentSample = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       category = Value(category),
+       titleEn = Value(titleEn),
+       titleAr = Value(titleAr),
+       classificationNote = Value(classificationNote);
+  static Insertable<GrammarTopicRow> custom({
+    Expression<String>? id,
+    Expression<String>? category,
+    Expression<String>? titleEn,
+    Expression<String>? titleAr,
+    Expression<String>? cefrLevel,
+    Expression<String>? classificationNote,
+    Expression<int>? sortOrder,
+    Expression<bool>? isDevelopmentSample,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (category != null) 'category': category,
+      if (titleEn != null) 'title_en': titleEn,
+      if (titleAr != null) 'title_ar': titleAr,
+      if (cefrLevel != null) 'cefr_level': cefrLevel,
+      if (classificationNote != null) 'classification_note': classificationNote,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (isDevelopmentSample != null)
+        'is_development_sample': isDevelopmentSample,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GrammarTopicsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? category,
+    Value<String>? titleEn,
+    Value<String>? titleAr,
+    Value<String?>? cefrLevel,
+    Value<String>? classificationNote,
+    Value<int>? sortOrder,
+    Value<bool>? isDevelopmentSample,
+    Value<int>? rowid,
+  }) {
+    return GrammarTopicsCompanion(
+      id: id ?? this.id,
+      category: category ?? this.category,
+      titleEn: titleEn ?? this.titleEn,
+      titleAr: titleAr ?? this.titleAr,
+      cefrLevel: cefrLevel ?? this.cefrLevel,
+      classificationNote: classificationNote ?? this.classificationNote,
+      sortOrder: sortOrder ?? this.sortOrder,
+      isDevelopmentSample: isDevelopmentSample ?? this.isDevelopmentSample,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (category.present) {
+      map['category'] = Variable<String>(category.value);
+    }
+    if (titleEn.present) {
+      map['title_en'] = Variable<String>(titleEn.value);
+    }
+    if (titleAr.present) {
+      map['title_ar'] = Variable<String>(titleAr.value);
+    }
+    if (cefrLevel.present) {
+      map['cefr_level'] = Variable<String>(cefrLevel.value);
+    }
+    if (classificationNote.present) {
+      map['classification_note'] = Variable<String>(classificationNote.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (isDevelopmentSample.present) {
+      map['is_development_sample'] = Variable<bool>(isDevelopmentSample.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GrammarTopicsCompanion(')
+          ..write('id: $id, ')
+          ..write('category: $category, ')
+          ..write('titleEn: $titleEn, ')
+          ..write('titleAr: $titleAr, ')
+          ..write('cefrLevel: $cefrLevel, ')
+          ..write('classificationNote: $classificationNote, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('isDevelopmentSample: $isDevelopmentSample, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $GrammarLessonsTable extends GrammarLessons
+    with TableInfo<$GrammarLessonsTable, GrammarLessonRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GrammarLessonsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _topicIdMeta = const VerificationMeta(
+    'topicId',
+  );
+  @override
+  late final GeneratedColumn<String> topicId = GeneratedColumn<String>(
+    'topic_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES grammar_topics (id)',
+    ),
+  );
+  static const VerificationMeta _useEnMeta = const VerificationMeta('useEn');
+  @override
+  late final GeneratedColumn<String> useEn = GeneratedColumn<String>(
+    'use_en',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _useArMeta = const VerificationMeta('useAr');
+  @override
+  late final GeneratedColumn<String> useAr = GeneratedColumn<String>(
+    'use_ar',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _structureMeta = const VerificationMeta(
+    'structure',
+  );
+  @override
+  late final GeneratedColumn<String> structure = GeneratedColumn<String>(
+    'structure',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _positiveExampleMeta = const VerificationMeta(
+    'positiveExample',
+  );
+  @override
+  late final GeneratedColumn<String> positiveExample = GeneratedColumn<String>(
+    'positive_example',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _negativeExampleMeta = const VerificationMeta(
+    'negativeExample',
+  );
+  @override
+  late final GeneratedColumn<String> negativeExample = GeneratedColumn<String>(
+    'negative_example',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _questionExampleMeta = const VerificationMeta(
+    'questionExample',
+  );
+  @override
+  late final GeneratedColumn<String> questionExample = GeneratedColumn<String>(
+    'question_example',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _mistakeWrongMeta = const VerificationMeta(
+    'mistakeWrong',
+  );
+  @override
+  late final GeneratedColumn<String> mistakeWrong = GeneratedColumn<String>(
+    'mistake_wrong',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _mistakeRightMeta = const VerificationMeta(
+    'mistakeRight',
+  );
+  @override
+  late final GeneratedColumn<String> mistakeRight = GeneratedColumn<String>(
+    'mistake_right',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    topicId,
+    useEn,
+    useAr,
+    structure,
+    positiveExample,
+    negativeExample,
+    questionExample,
+    mistakeWrong,
+    mistakeRight,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'grammar_lessons';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<GrammarLessonRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('topic_id')) {
+      context.handle(
+        _topicIdMeta,
+        topicId.isAcceptableOrUnknown(data['topic_id']!, _topicIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_topicIdMeta);
+    }
+    if (data.containsKey('use_en')) {
+      context.handle(
+        _useEnMeta,
+        useEn.isAcceptableOrUnknown(data['use_en']!, _useEnMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_useEnMeta);
+    }
+    if (data.containsKey('use_ar')) {
+      context.handle(
+        _useArMeta,
+        useAr.isAcceptableOrUnknown(data['use_ar']!, _useArMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_useArMeta);
+    }
+    if (data.containsKey('structure')) {
+      context.handle(
+        _structureMeta,
+        structure.isAcceptableOrUnknown(data['structure']!, _structureMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_structureMeta);
+    }
+    if (data.containsKey('positive_example')) {
+      context.handle(
+        _positiveExampleMeta,
+        positiveExample.isAcceptableOrUnknown(
+          data['positive_example']!,
+          _positiveExampleMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_positiveExampleMeta);
+    }
+    if (data.containsKey('negative_example')) {
+      context.handle(
+        _negativeExampleMeta,
+        negativeExample.isAcceptableOrUnknown(
+          data['negative_example']!,
+          _negativeExampleMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_negativeExampleMeta);
+    }
+    if (data.containsKey('question_example')) {
+      context.handle(
+        _questionExampleMeta,
+        questionExample.isAcceptableOrUnknown(
+          data['question_example']!,
+          _questionExampleMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_questionExampleMeta);
+    }
+    if (data.containsKey('mistake_wrong')) {
+      context.handle(
+        _mistakeWrongMeta,
+        mistakeWrong.isAcceptableOrUnknown(
+          data['mistake_wrong']!,
+          _mistakeWrongMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_mistakeWrongMeta);
+    }
+    if (data.containsKey('mistake_right')) {
+      context.handle(
+        _mistakeRightMeta,
+        mistakeRight.isAcceptableOrUnknown(
+          data['mistake_right']!,
+          _mistakeRightMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_mistakeRightMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GrammarLessonRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GrammarLessonRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      topicId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}topic_id'],
+      )!,
+      useEn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}use_en'],
+      )!,
+      useAr: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}use_ar'],
+      )!,
+      structure: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}structure'],
+      )!,
+      positiveExample: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}positive_example'],
+      )!,
+      negativeExample: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}negative_example'],
+      )!,
+      questionExample: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}question_example'],
+      )!,
+      mistakeWrong: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mistake_wrong'],
+      )!,
+      mistakeRight: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mistake_right'],
+      )!,
+    );
+  }
+
+  @override
+  $GrammarLessonsTable createAlias(String alias) {
+    return $GrammarLessonsTable(attachedDatabase, alias);
+  }
+}
+
+class GrammarLessonRow extends DataClass
+    implements Insertable<GrammarLessonRow> {
+  final String id;
+  final String topicId;
+  final String useEn;
+  final String useAr;
+  final String structure;
+  final String positiveExample;
+  final String negativeExample;
+  final String questionExample;
+  final String mistakeWrong;
+  final String mistakeRight;
+  const GrammarLessonRow({
+    required this.id,
+    required this.topicId,
+    required this.useEn,
+    required this.useAr,
+    required this.structure,
+    required this.positiveExample,
+    required this.negativeExample,
+    required this.questionExample,
+    required this.mistakeWrong,
+    required this.mistakeRight,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['topic_id'] = Variable<String>(topicId);
+    map['use_en'] = Variable<String>(useEn);
+    map['use_ar'] = Variable<String>(useAr);
+    map['structure'] = Variable<String>(structure);
+    map['positive_example'] = Variable<String>(positiveExample);
+    map['negative_example'] = Variable<String>(negativeExample);
+    map['question_example'] = Variable<String>(questionExample);
+    map['mistake_wrong'] = Variable<String>(mistakeWrong);
+    map['mistake_right'] = Variable<String>(mistakeRight);
+    return map;
+  }
+
+  GrammarLessonsCompanion toCompanion(bool nullToAbsent) {
+    return GrammarLessonsCompanion(
+      id: Value(id),
+      topicId: Value(topicId),
+      useEn: Value(useEn),
+      useAr: Value(useAr),
+      structure: Value(structure),
+      positiveExample: Value(positiveExample),
+      negativeExample: Value(negativeExample),
+      questionExample: Value(questionExample),
+      mistakeWrong: Value(mistakeWrong),
+      mistakeRight: Value(mistakeRight),
+    );
+  }
+
+  factory GrammarLessonRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GrammarLessonRow(
+      id: serializer.fromJson<String>(json['id']),
+      topicId: serializer.fromJson<String>(json['topicId']),
+      useEn: serializer.fromJson<String>(json['useEn']),
+      useAr: serializer.fromJson<String>(json['useAr']),
+      structure: serializer.fromJson<String>(json['structure']),
+      positiveExample: serializer.fromJson<String>(json['positiveExample']),
+      negativeExample: serializer.fromJson<String>(json['negativeExample']),
+      questionExample: serializer.fromJson<String>(json['questionExample']),
+      mistakeWrong: serializer.fromJson<String>(json['mistakeWrong']),
+      mistakeRight: serializer.fromJson<String>(json['mistakeRight']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'topicId': serializer.toJson<String>(topicId),
+      'useEn': serializer.toJson<String>(useEn),
+      'useAr': serializer.toJson<String>(useAr),
+      'structure': serializer.toJson<String>(structure),
+      'positiveExample': serializer.toJson<String>(positiveExample),
+      'negativeExample': serializer.toJson<String>(negativeExample),
+      'questionExample': serializer.toJson<String>(questionExample),
+      'mistakeWrong': serializer.toJson<String>(mistakeWrong),
+      'mistakeRight': serializer.toJson<String>(mistakeRight),
+    };
+  }
+
+  GrammarLessonRow copyWith({
+    String? id,
+    String? topicId,
+    String? useEn,
+    String? useAr,
+    String? structure,
+    String? positiveExample,
+    String? negativeExample,
+    String? questionExample,
+    String? mistakeWrong,
+    String? mistakeRight,
+  }) => GrammarLessonRow(
+    id: id ?? this.id,
+    topicId: topicId ?? this.topicId,
+    useEn: useEn ?? this.useEn,
+    useAr: useAr ?? this.useAr,
+    structure: structure ?? this.structure,
+    positiveExample: positiveExample ?? this.positiveExample,
+    negativeExample: negativeExample ?? this.negativeExample,
+    questionExample: questionExample ?? this.questionExample,
+    mistakeWrong: mistakeWrong ?? this.mistakeWrong,
+    mistakeRight: mistakeRight ?? this.mistakeRight,
+  );
+  GrammarLessonRow copyWithCompanion(GrammarLessonsCompanion data) {
+    return GrammarLessonRow(
+      id: data.id.present ? data.id.value : this.id,
+      topicId: data.topicId.present ? data.topicId.value : this.topicId,
+      useEn: data.useEn.present ? data.useEn.value : this.useEn,
+      useAr: data.useAr.present ? data.useAr.value : this.useAr,
+      structure: data.structure.present ? data.structure.value : this.structure,
+      positiveExample: data.positiveExample.present
+          ? data.positiveExample.value
+          : this.positiveExample,
+      negativeExample: data.negativeExample.present
+          ? data.negativeExample.value
+          : this.negativeExample,
+      questionExample: data.questionExample.present
+          ? data.questionExample.value
+          : this.questionExample,
+      mistakeWrong: data.mistakeWrong.present
+          ? data.mistakeWrong.value
+          : this.mistakeWrong,
+      mistakeRight: data.mistakeRight.present
+          ? data.mistakeRight.value
+          : this.mistakeRight,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GrammarLessonRow(')
+          ..write('id: $id, ')
+          ..write('topicId: $topicId, ')
+          ..write('useEn: $useEn, ')
+          ..write('useAr: $useAr, ')
+          ..write('structure: $structure, ')
+          ..write('positiveExample: $positiveExample, ')
+          ..write('negativeExample: $negativeExample, ')
+          ..write('questionExample: $questionExample, ')
+          ..write('mistakeWrong: $mistakeWrong, ')
+          ..write('mistakeRight: $mistakeRight')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    topicId,
+    useEn,
+    useAr,
+    structure,
+    positiveExample,
+    negativeExample,
+    questionExample,
+    mistakeWrong,
+    mistakeRight,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GrammarLessonRow &&
+          other.id == this.id &&
+          other.topicId == this.topicId &&
+          other.useEn == this.useEn &&
+          other.useAr == this.useAr &&
+          other.structure == this.structure &&
+          other.positiveExample == this.positiveExample &&
+          other.negativeExample == this.negativeExample &&
+          other.questionExample == this.questionExample &&
+          other.mistakeWrong == this.mistakeWrong &&
+          other.mistakeRight == this.mistakeRight);
+}
+
+class GrammarLessonsCompanion extends UpdateCompanion<GrammarLessonRow> {
+  final Value<String> id;
+  final Value<String> topicId;
+  final Value<String> useEn;
+  final Value<String> useAr;
+  final Value<String> structure;
+  final Value<String> positiveExample;
+  final Value<String> negativeExample;
+  final Value<String> questionExample;
+  final Value<String> mistakeWrong;
+  final Value<String> mistakeRight;
+  final Value<int> rowid;
+  const GrammarLessonsCompanion({
+    this.id = const Value.absent(),
+    this.topicId = const Value.absent(),
+    this.useEn = const Value.absent(),
+    this.useAr = const Value.absent(),
+    this.structure = const Value.absent(),
+    this.positiveExample = const Value.absent(),
+    this.negativeExample = const Value.absent(),
+    this.questionExample = const Value.absent(),
+    this.mistakeWrong = const Value.absent(),
+    this.mistakeRight = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GrammarLessonsCompanion.insert({
+    required String id,
+    required String topicId,
+    required String useEn,
+    required String useAr,
+    required String structure,
+    required String positiveExample,
+    required String negativeExample,
+    required String questionExample,
+    required String mistakeWrong,
+    required String mistakeRight,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       topicId = Value(topicId),
+       useEn = Value(useEn),
+       useAr = Value(useAr),
+       structure = Value(structure),
+       positiveExample = Value(positiveExample),
+       negativeExample = Value(negativeExample),
+       questionExample = Value(questionExample),
+       mistakeWrong = Value(mistakeWrong),
+       mistakeRight = Value(mistakeRight);
+  static Insertable<GrammarLessonRow> custom({
+    Expression<String>? id,
+    Expression<String>? topicId,
+    Expression<String>? useEn,
+    Expression<String>? useAr,
+    Expression<String>? structure,
+    Expression<String>? positiveExample,
+    Expression<String>? negativeExample,
+    Expression<String>? questionExample,
+    Expression<String>? mistakeWrong,
+    Expression<String>? mistakeRight,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (topicId != null) 'topic_id': topicId,
+      if (useEn != null) 'use_en': useEn,
+      if (useAr != null) 'use_ar': useAr,
+      if (structure != null) 'structure': structure,
+      if (positiveExample != null) 'positive_example': positiveExample,
+      if (negativeExample != null) 'negative_example': negativeExample,
+      if (questionExample != null) 'question_example': questionExample,
+      if (mistakeWrong != null) 'mistake_wrong': mistakeWrong,
+      if (mistakeRight != null) 'mistake_right': mistakeRight,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GrammarLessonsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? topicId,
+    Value<String>? useEn,
+    Value<String>? useAr,
+    Value<String>? structure,
+    Value<String>? positiveExample,
+    Value<String>? negativeExample,
+    Value<String>? questionExample,
+    Value<String>? mistakeWrong,
+    Value<String>? mistakeRight,
+    Value<int>? rowid,
+  }) {
+    return GrammarLessonsCompanion(
+      id: id ?? this.id,
+      topicId: topicId ?? this.topicId,
+      useEn: useEn ?? this.useEn,
+      useAr: useAr ?? this.useAr,
+      structure: structure ?? this.structure,
+      positiveExample: positiveExample ?? this.positiveExample,
+      negativeExample: negativeExample ?? this.negativeExample,
+      questionExample: questionExample ?? this.questionExample,
+      mistakeWrong: mistakeWrong ?? this.mistakeWrong,
+      mistakeRight: mistakeRight ?? this.mistakeRight,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (topicId.present) {
+      map['topic_id'] = Variable<String>(topicId.value);
+    }
+    if (useEn.present) {
+      map['use_en'] = Variable<String>(useEn.value);
+    }
+    if (useAr.present) {
+      map['use_ar'] = Variable<String>(useAr.value);
+    }
+    if (structure.present) {
+      map['structure'] = Variable<String>(structure.value);
+    }
+    if (positiveExample.present) {
+      map['positive_example'] = Variable<String>(positiveExample.value);
+    }
+    if (negativeExample.present) {
+      map['negative_example'] = Variable<String>(negativeExample.value);
+    }
+    if (questionExample.present) {
+      map['question_example'] = Variable<String>(questionExample.value);
+    }
+    if (mistakeWrong.present) {
+      map['mistake_wrong'] = Variable<String>(mistakeWrong.value);
+    }
+    if (mistakeRight.present) {
+      map['mistake_right'] = Variable<String>(mistakeRight.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GrammarLessonsCompanion(')
+          ..write('id: $id, ')
+          ..write('topicId: $topicId, ')
+          ..write('useEn: $useEn, ')
+          ..write('useAr: $useAr, ')
+          ..write('structure: $structure, ')
+          ..write('positiveExample: $positiveExample, ')
+          ..write('negativeExample: $negativeExample, ')
+          ..write('questionExample: $questionExample, ')
+          ..write('mistakeWrong: $mistakeWrong, ')
+          ..write('mistakeRight: $mistakeRight, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $GrammarExercisesTable extends GrammarExercises
+    with TableInfo<$GrammarExercisesTable, GrammarExerciseRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GrammarExercisesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lessonIdMeta = const VerificationMeta(
+    'lessonId',
+  );
+  @override
+  late final GeneratedColumn<String> lessonId = GeneratedColumn<String>(
+    'lesson_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES grammar_lessons (id)',
+    ),
+  );
+  static const VerificationMeta _kindMeta = const VerificationMeta('kind');
+  @override
+  late final GeneratedColumn<String> kind = GeneratedColumn<String>(
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _promptMeta = const VerificationMeta('prompt');
+  @override
+  late final GeneratedColumn<String> prompt = GeneratedColumn<String>(
+    'prompt',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _choicesJsonMeta = const VerificationMeta(
+    'choicesJson',
+  );
+  @override
+  late final GeneratedColumn<String> choicesJson = GeneratedColumn<String>(
+    'choices_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  );
+  static const VerificationMeta _answerMeta = const VerificationMeta('answer');
+  @override
+  late final GeneratedColumn<String> answer = GeneratedColumn<String>(
+    'answer',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _explanationEnMeta = const VerificationMeta(
+    'explanationEn',
+  );
+  @override
+  late final GeneratedColumn<String> explanationEn = GeneratedColumn<String>(
+    'explanation_en',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _explanationArMeta = const VerificationMeta(
+    'explanationAr',
+  );
+  @override
+  late final GeneratedColumn<String> explanationAr = GeneratedColumn<String>(
+    'explanation_ar',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _isAdvancedMeta = const VerificationMeta(
+    'isAdvanced',
+  );
+  @override
+  late final GeneratedColumn<bool> isAdvanced = GeneratedColumn<bool>(
+    'is_advanced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_advanced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    lessonId,
+    kind,
+    prompt,
+    choicesJson,
+    answer,
+    explanationEn,
+    explanationAr,
+    sortOrder,
+    isAdvanced,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'grammar_exercises';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<GrammarExerciseRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('lesson_id')) {
+      context.handle(
+        _lessonIdMeta,
+        lessonId.isAcceptableOrUnknown(data['lesson_id']!, _lessonIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_lessonIdMeta);
+    }
+    if (data.containsKey('kind')) {
+      context.handle(
+        _kindMeta,
+        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_kindMeta);
+    }
+    if (data.containsKey('prompt')) {
+      context.handle(
+        _promptMeta,
+        prompt.isAcceptableOrUnknown(data['prompt']!, _promptMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_promptMeta);
+    }
+    if (data.containsKey('choices_json')) {
+      context.handle(
+        _choicesJsonMeta,
+        choicesJson.isAcceptableOrUnknown(
+          data['choices_json']!,
+          _choicesJsonMeta,
+        ),
+      );
+    }
+    if (data.containsKey('answer')) {
+      context.handle(
+        _answerMeta,
+        answer.isAcceptableOrUnknown(data['answer']!, _answerMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_answerMeta);
+    }
+    if (data.containsKey('explanation_en')) {
+      context.handle(
+        _explanationEnMeta,
+        explanationEn.isAcceptableOrUnknown(
+          data['explanation_en']!,
+          _explanationEnMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_explanationEnMeta);
+    }
+    if (data.containsKey('explanation_ar')) {
+      context.handle(
+        _explanationArMeta,
+        explanationAr.isAcceptableOrUnknown(
+          data['explanation_ar']!,
+          _explanationArMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_explanationArMeta);
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('is_advanced')) {
+      context.handle(
+        _isAdvancedMeta,
+        isAdvanced.isAcceptableOrUnknown(data['is_advanced']!, _isAdvancedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GrammarExerciseRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GrammarExerciseRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      lessonId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}lesson_id'],
+      )!,
+      kind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kind'],
+      )!,
+      prompt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}prompt'],
+      )!,
+      choicesJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}choices_json'],
+      )!,
+      answer: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}answer'],
+      )!,
+      explanationEn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}explanation_en'],
+      )!,
+      explanationAr: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}explanation_ar'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      isAdvanced: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_advanced'],
+      )!,
+    );
+  }
+
+  @override
+  $GrammarExercisesTable createAlias(String alias) {
+    return $GrammarExercisesTable(attachedDatabase, alias);
+  }
+}
+
+class GrammarExerciseRow extends DataClass
+    implements Insertable<GrammarExerciseRow> {
+  final String id;
+  final String lessonId;
+  final String kind;
+  final String prompt;
+  final String choicesJson;
+  final String answer;
+  final String explanationEn;
+  final String explanationAr;
+  final int sortOrder;
+  final bool isAdvanced;
+  const GrammarExerciseRow({
+    required this.id,
+    required this.lessonId,
+    required this.kind,
+    required this.prompt,
+    required this.choicesJson,
+    required this.answer,
+    required this.explanationEn,
+    required this.explanationAr,
+    required this.sortOrder,
+    required this.isAdvanced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['lesson_id'] = Variable<String>(lessonId);
+    map['kind'] = Variable<String>(kind);
+    map['prompt'] = Variable<String>(prompt);
+    map['choices_json'] = Variable<String>(choicesJson);
+    map['answer'] = Variable<String>(answer);
+    map['explanation_en'] = Variable<String>(explanationEn);
+    map['explanation_ar'] = Variable<String>(explanationAr);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['is_advanced'] = Variable<bool>(isAdvanced);
+    return map;
+  }
+
+  GrammarExercisesCompanion toCompanion(bool nullToAbsent) {
+    return GrammarExercisesCompanion(
+      id: Value(id),
+      lessonId: Value(lessonId),
+      kind: Value(kind),
+      prompt: Value(prompt),
+      choicesJson: Value(choicesJson),
+      answer: Value(answer),
+      explanationEn: Value(explanationEn),
+      explanationAr: Value(explanationAr),
+      sortOrder: Value(sortOrder),
+      isAdvanced: Value(isAdvanced),
+    );
+  }
+
+  factory GrammarExerciseRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GrammarExerciseRow(
+      id: serializer.fromJson<String>(json['id']),
+      lessonId: serializer.fromJson<String>(json['lessonId']),
+      kind: serializer.fromJson<String>(json['kind']),
+      prompt: serializer.fromJson<String>(json['prompt']),
+      choicesJson: serializer.fromJson<String>(json['choicesJson']),
+      answer: serializer.fromJson<String>(json['answer']),
+      explanationEn: serializer.fromJson<String>(json['explanationEn']),
+      explanationAr: serializer.fromJson<String>(json['explanationAr']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      isAdvanced: serializer.fromJson<bool>(json['isAdvanced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'lessonId': serializer.toJson<String>(lessonId),
+      'kind': serializer.toJson<String>(kind),
+      'prompt': serializer.toJson<String>(prompt),
+      'choicesJson': serializer.toJson<String>(choicesJson),
+      'answer': serializer.toJson<String>(answer),
+      'explanationEn': serializer.toJson<String>(explanationEn),
+      'explanationAr': serializer.toJson<String>(explanationAr),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'isAdvanced': serializer.toJson<bool>(isAdvanced),
+    };
+  }
+
+  GrammarExerciseRow copyWith({
+    String? id,
+    String? lessonId,
+    String? kind,
+    String? prompt,
+    String? choicesJson,
+    String? answer,
+    String? explanationEn,
+    String? explanationAr,
+    int? sortOrder,
+    bool? isAdvanced,
+  }) => GrammarExerciseRow(
+    id: id ?? this.id,
+    lessonId: lessonId ?? this.lessonId,
+    kind: kind ?? this.kind,
+    prompt: prompt ?? this.prompt,
+    choicesJson: choicesJson ?? this.choicesJson,
+    answer: answer ?? this.answer,
+    explanationEn: explanationEn ?? this.explanationEn,
+    explanationAr: explanationAr ?? this.explanationAr,
+    sortOrder: sortOrder ?? this.sortOrder,
+    isAdvanced: isAdvanced ?? this.isAdvanced,
+  );
+  GrammarExerciseRow copyWithCompanion(GrammarExercisesCompanion data) {
+    return GrammarExerciseRow(
+      id: data.id.present ? data.id.value : this.id,
+      lessonId: data.lessonId.present ? data.lessonId.value : this.lessonId,
+      kind: data.kind.present ? data.kind.value : this.kind,
+      prompt: data.prompt.present ? data.prompt.value : this.prompt,
+      choicesJson: data.choicesJson.present
+          ? data.choicesJson.value
+          : this.choicesJson,
+      answer: data.answer.present ? data.answer.value : this.answer,
+      explanationEn: data.explanationEn.present
+          ? data.explanationEn.value
+          : this.explanationEn,
+      explanationAr: data.explanationAr.present
+          ? data.explanationAr.value
+          : this.explanationAr,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      isAdvanced: data.isAdvanced.present
+          ? data.isAdvanced.value
+          : this.isAdvanced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GrammarExerciseRow(')
+          ..write('id: $id, ')
+          ..write('lessonId: $lessonId, ')
+          ..write('kind: $kind, ')
+          ..write('prompt: $prompt, ')
+          ..write('choicesJson: $choicesJson, ')
+          ..write('answer: $answer, ')
+          ..write('explanationEn: $explanationEn, ')
+          ..write('explanationAr: $explanationAr, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('isAdvanced: $isAdvanced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    lessonId,
+    kind,
+    prompt,
+    choicesJson,
+    answer,
+    explanationEn,
+    explanationAr,
+    sortOrder,
+    isAdvanced,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GrammarExerciseRow &&
+          other.id == this.id &&
+          other.lessonId == this.lessonId &&
+          other.kind == this.kind &&
+          other.prompt == this.prompt &&
+          other.choicesJson == this.choicesJson &&
+          other.answer == this.answer &&
+          other.explanationEn == this.explanationEn &&
+          other.explanationAr == this.explanationAr &&
+          other.sortOrder == this.sortOrder &&
+          other.isAdvanced == this.isAdvanced);
+}
+
+class GrammarExercisesCompanion extends UpdateCompanion<GrammarExerciseRow> {
+  final Value<String> id;
+  final Value<String> lessonId;
+  final Value<String> kind;
+  final Value<String> prompt;
+  final Value<String> choicesJson;
+  final Value<String> answer;
+  final Value<String> explanationEn;
+  final Value<String> explanationAr;
+  final Value<int> sortOrder;
+  final Value<bool> isAdvanced;
+  final Value<int> rowid;
+  const GrammarExercisesCompanion({
+    this.id = const Value.absent(),
+    this.lessonId = const Value.absent(),
+    this.kind = const Value.absent(),
+    this.prompt = const Value.absent(),
+    this.choicesJson = const Value.absent(),
+    this.answer = const Value.absent(),
+    this.explanationEn = const Value.absent(),
+    this.explanationAr = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.isAdvanced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GrammarExercisesCompanion.insert({
+    required String id,
+    required String lessonId,
+    required String kind,
+    required String prompt,
+    this.choicesJson = const Value.absent(),
+    required String answer,
+    required String explanationEn,
+    required String explanationAr,
+    this.sortOrder = const Value.absent(),
+    this.isAdvanced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       lessonId = Value(lessonId),
+       kind = Value(kind),
+       prompt = Value(prompt),
+       answer = Value(answer),
+       explanationEn = Value(explanationEn),
+       explanationAr = Value(explanationAr);
+  static Insertable<GrammarExerciseRow> custom({
+    Expression<String>? id,
+    Expression<String>? lessonId,
+    Expression<String>? kind,
+    Expression<String>? prompt,
+    Expression<String>? choicesJson,
+    Expression<String>? answer,
+    Expression<String>? explanationEn,
+    Expression<String>? explanationAr,
+    Expression<int>? sortOrder,
+    Expression<bool>? isAdvanced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (lessonId != null) 'lesson_id': lessonId,
+      if (kind != null) 'kind': kind,
+      if (prompt != null) 'prompt': prompt,
+      if (choicesJson != null) 'choices_json': choicesJson,
+      if (answer != null) 'answer': answer,
+      if (explanationEn != null) 'explanation_en': explanationEn,
+      if (explanationAr != null) 'explanation_ar': explanationAr,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (isAdvanced != null) 'is_advanced': isAdvanced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GrammarExercisesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? lessonId,
+    Value<String>? kind,
+    Value<String>? prompt,
+    Value<String>? choicesJson,
+    Value<String>? answer,
+    Value<String>? explanationEn,
+    Value<String>? explanationAr,
+    Value<int>? sortOrder,
+    Value<bool>? isAdvanced,
+    Value<int>? rowid,
+  }) {
+    return GrammarExercisesCompanion(
+      id: id ?? this.id,
+      lessonId: lessonId ?? this.lessonId,
+      kind: kind ?? this.kind,
+      prompt: prompt ?? this.prompt,
+      choicesJson: choicesJson ?? this.choicesJson,
+      answer: answer ?? this.answer,
+      explanationEn: explanationEn ?? this.explanationEn,
+      explanationAr: explanationAr ?? this.explanationAr,
+      sortOrder: sortOrder ?? this.sortOrder,
+      isAdvanced: isAdvanced ?? this.isAdvanced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (lessonId.present) {
+      map['lesson_id'] = Variable<String>(lessonId.value);
+    }
+    if (kind.present) {
+      map['kind'] = Variable<String>(kind.value);
+    }
+    if (prompt.present) {
+      map['prompt'] = Variable<String>(prompt.value);
+    }
+    if (choicesJson.present) {
+      map['choices_json'] = Variable<String>(choicesJson.value);
+    }
+    if (answer.present) {
+      map['answer'] = Variable<String>(answer.value);
+    }
+    if (explanationEn.present) {
+      map['explanation_en'] = Variable<String>(explanationEn.value);
+    }
+    if (explanationAr.present) {
+      map['explanation_ar'] = Variable<String>(explanationAr.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (isAdvanced.present) {
+      map['is_advanced'] = Variable<bool>(isAdvanced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GrammarExercisesCompanion(')
+          ..write('id: $id, ')
+          ..write('lessonId: $lessonId, ')
+          ..write('kind: $kind, ')
+          ..write('prompt: $prompt, ')
+          ..write('choicesJson: $choicesJson, ')
+          ..write('answer: $answer, ')
+          ..write('explanationEn: $explanationEn, ')
+          ..write('explanationAr: $explanationAr, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('isAdvanced: $isAdvanced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UserGrammarProgressTable extends UserGrammarProgress
+    with TableInfo<$UserGrammarProgressTable, UserGrammarProgressRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UserGrammarProgressTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _topicIdMeta = const VerificationMeta(
+    'topicId',
+  );
+  @override
+  late final GeneratedColumn<String> topicId = GeneratedColumn<String>(
+    'topic_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES grammar_topics (id)',
+    ),
+  );
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+    'status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('available'),
+  );
+  static const VerificationMeta _bestScoreMeta = const VerificationMeta(
+    'bestScore',
+  );
+  @override
+  late final GeneratedColumn<int> bestScore = GeneratedColumn<int>(
+    'best_score',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _attemptsMeta = const VerificationMeta(
+    'attempts',
+  );
+  @override
+  late final GeneratedColumn<int> attempts = GeneratedColumn<int>(
+    'attempts',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _completedAtMeta = const VerificationMeta(
+    'completedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> completedAt = GeneratedColumn<DateTime>(
+    'completed_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    topicId,
+    status,
+    bestScore,
+    attempts,
+    completedAt,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'user_grammar_progress';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<UserGrammarProgressRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('topic_id')) {
+      context.handle(
+        _topicIdMeta,
+        topicId.isAcceptableOrUnknown(data['topic_id']!, _topicIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_topicIdMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(
+        _statusMeta,
+        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
+      );
+    }
+    if (data.containsKey('best_score')) {
+      context.handle(
+        _bestScoreMeta,
+        bestScore.isAcceptableOrUnknown(data['best_score']!, _bestScoreMeta),
+      );
+    }
+    if (data.containsKey('attempts')) {
+      context.handle(
+        _attemptsMeta,
+        attempts.isAcceptableOrUnknown(data['attempts']!, _attemptsMeta),
+      );
+    }
+    if (data.containsKey('completed_at')) {
+      context.handle(
+        _completedAtMeta,
+        completedAt.isAcceptableOrUnknown(
+          data['completed_at']!,
+          _completedAtMeta,
+        ),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {topicId};
+  @override
+  UserGrammarProgressRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UserGrammarProgressRow(
+      topicId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}topic_id'],
+      )!,
+      status: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}status'],
+      )!,
+      bestScore: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}best_score'],
+      )!,
+      attempts: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}attempts'],
+      )!,
+      completedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}completed_at'],
+      ),
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $UserGrammarProgressTable createAlias(String alias) {
+    return $UserGrammarProgressTable(attachedDatabase, alias);
+  }
+}
+
+class UserGrammarProgressRow extends DataClass
+    implements Insertable<UserGrammarProgressRow> {
+  final String topicId;
+  final String status;
+  final int bestScore;
+  final int attempts;
+  final DateTime? completedAt;
+  final DateTime updatedAt;
+  const UserGrammarProgressRow({
+    required this.topicId,
+    required this.status,
+    required this.bestScore,
+    required this.attempts,
+    this.completedAt,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['topic_id'] = Variable<String>(topicId);
+    map['status'] = Variable<String>(status);
+    map['best_score'] = Variable<int>(bestScore);
+    map['attempts'] = Variable<int>(attempts);
+    if (!nullToAbsent || completedAt != null) {
+      map['completed_at'] = Variable<DateTime>(completedAt);
+    }
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  UserGrammarProgressCompanion toCompanion(bool nullToAbsent) {
+    return UserGrammarProgressCompanion(
+      topicId: Value(topicId),
+      status: Value(status),
+      bestScore: Value(bestScore),
+      attempts: Value(attempts),
+      completedAt: completedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(completedAt),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory UserGrammarProgressRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UserGrammarProgressRow(
+      topicId: serializer.fromJson<String>(json['topicId']),
+      status: serializer.fromJson<String>(json['status']),
+      bestScore: serializer.fromJson<int>(json['bestScore']),
+      attempts: serializer.fromJson<int>(json['attempts']),
+      completedAt: serializer.fromJson<DateTime?>(json['completedAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'topicId': serializer.toJson<String>(topicId),
+      'status': serializer.toJson<String>(status),
+      'bestScore': serializer.toJson<int>(bestScore),
+      'attempts': serializer.toJson<int>(attempts),
+      'completedAt': serializer.toJson<DateTime?>(completedAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  UserGrammarProgressRow copyWith({
+    String? topicId,
+    String? status,
+    int? bestScore,
+    int? attempts,
+    Value<DateTime?> completedAt = const Value.absent(),
+    DateTime? updatedAt,
+  }) => UserGrammarProgressRow(
+    topicId: topicId ?? this.topicId,
+    status: status ?? this.status,
+    bestScore: bestScore ?? this.bestScore,
+    attempts: attempts ?? this.attempts,
+    completedAt: completedAt.present ? completedAt.value : this.completedAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  UserGrammarProgressRow copyWithCompanion(UserGrammarProgressCompanion data) {
+    return UserGrammarProgressRow(
+      topicId: data.topicId.present ? data.topicId.value : this.topicId,
+      status: data.status.present ? data.status.value : this.status,
+      bestScore: data.bestScore.present ? data.bestScore.value : this.bestScore,
+      attempts: data.attempts.present ? data.attempts.value : this.attempts,
+      completedAt: data.completedAt.present
+          ? data.completedAt.value
+          : this.completedAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserGrammarProgressRow(')
+          ..write('topicId: $topicId, ')
+          ..write('status: $status, ')
+          ..write('bestScore: $bestScore, ')
+          ..write('attempts: $attempts, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(topicId, status, bestScore, attempts, completedAt, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserGrammarProgressRow &&
+          other.topicId == this.topicId &&
+          other.status == this.status &&
+          other.bestScore == this.bestScore &&
+          other.attempts == this.attempts &&
+          other.completedAt == this.completedAt &&
+          other.updatedAt == this.updatedAt);
+}
+
+class UserGrammarProgressCompanion
+    extends UpdateCompanion<UserGrammarProgressRow> {
+  final Value<String> topicId;
+  final Value<String> status;
+  final Value<int> bestScore;
+  final Value<int> attempts;
+  final Value<DateTime?> completedAt;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const UserGrammarProgressCompanion({
+    this.topicId = const Value.absent(),
+    this.status = const Value.absent(),
+    this.bestScore = const Value.absent(),
+    this.attempts = const Value.absent(),
+    this.completedAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  UserGrammarProgressCompanion.insert({
+    required String topicId,
+    this.status = const Value.absent(),
+    this.bestScore = const Value.absent(),
+    this.attempts = const Value.absent(),
+    this.completedAt = const Value.absent(),
+    required DateTime updatedAt,
+    this.rowid = const Value.absent(),
+  }) : topicId = Value(topicId),
+       updatedAt = Value(updatedAt);
+  static Insertable<UserGrammarProgressRow> custom({
+    Expression<String>? topicId,
+    Expression<String>? status,
+    Expression<int>? bestScore,
+    Expression<int>? attempts,
+    Expression<DateTime>? completedAt,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (topicId != null) 'topic_id': topicId,
+      if (status != null) 'status': status,
+      if (bestScore != null) 'best_score': bestScore,
+      if (attempts != null) 'attempts': attempts,
+      if (completedAt != null) 'completed_at': completedAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  UserGrammarProgressCompanion copyWith({
+    Value<String>? topicId,
+    Value<String>? status,
+    Value<int>? bestScore,
+    Value<int>? attempts,
+    Value<DateTime?>? completedAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
+    return UserGrammarProgressCompanion(
+      topicId: topicId ?? this.topicId,
+      status: status ?? this.status,
+      bestScore: bestScore ?? this.bestScore,
+      attempts: attempts ?? this.attempts,
+      completedAt: completedAt ?? this.completedAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (topicId.present) {
+      map['topic_id'] = Variable<String>(topicId.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (bestScore.present) {
+      map['best_score'] = Variable<int>(bestScore.value);
+    }
+    if (attempts.present) {
+      map['attempts'] = Variable<int>(attempts.value);
+    }
+    if (completedAt.present) {
+      map['completed_at'] = Variable<DateTime>(completedAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserGrammarProgressCompanion(')
+          ..write('topicId: $topicId, ')
+          ..write('status: $status, ')
+          ..write('bestScore: $bestScore, ')
+          ..write('attempts: $attempts, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TopicQuestionsTable extends TopicQuestions
+    with TableInfo<$TopicQuestionsTable, TopicQuestionRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TopicQuestionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _topicIdMeta = const VerificationMeta(
+    'topicId',
+  );
+  @override
+  late final GeneratedColumn<String> topicId = GeneratedColumn<String>(
+    'topic_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES topics (id)',
+    ),
+  );
+  static const VerificationMeta _cefrLevelMeta = const VerificationMeta(
+    'cefrLevel',
+  );
+  @override
+  late final GeneratedColumn<String> cefrLevel = GeneratedColumn<String>(
+    'cefr_level',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _promptEnMeta = const VerificationMeta(
+    'promptEn',
+  );
+  @override
+  late final GeneratedColumn<String> promptEn = GeneratedColumn<String>(
+    'prompt_en',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _promptArMeta = const VerificationMeta(
+    'promptAr',
+  );
+  @override
+  late final GeneratedColumn<String> promptAr = GeneratedColumn<String>(
+    'prompt_ar',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _suggestedAnswerMeta = const VerificationMeta(
+    'suggestedAnswer',
+  );
+  @override
+  late final GeneratedColumn<String> suggestedAnswer = GeneratedColumn<String>(
+    'suggested_answer',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _isDevelopmentSampleMeta =
+      const VerificationMeta('isDevelopmentSample');
+  @override
+  late final GeneratedColumn<bool> isDevelopmentSample = GeneratedColumn<bool>(
+    'is_development_sample',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_development_sample" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    topicId,
+    cefrLevel,
+    promptEn,
+    promptAr,
+    suggestedAnswer,
+    sortOrder,
+    isDevelopmentSample,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'topic_questions';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TopicQuestionRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('topic_id')) {
+      context.handle(
+        _topicIdMeta,
+        topicId.isAcceptableOrUnknown(data['topic_id']!, _topicIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_topicIdMeta);
+    }
+    if (data.containsKey('cefr_level')) {
+      context.handle(
+        _cefrLevelMeta,
+        cefrLevel.isAcceptableOrUnknown(data['cefr_level']!, _cefrLevelMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_cefrLevelMeta);
+    }
+    if (data.containsKey('prompt_en')) {
+      context.handle(
+        _promptEnMeta,
+        promptEn.isAcceptableOrUnknown(data['prompt_en']!, _promptEnMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_promptEnMeta);
+    }
+    if (data.containsKey('prompt_ar')) {
+      context.handle(
+        _promptArMeta,
+        promptAr.isAcceptableOrUnknown(data['prompt_ar']!, _promptArMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_promptArMeta);
+    }
+    if (data.containsKey('suggested_answer')) {
+      context.handle(
+        _suggestedAnswerMeta,
+        suggestedAnswer.isAcceptableOrUnknown(
+          data['suggested_answer']!,
+          _suggestedAnswerMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_suggestedAnswerMeta);
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    }
+    if (data.containsKey('is_development_sample')) {
+      context.handle(
+        _isDevelopmentSampleMeta,
+        isDevelopmentSample.isAcceptableOrUnknown(
+          data['is_development_sample']!,
+          _isDevelopmentSampleMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  TopicQuestionRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TopicQuestionRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      topicId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}topic_id'],
+      )!,
+      cefrLevel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}cefr_level'],
+      )!,
+      promptEn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}prompt_en'],
+      )!,
+      promptAr: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}prompt_ar'],
+      )!,
+      suggestedAnswer: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}suggested_answer'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      isDevelopmentSample: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_development_sample'],
+      )!,
+    );
+  }
+
+  @override
+  $TopicQuestionsTable createAlias(String alias) {
+    return $TopicQuestionsTable(attachedDatabase, alias);
+  }
+}
+
+class TopicQuestionRow extends DataClass
+    implements Insertable<TopicQuestionRow> {
+  final String id;
+  final String topicId;
+  final String cefrLevel;
+  final String promptEn;
+  final String promptAr;
+  final String suggestedAnswer;
+  final int sortOrder;
+  final bool isDevelopmentSample;
+  const TopicQuestionRow({
+    required this.id,
+    required this.topicId,
+    required this.cefrLevel,
+    required this.promptEn,
+    required this.promptAr,
+    required this.suggestedAnswer,
+    required this.sortOrder,
+    required this.isDevelopmentSample,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['topic_id'] = Variable<String>(topicId);
+    map['cefr_level'] = Variable<String>(cefrLevel);
+    map['prompt_en'] = Variable<String>(promptEn);
+    map['prompt_ar'] = Variable<String>(promptAr);
+    map['suggested_answer'] = Variable<String>(suggestedAnswer);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['is_development_sample'] = Variable<bool>(isDevelopmentSample);
+    return map;
+  }
+
+  TopicQuestionsCompanion toCompanion(bool nullToAbsent) {
+    return TopicQuestionsCompanion(
+      id: Value(id),
+      topicId: Value(topicId),
+      cefrLevel: Value(cefrLevel),
+      promptEn: Value(promptEn),
+      promptAr: Value(promptAr),
+      suggestedAnswer: Value(suggestedAnswer),
+      sortOrder: Value(sortOrder),
+      isDevelopmentSample: Value(isDevelopmentSample),
+    );
+  }
+
+  factory TopicQuestionRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TopicQuestionRow(
+      id: serializer.fromJson<String>(json['id']),
+      topicId: serializer.fromJson<String>(json['topicId']),
+      cefrLevel: serializer.fromJson<String>(json['cefrLevel']),
+      promptEn: serializer.fromJson<String>(json['promptEn']),
+      promptAr: serializer.fromJson<String>(json['promptAr']),
+      suggestedAnswer: serializer.fromJson<String>(json['suggestedAnswer']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      isDevelopmentSample: serializer.fromJson<bool>(
+        json['isDevelopmentSample'],
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'topicId': serializer.toJson<String>(topicId),
+      'cefrLevel': serializer.toJson<String>(cefrLevel),
+      'promptEn': serializer.toJson<String>(promptEn),
+      'promptAr': serializer.toJson<String>(promptAr),
+      'suggestedAnswer': serializer.toJson<String>(suggestedAnswer),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'isDevelopmentSample': serializer.toJson<bool>(isDevelopmentSample),
+    };
+  }
+
+  TopicQuestionRow copyWith({
+    String? id,
+    String? topicId,
+    String? cefrLevel,
+    String? promptEn,
+    String? promptAr,
+    String? suggestedAnswer,
+    int? sortOrder,
+    bool? isDevelopmentSample,
+  }) => TopicQuestionRow(
+    id: id ?? this.id,
+    topicId: topicId ?? this.topicId,
+    cefrLevel: cefrLevel ?? this.cefrLevel,
+    promptEn: promptEn ?? this.promptEn,
+    promptAr: promptAr ?? this.promptAr,
+    suggestedAnswer: suggestedAnswer ?? this.suggestedAnswer,
+    sortOrder: sortOrder ?? this.sortOrder,
+    isDevelopmentSample: isDevelopmentSample ?? this.isDevelopmentSample,
+  );
+  TopicQuestionRow copyWithCompanion(TopicQuestionsCompanion data) {
+    return TopicQuestionRow(
+      id: data.id.present ? data.id.value : this.id,
+      topicId: data.topicId.present ? data.topicId.value : this.topicId,
+      cefrLevel: data.cefrLevel.present ? data.cefrLevel.value : this.cefrLevel,
+      promptEn: data.promptEn.present ? data.promptEn.value : this.promptEn,
+      promptAr: data.promptAr.present ? data.promptAr.value : this.promptAr,
+      suggestedAnswer: data.suggestedAnswer.present
+          ? data.suggestedAnswer.value
+          : this.suggestedAnswer,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      isDevelopmentSample: data.isDevelopmentSample.present
+          ? data.isDevelopmentSample.value
+          : this.isDevelopmentSample,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TopicQuestionRow(')
+          ..write('id: $id, ')
+          ..write('topicId: $topicId, ')
+          ..write('cefrLevel: $cefrLevel, ')
+          ..write('promptEn: $promptEn, ')
+          ..write('promptAr: $promptAr, ')
+          ..write('suggestedAnswer: $suggestedAnswer, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('isDevelopmentSample: $isDevelopmentSample')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    topicId,
+    cefrLevel,
+    promptEn,
+    promptAr,
+    suggestedAnswer,
+    sortOrder,
+    isDevelopmentSample,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TopicQuestionRow &&
+          other.id == this.id &&
+          other.topicId == this.topicId &&
+          other.cefrLevel == this.cefrLevel &&
+          other.promptEn == this.promptEn &&
+          other.promptAr == this.promptAr &&
+          other.suggestedAnswer == this.suggestedAnswer &&
+          other.sortOrder == this.sortOrder &&
+          other.isDevelopmentSample == this.isDevelopmentSample);
+}
+
+class TopicQuestionsCompanion extends UpdateCompanion<TopicQuestionRow> {
+  final Value<String> id;
+  final Value<String> topicId;
+  final Value<String> cefrLevel;
+  final Value<String> promptEn;
+  final Value<String> promptAr;
+  final Value<String> suggestedAnswer;
+  final Value<int> sortOrder;
+  final Value<bool> isDevelopmentSample;
+  final Value<int> rowid;
+  const TopicQuestionsCompanion({
+    this.id = const Value.absent(),
+    this.topicId = const Value.absent(),
+    this.cefrLevel = const Value.absent(),
+    this.promptEn = const Value.absent(),
+    this.promptAr = const Value.absent(),
+    this.suggestedAnswer = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.isDevelopmentSample = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  TopicQuestionsCompanion.insert({
+    required String id,
+    required String topicId,
+    required String cefrLevel,
+    required String promptEn,
+    required String promptAr,
+    required String suggestedAnswer,
+    this.sortOrder = const Value.absent(),
+    this.isDevelopmentSample = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       topicId = Value(topicId),
+       cefrLevel = Value(cefrLevel),
+       promptEn = Value(promptEn),
+       promptAr = Value(promptAr),
+       suggestedAnswer = Value(suggestedAnswer);
+  static Insertable<TopicQuestionRow> custom({
+    Expression<String>? id,
+    Expression<String>? topicId,
+    Expression<String>? cefrLevel,
+    Expression<String>? promptEn,
+    Expression<String>? promptAr,
+    Expression<String>? suggestedAnswer,
+    Expression<int>? sortOrder,
+    Expression<bool>? isDevelopmentSample,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (topicId != null) 'topic_id': topicId,
+      if (cefrLevel != null) 'cefr_level': cefrLevel,
+      if (promptEn != null) 'prompt_en': promptEn,
+      if (promptAr != null) 'prompt_ar': promptAr,
+      if (suggestedAnswer != null) 'suggested_answer': suggestedAnswer,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (isDevelopmentSample != null)
+        'is_development_sample': isDevelopmentSample,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  TopicQuestionsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? topicId,
+    Value<String>? cefrLevel,
+    Value<String>? promptEn,
+    Value<String>? promptAr,
+    Value<String>? suggestedAnswer,
+    Value<int>? sortOrder,
+    Value<bool>? isDevelopmentSample,
+    Value<int>? rowid,
+  }) {
+    return TopicQuestionsCompanion(
+      id: id ?? this.id,
+      topicId: topicId ?? this.topicId,
+      cefrLevel: cefrLevel ?? this.cefrLevel,
+      promptEn: promptEn ?? this.promptEn,
+      promptAr: promptAr ?? this.promptAr,
+      suggestedAnswer: suggestedAnswer ?? this.suggestedAnswer,
+      sortOrder: sortOrder ?? this.sortOrder,
+      isDevelopmentSample: isDevelopmentSample ?? this.isDevelopmentSample,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (topicId.present) {
+      map['topic_id'] = Variable<String>(topicId.value);
+    }
+    if (cefrLevel.present) {
+      map['cefr_level'] = Variable<String>(cefrLevel.value);
+    }
+    if (promptEn.present) {
+      map['prompt_en'] = Variable<String>(promptEn.value);
+    }
+    if (promptAr.present) {
+      map['prompt_ar'] = Variable<String>(promptAr.value);
+    }
+    if (suggestedAnswer.present) {
+      map['suggested_answer'] = Variable<String>(suggestedAnswer.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (isDevelopmentSample.present) {
+      map['is_development_sample'] = Variable<bool>(isDevelopmentSample.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TopicQuestionsCompanion(')
+          ..write('id: $id, ')
+          ..write('topicId: $topicId, ')
+          ..write('cefrLevel: $cefrLevel, ')
+          ..write('promptEn: $promptEn, ')
+          ..write('promptAr: $promptAr, ')
+          ..write('suggestedAnswer: $suggestedAnswer, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('isDevelopmentSample: $isDevelopmentSample, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UserTopicAnswersTable extends UserTopicAnswers
+    with TableInfo<$UserTopicAnswersTable, UserTopicAnswerRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UserTopicAnswersTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _questionIdMeta = const VerificationMeta(
+    'questionId',
+  );
+  @override
+  late final GeneratedColumn<String> questionId = GeneratedColumn<String>(
+    'question_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES topic_questions (id)',
+    ),
+  );
+  static const VerificationMeta _answerTextMeta = const VerificationMeta(
+    'answerText',
+  );
+  @override
+  late final GeneratedColumn<String> answerText = GeneratedColumn<String>(
+    'answer_text',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, questionId, answerText, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'user_topic_answers';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<UserTopicAnswerRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('question_id')) {
+      context.handle(
+        _questionIdMeta,
+        questionId.isAcceptableOrUnknown(data['question_id']!, _questionIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_questionIdMeta);
+    }
+    if (data.containsKey('answer_text')) {
+      context.handle(
+        _answerTextMeta,
+        answerText.isAcceptableOrUnknown(data['answer_text']!, _answerTextMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_answerTextMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  UserTopicAnswerRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UserTopicAnswerRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      questionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}question_id'],
+      )!,
+      answerText: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}answer_text'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  $UserTopicAnswersTable createAlias(String alias) {
+    return $UserTopicAnswersTable(attachedDatabase, alias);
+  }
+}
+
+class UserTopicAnswerRow extends DataClass
+    implements Insertable<UserTopicAnswerRow> {
+  final String id;
+  final String questionId;
+  final String answerText;
+  final DateTime createdAt;
+  const UserTopicAnswerRow({
+    required this.id,
+    required this.questionId,
+    required this.answerText,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['question_id'] = Variable<String>(questionId);
+    map['answer_text'] = Variable<String>(answerText);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  UserTopicAnswersCompanion toCompanion(bool nullToAbsent) {
+    return UserTopicAnswersCompanion(
+      id: Value(id),
+      questionId: Value(questionId),
+      answerText: Value(answerText),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory UserTopicAnswerRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UserTopicAnswerRow(
+      id: serializer.fromJson<String>(json['id']),
+      questionId: serializer.fromJson<String>(json['questionId']),
+      answerText: serializer.fromJson<String>(json['answerText']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'questionId': serializer.toJson<String>(questionId),
+      'answerText': serializer.toJson<String>(answerText),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  UserTopicAnswerRow copyWith({
+    String? id,
+    String? questionId,
+    String? answerText,
+    DateTime? createdAt,
+  }) => UserTopicAnswerRow(
+    id: id ?? this.id,
+    questionId: questionId ?? this.questionId,
+    answerText: answerText ?? this.answerText,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  UserTopicAnswerRow copyWithCompanion(UserTopicAnswersCompanion data) {
+    return UserTopicAnswerRow(
+      id: data.id.present ? data.id.value : this.id,
+      questionId: data.questionId.present
+          ? data.questionId.value
+          : this.questionId,
+      answerText: data.answerText.present
+          ? data.answerText.value
+          : this.answerText,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserTopicAnswerRow(')
+          ..write('id: $id, ')
+          ..write('questionId: $questionId, ')
+          ..write('answerText: $answerText, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, questionId, answerText, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserTopicAnswerRow &&
+          other.id == this.id &&
+          other.questionId == this.questionId &&
+          other.answerText == this.answerText &&
+          other.createdAt == this.createdAt);
+}
+
+class UserTopicAnswersCompanion extends UpdateCompanion<UserTopicAnswerRow> {
+  final Value<String> id;
+  final Value<String> questionId;
+  final Value<String> answerText;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const UserTopicAnswersCompanion({
+    this.id = const Value.absent(),
+    this.questionId = const Value.absent(),
+    this.answerText = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  UserTopicAnswersCompanion.insert({
+    required String id,
+    required String questionId,
+    required String answerText,
+    required DateTime createdAt,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       questionId = Value(questionId),
+       answerText = Value(answerText),
+       createdAt = Value(createdAt);
+  static Insertable<UserTopicAnswerRow> custom({
+    Expression<String>? id,
+    Expression<String>? questionId,
+    Expression<String>? answerText,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (questionId != null) 'question_id': questionId,
+      if (answerText != null) 'answer_text': answerText,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  UserTopicAnswersCompanion copyWith({
+    Value<String>? id,
+    Value<String>? questionId,
+    Value<String>? answerText,
+    Value<DateTime>? createdAt,
+    Value<int>? rowid,
+  }) {
+    return UserTopicAnswersCompanion(
+      id: id ?? this.id,
+      questionId: questionId ?? this.questionId,
+      answerText: answerText ?? this.answerText,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (questionId.present) {
+      map['question_id'] = Variable<String>(questionId.value);
+    }
+    if (answerText.present) {
+      map['answer_text'] = Variable<String>(answerText.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserTopicAnswersCompanion(')
+          ..write('id: $id, ')
+          ..write('questionId: $questionId, ')
+          ..write('answerText: $answerText, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UserAchievementsTable extends UserAchievements
+    with TableInfo<$UserAchievementsTable, UserAchievementRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UserAchievementsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _unlockedAtMeta = const VerificationMeta(
+    'unlockedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> unlockedAt = GeneratedColumn<DateTime>(
+    'unlocked_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _celebratedMeta = const VerificationMeta(
+    'celebrated',
+  );
+  @override
+  late final GeneratedColumn<bool> celebrated = GeneratedColumn<bool>(
+    'celebrated',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("celebrated" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, unlockedAt, celebrated];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'user_achievements';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<UserAchievementRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('unlocked_at')) {
+      context.handle(
+        _unlockedAtMeta,
+        unlockedAt.isAcceptableOrUnknown(data['unlocked_at']!, _unlockedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_unlockedAtMeta);
+    }
+    if (data.containsKey('celebrated')) {
+      context.handle(
+        _celebratedMeta,
+        celebrated.isAcceptableOrUnknown(data['celebrated']!, _celebratedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  UserAchievementRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UserAchievementRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      unlockedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}unlocked_at'],
+      )!,
+      celebrated: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}celebrated'],
+      )!,
+    );
+  }
+
+  @override
+  $UserAchievementsTable createAlias(String alias) {
+    return $UserAchievementsTable(attachedDatabase, alias);
+  }
+}
+
+class UserAchievementRow extends DataClass
+    implements Insertable<UserAchievementRow> {
+  final String id;
+  final DateTime unlockedAt;
+  final bool celebrated;
+  const UserAchievementRow({
+    required this.id,
+    required this.unlockedAt,
+    required this.celebrated,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['unlocked_at'] = Variable<DateTime>(unlockedAt);
+    map['celebrated'] = Variable<bool>(celebrated);
+    return map;
+  }
+
+  UserAchievementsCompanion toCompanion(bool nullToAbsent) {
+    return UserAchievementsCompanion(
+      id: Value(id),
+      unlockedAt: Value(unlockedAt),
+      celebrated: Value(celebrated),
+    );
+  }
+
+  factory UserAchievementRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UserAchievementRow(
+      id: serializer.fromJson<String>(json['id']),
+      unlockedAt: serializer.fromJson<DateTime>(json['unlockedAt']),
+      celebrated: serializer.fromJson<bool>(json['celebrated']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'unlockedAt': serializer.toJson<DateTime>(unlockedAt),
+      'celebrated': serializer.toJson<bool>(celebrated),
+    };
+  }
+
+  UserAchievementRow copyWith({
+    String? id,
+    DateTime? unlockedAt,
+    bool? celebrated,
+  }) => UserAchievementRow(
+    id: id ?? this.id,
+    unlockedAt: unlockedAt ?? this.unlockedAt,
+    celebrated: celebrated ?? this.celebrated,
+  );
+  UserAchievementRow copyWithCompanion(UserAchievementsCompanion data) {
+    return UserAchievementRow(
+      id: data.id.present ? data.id.value : this.id,
+      unlockedAt: data.unlockedAt.present
+          ? data.unlockedAt.value
+          : this.unlockedAt,
+      celebrated: data.celebrated.present
+          ? data.celebrated.value
+          : this.celebrated,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserAchievementRow(')
+          ..write('id: $id, ')
+          ..write('unlockedAt: $unlockedAt, ')
+          ..write('celebrated: $celebrated')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, unlockedAt, celebrated);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserAchievementRow &&
+          other.id == this.id &&
+          other.unlockedAt == this.unlockedAt &&
+          other.celebrated == this.celebrated);
+}
+
+class UserAchievementsCompanion extends UpdateCompanion<UserAchievementRow> {
+  final Value<String> id;
+  final Value<DateTime> unlockedAt;
+  final Value<bool> celebrated;
+  final Value<int> rowid;
+  const UserAchievementsCompanion({
+    this.id = const Value.absent(),
+    this.unlockedAt = const Value.absent(),
+    this.celebrated = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  UserAchievementsCompanion.insert({
+    required String id,
+    required DateTime unlockedAt,
+    this.celebrated = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       unlockedAt = Value(unlockedAt);
+  static Insertable<UserAchievementRow> custom({
+    Expression<String>? id,
+    Expression<DateTime>? unlockedAt,
+    Expression<bool>? celebrated,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (unlockedAt != null) 'unlocked_at': unlockedAt,
+      if (celebrated != null) 'celebrated': celebrated,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  UserAchievementsCompanion copyWith({
+    Value<String>? id,
+    Value<DateTime>? unlockedAt,
+    Value<bool>? celebrated,
+    Value<int>? rowid,
+  }) {
+    return UserAchievementsCompanion(
+      id: id ?? this.id,
+      unlockedAt: unlockedAt ?? this.unlockedAt,
+      celebrated: celebrated ?? this.celebrated,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (unlockedAt.present) {
+      map['unlocked_at'] = Variable<DateTime>(unlockedAt.value);
+    }
+    if (celebrated.present) {
+      map['celebrated'] = Variable<bool>(celebrated.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserAchievementsCompanion(')
+          ..write('id: $id, ')
+          ..write('unlockedAt: $unlockedAt, ')
+          ..write('celebrated: $celebrated, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LearningDaysTable extends LearningDays
+    with TableInfo<$LearningDaysTable, LearningDayRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LearningDaysTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dayMeta = const VerificationMeta('day');
+  @override
+  late final GeneratedColumn<String> day = GeneratedColumn<String>(
+    'day',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _activeSecondsMeta = const VerificationMeta(
+    'activeSeconds',
+  );
+  @override
+  late final GeneratedColumn<int> activeSeconds = GeneratedColumn<int>(
+    'active_seconds',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _reviewsMeta = const VerificationMeta(
+    'reviews',
+  );
+  @override
+  late final GeneratedColumn<int> reviews = GeneratedColumn<int>(
+    'reviews',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _exercisesMeta = const VerificationMeta(
+    'exercises',
+  );
+  @override
+  late final GeneratedColumn<int> exercises = GeneratedColumn<int>(
+    'exercises',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    day,
+    activeSeconds,
+    reviews,
+    exercises,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'learning_days';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<LearningDayRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('day')) {
+      context.handle(
+        _dayMeta,
+        day.isAcceptableOrUnknown(data['day']!, _dayMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dayMeta);
+    }
+    if (data.containsKey('active_seconds')) {
+      context.handle(
+        _activeSecondsMeta,
+        activeSeconds.isAcceptableOrUnknown(
+          data['active_seconds']!,
+          _activeSecondsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('reviews')) {
+      context.handle(
+        _reviewsMeta,
+        reviews.isAcceptableOrUnknown(data['reviews']!, _reviewsMeta),
+      );
+    }
+    if (data.containsKey('exercises')) {
+      context.handle(
+        _exercisesMeta,
+        exercises.isAcceptableOrUnknown(data['exercises']!, _exercisesMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {day};
+  @override
+  LearningDayRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LearningDayRow(
+      day: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}day'],
+      )!,
+      activeSeconds: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}active_seconds'],
+      )!,
+      reviews: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}reviews'],
+      )!,
+      exercises: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}exercises'],
+      )!,
+    );
+  }
+
+  @override
+  $LearningDaysTable createAlias(String alias) {
+    return $LearningDaysTable(attachedDatabase, alias);
+  }
+}
+
+class LearningDayRow extends DataClass implements Insertable<LearningDayRow> {
+  final String day;
+  final int activeSeconds;
+  final int reviews;
+  final int exercises;
+  const LearningDayRow({
+    required this.day,
+    required this.activeSeconds,
+    required this.reviews,
+    required this.exercises,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['day'] = Variable<String>(day);
+    map['active_seconds'] = Variable<int>(activeSeconds);
+    map['reviews'] = Variable<int>(reviews);
+    map['exercises'] = Variable<int>(exercises);
+    return map;
+  }
+
+  LearningDaysCompanion toCompanion(bool nullToAbsent) {
+    return LearningDaysCompanion(
+      day: Value(day),
+      activeSeconds: Value(activeSeconds),
+      reviews: Value(reviews),
+      exercises: Value(exercises),
+    );
+  }
+
+  factory LearningDayRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LearningDayRow(
+      day: serializer.fromJson<String>(json['day']),
+      activeSeconds: serializer.fromJson<int>(json['activeSeconds']),
+      reviews: serializer.fromJson<int>(json['reviews']),
+      exercises: serializer.fromJson<int>(json['exercises']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'day': serializer.toJson<String>(day),
+      'activeSeconds': serializer.toJson<int>(activeSeconds),
+      'reviews': serializer.toJson<int>(reviews),
+      'exercises': serializer.toJson<int>(exercises),
+    };
+  }
+
+  LearningDayRow copyWith({
+    String? day,
+    int? activeSeconds,
+    int? reviews,
+    int? exercises,
+  }) => LearningDayRow(
+    day: day ?? this.day,
+    activeSeconds: activeSeconds ?? this.activeSeconds,
+    reviews: reviews ?? this.reviews,
+    exercises: exercises ?? this.exercises,
+  );
+  LearningDayRow copyWithCompanion(LearningDaysCompanion data) {
+    return LearningDayRow(
+      day: data.day.present ? data.day.value : this.day,
+      activeSeconds: data.activeSeconds.present
+          ? data.activeSeconds.value
+          : this.activeSeconds,
+      reviews: data.reviews.present ? data.reviews.value : this.reviews,
+      exercises: data.exercises.present ? data.exercises.value : this.exercises,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LearningDayRow(')
+          ..write('day: $day, ')
+          ..write('activeSeconds: $activeSeconds, ')
+          ..write('reviews: $reviews, ')
+          ..write('exercises: $exercises')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(day, activeSeconds, reviews, exercises);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LearningDayRow &&
+          other.day == this.day &&
+          other.activeSeconds == this.activeSeconds &&
+          other.reviews == this.reviews &&
+          other.exercises == this.exercises);
+}
+
+class LearningDaysCompanion extends UpdateCompanion<LearningDayRow> {
+  final Value<String> day;
+  final Value<int> activeSeconds;
+  final Value<int> reviews;
+  final Value<int> exercises;
+  final Value<int> rowid;
+  const LearningDaysCompanion({
+    this.day = const Value.absent(),
+    this.activeSeconds = const Value.absent(),
+    this.reviews = const Value.absent(),
+    this.exercises = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  LearningDaysCompanion.insert({
+    required String day,
+    this.activeSeconds = const Value.absent(),
+    this.reviews = const Value.absent(),
+    this.exercises = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : day = Value(day);
+  static Insertable<LearningDayRow> custom({
+    Expression<String>? day,
+    Expression<int>? activeSeconds,
+    Expression<int>? reviews,
+    Expression<int>? exercises,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (day != null) 'day': day,
+      if (activeSeconds != null) 'active_seconds': activeSeconds,
+      if (reviews != null) 'reviews': reviews,
+      if (exercises != null) 'exercises': exercises,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  LearningDaysCompanion copyWith({
+    Value<String>? day,
+    Value<int>? activeSeconds,
+    Value<int>? reviews,
+    Value<int>? exercises,
+    Value<int>? rowid,
+  }) {
+    return LearningDaysCompanion(
+      day: day ?? this.day,
+      activeSeconds: activeSeconds ?? this.activeSeconds,
+      reviews: reviews ?? this.reviews,
+      exercises: exercises ?? this.exercises,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (day.present) {
+      map['day'] = Variable<String>(day.value);
+    }
+    if (activeSeconds.present) {
+      map['active_seconds'] = Variable<int>(activeSeconds.value);
+    }
+    if (reviews.present) {
+      map['reviews'] = Variable<int>(reviews.value);
+    }
+    if (exercises.present) {
+      map['exercises'] = Variable<int>(exercises.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LearningDaysCompanion(')
+          ..write('day: $day, ')
+          ..write('activeSeconds: $activeSeconds, ')
+          ..write('reviews: $reviews, ')
+          ..write('exercises: $exercises, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -12173,6 +16030,21 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $LearningPathsTable learningPaths = $LearningPathsTable(this);
   late final $LearningPathTopicsTable learningPathTopics =
       $LearningPathTopicsTable(this);
+  late final $GrammarTopicsTable grammarTopics = $GrammarTopicsTable(this);
+  late final $GrammarLessonsTable grammarLessons = $GrammarLessonsTable(this);
+  late final $GrammarExercisesTable grammarExercises = $GrammarExercisesTable(
+    this,
+  );
+  late final $UserGrammarProgressTable userGrammarProgress =
+      $UserGrammarProgressTable(this);
+  late final $TopicQuestionsTable topicQuestions = $TopicQuestionsTable(this);
+  late final $UserTopicAnswersTable userTopicAnswers = $UserTopicAnswersTable(
+    this,
+  );
+  late final $UserAchievementsTable userAchievements = $UserAchievementsTable(
+    this,
+  );
+  late final $LearningDaysTable learningDays = $LearningDaysTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -12205,6 +16077,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     topicSentenceTopics,
     learningPaths,
     learningPathTopics,
+    grammarTopics,
+    grammarLessons,
+    grammarExercises,
+    userGrammarProgress,
+    topicQuestions,
+    userTopicAnswers,
+    userAchievements,
+    learningDays,
   ];
 }
 
@@ -18926,6 +22806,10 @@ typedef $$UserVocabularyTableCreateCompanionBuilder =
       Value<String?> sourceId,
       Value<int> usageCount,
       required DateTime lastUsedAt,
+      Value<String?> userArabicMeaning,
+      Value<String?> userExample,
+      Value<String?> userExampleTranslation,
+      Value<String?> userNotes,
       Value<int> rowid,
     });
 typedef $$UserVocabularyTableUpdateCompanionBuilder =
@@ -18937,6 +22821,10 @@ typedef $$UserVocabularyTableUpdateCompanionBuilder =
       Value<String?> sourceId,
       Value<int> usageCount,
       Value<DateTime> lastUsedAt,
+      Value<String?> userArabicMeaning,
+      Value<String?> userExample,
+      Value<String?> userExampleTranslation,
+      Value<String?> userNotes,
       Value<int> rowid,
     });
 
@@ -19007,6 +22895,26 @@ class $$UserVocabularyTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<String> get userArabicMeaning => $composableBuilder(
+    column: $table.userArabicMeaning,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userExample => $composableBuilder(
+    column: $table.userExample,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userExampleTranslation => $composableBuilder(
+    column: $table.userExampleTranslation,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get userNotes => $composableBuilder(
+    column: $table.userNotes,
+    builder: (column) => ColumnFilters(column),
+  );
+
   $$VocabularyEntriesTableFilterComposer get entryId {
     final $$VocabularyEntriesTableFilterComposer composer = $composerBuilder(
       composer: this,
@@ -19070,6 +22978,26 @@ class $$UserVocabularyTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get userArabicMeaning => $composableBuilder(
+    column: $table.userArabicMeaning,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userExample => $composableBuilder(
+    column: $table.userExample,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userExampleTranslation => $composableBuilder(
+    column: $table.userExampleTranslation,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get userNotes => $composableBuilder(
+    column: $table.userNotes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   $$VocabularyEntriesTableOrderingComposer get entryId {
     final $$VocabularyEntriesTableOrderingComposer composer = $composerBuilder(
       composer: this,
@@ -19128,6 +23056,24 @@ class $$UserVocabularyTableAnnotationComposer
     column: $table.lastUsedAt,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get userArabicMeaning => $composableBuilder(
+    column: $table.userArabicMeaning,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get userExample => $composableBuilder(
+    column: $table.userExample,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get userExampleTranslation => $composableBuilder(
+    column: $table.userExampleTranslation,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get userNotes =>
+      $composableBuilder(column: $table.userNotes, builder: (column) => column);
 
   $$VocabularyEntriesTableAnnotationComposer get entryId {
     final $$VocabularyEntriesTableAnnotationComposer composer =
@@ -19191,6 +23137,10 @@ class $$UserVocabularyTableTableManager
                 Value<String?> sourceId = const Value.absent(),
                 Value<int> usageCount = const Value.absent(),
                 Value<DateTime> lastUsedAt = const Value.absent(),
+                Value<String?> userArabicMeaning = const Value.absent(),
+                Value<String?> userExample = const Value.absent(),
+                Value<String?> userExampleTranslation = const Value.absent(),
+                Value<String?> userNotes = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UserVocabularyCompanion(
                 entryId: entryId,
@@ -19200,6 +23150,10 @@ class $$UserVocabularyTableTableManager
                 sourceId: sourceId,
                 usageCount: usageCount,
                 lastUsedAt: lastUsedAt,
+                userArabicMeaning: userArabicMeaning,
+                userExample: userExample,
+                userExampleTranslation: userExampleTranslation,
+                userNotes: userNotes,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -19211,6 +23165,10 @@ class $$UserVocabularyTableTableManager
                 Value<String?> sourceId = const Value.absent(),
                 Value<int> usageCount = const Value.absent(),
                 required DateTime lastUsedAt,
+                Value<String?> userArabicMeaning = const Value.absent(),
+                Value<String?> userExample = const Value.absent(),
+                Value<String?> userExampleTranslation = const Value.absent(),
+                Value<String?> userNotes = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => UserVocabularyCompanion.insert(
                 entryId: entryId,
@@ -19220,6 +23178,10 @@ class $$UserVocabularyTableTableManager
                 sourceId: sourceId,
                 usageCount: usageCount,
                 lastUsedAt: lastUsedAt,
+                userArabicMeaning: userArabicMeaning,
+                userExample: userExample,
+                userExampleTranslation: userExampleTranslation,
+                userNotes: userNotes,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
@@ -20808,6 +24770,24 @@ final class $$TopicsTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<$TopicQuestionsTable, List<TopicQuestionRow>>
+  _topicQuestionsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.topicQuestions,
+    aliasName: 'topics__id__topic_questions__topic_id',
+  );
+
+  $$TopicQuestionsTableProcessedTableManager get topicQuestionsRefs {
+    final manager = $$TopicQuestionsTableTableManager(
+      $_db,
+      $_db.topicQuestions,
+    ).filter((f) => f.topicId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_topicQuestionsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$TopicsTableFilterComposer
@@ -20953,6 +24933,31 @@ class $$TopicsTableFilterComposer
           }) => $$LearningPathTopicsTableFilterComposer(
             $db: $db,
             $table: $db.learningPathTopics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> topicQuestionsRefs(
+    Expression<bool> Function($$TopicQuestionsTableFilterComposer f) f,
+  ) {
+    final $$TopicQuestionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.topicQuestions,
+      getReferencedColumn: (t) => t.topicId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicQuestionsTableFilterComposer(
+            $db: $db,
+            $table: $db.topicQuestions,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -21180,6 +25185,31 @@ class $$TopicsTableAnnotationComposer
         );
     return f(composer);
   }
+
+  Expression<T> topicQuestionsRefs<T extends Object>(
+    Expression<T> Function($$TopicQuestionsTableAnnotationComposer a) f,
+  ) {
+    final $$TopicQuestionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.topicQuestions,
+      getReferencedColumn: (t) => t.topicId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicQuestionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.topicQuestions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$TopicsTableTableManager
@@ -21200,6 +25230,7 @@ class $$TopicsTableTableManager
             bool vocabularyTopicsRefs,
             bool topicSentenceTopicsRefs,
             bool learningPathTopicsRefs,
+            bool topicQuestionsRefs,
           })
         > {
   $$TopicsTableTableManager(_$AppDatabase db, $TopicsTable table)
@@ -21279,6 +25310,7 @@ class $$TopicsTableTableManager
                 vocabularyTopicsRefs = false,
                 topicSentenceTopicsRefs = false,
                 learningPathTopicsRefs = false,
+                topicQuestionsRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -21286,6 +25318,7 @@ class $$TopicsTableTableManager
                     if (vocabularyTopicsRefs) db.vocabularyTopics,
                     if (topicSentenceTopicsRefs) db.topicSentenceTopics,
                     if (learningPathTopicsRefs) db.learningPathTopics,
+                    if (topicQuestionsRefs) db.topicQuestions,
                   ],
                   addJoins:
                       <
@@ -21382,6 +25415,27 @@ class $$TopicsTableTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (topicQuestionsRefs)
+                        await $_getPrefetchedData<
+                          TopicRow,
+                          $TopicsTable,
+                          TopicQuestionRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$TopicsTableReferences
+                              ._topicQuestionsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$TopicsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).topicQuestionsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.topicId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -21407,6 +25461,7 @@ typedef $$TopicsTableProcessedTableManager =
         bool vocabularyTopicsRefs,
         bool topicSentenceTopicsRefs,
         bool learningPathTopicsRefs,
+        bool topicQuestionsRefs,
       })
     >;
 typedef $$VocabularyTopicsTableCreateCompanionBuilder =
@@ -23259,6 +27314,2960 @@ typedef $$LearningPathTopicsTableProcessedTableManager =
       LearningPathTopicRow,
       PrefetchHooks Function({bool pathId, bool topicId})
     >;
+typedef $$GrammarTopicsTableCreateCompanionBuilder =
+    GrammarTopicsCompanion Function({
+      required String id,
+      required String category,
+      required String titleEn,
+      required String titleAr,
+      Value<String?> cefrLevel,
+      required String classificationNote,
+      Value<int> sortOrder,
+      Value<bool> isDevelopmentSample,
+      Value<int> rowid,
+    });
+typedef $$GrammarTopicsTableUpdateCompanionBuilder =
+    GrammarTopicsCompanion Function({
+      Value<String> id,
+      Value<String> category,
+      Value<String> titleEn,
+      Value<String> titleAr,
+      Value<String?> cefrLevel,
+      Value<String> classificationNote,
+      Value<int> sortOrder,
+      Value<bool> isDevelopmentSample,
+      Value<int> rowid,
+    });
+
+final class $$GrammarTopicsTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $GrammarTopicsTable, GrammarTopicRow> {
+  $$GrammarTopicsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static MultiTypedResultKey<$GrammarLessonsTable, List<GrammarLessonRow>>
+  _grammarLessonsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.grammarLessons,
+    aliasName: 'grammar_topics__id__grammar_lessons__topic_id',
+  );
+
+  $$GrammarLessonsTableProcessedTableManager get grammarLessonsRefs {
+    final manager = $$GrammarLessonsTableTableManager(
+      $_db,
+      $_db.grammarLessons,
+    ).filter((f) => f.topicId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_grammarLessonsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<
+    $UserGrammarProgressTable,
+    List<UserGrammarProgressRow>
+  >
+  _userGrammarProgressRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.userGrammarProgress,
+        aliasName: 'grammar_topics__id__user_grammar_progress__topic_id',
+      );
+
+  $$UserGrammarProgressTableProcessedTableManager get userGrammarProgressRefs {
+    final manager = $$UserGrammarProgressTableTableManager(
+      $_db,
+      $_db.userGrammarProgress,
+    ).filter((f) => f.topicId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _userGrammarProgressRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$GrammarTopicsTableFilterComposer
+    extends Composer<_$AppDatabase, $GrammarTopicsTable> {
+  $$GrammarTopicsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get category => $composableBuilder(
+    column: $table.category,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get titleEn => $composableBuilder(
+    column: $table.titleEn,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get titleAr => $composableBuilder(
+    column: $table.titleAr,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get cefrLevel => $composableBuilder(
+    column: $table.cefrLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get classificationNote => $composableBuilder(
+    column: $table.classificationNote,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isDevelopmentSample => $composableBuilder(
+    column: $table.isDevelopmentSample,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  Expression<bool> grammarLessonsRefs(
+    Expression<bool> Function($$GrammarLessonsTableFilterComposer f) f,
+  ) {
+    final $$GrammarLessonsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.grammarLessons,
+      getReferencedColumn: (t) => t.topicId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarLessonsTableFilterComposer(
+            $db: $db,
+            $table: $db.grammarLessons,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> userGrammarProgressRefs(
+    Expression<bool> Function($$UserGrammarProgressTableFilterComposer f) f,
+  ) {
+    final $$UserGrammarProgressTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.userGrammarProgress,
+      getReferencedColumn: (t) => t.topicId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UserGrammarProgressTableFilterComposer(
+            $db: $db,
+            $table: $db.userGrammarProgress,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$GrammarTopicsTableOrderingComposer
+    extends Composer<_$AppDatabase, $GrammarTopicsTable> {
+  $$GrammarTopicsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get category => $composableBuilder(
+    column: $table.category,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get titleEn => $composableBuilder(
+    column: $table.titleEn,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get titleAr => $composableBuilder(
+    column: $table.titleAr,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get cefrLevel => $composableBuilder(
+    column: $table.cefrLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get classificationNote => $composableBuilder(
+    column: $table.classificationNote,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isDevelopmentSample => $composableBuilder(
+    column: $table.isDevelopmentSample,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$GrammarTopicsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GrammarTopicsTable> {
+  $$GrammarTopicsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumn<String> get titleEn =>
+      $composableBuilder(column: $table.titleEn, builder: (column) => column);
+
+  GeneratedColumn<String> get titleAr =>
+      $composableBuilder(column: $table.titleAr, builder: (column) => column);
+
+  GeneratedColumn<String> get cefrLevel =>
+      $composableBuilder(column: $table.cefrLevel, builder: (column) => column);
+
+  GeneratedColumn<String> get classificationNote => $composableBuilder(
+    column: $table.classificationNote,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sortOrder =>
+      $composableBuilder(column: $table.sortOrder, builder: (column) => column);
+
+  GeneratedColumn<bool> get isDevelopmentSample => $composableBuilder(
+    column: $table.isDevelopmentSample,
+    builder: (column) => column,
+  );
+
+  Expression<T> grammarLessonsRefs<T extends Object>(
+    Expression<T> Function($$GrammarLessonsTableAnnotationComposer a) f,
+  ) {
+    final $$GrammarLessonsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.grammarLessons,
+      getReferencedColumn: (t) => t.topicId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarLessonsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.grammarLessons,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<T> userGrammarProgressRefs<T extends Object>(
+    Expression<T> Function($$UserGrammarProgressTableAnnotationComposer a) f,
+  ) {
+    final $$UserGrammarProgressTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.userGrammarProgress,
+          getReferencedColumn: (t) => t.topicId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$UserGrammarProgressTableAnnotationComposer(
+                $db: $db,
+                $table: $db.userGrammarProgress,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+}
+
+class $$GrammarTopicsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GrammarTopicsTable,
+          GrammarTopicRow,
+          $$GrammarTopicsTableFilterComposer,
+          $$GrammarTopicsTableOrderingComposer,
+          $$GrammarTopicsTableAnnotationComposer,
+          $$GrammarTopicsTableCreateCompanionBuilder,
+          $$GrammarTopicsTableUpdateCompanionBuilder,
+          (GrammarTopicRow, $$GrammarTopicsTableReferences),
+          GrammarTopicRow,
+          PrefetchHooks Function({
+            bool grammarLessonsRefs,
+            bool userGrammarProgressRefs,
+          })
+        > {
+  $$GrammarTopicsTableTableManager(_$AppDatabase db, $GrammarTopicsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GrammarTopicsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GrammarTopicsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GrammarTopicsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> category = const Value.absent(),
+                Value<String> titleEn = const Value.absent(),
+                Value<String> titleAr = const Value.absent(),
+                Value<String?> cefrLevel = const Value.absent(),
+                Value<String> classificationNote = const Value.absent(),
+                Value<int> sortOrder = const Value.absent(),
+                Value<bool> isDevelopmentSample = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GrammarTopicsCompanion(
+                id: id,
+                category: category,
+                titleEn: titleEn,
+                titleAr: titleAr,
+                cefrLevel: cefrLevel,
+                classificationNote: classificationNote,
+                sortOrder: sortOrder,
+                isDevelopmentSample: isDevelopmentSample,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String category,
+                required String titleEn,
+                required String titleAr,
+                Value<String?> cefrLevel = const Value.absent(),
+                required String classificationNote,
+                Value<int> sortOrder = const Value.absent(),
+                Value<bool> isDevelopmentSample = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GrammarTopicsCompanion.insert(
+                id: id,
+                category: category,
+                titleEn: titleEn,
+                titleAr: titleAr,
+                cefrLevel: cefrLevel,
+                classificationNote: classificationNote,
+                sortOrder: sortOrder,
+                isDevelopmentSample: isDevelopmentSample,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$GrammarTopicsTable, GrammarTopicRow>(table),
+                  $$GrammarTopicsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({grammarLessonsRefs = false, userGrammarProgressRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (grammarLessonsRefs) db.grammarLessons,
+                    if (userGrammarProgressRefs) db.userGrammarProgress,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (grammarLessonsRefs)
+                        await $_getPrefetchedData<
+                          GrammarTopicRow,
+                          $GrammarTopicsTable,
+                          GrammarLessonRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$GrammarTopicsTableReferences
+                              ._grammarLessonsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$GrammarTopicsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).grammarLessonsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.topicId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (userGrammarProgressRefs)
+                        await $_getPrefetchedData<
+                          GrammarTopicRow,
+                          $GrammarTopicsTable,
+                          UserGrammarProgressRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$GrammarTopicsTableReferences
+                              ._userGrammarProgressRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$GrammarTopicsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).userGrammarProgressRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.topicId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$GrammarTopicsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GrammarTopicsTable,
+      GrammarTopicRow,
+      $$GrammarTopicsTableFilterComposer,
+      $$GrammarTopicsTableOrderingComposer,
+      $$GrammarTopicsTableAnnotationComposer,
+      $$GrammarTopicsTableCreateCompanionBuilder,
+      $$GrammarTopicsTableUpdateCompanionBuilder,
+      (GrammarTopicRow, $$GrammarTopicsTableReferences),
+      GrammarTopicRow,
+      PrefetchHooks Function({
+        bool grammarLessonsRefs,
+        bool userGrammarProgressRefs,
+      })
+    >;
+typedef $$GrammarLessonsTableCreateCompanionBuilder =
+    GrammarLessonsCompanion Function({
+      required String id,
+      required String topicId,
+      required String useEn,
+      required String useAr,
+      required String structure,
+      required String positiveExample,
+      required String negativeExample,
+      required String questionExample,
+      required String mistakeWrong,
+      required String mistakeRight,
+      Value<int> rowid,
+    });
+typedef $$GrammarLessonsTableUpdateCompanionBuilder =
+    GrammarLessonsCompanion Function({
+      Value<String> id,
+      Value<String> topicId,
+      Value<String> useEn,
+      Value<String> useAr,
+      Value<String> structure,
+      Value<String> positiveExample,
+      Value<String> negativeExample,
+      Value<String> questionExample,
+      Value<String> mistakeWrong,
+      Value<String> mistakeRight,
+      Value<int> rowid,
+    });
+
+final class $$GrammarLessonsTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $GrammarLessonsTable, GrammarLessonRow> {
+  $$GrammarLessonsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $GrammarTopicsTable _topicIdTable(_$AppDatabase db) => db.grammarTopics
+      .createAlias('grammar_lessons__topic_id__grammar_topics__id');
+
+  $$GrammarTopicsTableProcessedTableManager get topicId {
+    final $_column = $_itemColumn<String>('topic_id')!;
+
+    final manager = $$GrammarTopicsTableTableManager(
+      $_db,
+      $_db.grammarTopics,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_topicIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static MultiTypedResultKey<$GrammarExercisesTable, List<GrammarExerciseRow>>
+  _grammarExercisesRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.grammarExercises,
+    aliasName: 'grammar_lessons__id__grammar_exercises__lesson_id',
+  );
+
+  $$GrammarExercisesTableProcessedTableManager get grammarExercisesRefs {
+    final manager = $$GrammarExercisesTableTableManager(
+      $_db,
+      $_db.grammarExercises,
+    ).filter((f) => f.lessonId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _grammarExercisesRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$GrammarLessonsTableFilterComposer
+    extends Composer<_$AppDatabase, $GrammarLessonsTable> {
+  $$GrammarLessonsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get useEn => $composableBuilder(
+    column: $table.useEn,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get useAr => $composableBuilder(
+    column: $table.useAr,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get structure => $composableBuilder(
+    column: $table.structure,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get positiveExample => $composableBuilder(
+    column: $table.positiveExample,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get negativeExample => $composableBuilder(
+    column: $table.negativeExample,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get questionExample => $composableBuilder(
+    column: $table.questionExample,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mistakeWrong => $composableBuilder(
+    column: $table.mistakeWrong,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mistakeRight => $composableBuilder(
+    column: $table.mistakeRight,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$GrammarTopicsTableFilterComposer get topicId {
+    final $$GrammarTopicsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.grammarTopics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarTopicsTableFilterComposer(
+            $db: $db,
+            $table: $db.grammarTopics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<bool> grammarExercisesRefs(
+    Expression<bool> Function($$GrammarExercisesTableFilterComposer f) f,
+  ) {
+    final $$GrammarExercisesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.grammarExercises,
+      getReferencedColumn: (t) => t.lessonId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarExercisesTableFilterComposer(
+            $db: $db,
+            $table: $db.grammarExercises,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$GrammarLessonsTableOrderingComposer
+    extends Composer<_$AppDatabase, $GrammarLessonsTable> {
+  $$GrammarLessonsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get useEn => $composableBuilder(
+    column: $table.useEn,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get useAr => $composableBuilder(
+    column: $table.useAr,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get structure => $composableBuilder(
+    column: $table.structure,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get positiveExample => $composableBuilder(
+    column: $table.positiveExample,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get negativeExample => $composableBuilder(
+    column: $table.negativeExample,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get questionExample => $composableBuilder(
+    column: $table.questionExample,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mistakeWrong => $composableBuilder(
+    column: $table.mistakeWrong,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mistakeRight => $composableBuilder(
+    column: $table.mistakeRight,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$GrammarTopicsTableOrderingComposer get topicId {
+    final $$GrammarTopicsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.grammarTopics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarTopicsTableOrderingComposer(
+            $db: $db,
+            $table: $db.grammarTopics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$GrammarLessonsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GrammarLessonsTable> {
+  $$GrammarLessonsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get useEn =>
+      $composableBuilder(column: $table.useEn, builder: (column) => column);
+
+  GeneratedColumn<String> get useAr =>
+      $composableBuilder(column: $table.useAr, builder: (column) => column);
+
+  GeneratedColumn<String> get structure =>
+      $composableBuilder(column: $table.structure, builder: (column) => column);
+
+  GeneratedColumn<String> get positiveExample => $composableBuilder(
+    column: $table.positiveExample,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get negativeExample => $composableBuilder(
+    column: $table.negativeExample,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get questionExample => $composableBuilder(
+    column: $table.questionExample,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get mistakeWrong => $composableBuilder(
+    column: $table.mistakeWrong,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get mistakeRight => $composableBuilder(
+    column: $table.mistakeRight,
+    builder: (column) => column,
+  );
+
+  $$GrammarTopicsTableAnnotationComposer get topicId {
+    final $$GrammarTopicsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.grammarTopics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarTopicsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.grammarTopics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<T> grammarExercisesRefs<T extends Object>(
+    Expression<T> Function($$GrammarExercisesTableAnnotationComposer a) f,
+  ) {
+    final $$GrammarExercisesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.grammarExercises,
+      getReferencedColumn: (t) => t.lessonId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarExercisesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.grammarExercises,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$GrammarLessonsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GrammarLessonsTable,
+          GrammarLessonRow,
+          $$GrammarLessonsTableFilterComposer,
+          $$GrammarLessonsTableOrderingComposer,
+          $$GrammarLessonsTableAnnotationComposer,
+          $$GrammarLessonsTableCreateCompanionBuilder,
+          $$GrammarLessonsTableUpdateCompanionBuilder,
+          (GrammarLessonRow, $$GrammarLessonsTableReferences),
+          GrammarLessonRow,
+          PrefetchHooks Function({bool topicId, bool grammarExercisesRefs})
+        > {
+  $$GrammarLessonsTableTableManager(
+    _$AppDatabase db,
+    $GrammarLessonsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GrammarLessonsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GrammarLessonsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GrammarLessonsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> topicId = const Value.absent(),
+                Value<String> useEn = const Value.absent(),
+                Value<String> useAr = const Value.absent(),
+                Value<String> structure = const Value.absent(),
+                Value<String> positiveExample = const Value.absent(),
+                Value<String> negativeExample = const Value.absent(),
+                Value<String> questionExample = const Value.absent(),
+                Value<String> mistakeWrong = const Value.absent(),
+                Value<String> mistakeRight = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GrammarLessonsCompanion(
+                id: id,
+                topicId: topicId,
+                useEn: useEn,
+                useAr: useAr,
+                structure: structure,
+                positiveExample: positiveExample,
+                negativeExample: negativeExample,
+                questionExample: questionExample,
+                mistakeWrong: mistakeWrong,
+                mistakeRight: mistakeRight,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String topicId,
+                required String useEn,
+                required String useAr,
+                required String structure,
+                required String positiveExample,
+                required String negativeExample,
+                required String questionExample,
+                required String mistakeWrong,
+                required String mistakeRight,
+                Value<int> rowid = const Value.absent(),
+              }) => GrammarLessonsCompanion.insert(
+                id: id,
+                topicId: topicId,
+                useEn: useEn,
+                useAr: useAr,
+                structure: structure,
+                positiveExample: positiveExample,
+                negativeExample: negativeExample,
+                questionExample: questionExample,
+                mistakeWrong: mistakeWrong,
+                mistakeRight: mistakeRight,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$GrammarLessonsTable, GrammarLessonRow>(table),
+                  $$GrammarLessonsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({topicId = false, grammarExercisesRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (grammarExercisesRefs) db.grammarExercises,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (topicId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.topicId,
+                            referencedTable: $$GrammarLessonsTableReferences
+                                ._topicIdTable(db),
+                            referencedColumn: $$GrammarLessonsTableReferences
+                                ._topicIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (grammarExercisesRefs)
+                        await $_getPrefetchedData<
+                          GrammarLessonRow,
+                          $GrammarLessonsTable,
+                          GrammarExerciseRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$GrammarLessonsTableReferences
+                              ._grammarExercisesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$GrammarLessonsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).grammarExercisesRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.lessonId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$GrammarLessonsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GrammarLessonsTable,
+      GrammarLessonRow,
+      $$GrammarLessonsTableFilterComposer,
+      $$GrammarLessonsTableOrderingComposer,
+      $$GrammarLessonsTableAnnotationComposer,
+      $$GrammarLessonsTableCreateCompanionBuilder,
+      $$GrammarLessonsTableUpdateCompanionBuilder,
+      (GrammarLessonRow, $$GrammarLessonsTableReferences),
+      GrammarLessonRow,
+      PrefetchHooks Function({bool topicId, bool grammarExercisesRefs})
+    >;
+typedef $$GrammarExercisesTableCreateCompanionBuilder =
+    GrammarExercisesCompanion Function({
+      required String id,
+      required String lessonId,
+      required String kind,
+      required String prompt,
+      Value<String> choicesJson,
+      required String answer,
+      required String explanationEn,
+      required String explanationAr,
+      Value<int> sortOrder,
+      Value<bool> isAdvanced,
+      Value<int> rowid,
+    });
+typedef $$GrammarExercisesTableUpdateCompanionBuilder =
+    GrammarExercisesCompanion Function({
+      Value<String> id,
+      Value<String> lessonId,
+      Value<String> kind,
+      Value<String> prompt,
+      Value<String> choicesJson,
+      Value<String> answer,
+      Value<String> explanationEn,
+      Value<String> explanationAr,
+      Value<int> sortOrder,
+      Value<bool> isAdvanced,
+      Value<int> rowid,
+    });
+
+final class $$GrammarExercisesTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $GrammarExercisesTable,
+          GrammarExerciseRow
+        > {
+  $$GrammarExercisesTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $GrammarLessonsTable _lessonIdTable(_$AppDatabase db) => db
+      .grammarLessons
+      .createAlias('grammar_exercises__lesson_id__grammar_lessons__id');
+
+  $$GrammarLessonsTableProcessedTableManager get lessonId {
+    final $_column = $_itemColumn<String>('lesson_id')!;
+
+    final manager = $$GrammarLessonsTableTableManager(
+      $_db,
+      $_db.grammarLessons,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_lessonIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$GrammarExercisesTableFilterComposer
+    extends Composer<_$AppDatabase, $GrammarExercisesTable> {
+  $$GrammarExercisesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get prompt => $composableBuilder(
+    column: $table.prompt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get choicesJson => $composableBuilder(
+    column: $table.choicesJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get answer => $composableBuilder(
+    column: $table.answer,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get explanationEn => $composableBuilder(
+    column: $table.explanationEn,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get explanationAr => $composableBuilder(
+    column: $table.explanationAr,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isAdvanced => $composableBuilder(
+    column: $table.isAdvanced,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$GrammarLessonsTableFilterComposer get lessonId {
+    final $$GrammarLessonsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.lessonId,
+      referencedTable: $db.grammarLessons,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarLessonsTableFilterComposer(
+            $db: $db,
+            $table: $db.grammarLessons,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$GrammarExercisesTableOrderingComposer
+    extends Composer<_$AppDatabase, $GrammarExercisesTable> {
+  $$GrammarExercisesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get prompt => $composableBuilder(
+    column: $table.prompt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get choicesJson => $composableBuilder(
+    column: $table.choicesJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get answer => $composableBuilder(
+    column: $table.answer,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get explanationEn => $composableBuilder(
+    column: $table.explanationEn,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get explanationAr => $composableBuilder(
+    column: $table.explanationAr,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isAdvanced => $composableBuilder(
+    column: $table.isAdvanced,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$GrammarLessonsTableOrderingComposer get lessonId {
+    final $$GrammarLessonsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.lessonId,
+      referencedTable: $db.grammarLessons,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarLessonsTableOrderingComposer(
+            $db: $db,
+            $table: $db.grammarLessons,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$GrammarExercisesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GrammarExercisesTable> {
+  $$GrammarExercisesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get kind =>
+      $composableBuilder(column: $table.kind, builder: (column) => column);
+
+  GeneratedColumn<String> get prompt =>
+      $composableBuilder(column: $table.prompt, builder: (column) => column);
+
+  GeneratedColumn<String> get choicesJson => $composableBuilder(
+    column: $table.choicesJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get answer =>
+      $composableBuilder(column: $table.answer, builder: (column) => column);
+
+  GeneratedColumn<String> get explanationEn => $composableBuilder(
+    column: $table.explanationEn,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get explanationAr => $composableBuilder(
+    column: $table.explanationAr,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sortOrder =>
+      $composableBuilder(column: $table.sortOrder, builder: (column) => column);
+
+  GeneratedColumn<bool> get isAdvanced => $composableBuilder(
+    column: $table.isAdvanced,
+    builder: (column) => column,
+  );
+
+  $$GrammarLessonsTableAnnotationComposer get lessonId {
+    final $$GrammarLessonsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.lessonId,
+      referencedTable: $db.grammarLessons,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarLessonsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.grammarLessons,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$GrammarExercisesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GrammarExercisesTable,
+          GrammarExerciseRow,
+          $$GrammarExercisesTableFilterComposer,
+          $$GrammarExercisesTableOrderingComposer,
+          $$GrammarExercisesTableAnnotationComposer,
+          $$GrammarExercisesTableCreateCompanionBuilder,
+          $$GrammarExercisesTableUpdateCompanionBuilder,
+          (GrammarExerciseRow, $$GrammarExercisesTableReferences),
+          GrammarExerciseRow,
+          PrefetchHooks Function({bool lessonId})
+        > {
+  $$GrammarExercisesTableTableManager(
+    _$AppDatabase db,
+    $GrammarExercisesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GrammarExercisesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GrammarExercisesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GrammarExercisesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> lessonId = const Value.absent(),
+                Value<String> kind = const Value.absent(),
+                Value<String> prompt = const Value.absent(),
+                Value<String> choicesJson = const Value.absent(),
+                Value<String> answer = const Value.absent(),
+                Value<String> explanationEn = const Value.absent(),
+                Value<String> explanationAr = const Value.absent(),
+                Value<int> sortOrder = const Value.absent(),
+                Value<bool> isAdvanced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GrammarExercisesCompanion(
+                id: id,
+                lessonId: lessonId,
+                kind: kind,
+                prompt: prompt,
+                choicesJson: choicesJson,
+                answer: answer,
+                explanationEn: explanationEn,
+                explanationAr: explanationAr,
+                sortOrder: sortOrder,
+                isAdvanced: isAdvanced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String lessonId,
+                required String kind,
+                required String prompt,
+                Value<String> choicesJson = const Value.absent(),
+                required String answer,
+                required String explanationEn,
+                required String explanationAr,
+                Value<int> sortOrder = const Value.absent(),
+                Value<bool> isAdvanced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GrammarExercisesCompanion.insert(
+                id: id,
+                lessonId: lessonId,
+                kind: kind,
+                prompt: prompt,
+                choicesJson: choicesJson,
+                answer: answer,
+                explanationEn: explanationEn,
+                explanationAr: explanationAr,
+                sortOrder: sortOrder,
+                isAdvanced: isAdvanced,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$GrammarExercisesTable, GrammarExerciseRow>(
+                    table,
+                  ),
+                  $$GrammarExercisesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({lessonId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (lessonId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.lessonId,
+                        referencedTable: $$GrammarExercisesTableReferences
+                            ._lessonIdTable(db),
+                        referencedColumn: $$GrammarExercisesTableReferences
+                            ._lessonIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$GrammarExercisesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GrammarExercisesTable,
+      GrammarExerciseRow,
+      $$GrammarExercisesTableFilterComposer,
+      $$GrammarExercisesTableOrderingComposer,
+      $$GrammarExercisesTableAnnotationComposer,
+      $$GrammarExercisesTableCreateCompanionBuilder,
+      $$GrammarExercisesTableUpdateCompanionBuilder,
+      (GrammarExerciseRow, $$GrammarExercisesTableReferences),
+      GrammarExerciseRow,
+      PrefetchHooks Function({bool lessonId})
+    >;
+typedef $$UserGrammarProgressTableCreateCompanionBuilder =
+    UserGrammarProgressCompanion Function({
+      required String topicId,
+      Value<String> status,
+      Value<int> bestScore,
+      Value<int> attempts,
+      Value<DateTime?> completedAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$UserGrammarProgressTableUpdateCompanionBuilder =
+    UserGrammarProgressCompanion Function({
+      Value<String> topicId,
+      Value<String> status,
+      Value<int> bestScore,
+      Value<int> attempts,
+      Value<DateTime?> completedAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
+
+final class $$UserGrammarProgressTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $UserGrammarProgressTable,
+          UserGrammarProgressRow
+        > {
+  $$UserGrammarProgressTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $GrammarTopicsTable _topicIdTable(_$AppDatabase db) => db.grammarTopics
+      .createAlias('user_grammar_progress__topic_id__grammar_topics__id');
+
+  $$GrammarTopicsTableProcessedTableManager get topicId {
+    final $_column = $_itemColumn<String>('topic_id')!;
+
+    final manager = $$GrammarTopicsTableTableManager(
+      $_db,
+      $_db.grammarTopics,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_topicIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$UserGrammarProgressTableFilterComposer
+    extends Composer<_$AppDatabase, $UserGrammarProgressTable> {
+  $$UserGrammarProgressTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get bestScore => $composableBuilder(
+    column: $table.bestScore,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get attempts => $composableBuilder(
+    column: $table.attempts,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$GrammarTopicsTableFilterComposer get topicId {
+    final $$GrammarTopicsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.grammarTopics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarTopicsTableFilterComposer(
+            $db: $db,
+            $table: $db.grammarTopics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UserGrammarProgressTableOrderingComposer
+    extends Composer<_$AppDatabase, $UserGrammarProgressTable> {
+  $$UserGrammarProgressTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get bestScore => $composableBuilder(
+    column: $table.bestScore,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get attempts => $composableBuilder(
+    column: $table.attempts,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$GrammarTopicsTableOrderingComposer get topicId {
+    final $$GrammarTopicsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.grammarTopics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarTopicsTableOrderingComposer(
+            $db: $db,
+            $table: $db.grammarTopics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UserGrammarProgressTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UserGrammarProgressTable> {
+  $$UserGrammarProgressTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<int> get bestScore =>
+      $composableBuilder(column: $table.bestScore, builder: (column) => column);
+
+  GeneratedColumn<int> get attempts =>
+      $composableBuilder(column: $table.attempts, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  $$GrammarTopicsTableAnnotationComposer get topicId {
+    final $$GrammarTopicsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.grammarTopics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$GrammarTopicsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.grammarTopics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UserGrammarProgressTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $UserGrammarProgressTable,
+          UserGrammarProgressRow,
+          $$UserGrammarProgressTableFilterComposer,
+          $$UserGrammarProgressTableOrderingComposer,
+          $$UserGrammarProgressTableAnnotationComposer,
+          $$UserGrammarProgressTableCreateCompanionBuilder,
+          $$UserGrammarProgressTableUpdateCompanionBuilder,
+          (UserGrammarProgressRow, $$UserGrammarProgressTableReferences),
+          UserGrammarProgressRow,
+          PrefetchHooks Function({bool topicId})
+        > {
+  $$UserGrammarProgressTableTableManager(
+    _$AppDatabase db,
+    $UserGrammarProgressTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UserGrammarProgressTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UserGrammarProgressTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$UserGrammarProgressTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> topicId = const Value.absent(),
+                Value<String> status = const Value.absent(),
+                Value<int> bestScore = const Value.absent(),
+                Value<int> attempts = const Value.absent(),
+                Value<DateTime?> completedAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UserGrammarProgressCompanion(
+                topicId: topicId,
+                status: status,
+                bestScore: bestScore,
+                attempts: attempts,
+                completedAt: completedAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String topicId,
+                Value<String> status = const Value.absent(),
+                Value<int> bestScore = const Value.absent(),
+                Value<int> attempts = const Value.absent(),
+                Value<DateTime?> completedAt = const Value.absent(),
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => UserGrammarProgressCompanion.insert(
+                topicId: topicId,
+                status: status,
+                bestScore: bestScore,
+                attempts: attempts,
+                completedAt: completedAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<
+                    $UserGrammarProgressTable,
+                    UserGrammarProgressRow
+                  >(table),
+                  $$UserGrammarProgressTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({topicId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (topicId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.topicId,
+                        referencedTable: $$UserGrammarProgressTableReferences
+                            ._topicIdTable(db),
+                        referencedColumn: $$UserGrammarProgressTableReferences
+                            ._topicIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$UserGrammarProgressTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $UserGrammarProgressTable,
+      UserGrammarProgressRow,
+      $$UserGrammarProgressTableFilterComposer,
+      $$UserGrammarProgressTableOrderingComposer,
+      $$UserGrammarProgressTableAnnotationComposer,
+      $$UserGrammarProgressTableCreateCompanionBuilder,
+      $$UserGrammarProgressTableUpdateCompanionBuilder,
+      (UserGrammarProgressRow, $$UserGrammarProgressTableReferences),
+      UserGrammarProgressRow,
+      PrefetchHooks Function({bool topicId})
+    >;
+typedef $$TopicQuestionsTableCreateCompanionBuilder =
+    TopicQuestionsCompanion Function({
+      required String id,
+      required String topicId,
+      required String cefrLevel,
+      required String promptEn,
+      required String promptAr,
+      required String suggestedAnswer,
+      Value<int> sortOrder,
+      Value<bool> isDevelopmentSample,
+      Value<int> rowid,
+    });
+typedef $$TopicQuestionsTableUpdateCompanionBuilder =
+    TopicQuestionsCompanion Function({
+      Value<String> id,
+      Value<String> topicId,
+      Value<String> cefrLevel,
+      Value<String> promptEn,
+      Value<String> promptAr,
+      Value<String> suggestedAnswer,
+      Value<int> sortOrder,
+      Value<bool> isDevelopmentSample,
+      Value<int> rowid,
+    });
+
+final class $$TopicQuestionsTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $TopicQuestionsTable, TopicQuestionRow> {
+  $$TopicQuestionsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $TopicsTable _topicIdTable(_$AppDatabase db) =>
+      db.topics.createAlias('topic_questions__topic_id__topics__id');
+
+  $$TopicsTableProcessedTableManager get topicId {
+    final $_column = $_itemColumn<String>('topic_id')!;
+
+    final manager = $$TopicsTableTableManager(
+      $_db,
+      $_db.topics,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_topicIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static MultiTypedResultKey<$UserTopicAnswersTable, List<UserTopicAnswerRow>>
+  _userTopicAnswersRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.userTopicAnswers,
+    aliasName: 'topic_questions__id__user_topic_answers__question_id',
+  );
+
+  $$UserTopicAnswersTableProcessedTableManager get userTopicAnswersRefs {
+    final manager = $$UserTopicAnswersTableTableManager(
+      $_db,
+      $_db.userTopicAnswers,
+    ).filter((f) => f.questionId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _userTopicAnswersRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$TopicQuestionsTableFilterComposer
+    extends Composer<_$AppDatabase, $TopicQuestionsTable> {
+  $$TopicQuestionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get cefrLevel => $composableBuilder(
+    column: $table.cefrLevel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get promptEn => $composableBuilder(
+    column: $table.promptEn,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get promptAr => $composableBuilder(
+    column: $table.promptAr,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get suggestedAnswer => $composableBuilder(
+    column: $table.suggestedAnswer,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isDevelopmentSample => $composableBuilder(
+    column: $table.isDevelopmentSample,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$TopicsTableFilterComposer get topicId {
+    final $$TopicsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.topics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicsTableFilterComposer(
+            $db: $db,
+            $table: $db.topics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<bool> userTopicAnswersRefs(
+    Expression<bool> Function($$UserTopicAnswersTableFilterComposer f) f,
+  ) {
+    final $$UserTopicAnswersTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.userTopicAnswers,
+      getReferencedColumn: (t) => t.questionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UserTopicAnswersTableFilterComposer(
+            $db: $db,
+            $table: $db.userTopicAnswers,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$TopicQuestionsTableOrderingComposer
+    extends Composer<_$AppDatabase, $TopicQuestionsTable> {
+  $$TopicQuestionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get cefrLevel => $composableBuilder(
+    column: $table.cefrLevel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get promptEn => $composableBuilder(
+    column: $table.promptEn,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get promptAr => $composableBuilder(
+    column: $table.promptAr,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get suggestedAnswer => $composableBuilder(
+    column: $table.suggestedAnswer,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isDevelopmentSample => $composableBuilder(
+    column: $table.isDevelopmentSample,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$TopicsTableOrderingComposer get topicId {
+    final $$TopicsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.topics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicsTableOrderingComposer(
+            $db: $db,
+            $table: $db.topics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$TopicQuestionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $TopicQuestionsTable> {
+  $$TopicQuestionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get cefrLevel =>
+      $composableBuilder(column: $table.cefrLevel, builder: (column) => column);
+
+  GeneratedColumn<String> get promptEn =>
+      $composableBuilder(column: $table.promptEn, builder: (column) => column);
+
+  GeneratedColumn<String> get promptAr =>
+      $composableBuilder(column: $table.promptAr, builder: (column) => column);
+
+  GeneratedColumn<String> get suggestedAnswer => $composableBuilder(
+    column: $table.suggestedAnswer,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get sortOrder =>
+      $composableBuilder(column: $table.sortOrder, builder: (column) => column);
+
+  GeneratedColumn<bool> get isDevelopmentSample => $composableBuilder(
+    column: $table.isDevelopmentSample,
+    builder: (column) => column,
+  );
+
+  $$TopicsTableAnnotationComposer get topicId {
+    final $$TopicsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.topicId,
+      referencedTable: $db.topics,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.topics,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<T> userTopicAnswersRefs<T extends Object>(
+    Expression<T> Function($$UserTopicAnswersTableAnnotationComposer a) f,
+  ) {
+    final $$UserTopicAnswersTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.userTopicAnswers,
+      getReferencedColumn: (t) => t.questionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UserTopicAnswersTableAnnotationComposer(
+            $db: $db,
+            $table: $db.userTopicAnswers,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$TopicQuestionsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $TopicQuestionsTable,
+          TopicQuestionRow,
+          $$TopicQuestionsTableFilterComposer,
+          $$TopicQuestionsTableOrderingComposer,
+          $$TopicQuestionsTableAnnotationComposer,
+          $$TopicQuestionsTableCreateCompanionBuilder,
+          $$TopicQuestionsTableUpdateCompanionBuilder,
+          (TopicQuestionRow, $$TopicQuestionsTableReferences),
+          TopicQuestionRow,
+          PrefetchHooks Function({bool topicId, bool userTopicAnswersRefs})
+        > {
+  $$TopicQuestionsTableTableManager(
+    _$AppDatabase db,
+    $TopicQuestionsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$TopicQuestionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$TopicQuestionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$TopicQuestionsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> topicId = const Value.absent(),
+                Value<String> cefrLevel = const Value.absent(),
+                Value<String> promptEn = const Value.absent(),
+                Value<String> promptAr = const Value.absent(),
+                Value<String> suggestedAnswer = const Value.absent(),
+                Value<int> sortOrder = const Value.absent(),
+                Value<bool> isDevelopmentSample = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => TopicQuestionsCompanion(
+                id: id,
+                topicId: topicId,
+                cefrLevel: cefrLevel,
+                promptEn: promptEn,
+                promptAr: promptAr,
+                suggestedAnswer: suggestedAnswer,
+                sortOrder: sortOrder,
+                isDevelopmentSample: isDevelopmentSample,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String topicId,
+                required String cefrLevel,
+                required String promptEn,
+                required String promptAr,
+                required String suggestedAnswer,
+                Value<int> sortOrder = const Value.absent(),
+                Value<bool> isDevelopmentSample = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => TopicQuestionsCompanion.insert(
+                id: id,
+                topicId: topicId,
+                cefrLevel: cefrLevel,
+                promptEn: promptEn,
+                promptAr: promptAr,
+                suggestedAnswer: suggestedAnswer,
+                sortOrder: sortOrder,
+                isDevelopmentSample: isDevelopmentSample,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$TopicQuestionsTable, TopicQuestionRow>(table),
+                  $$TopicQuestionsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({topicId = false, userTopicAnswersRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (userTopicAnswersRefs) db.userTopicAnswers,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (topicId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.topicId,
+                            referencedTable: $$TopicQuestionsTableReferences
+                                ._topicIdTable(db),
+                            referencedColumn: $$TopicQuestionsTableReferences
+                                ._topicIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (userTopicAnswersRefs)
+                        await $_getPrefetchedData<
+                          TopicQuestionRow,
+                          $TopicQuestionsTable,
+                          UserTopicAnswerRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$TopicQuestionsTableReferences
+                              ._userTopicAnswersRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$TopicQuestionsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).userTopicAnswersRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.questionId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$TopicQuestionsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $TopicQuestionsTable,
+      TopicQuestionRow,
+      $$TopicQuestionsTableFilterComposer,
+      $$TopicQuestionsTableOrderingComposer,
+      $$TopicQuestionsTableAnnotationComposer,
+      $$TopicQuestionsTableCreateCompanionBuilder,
+      $$TopicQuestionsTableUpdateCompanionBuilder,
+      (TopicQuestionRow, $$TopicQuestionsTableReferences),
+      TopicQuestionRow,
+      PrefetchHooks Function({bool topicId, bool userTopicAnswersRefs})
+    >;
+typedef $$UserTopicAnswersTableCreateCompanionBuilder =
+    UserTopicAnswersCompanion Function({
+      required String id,
+      required String questionId,
+      required String answerText,
+      required DateTime createdAt,
+      Value<int> rowid,
+    });
+typedef $$UserTopicAnswersTableUpdateCompanionBuilder =
+    UserTopicAnswersCompanion Function({
+      Value<String> id,
+      Value<String> questionId,
+      Value<String> answerText,
+      Value<DateTime> createdAt,
+      Value<int> rowid,
+    });
+
+final class $$UserTopicAnswersTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $UserTopicAnswersTable,
+          UserTopicAnswerRow
+        > {
+  $$UserTopicAnswersTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $TopicQuestionsTable _questionIdTable(_$AppDatabase db) => db
+      .topicQuestions
+      .createAlias('user_topic_answers__question_id__topic_questions__id');
+
+  $$TopicQuestionsTableProcessedTableManager get questionId {
+    final $_column = $_itemColumn<String>('question_id')!;
+
+    final manager = $$TopicQuestionsTableTableManager(
+      $_db,
+      $_db.topicQuestions,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_questionIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$UserTopicAnswersTableFilterComposer
+    extends Composer<_$AppDatabase, $UserTopicAnswersTable> {
+  $$UserTopicAnswersTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get answerText => $composableBuilder(
+    column: $table.answerText,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$TopicQuestionsTableFilterComposer get questionId {
+    final $$TopicQuestionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.questionId,
+      referencedTable: $db.topicQuestions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicQuestionsTableFilterComposer(
+            $db: $db,
+            $table: $db.topicQuestions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UserTopicAnswersTableOrderingComposer
+    extends Composer<_$AppDatabase, $UserTopicAnswersTable> {
+  $$UserTopicAnswersTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get answerText => $composableBuilder(
+    column: $table.answerText,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$TopicQuestionsTableOrderingComposer get questionId {
+    final $$TopicQuestionsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.questionId,
+      referencedTable: $db.topicQuestions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicQuestionsTableOrderingComposer(
+            $db: $db,
+            $table: $db.topicQuestions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UserTopicAnswersTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UserTopicAnswersTable> {
+  $$UserTopicAnswersTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get answerText => $composableBuilder(
+    column: $table.answerText,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$TopicQuestionsTableAnnotationComposer get questionId {
+    final $$TopicQuestionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.questionId,
+      referencedTable: $db.topicQuestions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TopicQuestionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.topicQuestions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UserTopicAnswersTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $UserTopicAnswersTable,
+          UserTopicAnswerRow,
+          $$UserTopicAnswersTableFilterComposer,
+          $$UserTopicAnswersTableOrderingComposer,
+          $$UserTopicAnswersTableAnnotationComposer,
+          $$UserTopicAnswersTableCreateCompanionBuilder,
+          $$UserTopicAnswersTableUpdateCompanionBuilder,
+          (UserTopicAnswerRow, $$UserTopicAnswersTableReferences),
+          UserTopicAnswerRow,
+          PrefetchHooks Function({bool questionId})
+        > {
+  $$UserTopicAnswersTableTableManager(
+    _$AppDatabase db,
+    $UserTopicAnswersTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UserTopicAnswersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UserTopicAnswersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UserTopicAnswersTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> questionId = const Value.absent(),
+                Value<String> answerText = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UserTopicAnswersCompanion(
+                id: id,
+                questionId: questionId,
+                answerText: answerText,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String questionId,
+                required String answerText,
+                required DateTime createdAt,
+                Value<int> rowid = const Value.absent(),
+              }) => UserTopicAnswersCompanion.insert(
+                id: id,
+                questionId: questionId,
+                answerText: answerText,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$UserTopicAnswersTable, UserTopicAnswerRow>(
+                    table,
+                  ),
+                  $$UserTopicAnswersTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({questionId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (questionId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.questionId,
+                        referencedTable: $$UserTopicAnswersTableReferences
+                            ._questionIdTable(db),
+                        referencedColumn: $$UserTopicAnswersTableReferences
+                            ._questionIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$UserTopicAnswersTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $UserTopicAnswersTable,
+      UserTopicAnswerRow,
+      $$UserTopicAnswersTableFilterComposer,
+      $$UserTopicAnswersTableOrderingComposer,
+      $$UserTopicAnswersTableAnnotationComposer,
+      $$UserTopicAnswersTableCreateCompanionBuilder,
+      $$UserTopicAnswersTableUpdateCompanionBuilder,
+      (UserTopicAnswerRow, $$UserTopicAnswersTableReferences),
+      UserTopicAnswerRow,
+      PrefetchHooks Function({bool questionId})
+    >;
+typedef $$UserAchievementsTableCreateCompanionBuilder =
+    UserAchievementsCompanion Function({
+      required String id,
+      required DateTime unlockedAt,
+      Value<bool> celebrated,
+      Value<int> rowid,
+    });
+typedef $$UserAchievementsTableUpdateCompanionBuilder =
+    UserAchievementsCompanion Function({
+      Value<String> id,
+      Value<DateTime> unlockedAt,
+      Value<bool> celebrated,
+      Value<int> rowid,
+    });
+
+class $$UserAchievementsTableFilterComposer
+    extends Composer<_$AppDatabase, $UserAchievementsTable> {
+  $$UserAchievementsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get unlockedAt => $composableBuilder(
+    column: $table.unlockedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get celebrated => $composableBuilder(
+    column: $table.celebrated,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$UserAchievementsTableOrderingComposer
+    extends Composer<_$AppDatabase, $UserAchievementsTable> {
+  $$UserAchievementsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get unlockedAt => $composableBuilder(
+    column: $table.unlockedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get celebrated => $composableBuilder(
+    column: $table.celebrated,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$UserAchievementsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UserAchievementsTable> {
+  $$UserAchievementsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get unlockedAt => $composableBuilder(
+    column: $table.unlockedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get celebrated => $composableBuilder(
+    column: $table.celebrated,
+    builder: (column) => column,
+  );
+}
+
+class $$UserAchievementsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $UserAchievementsTable,
+          UserAchievementRow,
+          $$UserAchievementsTableFilterComposer,
+          $$UserAchievementsTableOrderingComposer,
+          $$UserAchievementsTableAnnotationComposer,
+          $$UserAchievementsTableCreateCompanionBuilder,
+          $$UserAchievementsTableUpdateCompanionBuilder,
+          (
+            UserAchievementRow,
+            BaseReferences<
+              _$AppDatabase,
+              $UserAchievementsTable,
+              UserAchievementRow
+            >,
+          ),
+          UserAchievementRow,
+          PrefetchHooks Function()
+        > {
+  $$UserAchievementsTableTableManager(
+    _$AppDatabase db,
+    $UserAchievementsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UserAchievementsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UserAchievementsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UserAchievementsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<DateTime> unlockedAt = const Value.absent(),
+                Value<bool> celebrated = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UserAchievementsCompanion(
+                id: id,
+                unlockedAt: unlockedAt,
+                celebrated: celebrated,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required DateTime unlockedAt,
+                Value<bool> celebrated = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UserAchievementsCompanion.insert(
+                id: id,
+                unlockedAt: unlockedAt,
+                celebrated: celebrated,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$UserAchievementsTable, UserAchievementRow>(
+                    table,
+                  ),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $UserAchievementsTable,
+                    UserAchievementRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$UserAchievementsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $UserAchievementsTable,
+      UserAchievementRow,
+      $$UserAchievementsTableFilterComposer,
+      $$UserAchievementsTableOrderingComposer,
+      $$UserAchievementsTableAnnotationComposer,
+      $$UserAchievementsTableCreateCompanionBuilder,
+      $$UserAchievementsTableUpdateCompanionBuilder,
+      (
+        UserAchievementRow,
+        BaseReferences<
+          _$AppDatabase,
+          $UserAchievementsTable,
+          UserAchievementRow
+        >,
+      ),
+      UserAchievementRow,
+      PrefetchHooks Function()
+    >;
+typedef $$LearningDaysTableCreateCompanionBuilder =
+    LearningDaysCompanion Function({
+      required String day,
+      Value<int> activeSeconds,
+      Value<int> reviews,
+      Value<int> exercises,
+      Value<int> rowid,
+    });
+typedef $$LearningDaysTableUpdateCompanionBuilder =
+    LearningDaysCompanion Function({
+      Value<String> day,
+      Value<int> activeSeconds,
+      Value<int> reviews,
+      Value<int> exercises,
+      Value<int> rowid,
+    });
+
+class $$LearningDaysTableFilterComposer
+    extends Composer<_$AppDatabase, $LearningDaysTable> {
+  $$LearningDaysTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get activeSeconds => $composableBuilder(
+    column: $table.activeSeconds,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get reviews => $composableBuilder(
+    column: $table.reviews,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get exercises => $composableBuilder(
+    column: $table.exercises,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$LearningDaysTableOrderingComposer
+    extends Composer<_$AppDatabase, $LearningDaysTable> {
+  $$LearningDaysTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get activeSeconds => $composableBuilder(
+    column: $table.activeSeconds,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get reviews => $composableBuilder(
+    column: $table.reviews,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get exercises => $composableBuilder(
+    column: $table.exercises,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$LearningDaysTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LearningDaysTable> {
+  $$LearningDaysTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get day =>
+      $composableBuilder(column: $table.day, builder: (column) => column);
+
+  GeneratedColumn<int> get activeSeconds => $composableBuilder(
+    column: $table.activeSeconds,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get reviews =>
+      $composableBuilder(column: $table.reviews, builder: (column) => column);
+
+  GeneratedColumn<int> get exercises =>
+      $composableBuilder(column: $table.exercises, builder: (column) => column);
+}
+
+class $$LearningDaysTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $LearningDaysTable,
+          LearningDayRow,
+          $$LearningDaysTableFilterComposer,
+          $$LearningDaysTableOrderingComposer,
+          $$LearningDaysTableAnnotationComposer,
+          $$LearningDaysTableCreateCompanionBuilder,
+          $$LearningDaysTableUpdateCompanionBuilder,
+          (
+            LearningDayRow,
+            BaseReferences<_$AppDatabase, $LearningDaysTable, LearningDayRow>,
+          ),
+          LearningDayRow,
+          PrefetchHooks Function()
+        > {
+  $$LearningDaysTableTableManager(_$AppDatabase db, $LearningDaysTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LearningDaysTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LearningDaysTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LearningDaysTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> day = const Value.absent(),
+                Value<int> activeSeconds = const Value.absent(),
+                Value<int> reviews = const Value.absent(),
+                Value<int> exercises = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => LearningDaysCompanion(
+                day: day,
+                activeSeconds: activeSeconds,
+                reviews: reviews,
+                exercises: exercises,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String day,
+                Value<int> activeSeconds = const Value.absent(),
+                Value<int> reviews = const Value.absent(),
+                Value<int> exercises = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => LearningDaysCompanion.insert(
+                day: day,
+                activeSeconds: activeSeconds,
+                reviews: reviews,
+                exercises: exercises,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$LearningDaysTable, LearningDayRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $LearningDaysTable,
+                    LearningDayRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$LearningDaysTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $LearningDaysTable,
+      LearningDayRow,
+      $$LearningDaysTableFilterComposer,
+      $$LearningDaysTableOrderingComposer,
+      $$LearningDaysTableAnnotationComposer,
+      $$LearningDaysTableCreateCompanionBuilder,
+      $$LearningDaysTableUpdateCompanionBuilder,
+      (
+        LearningDayRow,
+        BaseReferences<_$AppDatabase, $LearningDaysTable, LearningDayRow>,
+      ),
+      LearningDayRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -23317,4 +30326,20 @@ class $AppDatabaseManager {
       $$LearningPathsTableTableManager(_db, _db.learningPaths);
   $$LearningPathTopicsTableTableManager get learningPathTopics =>
       $$LearningPathTopicsTableTableManager(_db, _db.learningPathTopics);
+  $$GrammarTopicsTableTableManager get grammarTopics =>
+      $$GrammarTopicsTableTableManager(_db, _db.grammarTopics);
+  $$GrammarLessonsTableTableManager get grammarLessons =>
+      $$GrammarLessonsTableTableManager(_db, _db.grammarLessons);
+  $$GrammarExercisesTableTableManager get grammarExercises =>
+      $$GrammarExercisesTableTableManager(_db, _db.grammarExercises);
+  $$UserGrammarProgressTableTableManager get userGrammarProgress =>
+      $$UserGrammarProgressTableTableManager(_db, _db.userGrammarProgress);
+  $$TopicQuestionsTableTableManager get topicQuestions =>
+      $$TopicQuestionsTableTableManager(_db, _db.topicQuestions);
+  $$UserTopicAnswersTableTableManager get userTopicAnswers =>
+      $$UserTopicAnswersTableTableManager(_db, _db.userTopicAnswers);
+  $$UserAchievementsTableTableManager get userAchievements =>
+      $$UserAchievementsTableTableManager(_db, _db.userAchievements);
+  $$LearningDaysTableTableManager get learningDays =>
+      $$LearningDaysTableTableManager(_db, _db.learningDays);
 }

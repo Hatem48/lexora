@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:drift/drift.dart';
 
 import '../../database/app_database.dart';
+import '../progress/learning_activity_store.dart';
 import '../topics/topic_repository.dart';
 import 'vocabulary_detection_engine.dart';
 
@@ -136,6 +137,10 @@ class VocabularyDiscoveryRepository {
         }
       }
     });
+
+    if (newly.isNotEmpty) {
+      await AchievementService(_db).sync();
+    }
 
     final detectedTopics = await TopicRepository(_db).detectEntryIds(
       hits.map((hit) => hit.entryId),

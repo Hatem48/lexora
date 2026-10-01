@@ -24,7 +24,7 @@ void main() {
     expect(catalog.entries, hasLength(inInclusiveRange(120, 200)));
     final document = TopicCatalogDocument.parse(topicsRaw);
     expect(document.datasetType, 'development');
-    expect(document.identity, '2:development');
+    expect(document.identity, '3:development');
     expect(document.topics.map((topic) => topic.id).toSet(), hasLength(50));
     expect(document.groups, hasLength(9));
     expect(document.paths, hasLength(3));
