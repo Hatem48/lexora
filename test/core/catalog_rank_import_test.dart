@@ -123,4 +123,41 @@ void main() {
     expect(ids, {'school-noun', 'kept'});
     expect(await db.select(db.userVocabulary).get(), hasLength(1));
   });
+
+  test('a lemma shared by two parts of speech is not assigned to either', () async {
+    final db = AppDatabase(NativeDatabase.memory());
+    addTearDown(db.close);
+    const raw = '''
+{
+  "version": 2,
+  "datasetType": "production",
+  "entries": [
+    {
+      "id": "record-noun",
+      "lemma": "record",
+      "cefr": "B1",
+      "pos": "noun",
+      "definitionEn": "",
+      "arabicMeaning": "",
+      "example": "",
+      "forms": ["records"]
+    },
+    {
+      "id": "record-verb",
+      "lemma": "record",
+      "cefr": "A2",
+      "pos": "verb",
+      "definitionEn": "",
+      "arabicMeaning": "",
+      "example": "",
+      "forms": ["recorded"]
+    }
+  ]
+}
+''';
+    await VocabularyCatalogImporter(db).importJson(raw);
+    final forms = await db.select(db.vocabularyForms).get();
+    expect(forms.map((row) => row.surface), containsAll(['records', 'recorded']));
+    expect(forms.map((row) => row.surface), isNot(contains('record')));
+  });
 }

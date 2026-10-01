@@ -1,53 +1,74 @@
 # Vocabulary source attribution
 
-The `catalog.json` currently in the app is original practice text marked `datasetType: development`. It is not the CEFR-J, Octanove, NGSL, or NAWL lists, and its definitions were written for trying the app. Those licensed sources apply only after the vocabulary pipeline replaces the file with `datasetType: production`.
+Retrieved on 1 October 2026. `assets/vocabulary/catalog.json` is the generated production catalog (`datasetType: production`, version 2). Definitions, Arabic meanings, example sentences, and inflections were not added, because none of these sources supply a licensed English definition, Arabic gloss, or inflection list for the app. Topic links were not generated. The previous practice catalog is kept at `data/vocabulary/catalog.development.json` and is not loaded by the app.
 
-Lexora does not ship the upstream word lists inside the app binary until a generated `catalog.json` is produced. When that file is published, cite the sources that were actually merged.
+CEFR levels come only from CEFR-J (A1–B2) and Octanove (C1–C2). When those sources disagree, or when one source lists two levels for the same lemma and part of speech, the entry is left out of the catalog and recorded in `build/vocabulary/conflicts.json`. NGSL, NGSL-Spoken, and NAWL add rank and the tags general, spoken, and academic. They do not set CEFR level.
 
 ## CEFR-J Vocabulary Profile 1.5
 
+- Dataset: CEFR-J Vocabulary Profile 1.5
 - Compiler: Yukio Tono, Tono Laboratory, Tokyo University of Foreign Studies
-- Role in Lexora: CEFR levels A1–B2
-- Redistribution used by this pipeline: Open Language Profiles `cefrj-vocabulary-profile-1.5.csv`
-- Terms stated by Open Language Profiles: research and commercial use with no charge, provided the dataset is cited. Copyright remains with Tono Laboratory at TUFS.
-- Source page: http://www.cefr-j.org/download.html
-- Profile copy: https://github.com/openlanguageprofiles/olp-en-cefrj
+- Role in Lexora: lemma, part of speech, and CEFR for A1–B2
+- File used: `data/vocabulary/raw/cefrj-vocabulary-profile-1.5.csv`
+- Retrieved from: https://github.com/openlanguageprofiles/olp-en-cefrj/blob/master/cefrj-vocabulary-profile-1.5.csv
+- Terms stated by Open Language Profiles: the CEFR-J vocabulary and grammar profiles may be used for research and commercial purposes at no charge, provided the dataset is cited. Copyright remains with Tono Laboratory at TUFS.
+- Official project page: http://www.cefr-j.org/download.html
+- Retrieved: 1 October 2026
 
 Suggested citation: The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies.
 
 ## Octanove Vocabulary Profile C1/C2 1.0
 
+- Dataset: Octanove Vocabulary Profile C1/C2
+- Version: 1.0
 - Creator: Octanove Labs
-- Role in Lexora: CEFR levels C1–C2
-- File: `octanove-vocabulary-profile-c1c2-1.0.csv`
+- Role in Lexora: lemma, part of speech, and CEFR for C1–C2
+- File used: `data/vocabulary/raw/octanove-vocabulary-profile-c1c2-1.0.csv`
+- Retrieved from: https://github.com/openlanguageprofiles/olp-en-cefrj/blob/master/octanove-vocabulary-profile-c1c2-1.0.csv
 - License: Creative Commons Attribution-ShareAlike 4.0 International
-- Profile copy: https://github.com/openlanguageprofiles/olp-en-cefrj
+- Retrieved: 1 October 2026
 
 ## NGSL 1.2
 
+- Dataset: New General Service List
+- Version: 1.2 stats
 - Creators: Charles Browne, Brent Culligan, and Joseph Phillips
-- Role in Lexora: General English membership and frequency rank
+- Role in Lexora: general-English tag and general frequency rank. No CEFR change.
+- File used: `data/vocabulary/raw/ngsl-1.2.csv`
+- Retrieved from: https://www.newgeneralservicelist.com/s/NGSL_12_stats.csv
 - License: Creative Commons Attribution-ShareAlike 4.0 International
 - Project: https://www.newgeneralservicelist.com/new-general-service-list
+- Retrieved: 1 October 2026
 
 Suggested citation: Browne, C., Culligan, B. & Phillips, J. (2013). The New General Service List. Retrieved from https://www.newgeneralservicelist.com
 
 ## NGSL-Spoken 1.2
 
+- Dataset: NGSL-Spoken
+- Version: 1.2 stats
 - Creators: Charles Browne and Brent Culligan
-- Role in Lexora: Spoken English membership and frequency rank
+- Role in Lexora: spoken tag and spoken frequency rank. No CEFR change.
+- File used: `data/vocabulary/raw/ngsl-spoken-1.2.csv`
+- Retrieved from: https://www.newgeneralservicelist.com/s/NGSL-Spoken_12_stats.csv
 - License: Creative Commons Attribution-ShareAlike 4.0 International
 - Project: https://www.newgeneralservicelist.com/ngsl-spoken
+- Retrieved: 1 October 2026
+- The published stats row for `TRUE` has rank `#N/A`. That row is rejected and is not given a spoken rank.
 
 ## NAWL 1.2
 
+- Dataset: New Academic Word List
+- Version: 1.2 stats
 - Creators: Charles Browne, Brent Culligan, and Joseph Phillips
-- Role in Lexora: academic membership and academic rank
+- Role in Lexora: academic tag and academic rank. No CEFR change.
+- File used: `data/vocabulary/raw/nawl-1.2.csv`
+- Retrieved from: https://www.newgeneralservicelist.com/s/NAWL_12_stats.csv
 - License: Creative Commons Attribution-ShareAlike 4.0 International
 - Project: https://www.newgeneralservicelist.com
+- Retrieved: 1 October 2026
 
 ## What Lexora adds
 
-CEFR levels are copied only from CEFR-J or Octanove. Frequency and academic flags are copied only from NGSL, NGSL-Spoken, and NAWL. Definitions, Arabic meanings, and examples are left empty unless a later licensed source is added. Inflections are not invented.
+Nothing was invented for a missing definition, Arabic meaning, example, inflection, or topic. A headword whose part of speech is not a real category in these files is rejected instead of assigned a guessed category. The rejected rows are `to` marked `infinitive-to` in CEFR-J, `batter` with an empty part of speech in Octanove, and `remonstrate` marked `vern` in Octanove. `to` remains in the catalog as a preposition because that separate CEFR-J row is valid.
 
-Because Octanove, NGSL, NGSL-Spoken, and NAWL use CC BY-SA 4.0, a published `catalog.json` that contains those entries needs the same attribution and ShareAlike terms. This file is the place those notices live. The app UI does not paste the license text.
+Because Octanove, NGSL, NGSL-Spoken, and NAWL use CC BY-SA 4.0, a published catalog that contains those entries needs this attribution and the ShareAlike terms. The app UI does not paste the license text.

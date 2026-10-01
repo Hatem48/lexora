@@ -25,7 +25,12 @@ List<CefrObservation> readCefrCsv(String raw, String fileName, String sourceId) 
   ];
 }
 
-List<RankObservation> readRankCsv(String raw, String fileName, String sourceId) {
+List<RankObservation> readRankCsv(
+  String raw,
+  String fileName,
+  String sourceId, {
+  List<String>? rejected,
+}) {
   final table = CsvTable.parse(raw, fileName);
   final lemmaIndex = table.requireColumn(
     const ['lemma', 'headword', 'word'],
@@ -43,9 +48,10 @@ List<RankObservation> readRankCsv(String raw, String fileName, String sourceId) 
     final rankRaw = table.cell(row, rankIndex);
     final rank = int.tryParse(rankRaw);
     if (rank == null) {
-      throw FormatException(
-        '$fileName has a non-numeric rank "$rankRaw" for "$lemma".',
+      rejected?.add(
+        '$fileName rejected non-numeric rank "$rankRaw" for "$lemma".',
       );
+      continue;
     }
     final posRaw = posIndex == null ? '' : table.cell(row, posIndex);
     String? pos;

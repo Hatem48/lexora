@@ -34,7 +34,7 @@ dart run --directory=tools/vocabulary_pipeline bin/generate.dart
 ## سياسة CEFR
 
 1. المستوى يُقبل فقط من CEFR-J أو Octanove.
-2. إذا قدّم مصدر واحد مستوى صالحاً، يُستخدم ذلك المستوى.
+2. إذا قدّم مصدر واحد مستوى صالحاً واحداً، يُستخدم ذلك المستوى. إذا سرد المصدر نفسه مستويين، يُستبعد المدخل وتُكتب المستويات معاً في `conflicts.json`.
 3. إذا قدّم المصدران المستوى نفسه، يُستخدم ويُسجَّل الاثنان في `sources.cefr`.
 4. إذا اختلفا، لا يُختار مستوى. المدخل يُستبعد من الكتالوج ويُكتب في `build/vocabulary/conflicts.json`.
 5. NGSL وNGSL-Spoken وNAWL لا تغيّر CEFR. كلمة بلا مستوى من المصدرين الأولين لا تدخل الكتالوج.
@@ -45,9 +45,13 @@ dart run --directory=tools/vocabulary_pipeline bin/generate.dart
 ## المخرجات
 
 - `assets/vocabulary/catalog.json`
+- `build/vocabulary/summary.json`
 - `build/vocabulary/statistics.json`
 - `build/vocabulary/conflicts.json`
+- `build/vocabulary/rejected.json` للصفوف المرفوضة، مثل رتبة `#N/A` أو جزء كلام غير معروف
 - `build/vocabulary/topic_links.json` فارغ إلى أن يوجد ملف الربط
+
+معرّف مكرر يوقف الكتابة. صف مرفوض لا يوقف بقية الكتالوج.
 
 الأوزان في `config/priority_weights.json`. الحقول بلا مصدر تبقى فارغة أو `false` أو `null`.
 

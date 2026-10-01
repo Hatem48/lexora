@@ -13,7 +13,8 @@ import 'package:lexora/core/services/vocabulary/vocabulary_discovery_repository.
 import 'package:sqlite3/sqlite3.dart';
 
 void main() {
-  final catalogRaw = File('assets/vocabulary/catalog.json').readAsStringSync();
+  final catalogRaw =
+      File('data/vocabulary/catalog.development.json').readAsStringSync();
   final topicsRaw = File('assets/vocabulary/topics.json').readAsStringSync();
 
   test('topics catalog has 50 topics and grouped paths', () {

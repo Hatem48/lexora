@@ -19,7 +19,11 @@ String canonicalLemma(String raw) {
 }
 
 String canonicalPos(String raw) {
-  final key = raw.trim().toLowerCase().replaceAll('_', '-');
+  final key = raw
+      .trim()
+      .toLowerCase()
+      .replaceAll('_', '-')
+      .replaceAll(RegExp(r'\s+'), '-');
   return switch (key) {
     'n' || 'nn' || 'noun' => 'noun',
     'v' || 'vb' || 'verb' => 'verb',
@@ -31,7 +35,14 @@ String canonicalPos(String raw) {
     'det' || 'determiner' || 'article' => 'determiner',
     'int' || 'interjection' => 'interjection',
     'num' || 'number' || 'numeral' => 'number',
-    'aux' || 'auxiliary' || 'modal' || 'be-verb' => 'auxiliary',
+    'aux' ||
+    'auxiliary' ||
+    'modal' ||
+    'be-verb' ||
+    'do-verb' ||
+    'have-verb' ||
+    'modal-auxiliary' =>
+      'auxiliary',
     _ => '',
   };
 }

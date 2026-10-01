@@ -144,6 +144,40 @@ void main() {
     expect(result.statistics['conflictsDetected'], 1);
   });
 
+  test('two levels from the same source are both recorded', () {
+    final result = buildCatalog(
+      RawSources(
+        cefr: const [
+          CefrObservation(
+            lemma: 'advantageous',
+            displayLemma: 'advantageous',
+            pos: 'adjective',
+            cefr: 'C1',
+            sourceId: sourceOctanove,
+          ),
+          CefrObservation(
+            lemma: 'advantageous',
+            displayLemma: 'advantageous',
+            pos: 'adjective',
+            cefr: 'C2',
+            sourceId: sourceOctanove,
+          ),
+        ],
+        generalRanks: const [],
+        spokenRanks: const [],
+        academicRanks: const [],
+        forms: const [],
+        topicMappings: const [],
+        ngslLoaded: false,
+        spokenLoaded: false,
+        nawlLoaded: false,
+      ),
+      PriorityConfig.parse(configRaw),
+    );
+    expect(result.entries, isEmpty);
+    expect(result.conflicts.single.levelsBySource[sourceOctanove], 'C1+C2');
+  });
+
   test('identical duplicate rows are counted and do not create two entries', () {
     final result = buildCatalog(sources(), PriorityConfig.parse(configRaw));
     expect(result.statistics['duplicatesResolved'], greaterThan(0));
@@ -251,6 +285,24 @@ void main() {
     expect(result.issues.map((issue) => issue.message).join('\n'), contains('Invalid rank'));
     expect(result.issues.map((issue) => issue.message).join('\n'), contains('missing entry'));
     expect(result.entries, isEmpty);
+  });
+
+  test('CEFR-J auxiliary labels map and a blank spoken rank is rejected', () {
+    expect(canonicalPos('do-verb'), 'auxiliary');
+    expect(canonicalPos('have-verb'), 'auxiliary');
+    expect(canonicalPos('modal auxiliary'), 'auxiliary');
+    expect(canonicalPos('infinitive-to'), isEmpty);
+    expect(canonicalPos('vern'), isEmpty);
+    final rejected = <String>[];
+    final ranks = readRankCsv(
+      'Lemma,Rank\nTRUE,#N/A\nschool,4\n',
+      spokenFileName,
+      sourceNgslSpoken,
+      rejected: rejected,
+    );
+    expect(ranks.single.lemma, 'school');
+    expect(ranks.single.rank, 4);
+    expect(rejected, hasLength(1));
   });
 
   test('malformed csv and json are rejected', () {

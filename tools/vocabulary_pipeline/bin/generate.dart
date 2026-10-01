@@ -8,8 +8,10 @@ void main() {
   try {
     generateCatalog(PipelinePaths(repoRoot));
     stdout.writeln('Wrote assets/vocabulary/catalog.json');
+    stdout.writeln('Reports: build/vocabulary/summary.json');
     stdout.writeln('Reports: build/vocabulary/statistics.json');
     stdout.writeln('Reports: build/vocabulary/conflicts.json');
+    stdout.writeln('Reports: build/vocabulary/rejected.json');
   } on MissingSources catch (error) {
     stderr.writeln(error);
     stderr.writeln('catalog.json was not changed.');

@@ -28,9 +28,15 @@ class VocabularyCatalogImporter {
     final forms = <VocabularyFormsCompanion>[];
     final ranks = <VocabularyEntryRanksCompanion>[];
     final seenSurfaces = <String>{};
+    final lemmaCounts = <String, int>{};
     for (final entry in document.entries) {
+      final lemma = entry.lemma.toLowerCase();
+      lemmaCounts[lemma] = (lemmaCounts[lemma] ?? 0) + 1;
+    }
+    for (final entry in document.entries) {
+      final lemma = entry.lemma.toLowerCase();
       final surfaces = {
-        entry.lemma.toLowerCase(),
+        if (lemma.isNotEmpty && lemmaCounts[lemma] == 1) lemma,
         ...entry.forms.map((form) => form.toLowerCase()),
       };
       for (final surface in surfaces) {

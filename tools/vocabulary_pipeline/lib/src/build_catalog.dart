@@ -87,18 +87,19 @@ BuildResult buildCatalog(RawSources sources, PriorityConfig config) {
   final usedIds = <String>{};
   for (final key in keys) {
     final rows = grouped[key]!;
-    final levels = <String, String>{};
-    var disagreement = false;
+    final observed = <String, Set<String>>{};
     for (final row in rows) {
-      final previous = levels[row.sourceId];
-      if (previous != null && previous != row.cefr) {
-        disagreement = true;
-      }
-      levels[row.sourceId] = row.cefr;
-      if (previous == row.cefr) duplicatesResolved++;
+      final levelsForSource = observed.putIfAbsent(row.sourceId, () => {});
+      if (levelsForSource.contains(row.cefr)) duplicatesResolved++;
+      levelsForSource.add(row.cefr);
     }
-    final distinct = levels.values.toSet();
-    if (disagreement || distinct.length != 1) {
+    final levels = {
+      for (final item in observed.entries)
+        item.key: (item.value.toList()..sort()).join('+'),
+    };
+    final distinct = {for (final values in observed.values) ...values};
+    final sourceDisagrees = observed.values.any((values) => values.length != 1);
+    if (sourceDisagrees || distinct.length != 1) {
       conflicts.add(
         LevelConflict(
           lemma: rows.first.displayLemma,
