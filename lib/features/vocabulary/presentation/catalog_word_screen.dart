@@ -10,8 +10,11 @@ import '../../../core/constants/enums.dart';
 import '../../../core/constants/enum_labels.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/services/progress/learning_activity_store.dart';
 import '../../../core/services/vocabulary/mastery_policy.dart';
 import '../../../core/services/vocabulary/word_form_slots.dart';
+import '../../../core/help/context_help_icon.dart';
+import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../progress/presentation/catalog_progress_section.dart';
 import '../../topics/presentation/topic_icons.dart';
@@ -43,7 +46,12 @@ class CatalogWordScreen extends ConsumerWidget {
     final accent = ref.watch(settingsProvider).accent;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.vocabulary)),
+      appBar: AppBar(
+        title: Text(l10n.vocabulary),
+        actions: const [
+          ContextHelpIcon(topic: HelpTopic.vocabularyDiscovery),
+        ],
+      ),
       body: word.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) => Center(child: Text(l10n.wordNotFound)),
@@ -78,7 +86,10 @@ class CatalogWordScreen extends ConsumerWidget {
                 children: [
                   CefrBadge(level: entry.cefrLevel),
                   Chip(label: Text(partOfSpeechLabel(l10n, entry.partOfSpeech))),
-                  if (entry.academic) Chip(label: Text(l10n.academicWord)),
+                  if (entry.academic) ...[
+                    Chip(label: Text(l10n.academicWord)),
+                    const ContextHelpIcon(topic: HelpTopic.academicTag),
+                  ],
                   _RankTags(entryId: entry.id),
                 ],
               ),
@@ -190,6 +201,7 @@ class CatalogWordScreen extends ConsumerWidget {
     await (db.update(db.userVocabulary)
           ..where((row) => row.entryId.equals(entryId)))
         .write(UserVocabularyCompanion(status: Value(status.storageValue)));
+    await AchievementService(db).sync();
     ref.invalidate(catalogWordProvider(entryId));
     ref.invalidate(catalogProgressProvider);
   }
@@ -267,7 +279,17 @@ class _FormsBlock extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(l10n.wordForms, style: Theme.of(context).textTheme.titleSmall),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        l10n.wordForms,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    ),
+                    const ContextHelpIcon(topic: HelpTopic.wordForms),
+                  ],
+                ),
                 const SizedBox(height: 8),
                 Text(
                   slots.hasAny ? surfaces.join(', ') : l10n.formsUnavailable,
@@ -302,7 +324,10 @@ class _RankTags extends ConsumerWidget {
           spacing: 8,
           children: [
             if (row?.frequencyRank != null) Chip(label: Text(l10n.generalTag)),
-            if (row?.spokenRelevance != null) Chip(label: Text(l10n.spokenTag)),
+            if (row?.spokenRelevance != null) ...[
+              Chip(label: Text(l10n.spokenTag)),
+              const ContextHelpIcon(topic: HelpTopic.spokenTag),
+            ],
           ],
         );
       },

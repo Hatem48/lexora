@@ -17,6 +17,29 @@
   "mastered": "مُتقَنة",
   "dueToday": "مستحقة اليوم",
   "yourCefrProgress": "تقدّمك في مستويات CEFR",
+  "vocabularyJourney": "رحلة المفردات",
+  "masteredCountOfTotal": "{mastered} / {total} متقنة",
+  "@masteredCountOfTotal": {
+    "placeholders": {
+      "mastered": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "wordsRemainingCount": "{count} لم تُتقن بعد",
+  "@wordsRemainingCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "remaining": "المتبقي",
+  "masterpieceCompleted": "اكتملت لوحة {level}",
+  "@masterpieceCompleted": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "collectionNotOfficialLevel": "هذا إكمال لمجموعة المفردات، وليس مستوى CEFR رسميًا.",
+  "artNotStarted": "لم يبدأ",
   "continueLearning": "واصل التعلّم",
   "itemsNeedReview": "{words} كلمات + {sentences} جمل تحتاج مراجعة",
   "startReview": "ابدأ المراجعة",
@@ -80,6 +103,33 @@
   "learning": "التعلّم",
   "dailyGoal": "الهدف اليومي",
   "notifications": "الإشعارات",
+  "notificationCenter": "التنبيهات",
+  "noNewNotifications": "لا توجد إشعارات جديدة",
+  "notificationsHelp": "ستظهر هنا تذكيرات المراجعة وإنجازات التعلم.",
+  "markAllRead": "تعليم الكل كمقروء",
+  "dueWordsNoticeTitle": "كلمات جاهزة للمراجعة",
+  "dueWordsNotice": "{count} كلمات جاهزة للمراجعة",
+  "@dueWordsNotice": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dueSentencesNoticeTitle": "جمل جاهزة للمراجعة",
+  "dueSentencesNotice": "{count} جمل جاهزة للمراجعة",
+  "@dueSentencesNotice": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dailyLearningNoticeTitle": "تذكير التعلم اليومي",
+  "dailyLearningNotice": "مراجعة قصيرة تُبقي تعلمك مستمرًا.",
+  "streakNoticeTitle": "تذكير سلسلة التعلم",
+  "streakNotice": "سلسلتك الحالية ما زالت مفتوحة: {count} أيام",
+  "@streakNotice": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "data": "البيانات",
   "localStorageOnly": "تخزين محلي فقط",
   "exportData": "تصدير البيانات",

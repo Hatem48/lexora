@@ -24,8 +24,8 @@ void main() {
 
   test('production catalog is an enriched licensed A1-C2 list', () {
     expect(production.datasetType, 'production');
-    expect(production.identity, '3:production');
-    expect(production.version, 3);
+    expect(production.identity, '4:production');
+    expect(production.version, 4);
     expect(production.entries.length, 9660);
     const levels = {'A1', 'A2', 'B1', 'B2', 'C1', 'C2'};
     final ids = <String>{};
@@ -136,6 +136,20 @@ void main() {
   });
 
   test('develop and development stay independent catalog entries', () {
+    final problem = byId('problem-noun');
+    expect(problem.pos, 'noun');
+    expect(problem.cefr, 'A1');
+    expect(problem.arabicMeaning, 'مشكلة؛ مسألة تحتاج إلى حل');
+    expect(
+      problem.definitionEn,
+      'A difficult situation or question that needs to be solved.',
+    );
+    expect(problem.example, 'The problem is that the door will not open.');
+    expect(problem.example.toLowerCase(), contains('problem'));
+    expect(problem.forms, ['problem', 'problems']);
+    expect(production.entries.where((entry) => entry.lemma == 'gard'), isEmpty);
+    expect(byId('pro-noun').arabicMeaning, isNot(problem.arabicMeaning));
+
     expect(byId('develop-verb').forms, containsAll(['develop', 'develops', 'developing']));
     expect(byId('develop-verb').forms, isNot(contains('development')));
     expect(byId('development-noun').forms, containsAll(['development', 'developments']));
@@ -269,7 +283,7 @@ void main() {
       final stored = await (db.select(db.appStatistics)
             ..where((row) => row.key.equals(vocabularyCatalogVersionKey)))
           .getSingle();
-      expect(stored.value, '3:production');
+      expect(stored.value, '4:production');
       final keptInProduction =
           production.entries.any((entry) => entry.id == kept.id);
       final count = await db.select(db.vocabularyEntries).get();
@@ -284,7 +298,7 @@ void main() {
       expect(abandon.definitionEn, isNotEmpty);
       expect(abandon.arabicMeaning, isNotEmpty);
       expect(abandon.exampleSentence, isNotEmpty);
-      expect(abandon.catalogVersion, 3);
+      expect(abandon.catalogVersion, 4);
 
       await importer.importJson(productionRaw);
       final afterUpdate = await (db.select(db.userVocabulary)

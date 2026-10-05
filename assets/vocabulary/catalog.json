@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "datasetType": "production",
   "entries": [
     {
@@ -186601,9 +186601,9 @@
       "lemma": "problem",
       "cefr": "A1",
       "pos": "noun",
-      "definitionEn": "Something that is wrong or difficult and needs to be dealt with.",
-      "arabicMeaning": "أمر خطأ أو صعب يحتاج معالجة",
-      "example": "We have a problem with the internet connection.",
+      "definitionEn": "A difficult situation or question that needs to be solved.",
+      "arabicMeaning": "مشكلة؛ مسألة تحتاج إلى حل",
+      "example": "The problem is that the door will not open.",
       "phonetic": null,
       "academic": false,
       "generalEnglish": true,

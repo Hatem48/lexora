@@ -16,6 +16,8 @@ import '../../../core/services/vocabulary/mastery_policy.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/review/review_engine.dart';
+import '../../../core/help/context_help_icon.dart';
+import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 
 class ReviewCardData {
@@ -346,6 +348,9 @@ class ReviewSessionScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('${l10n.review}  ${state.index + 1} / ${state.total}'),
+        actions: const [
+          ContextHelpIcon(topic: HelpTopic.reviewSystem),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.screenPadding),

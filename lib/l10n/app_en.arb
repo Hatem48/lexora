@@ -37,6 +37,29 @@
   "mastered": "Mastered",
   "dueToday": "Due today",
   "yourCefrProgress": "Your CEFR Progress",
+  "vocabularyJourney": "Vocabulary journey",
+  "masteredCountOfTotal": "{mastered} / {total} mastered",
+  "@masteredCountOfTotal": {
+    "placeholders": {
+      "mastered": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "wordsRemainingCount": "{count} still to master",
+  "@wordsRemainingCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "remaining": "Remaining",
+  "masterpieceCompleted": "{level} masterpiece completed",
+  "@masterpieceCompleted": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "collectionNotOfficialLevel": "This completes the vocabulary collection, not an official CEFR level.",
+  "artNotStarted": "Not started",
   "continueLearning": "Continue Learning",
   "itemsNeedReview": "{words} words + {sentences} sentences need review",
   "@itemsNeedReview": {
@@ -106,6 +129,33 @@
   "learning": "Learning",
   "dailyGoal": "Daily goal",
   "notifications": "Notifications",
+  "notificationCenter": "Notifications",
+  "noNewNotifications": "No new notifications",
+  "notificationsHelp": "Review reminders and learning milestones will appear here.",
+  "markAllRead": "Mark all read",
+  "dueWordsNoticeTitle": "Words ready for review",
+  "dueWordsNotice": "{count} words are ready for review",
+  "@dueWordsNotice": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dueSentencesNoticeTitle": "Sentences ready for review",
+  "dueSentencesNotice": "{count} sentences are ready for review",
+  "@dueSentencesNotice": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dailyLearningNoticeTitle": "Daily learning",
+  "dailyLearningNotice": "A short review keeps your English moving.",
+  "streakNoticeTitle": "Streak reminder",
+  "streakNotice": "Your {count}-day streak is still open today",
+  "@streakNotice": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "data": "Data",
   "localStorageOnly": "Local Storage Only",
   "exportData": "Export Data",

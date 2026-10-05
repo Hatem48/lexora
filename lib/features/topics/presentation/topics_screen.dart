@@ -5,6 +5,8 @@ import 'package:lexora/l10n/app_localizations.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../core/help/context_help_icon.dart';
+import '../../../core/help/help_catalog.dart';
 import '../../../core/services/topics/topic_repository.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import 'topic_icons.dart';
@@ -23,6 +25,11 @@ class TopicsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(pathId == null ? l10n.topicsTitle : l10n.learningPaths),
+        actions: [
+          ContextHelpIcon(
+            topic: pathId == null ? HelpTopic.topics : HelpTopic.learningPaths,
+          ),
+        ],
       ),
       body: board.when(
         loading: () => const Center(child: CircularProgressIndicator()),

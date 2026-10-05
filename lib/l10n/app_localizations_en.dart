@@ -69,6 +69,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourCefrProgress => 'Your CEFR Progress';
 
   @override
+  String get vocabularyJourney => 'Vocabulary journey';
+
+  @override
+  String masteredCountOfTotal(int mastered, int total) {
+    return '$mastered / $total mastered';
+  }
+
+  @override
+  String wordsRemainingCount(int count) {
+    return '$count still to master';
+  }
+
+  @override
+  String get remaining => 'Remaining';
+
+  @override
+  String masterpieceCompleted(String level) {
+    return '$level masterpiece completed';
+  }
+
+  @override
+  String get collectionNotOfficialLevel =>
+      'This completes the vocabulary collection, not an official CEFR level.';
+
+  @override
+  String get artNotStarted => 'Not started';
+
+  @override
   String get continueLearning => 'Continue Learning';
 
   @override
@@ -258,6 +286,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notifications => 'Notifications';
+
+  @override
+  String get notificationCenter => 'Notifications';
+
+  @override
+  String get noNewNotifications => 'No new notifications';
+
+  @override
+  String get notificationsHelp =>
+      'Review reminders and learning milestones will appear here.';
+
+  @override
+  String get markAllRead => 'Mark all read';
+
+  @override
+  String get dueWordsNoticeTitle => 'Words ready for review';
+
+  @override
+  String dueWordsNotice(int count) {
+    return '$count words are ready for review';
+  }
+
+  @override
+  String get dueSentencesNoticeTitle => 'Sentences ready for review';
+
+  @override
+  String dueSentencesNotice(int count) {
+    return '$count sentences are ready for review';
+  }
+
+  @override
+  String get dailyLearningNoticeTitle => 'Daily learning';
+
+  @override
+  String get dailyLearningNotice => 'A short review keeps your English moving.';
+
+  @override
+  String get streakNoticeTitle => 'Streak reminder';
+
+  @override
+  String streakNotice(int count) {
+    return 'Your $count-day streak is still open today';
+  }
 
   @override
   String get data => 'Data';

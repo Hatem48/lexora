@@ -11,8 +11,12 @@ import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/services/progress/activity_policy.dart';
 import '../../../core/services/progress/streak.dart';
+import '../../../core/help/context_help_icon.dart';
+import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
-import '../../progress/presentation/catalog_progress_section.dart';
+import 'catalog_progress_section.dart';
+import 'cefr_artwork_card.dart';
+import '../domain/cefr_artwork.dart';
 
 class ProgressSnapshot {
   const ProgressSnapshot({
@@ -129,7 +133,12 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
     final snapshot = ref.watch(progressSnapshotProvider(_level?.code));
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.navProgress)),
+      appBar: AppBar(
+        title: Text(l10n.navProgress),
+        actions: const [
+          ContextHelpIcon(topic: HelpTopic.achievements),
+        ],
+      ),
       body: snapshot.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => EmptyState(
@@ -142,6 +151,36 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
           return ListView(
             padding: const EdgeInsets.all(AppSpacing.screenPadding),
             children: [
+              SectionHeader(
+                title: l10n.vocabularyJourney,
+                help: HelpTopic.levelArtwork,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              SizedBox(
+                height: 188,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: CefrLevel.values.length,
+                  separatorBuilder: (_, _) => const SizedBox(width: 12),
+                  itemBuilder: (context, index) {
+                    final level = CefrLevel.values[index];
+                    final art = ref.watch(catalogProgressProvider).asData?.value;
+                    return SizedBox(
+                      width: 220,
+                      child: CefrArtworkCard(
+                        level: level.code,
+                        mastered: art?.masteredByLevel[level.code] ?? 0,
+                        total: art?.totals[level.code] ?? 0,
+                        compact: true,
+                        onTap: levelArtIsOpen(level.code)
+                            ? () => context.push(levelArtPath(level.code))
+                            : null,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sectionGap),
               SizedBox(
                 height: 40,
                 child: ListView(
@@ -175,7 +214,10 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                 ],
               ),
               const SizedBox(height: AppSpacing.sectionGap),
-              SectionHeader(title: l10n.learningOverTime),
+              SectionHeader(
+                title: l10n.learningOverTime,
+                help: HelpTopic.learningTime,
+              ),
               const SizedBox(height: AppSpacing.md),
               LexoraCard(
                 child: SizedBox(
@@ -226,11 +268,13 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                     _MetricRow(
                       label: l10n.reviewsCompleted,
                       value: '${data.reviewsCompleted}',
+                      help: HelpTopic.reviewSystem,
                     ),
                     const Divider(height: 24),
                     _MetricRow(
                       label: l10n.currentStreak,
                       value: '${data.currentStreak}',
+                      help: HelpTopic.streak,
                     ),
                     const Divider(height: 24),
                     _MetricRow(
@@ -250,6 +294,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                     const Icon(Icons.school_outlined),
                     const SizedBox(width: 12),
                     Expanded(child: Text(l10n.grammarTitle)),
+                    const ContextHelpIcon(topic: HelpTopic.grammar),
                     const Icon(Icons.chevron_right),
                   ],
                 ),
@@ -304,16 +349,18 @@ class _DonutStat extends StatelessWidget {
 }
 
 class _MetricRow extends StatelessWidget {
-  const _MetricRow({required this.label, required this.value});
+  const _MetricRow({required this.label, required this.value, this.help});
 
   final String label;
   final String value;
+  final HelpTopic? help;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(child: Text(label)),
+        if (help != null) ContextHelpIcon(topic: help!),
         Text(value, style: Theme.of(context).textTheme.titleLarge),
       ],
     );

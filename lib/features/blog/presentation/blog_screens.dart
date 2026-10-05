@@ -7,6 +7,8 @@ import 'package:lexora/l10n/app_localizations.dart';
 
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/database/app_database.dart';
+import '../../../core/help/context_help_icon.dart';
+import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../topics/presentation/topic_icons.dart';
 import '../../topics/presentation/topic_providers.dart';
@@ -22,7 +24,12 @@ class BlogListScreen extends ConsumerWidget {
     final blogs = ref.watch(blogsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.blog)),
+      appBar: AppBar(
+        title: Text(l10n.blog),
+        actions: const [
+          ContextHelpIcon(topic: HelpTopic.posts),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.push('/blog/write'),
         child: const Icon(Icons.edit_outlined),

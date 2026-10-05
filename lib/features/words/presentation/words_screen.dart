@@ -341,7 +341,8 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
             ..where((row) => row.lemma.lower().equals(lemma))
             ..limit(8))
           .get();
-      if (!mounted) return;
+      if (!mounted || _wordCtrl.text.trim().toLowerCase() != lemma) return;
+      final previous = _catalogMatch;
       setState(() {
         _catalogMatches = matches;
         _catalogMatch = matches.length == 1 ? matches.single : null;
@@ -351,6 +352,13 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
       });
       if (_catalogMatch != null) {
         _applyCatalogMatch(_catalogMatch!);
+      } else if (previous != null) {
+        if (_meaningCtrl.text.trim() == previous.arabicMeaning.trim()) {
+          _meaningCtrl.clear();
+        }
+        if (_exampleCtrl.text.trim() == previous.exampleSentence.trim()) {
+          _exampleCtrl.clear();
+        }
       }
     });
   }

@@ -11,6 +11,8 @@ import '../../features/grammar/presentation/grammar_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/patterns/presentation/patterns_screen.dart';
+import '../../features/notifications/presentation/notification_center_screen.dart';
+import '../../features/progress/presentation/cefr_level_screen.dart';
 import '../../features/progress/presentation/progress_screen.dart';
 import '../../features/review/presentation/review_session_screen.dart';
 import '../../features/sentences/presentation/sentences_screen.dart';
@@ -141,6 +143,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,
+        path: '/notifications',
+        builder: (context, state) => const NotificationCenterScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
         path: '/review',
         builder: (context, state) => const ReviewSessionScreen(),
       ),
@@ -225,6 +232,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ),
           ),
         ],
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/progress/level/:level',
+        builder: (context, state) => CefrLevelScreen(
+          level: state.pathParameters['level']!,
+        ),
       ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,

@@ -200,6 +200,48 @@ abstract class AppLocalizations {
   /// **'Your CEFR Progress'**
   String get yourCefrProgress;
 
+  /// No description provided for @vocabularyJourney.
+  ///
+  /// In en, this message translates to:
+  /// **'Vocabulary journey'**
+  String get vocabularyJourney;
+
+  /// No description provided for @masteredCountOfTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'{mastered} / {total} mastered'**
+  String masteredCountOfTotal(int mastered, int total);
+
+  /// No description provided for @wordsRemainingCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} still to master'**
+  String wordsRemainingCount(int count);
+
+  /// No description provided for @remaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get remaining;
+
+  /// No description provided for @masterpieceCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'{level} masterpiece completed'**
+  String masterpieceCompleted(String level);
+
+  /// No description provided for @collectionNotOfficialLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'This completes the vocabulary collection, not an official CEFR level.'**
+  String get collectionNotOfficialLevel;
+
+  /// No description provided for @artNotStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Not started'**
+  String get artNotStarted;
+
   /// No description provided for @continueLearning.
   ///
   /// In en, this message translates to:
@@ -577,6 +619,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications'**
   String get notifications;
+
+  /// No description provided for @notificationCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationCenter;
+
+  /// No description provided for @noNewNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No new notifications'**
+  String get noNewNotifications;
+
+  /// No description provided for @notificationsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Review reminders and learning milestones will appear here.'**
+  String get notificationsHelp;
+
+  /// No description provided for @markAllRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all read'**
+  String get markAllRead;
+
+  /// No description provided for @dueWordsNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Words ready for review'**
+  String get dueWordsNoticeTitle;
+
+  /// No description provided for @dueWordsNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} words are ready for review'**
+  String dueWordsNotice(int count);
+
+  /// No description provided for @dueSentencesNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentences ready for review'**
+  String get dueSentencesNoticeTitle;
+
+  /// No description provided for @dueSentencesNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sentences are ready for review'**
+  String dueSentencesNotice(int count);
+
+  /// No description provided for @dailyLearningNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily learning'**
+  String get dailyLearningNoticeTitle;
+
+  /// No description provided for @dailyLearningNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'A short review keeps your English moving.'**
+  String get dailyLearningNotice;
+
+  /// No description provided for @streakNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak reminder'**
+  String get streakNoticeTitle;
+
+  /// No description provided for @streakNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Your {count}-day streak is still open today'**
+  String streakNotice(int count);
 
   /// No description provided for @data.
   ///

@@ -1,7 +1,7 @@
 name: lexora
 description: Premium bilingual English learning app — local-first vocabulary, sentences, and spaced repetition.
 publish_to: 'none'
-version: 1.0.0+14
+version: 1.0.0+15
 
 environment:
   sdk: ^3.13.4
@@ -44,6 +44,7 @@ dependencies:
   url_launcher: ^6.3.2
   record: ^7.1.1
   audioplayers: ^6.8.1
+  package_info_plus: ^10.2.2
 
 dev_dependencies:
   flutter_test:

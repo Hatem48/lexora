@@ -7,6 +7,8 @@ import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/startup_provider.dart';
+import '../../../core/help/context_help_icon.dart';
+import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 
 class CatalogProgress {
@@ -140,9 +142,16 @@ class CatalogProgressSection extends ConsumerWidget {
       data: (data) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l10n.catalogProgress,
-            style: Theme.of(context).textTheme.titleMedium,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.catalogProgress,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              const ContextHelpIcon(topic: HelpTopic.vocabularyProgress),
+            ],
           ),
           const SizedBox(height: 4),
           Text(l10n.catalogStatsNote),
@@ -165,18 +174,23 @@ class CatalogProgressSection extends ConsumerWidget {
                       data.totals[level.code] ?? 0,
                     ),
                     value: '',
+                    help: level == CefrLevel.a1 ? HelpTopic.masteredWords : null,
                   ),
                   _Metric(
                     label: l10n.learningProgressCount(
                       data.learning[level.code] ?? 0,
                     ),
                     value: '',
+                    help: level == CefrLevel.a1 ? HelpTopic.learningWords : null,
                   ),
                   _Metric(
                     label: l10n.discoveredProgressCount(
                       data.discovered[level.code] ?? 0,
                     ),
                     value: '',
+                    help: level == CefrLevel.a1
+                        ? HelpTopic.discoveredWords
+                        : null,
                   ),
                   if (level != CefrLevel.c2) const Divider(height: 20),
                 ],
@@ -197,6 +211,7 @@ class CatalogProgressSection extends ConsumerWidget {
                 _Metric(
                   label: l10n.academicCatalog,
                   value: '${data.academic}',
+                  help: HelpTopic.academicTag,
                 ),
                 const Divider(height: 24),
                 _Metric(label: l10n.ieltsRelevant, value: '${data.ielts}'),
@@ -217,15 +232,17 @@ class CatalogProgressSection extends ConsumerWidget {
 }
 
 class _Metric extends StatelessWidget {
-  const _Metric({required this.label, required this.value});
+  const _Metric({required this.label, required this.value, this.help});
 
   final String label;
   final String value;
+  final HelpTopic? help;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
+        if (help != null) ContextHelpIcon(topic: help!),
         Expanded(child: Text(label)),
         Text(value, style: Theme.of(context).textTheme.titleMedium),
       ],

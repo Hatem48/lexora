@@ -8,7 +8,14 @@ import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/enums.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
+import '../../progress/domain/cefr_artwork.dart';
+import '../../progress/presentation/catalog_progress_section.dart';
+import '../../progress/presentation/cefr_artwork_card.dart';
+import '../../notifications/domain/in_app_notice.dart';
+import '../../notifications/presentation/notice_providers.dart';
+import '../../notifications/presentation/notification_center_screen.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/account_avatar.dart';
 import '../domain/dashboard_stats.dart';
@@ -22,14 +29,6 @@ class HomeScreen extends ConsumerWidget {
     if (hour < 12) return l10n.goodMorning(name);
     if (hour < 17) return l10n.goodAfternoon(name);
     return l10n.goodEvening(name);
-  }
-
-  String _levelLabel(AppLocalizations l10n, CefrLevel level) {
-    return switch (level) {
-      CefrLevel.a1 || CefrLevel.a2 => l10n.beginner,
-      CefrLevel.b1 || CefrLevel.b2 => l10n.intermediate,
-      CefrLevel.c1 || CefrLevel.c2 => l10n.advanced,
-    };
   }
 
   String _recTitle(AppLocalizations l10n, DashboardRecommendation r) {
@@ -77,7 +76,10 @@ class HomeScreen extends ConsumerWidget {
           ),
           data: (stats) {
             final next = stats.currentLevel.next;
-            final percent = (stats.levelProgress * 100).round();
+            final art = ref.watch(catalogProgressProvider).asData?.value;
+            final code = stats.currentLevel.code;
+            final mastered = art?.masteredByLevel[code] ?? 0;
+            final total = art?.totals[code] ?? 0;
 
             return RefreshIndicator(
               onRefresh: () async => ref.invalidate(dashboardStatsProvider),
@@ -97,10 +99,13 @@ class HomeScreen extends ConsumerWidget {
                           style: theme.textTheme.headlineMedium,
                         ),
                       ),
-                      IconButton(
+                      NotificationBell(
+                        unread: unreadNoticeCount(
+                          ref.watch(inAppNoticesProvider).asData?.value ??
+                              const [],
+                        ),
                         tooltip: l10n.notifications,
-                        onPressed: () => context.push('/settings'),
-                        icon: const Icon(Icons.notifications_none_rounded),
+                        onPressed: () => context.push('/notifications'),
                       ),
                       GestureDetector(
                         onTap: () => context.push('/settings'),
@@ -109,58 +114,17 @@ class HomeScreen extends ConsumerWidget {
                     ],
                   ).animate().fadeIn(duration: 350.ms),
                   const SizedBox(height: AppSpacing.lg),
-                  LexoraCard(
-                    gradient: AppColors.heroGradient,
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              stats.currentLevel.code,
-                              style: theme.textTheme.displayMedium?.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                            const Spacer(),
-                            Text(
-                              '$percent%',
-                              style: theme.textTheme.headlineMedium?.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          _levelLabel(l10n, stats.currentLevel),
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.9),
-                          ),
-                        ),
-                        const SizedBox(height: AppSpacing.md),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(99),
-                          child: LinearProgressIndicator(
-                            value: stats.levelProgress,
-                            minHeight: 8,
-                            backgroundColor:
-                                Colors.white.withValues(alpha: 0.25),
-                            color: Colors.white,
-                          ),
-                        ),
-                        if (next != null) ...[
-                          const SizedBox(height: AppSpacing.sm),
-                          Text(
-                            l10n.keepGoingTo(next.code),
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: Colors.white.withValues(alpha: 0.9),
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
+                  CefrArtworkCard(
+                    level: code,
+                    mastered: mastered,
+                    total: total,
+                    onTap: () => context.push(levelArtPath(code)),
+                    help: true,
                   ).animate().fadeIn(delay: 80.ms).slideY(begin: 0.05, end: 0),
+                  if (next != null) ...[
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(l10n.keepGoingTo(next.code)),
+                  ],
                   const SizedBox(height: AppSpacing.md),
                   GridView.count(
                     crossAxisCount: 2,
@@ -184,22 +148,33 @@ class HomeScreen extends ConsumerWidget {
                         label: l10n.mastered,
                         value: '${stats.masteredCount}',
                         color: AppColors.success,
+                        help: HelpTopic.masteredWords,
                       ),
                       StatTile(
                         label: l10n.dueToday,
                         value: '${stats.dueTodayCount}',
                         color: AppColors.warning,
+                        help: HelpTopic.reviewSystem,
                       ),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.sectionGap),
-                  SectionHeader(title: l10n.yourCefrProgress),
+                  SectionHeader(
+                    title: l10n.yourCefrProgress,
+                    help: HelpTopic.cefr,
+                  ),
                   const SizedBox(height: AppSpacing.md),
                   LexoraCard(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: CefrLevel.values.map((level) {
-                        final progress = stats.cefrProgress[level] ?? 0;
+                        final ring = stats.cefrProgress[level] ??
+                            const CefrLevelProgress(known: 0, total: 0);
+                        final fill = ring.known == 0
+                            ? 0.0
+                            : ring.fraction < 0.08
+                                ? 0.08
+                                : ring.fraction;
                         return Column(
                           children: [
                             SizedBox(
@@ -209,18 +184,18 @@ class HomeScreen extends ConsumerWidget {
                                 fit: StackFit.expand,
                                 children: [
                                   CircularProgressIndicator(
-                                    value: progress == 0 ? 0.04 : progress,
+                                    value: fill,
                                     strokeWidth: 4,
                                     backgroundColor: AppColors.border,
                                     color: AppColors.cefrColor(level.code),
                                   ),
                                   Center(
                                     child: Text(
-                                      '${(progress * 100).round()}',
+                                      '${ring.known}',
                                       style: theme.textTheme.labelSmall
                                           ?.copyWith(
                                         fontWeight: FontWeight.w700,
-                                        fontSize: 9,
+                                        fontSize: ring.known > 99 ? 8 : 10,
                                       ),
                                     ),
                                   ),

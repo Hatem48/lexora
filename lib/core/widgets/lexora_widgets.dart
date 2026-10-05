@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 
 import '../../app/theme/app_colors.dart';
 import '../../app/theme/app_spacing.dart';
+import '../help/context_help_icon.dart';
+import '../help/help_catalog.dart';
 
 class LexoraCard extends StatelessWidget {
   const LexoraCard({
@@ -245,10 +247,12 @@ class SectionHeader extends StatelessWidget {
     super.key,
     required this.title,
     this.trailing,
+    this.help,
   });
 
   final String title;
   final Widget? trailing;
+  final HelpTopic? help;
 
   @override
   Widget build(BuildContext context) {
@@ -257,6 +261,7 @@ class SectionHeader extends StatelessWidget {
         Expanded(
           child: Text(title, style: Theme.of(context).textTheme.headlineSmall),
         ),
+        if (help != null) ContextHelpIcon(topic: help!),
         ?trailing,
       ],
     );
@@ -270,12 +275,14 @@ class StatTile extends StatelessWidget {
     required this.value,
     this.icon,
     this.color,
+    this.help,
   });
 
   final String label;
   final String value;
   final IconData? icon;
   final Color? color;
+  final HelpTopic? help;
 
   @override
   Widget build(BuildContext context) {
@@ -286,14 +293,20 @@ class StatTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (icon != null)
-            Icon(icon, size: 18, color: accent)
-          else
-            Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(color: accent, shape: BoxShape.circle),
-            ),
+          Row(
+            children: [
+              if (icon != null)
+                Icon(icon, size: 18, color: accent)
+              else
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(color: accent, shape: BoxShape.circle),
+                ),
+              const Spacer(),
+              if (help != null) ContextHelpIcon(topic: help!),
+            ],
+          ),
           const SizedBox(height: AppSpacing.sm),
           Text(value, style: theme.textTheme.headlineMedium),
           const SizedBox(height: 2),

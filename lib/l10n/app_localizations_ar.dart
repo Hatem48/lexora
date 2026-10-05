@@ -69,6 +69,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get yourCefrProgress => 'تقدّمك في مستويات CEFR';
 
   @override
+  String get vocabularyJourney => 'رحلة المفردات';
+
+  @override
+  String masteredCountOfTotal(int mastered, int total) {
+    return '$mastered / $total متقنة';
+  }
+
+  @override
+  String wordsRemainingCount(int count) {
+    return '$count لم تُتقن بعد';
+  }
+
+  @override
+  String get remaining => 'المتبقي';
+
+  @override
+  String masterpieceCompleted(String level) {
+    return 'اكتملت لوحة $level';
+  }
+
+  @override
+  String get collectionNotOfficialLevel =>
+      'هذا إكمال لمجموعة المفردات، وليس مستوى CEFR رسميًا.';
+
+  @override
+  String get artNotStarted => 'لم يبدأ';
+
+  @override
   String get continueLearning => 'واصل التعلّم';
 
   @override
@@ -258,6 +286,48 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notifications => 'الإشعارات';
+
+  @override
+  String get notificationCenter => 'التنبيهات';
+
+  @override
+  String get noNewNotifications => 'لا توجد إشعارات جديدة';
+
+  @override
+  String get notificationsHelp => 'ستظهر هنا تذكيرات المراجعة وإنجازات التعلم.';
+
+  @override
+  String get markAllRead => 'تعليم الكل كمقروء';
+
+  @override
+  String get dueWordsNoticeTitle => 'كلمات جاهزة للمراجعة';
+
+  @override
+  String dueWordsNotice(int count) {
+    return '$count كلمات جاهزة للمراجعة';
+  }
+
+  @override
+  String get dueSentencesNoticeTitle => 'جمل جاهزة للمراجعة';
+
+  @override
+  String dueSentencesNotice(int count) {
+    return '$count جمل جاهزة للمراجعة';
+  }
+
+  @override
+  String get dailyLearningNoticeTitle => 'تذكير التعلم اليومي';
+
+  @override
+  String get dailyLearningNotice => 'مراجعة قصيرة تُبقي تعلمك مستمرًا.';
+
+  @override
+  String get streakNoticeTitle => 'تذكير سلسلة التعلم';
+
+  @override
+  String streakNotice(int count) {
+    return 'سلسلتك الحالية ما زالت مفتوحة: $count أيام';
+  }
 
   @override
   String get data => 'البيانات';

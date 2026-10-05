@@ -44,32 +44,32 @@ final dashboardStatsProvider = FutureProvider<DashboardStats>((ref) async {
     }
   }
 
-  final cefrProgress = <CefrLevel, double>{};
-  for (final level in CefrLevel.values) {
-    final total = _levelCount(wordGroups, level.code);
-    if (total == 0) {
-      cefrProgress[level] = 0;
-      continue;
-    }
-    final progressed = _levelStatus(
-          wordGroups,
-          level.code,
-          MasteryStatus.mastered.storageValue,
-        ) +
-        _levelStatus(
-          wordGroups,
-          level.code,
-          MasteryStatus.reviewing.storageValue,
-        );
-    cefrProgress[level] = progressed / total;
-  }
+  final catalogTotals = await _countsByLevel(
+    db,
+    'SELECT cefr_level AS level, COUNT(*) AS c FROM vocabulary_entries GROUP BY cefr_level',
+    {db.vocabularyEntries},
+  );
+  final catalogKnown = await _countsByLevel(
+    db,
+    '''
+    SELECT e.cefr_level AS level, COUNT(*) AS c
+    FROM user_vocabulary u
+    JOIN vocabulary_entries e ON e.id = u.entry_id
+    GROUP BY e.cefr_level
+    ''',
+    {db.userVocabulary, db.vocabularyEntries},
+  );
+  final cefrProgress = {
+    for (final level in CefrLevel.values)
+      level: CefrLevelProgress(
+        known: (catalogKnown[level.code] ?? 0) +
+            _levelCount(wordGroups, level.code),
+        total: catalogTotals[level.code] ?? 0,
+      ),
+  };
 
   final current = settings.cefrLevel;
-  final currentTotal = _levelCount(wordGroups, current.code);
-  final currentStarted = currentTotal -
-      _levelStatus(wordGroups, current.code, MasteryStatus.newItem.storageValue);
-  final levelProgress =
-      currentTotal == 0 ? 0.0 : currentStarted / currentTotal;
+  final levelProgress = cefrProgress[current]?.fraction ?? 0;
 
   final patternCount = await _scalar(
     db,
@@ -145,14 +145,17 @@ int _statusCount(List<QueryRow> rows, String status) => rows
     .where((row) => row.read<String>('status') == status)
     .fold<int>(0, (sum, row) => sum + row.read<int>('c'));
 
+Future<Map<String, int>> _countsByLevel(
+  AppDatabase db,
+  String sql,
+  Set<ResultSetImplementation> readsFrom,
+) async {
+  final rows = await db.customSelect(sql, readsFrom: readsFrom).get();
+  return {
+    for (final row in rows) row.read<String>('level'): row.read<int>('c'),
+  };
+}
+
 int _levelCount(List<QueryRow> rows, String level) => rows
     .where((row) => row.read<String>('level') == level)
-    .fold<int>(0, (sum, row) => sum + row.read<int>('c'));
-
-int _levelStatus(List<QueryRow> rows, String level, String status) => rows
-    .where(
-      (row) =>
-          row.read<String>('level') == level &&
-          row.read<String>('status') == status,
-    )
     .fold<int>(0, (sum, row) => sum + row.read<int>('c'));

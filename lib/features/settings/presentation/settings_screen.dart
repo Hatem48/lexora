@@ -14,6 +14,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/app_info.dart';
+import '../../../core/help/context_help_icon.dart';
+import '../../../core/help/help_catalog.dart';
+import '../../../core/services/app_package_info.dart';
 import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
@@ -346,7 +349,14 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
-          Text(l10n.notifications, style: theme.textTheme.titleSmall),
+          Row(
+            children: [
+              Expanded(
+                child: Text(l10n.notifications, style: theme.textTheme.titleSmall),
+              ),
+              const ContextHelpIcon(topic: HelpTopic.notifications),
+            ],
+          ),
           const SizedBox(height: 8),
           LexoraCard(
             child: Column(
@@ -357,13 +367,12 @@ class SettingsScreen extends ConsumerWidget {
                   value: settings.remindersEnabled,
                   onChanged: (v) async {
                     final messenger = ScaffoldMessenger.of(context);
-                    await persistAndSyncReminders(
+                    final ok = await persistAndSyncReminders(
                       ref.read(settingsProvider.notifier),
                       settings,
                       (s) => s.copyWith(remindersEnabled: v),
                     );
-                    final ok = !v ||
-                        await ReminderScheduler.instance.requestPermission();
+                    if (!context.mounted) return;
                     messenger.showSnackBar(
                       SnackBar(
                         content: Text(
@@ -473,7 +482,14 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
-          Text(l10n.data, style: theme.textTheme.titleSmall),
+          Row(
+            children: [
+              Expanded(
+                child: Text(l10n.data, style: theme.textTheme.titleSmall),
+              ),
+              const ContextHelpIcon(topic: HelpTopic.backup),
+            ],
+          ),
           const SizedBox(height: 8),
           LexoraCard(
             child: Column(
@@ -535,7 +551,7 @@ class SettingsScreen extends ConsumerWidget {
               children: [
                 Text(l10n.appName, style: theme.textTheme.titleLarge),
                 const SizedBox(height: 4),
-                Text(l10n.version(AppInfo.version)),
+                const InstalledVersionText(),
                 if (ref.watch(_developmentDatasetProvider).value ?? false) ...[
                   const SizedBox(height: 12),
                   Text(

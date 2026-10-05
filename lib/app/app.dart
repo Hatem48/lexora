@@ -11,6 +11,8 @@ import '../core/providers/settings_provider.dart';
 import '../core/services/progress/achievement_catalog.dart';
 import '../core/services/progress/activity_policy.dart';
 import '../core/services/progress/learning_activity_store.dart';
+import '../core/services/notifications/reminder_scheduler.dart';
+import '../features/notifications/domain/in_app_notice.dart';
 import '../core/services/pronunciation/pronunciation_service.dart';
 import '../core/services/pronunciation/quality_tts_service.dart';
 import 'router/app_router.dart';
@@ -83,6 +85,9 @@ class _LearningSessionHostState extends ConsumerState<LearningSessionHost>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    ReminderScheduler.instance.bind((payload) {
+      ref.read(appRouterProvider).push(notificationRoute(payload));
+    });
     _flushTimer = Timer.periodic(const Duration(seconds: 30), (_) => _flush());
     WidgetsBinding.instance.addPostFrameCallback((_) => _celebrate());
   }

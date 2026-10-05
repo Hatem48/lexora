@@ -5,14 +5,22 @@ import '../constants/enums.dart';
 import '../providers/settings_provider.dart';
 import '../services/notifications/reminder_scheduler.dart';
 
-Future<void> persistAndSyncReminders(
+Future<bool> persistAndSyncReminders(
   SettingsController controller,
   AppSettings current,
   AppSettings Function(AppSettings current) transform,
 ) async {
   final next = transform(current);
   await controller.update((_) => next);
-  await ReminderScheduler.instance.sync(next);
+  if (!next.remindersEnabled) {
+    await ReminderScheduler.instance.sync(next);
+    return true;
+  }
+  final permitted = await ReminderScheduler.instance.requestPermission();
+  if (permitted) {
+    await ReminderScheduler.instance.sync(next);
+  }
+  return permitted;
 }
 
 String reminderTypeLabel(AppLocalizations l10n, ReminderType type) {

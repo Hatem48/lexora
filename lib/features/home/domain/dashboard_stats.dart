@@ -24,7 +24,7 @@ class DashboardStats extends Equatable {
   final int dueSentences;
   final CefrLevel currentLevel;
   final double levelProgress;
-  final Map<CefrLevel, double> cefrProgress;
+  final Map<CefrLevel, CefrLevelProgress> cefrProgress;
   final List<DashboardRecommendation> recommendations;
 
   @override
@@ -40,6 +40,23 @@ class DashboardStats extends Equatable {
         cefrProgress,
         recommendations,
       ];
+}
+
+/// Words the learner has met at one CEFR level, against the catalog size.
+class CefrLevelProgress extends Equatable {
+  const CefrLevelProgress({required this.known, required this.total});
+
+  final int known;
+  final int total;
+
+  double get fraction {
+    if (total <= 0 || known <= 0) return 0;
+    final value = known / total;
+    return value > 1 ? 1 : value;
+  }
+
+  @override
+  List<Object?> get props => [known, total];
 }
 
 class DashboardRecommendation extends Equatable {
