@@ -77,6 +77,28 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String paintingWordsCount(int count, int total) {
+    return '$count / $total كلمة';
+  }
+
+  @override
+  String get whatsNewTitle => 'ما الجديد';
+
+  @override
+  String get whatsNewThisVersion => 'في هذا الإصدار';
+
+  @override
+  String get whatsNewPreviousVersion => 'في الإصدار السابق';
+
+  @override
+  String get whatsNewCurrentBody =>
+      'لوحات المستويات تتلون الآن بالكلمات التي يتعرف عليها Lexora عند إضافة كلمة أو جملة. كل مستوى له لوحته. الضغط على الجملة يفتحها ويعرض ملاحظاتك. النطق أصبح أبطأ، واللوحة الفارغة لم تعد صفحة بيضاء.';
+
+  @override
+  String get whatsNewPreviousBody =>
+      'تم تثبيت قاموس المفردات الكامل دون مسح كلماتك أو جملك أو تقدمك. حلقات CEFR تعرض الكلمات التي قابلتها فعلًا.';
+
+  @override
   String wordsRemainingCount(int count) {
     return '$count لم تُتقن بعد';
   }
@@ -166,6 +188,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notes => 'ملاحظات';
+
+  @override
+  String get noNotesYet => 'لا توجد ملاحظات بعد';
 
   @override
   String get addToReviewSystem => 'أضف إلى نظام المراجعة';

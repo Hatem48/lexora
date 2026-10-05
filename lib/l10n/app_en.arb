@@ -45,6 +45,18 @@
       "total": { "type": "int" }
     }
   },
+  "paintingWordsCount": "{count} / {total} words",
+  "@paintingWordsCount": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "whatsNewTitle": "What's new",
+  "whatsNewThisVersion": "In this version",
+  "whatsNewPreviousVersion": "In the previous version",
+  "whatsNewCurrentBody": "Level paintings now fill from the words Lexora recognizes when you add a word or a sentence. Each level has its own painting. Tapping a sentence opens it and shows your notes. Pronunciation is slower, and an empty painting is a calm canvas instead of a white block.",
+  "whatsNewPreviousBody": "The full vocabulary catalog was installed without erasing your words, sentences, or progress. The CEFR rings count words you have actually met.",
   "wordsRemainingCount": "{count} still to master",
   "@wordsRemainingCount": {
     "placeholders": {
@@ -89,6 +101,7 @@
   "exampleSentence": "Example Sentence",
   "arabicTranslation": "Arabic Translation",
   "notes": "Notes",
+  "noNotesYet": "No notes yet",
   "addToReviewSystem": "Add to review system",
   "requiredField": "This field is required",
   "wordAlreadyExists": "This word already exists in your library",

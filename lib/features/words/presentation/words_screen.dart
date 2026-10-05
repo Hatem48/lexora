@@ -17,6 +17,8 @@ import '../../../core/providers/settings_provider.dart';
 import '../../../core/widgets/content_filter_sheet.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../../core/services/progress/learning_activity_store.dart';
+import '../../home/presentation/dashboard_providers.dart';
+import '../../progress/presentation/catalog_progress_section.dart';
 import '../../../core/services/vocabulary/mastery_policy.dart';
 import '../../categories/data/category_repository.dart';
 import '../../categories/presentation/categories_screen.dart';
@@ -76,7 +78,8 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
     final wordsAsync = ref.watch(learningWordsProvider(query));
     final needsCount = ref.watch(needsCompletionCountProvider).asData?.value ?? 0;
     final pronunciation = ref.watch(pronunciationServiceProvider);
-    final accent = ref.watch(settingsProvider).accent;
+    final settings = ref.watch(settingsProvider);
+    final accent = settings.accent;
 
     return Scaffold(
       appBar: AppBar(
@@ -257,6 +260,7 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
                             onPressed: () => pronunciation.speak(
                               word.word,
                               accent: accent,
+                              speed: settings.playbackSpeed,
                             ),
                             icon: const Icon(Icons.volume_up_rounded),
                             color: AppColors.primary,
@@ -493,6 +497,8 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
         }
       }
       await LearningActivityStore(db).add(exercises: 1);
+      ref.invalidate(catalogProgressProvider);
+      ref.invalidate(dashboardStatsProvider);
       if (!mounted) return;
       setState(() => _saving = false);
       if (addAnother) {
@@ -560,6 +566,8 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
             ),
           );
     }
+    ref.invalidate(catalogProgressProvider);
+    ref.invalidate(dashboardStatsProvider);
 
     if (!mounted) return;
     setState(() => _saving = false);
@@ -782,7 +790,8 @@ class WordDetailsScreen extends ConsumerWidget {
         }
 
         final pronunciation = ref.watch(pronunciationServiceProvider);
-        final accent = ref.watch(settingsProvider).accent;
+        final settings = ref.watch(settingsProvider);
+        final accent = settings.accent;
 
         return Scaffold(
           appBar: AppBar(
@@ -897,7 +906,11 @@ class WordDetailsScreen extends ConsumerWidget {
                 label: l10n.listen,
                 icon: Icons.volume_up_rounded,
                 onPressed: () =>
-                    pronunciation.speak(word.word, accent: accent),
+                    pronunciation.speak(
+                      word.word,
+                      accent: accent,
+                      speed: settings.playbackSpeed,
+                    ),
               ),
               if (word.exampleSentence != null) ...[
                 const SizedBox(height: AppSpacing.sectionGap),

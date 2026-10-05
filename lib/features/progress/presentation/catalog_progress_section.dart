@@ -17,6 +17,7 @@ class CatalogProgress {
     required this.discovered,
     required this.learning,
     required this.masteredByLevel,
+    required this.personalByLevel,
     required this.mastered,
     required this.academic,
     required this.ielts,
@@ -28,11 +29,22 @@ class CatalogProgress {
   final Map<String, int> discovered;
   final Map<String, int> learning;
   final Map<String, int> masteredByLevel;
+  final Map<String, int> personalByLevel;
   final int mastered;
   final int academic;
   final int ielts;
   final int toefl;
   final int discoveredThisWeek;
+
+  /// Words that color a level painting: catalog words met by adding a word,
+  /// sentence, or post, plus personal words saved at that level.
+  int recognizedFor(String level) {
+    final count = (discovered[level] ?? 0) +
+        (learning[level] ?? 0) +
+        (masteredByLevel[level] ?? 0) +
+        (personalByLevel[level] ?? 0);
+    return count < 0 ? 0 : count;
+  }
 }
 
 final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
@@ -80,6 +92,13 @@ final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
     GROUP BY e.cefr_level
     ''',
   );
+  final personalRows = await db.customSelect(
+    'SELECT cefr_level AS level, COUNT(*) AS c FROM words GROUP BY cefr_level',
+    readsFrom: {db.words},
+  ).get();
+  final personalByLevel = {
+    for (final row in personalRows) row.read<String>('level'): row.read<int>('c'),
+  };
 
   Future<int> count(String sql, {List<Variable> variables = const []}) async {
     final row = await db.customSelect(
@@ -95,6 +114,7 @@ final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
     discovered: discovered,
     learning: learning,
     masteredByLevel: masteredByLevel,
+    personalByLevel: personalByLevel,
     mastered: await count(
       "SELECT COUNT(*) AS c FROM user_vocabulary WHERE status = 'mastered'",
     ),

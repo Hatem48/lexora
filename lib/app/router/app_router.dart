@@ -127,6 +127,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     path: 'add',
                     builder: (context, state) => const AddSentenceScreen(),
                   ),
+                  GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
+                    path: ':id',
+                    builder: (context, state) => SentenceDetailsScreen(
+                      sentenceId: state.pathParameters['id']!,
+                    ),
+                  ),
                 ],
               ),
             ],

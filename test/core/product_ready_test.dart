@@ -146,7 +146,7 @@ void main() {
     expect(formatInstalledVersion(version: '1.1.0', buildNumber: '20'), '1.1.0 (20)');
     expect(formatInstalledVersion(version: ' ', buildNumber: ''), '— (—)');
     final codemagic = File('codemagic.yaml').readAsStringSync();
-    expect(codemagic.contains('--build-number=15'), isTrue);
+    expect(codemagic.contains('--build-number=16'), isTrue);
     expect(codemagic.contains('--build-name=1.0.0'), isTrue);
   });
 

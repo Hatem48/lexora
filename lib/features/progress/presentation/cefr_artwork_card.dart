@@ -91,6 +91,9 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
           animation: _reveal,
           builder: (context, _) {
             final shown = _from + ((_to - _from) * _reveal.value).round();
+            final dark = Theme.of(context).brightness == Brightness.dark;
+            final title = dark ? Colors.white : const Color(0xFF12233F);
+            final muted = title.withValues(alpha: 0.82);
             return Stack(
               fit: StackFit.expand,
               children: [
@@ -98,6 +101,7 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
                   painter: CefrArtworkPainter(
                     level: widget.level,
                     visibleRegions: shown,
+                    dark: dark,
                   ),
                 ),
                 DecoratedBox(
@@ -107,7 +111,9 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        Colors.black.withValues(alpha: 0.28),
+                        (dark ? Colors.black : Colors.white).withValues(
+                          alpha: dark ? 0.42 : 0.78,
+                        ),
                       ],
                       stops: const [0.45, 1],
                     ),
@@ -128,29 +134,29 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
                         widget.level.toUpperCase(),
                         textDirection: TextDirection.ltr,
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              color: Colors.white,
+                              color: title,
                               fontWeight: FontWeight.w700,
                             ),
                       ),
                       Text(
                         label,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.white.withValues(alpha: 0.92),
+                              color: muted,
                             ),
                       ),
                       Text(
                         '$percent%',
                         textDirection: TextDirection.ltr,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.white,
+                              color: title,
                               fontWeight: FontWeight.w700,
                             ),
                       ),
                       if (!widget.compact)
                         Text(
-                          l10n.masteredCountOfTotal(widget.mastered, widget.total),
+                          l10n.paintingWordsCount(widget.mastered, widget.total),
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.white.withValues(alpha: 0.9),
+                                color: muted,
                               ),
                         ),
                     ],
@@ -187,15 +193,28 @@ class CefrArtworkPainter extends CustomPainter {
   const CefrArtworkPainter({
     required this.level,
     required this.visibleRegions,
+    required this.dark,
   });
 
   final String level;
   final int visibleRegions;
+  final bool dark;
 
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    canvas.drawRect(rect, Paint()..color = const Color(0xFFF4F7FB));
+    final paper = dark
+        ? const Color(0xFF1A2740)
+        : const Color(0xFFE7EEF6);
+    canvas.drawRect(rect, Paint()..color = paper);
+    canvas.saveLayer(
+      rect,
+      Paint()
+        ..color = Colors.white.withValues(alpha: dark ? 0.34 : 0.55),
+    );
+    _paintScene(canvas, size);
+    canvas.restore();
+    if (visibleRegions <= 0) return;
     canvas.saveLayer(rect, Paint());
     _paintScene(canvas, size);
     canvas.saveLayer(rect, Paint()..blendMode = BlendMode.dstIn);
@@ -266,6 +285,8 @@ class CefrArtworkPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CefrArtworkPainter oldDelegate) {
-    return oldDelegate.level != level || oldDelegate.visibleRegions != visibleRegions;
+    return oldDelegate.level != level ||
+        oldDelegate.visibleRegions != visibleRegions ||
+        oldDelegate.dark != dark;
   }
 }

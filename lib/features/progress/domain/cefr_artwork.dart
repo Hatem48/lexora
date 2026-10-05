@@ -5,7 +5,13 @@ import 'dart:ui';
 /// Enough to feel gradual, few enough to paint in one canvas pass.
 const cefrArtRegionCount = 180;
 
-/// Mastered catalog words only. Discovery and learning do not count.
+/// How many catalog words of a level should color its painting.
+int paintingWordCount({required int recognized, required int total}) {
+  if (recognized <= 0 || total <= 0) return 0;
+  if (recognized >= total) return total;
+  return recognized;
+}
+
 double artProgressFraction({required int mastered, required int total}) {
   if (mastered <= 0 || total <= 0) return 0;
   if (mastered >= total) return 1;

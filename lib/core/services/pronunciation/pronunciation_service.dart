@@ -1,4 +1,19 @@
+import 'package:flutter/foundation.dart';
+
 import '../../constants/enums.dart';
+
+/// iOS treats 0.5 as normal and 1.0 as the fastest. Android treats 1.0 as normal.
+double speechRateFor(
+  PlaybackSpeed speed, {
+  TargetPlatform platform = TargetPlatform.android,
+}) {
+  final apple =
+      platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
+  return switch (speed) {
+    PlaybackSpeed.normal => apple ? 0.40 : 0.78,
+    PlaybackSpeed.slow => apple ? 0.28 : 0.50,
+  };
+}
 
 /// Abstraction for pronunciation playback.
 /// UI must depend on this — never a concrete TTS provider.

@@ -9,7 +9,9 @@ import 'package:lexora/core/database/app_database.dart';
 import 'package:lexora/core/services/progress/achievement_catalog.dart';
 import 'package:lexora/core/services/progress/learning_activity_store.dart';
 import 'package:lexora/core/services/vocabulary/vocabulary_catalog_importer.dart';
+import 'package:lexora/features/home/domain/whats_new.dart';
 import 'package:lexora/features/progress/domain/cefr_artwork.dart';
+import 'package:lexora/features/progress/presentation/catalog_progress_section.dart';
 import 'package:lexora/features/progress/presentation/cefr_artwork_card.dart';
 import 'package:lexora/l10n/app_localizations.dart';
 
@@ -50,6 +52,32 @@ void main() {
     expect(artProgressFraction(mastered: 0, total: 0), 0);
     expect(visibleArtRegions(mastered: 4, total: 0), 0);
     expect(artProgressFraction(mastered: 3, total: 2), 1);
+  });
+
+  test('words added in sentences and the word list color that level only', () {
+    const progress = CatalogProgress(
+      totals: {'A1': 4, 'B1': 10},
+      discovered: {'B1': 3},
+      learning: {'A1': 1},
+      masteredByLevel: {'B1': 1},
+      personalByLevel: {'A1': 2},
+      mastered: 1,
+      academic: 0,
+      ielts: 0,
+      toefl: 0,
+      discoveredThisWeek: 0,
+    );
+    expect(progress.recognizedFor('B1'), 4);
+    expect(progress.recognizedFor('A1'), 3);
+    expect(progress.recognizedFor('A2'), 0);
+    expect(paintingWordCount(recognized: 4, total: 10), 4);
+    expect(
+      visibleArtRegions(mastered: progress.recognizedFor('B1'), total: 10),
+      greaterThan(0),
+    );
+    expect(shouldShowWhatsNew(seen: null, current: '1.0.0+15'), isTrue);
+    expect(shouldShowWhatsNew(seen: '1.0.0+14', current: '1.0.0+15'), isTrue);
+    expect(shouldShowWhatsNew(seen: '1.0.0+15', current: '1.0.0+15'), isFalse);
   });
 
   test('each level is an independent painting', () {

@@ -165,11 +165,16 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                   itemBuilder: (context, index) {
                     final level = CefrLevel.values[index];
                     final art = ref.watch(catalogProgressProvider).asData?.value;
+                    final recognized = art?.recognizedFor(level.code) ?? 0;
+                    final total = art?.totals[level.code] ?? 0;
                     return SizedBox(
                       width: 220,
                       child: CefrArtworkCard(
                         level: level.code,
-                        mastered: art?.masteredByLevel[level.code] ?? 0,
+                        mastered: paintingWordCount(
+                          recognized: recognized,
+                          total: total,
+                        ),
                         total: art?.totals[level.code] ?? 0,
                         compact: true,
                         onTap: levelArtIsOpen(level.code)

@@ -212,6 +212,42 @@ abstract class AppLocalizations {
   /// **'{mastered} / {total} mastered'**
   String masteredCountOfTotal(int mastered, int total);
 
+  /// No description provided for @paintingWordsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} / {total} words'**
+  String paintingWordsCount(int count, int total);
+
+  /// No description provided for @whatsNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s new'**
+  String get whatsNewTitle;
+
+  /// No description provided for @whatsNewThisVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'In this version'**
+  String get whatsNewThisVersion;
+
+  /// No description provided for @whatsNewPreviousVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'In the previous version'**
+  String get whatsNewPreviousVersion;
+
+  /// No description provided for @whatsNewCurrentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Level paintings now fill from the words Lexora recognizes when you add a word or a sentence. Each level has its own painting. Tapping a sentence opens it and shows your notes. Pronunciation is slower, and an empty painting is a calm canvas instead of a white block.'**
+  String get whatsNewCurrentBody;
+
+  /// No description provided for @whatsNewPreviousBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The full vocabulary catalog was installed without erasing your words, sentences, or progress. The CEFR rings count words you have actually met.'**
+  String get whatsNewPreviousBody;
+
   /// No description provided for @wordsRemainingCount.
   ///
   /// In en, this message translates to:
@@ -379,6 +415,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notes'**
   String get notes;
+
+  /// No description provided for @noNotesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No notes yet'**
+  String get noNotesYet;
 
   /// No description provided for @addToReviewSystem.
   ///

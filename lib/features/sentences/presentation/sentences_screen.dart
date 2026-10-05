@@ -13,6 +13,8 @@ import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/vocabulary/vocabulary_discovery_repository.dart';
+import '../../home/presentation/dashboard_providers.dart';
+import '../../progress/presentation/catalog_progress_section.dart';
 import '../../../core/widgets/content_filter_sheet.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../categories/data/category_repository.dart';
@@ -142,7 +144,8 @@ class _SentencesScreenState extends ConsumerState<SentencesScreen> {
     );
     final async = ref.watch(sentencesListProvider(query));
     final pronunciation = ref.watch(pronunciationServiceProvider);
-    final accent = ref.watch(settingsProvider).accent;
+    final settings = ref.watch(settingsProvider);
+    final accent = settings.accent;
 
     return Scaffold(
       appBar: AppBar(
@@ -243,6 +246,7 @@ class _SentencesScreenState extends ConsumerState<SentencesScreen> {
                   itemBuilder: (context, index) {
                     final s = items[index];
                     return LexoraCard(
+                      onTap: () => context.push('/sentences/${s.id}'),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -260,6 +264,7 @@ class _SentencesScreenState extends ConsumerState<SentencesScreen> {
                                 onPressed: () => pronunciation.speak(
                                   s.sentence,
                                   accent: accent,
+                                  speed: settings.playbackSpeed,
                                 ),
                                 icon: const Icon(Icons.volume_up_rounded),
                                 color: AppColors.primary,
@@ -277,6 +282,15 @@ class _SentencesScreenState extends ConsumerState<SentencesScreen> {
                             s.arabicTranslation,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
+                          if (s.notes != null && s.notes!.trim().isNotEmpty) ...[
+                            const SizedBox(height: 8),
+                            Text(
+                              s.notes!,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
                           const SizedBox(height: 10),
                           CefrBadge(level: s.cefrLevel),
                         ],
@@ -369,6 +383,8 @@ class _AddSentenceScreenState extends ConsumerState<AddSentenceScreen> {
       discoveredIn: 'sentence',
       sourceId: id,
     );
+    ref.invalidate(catalogProgressProvider);
+    ref.invalidate(dashboardStatsProvider);
 
     if (mounted) {
       setState(() => _saving = false);
@@ -459,6 +475,130 @@ class _AddSentenceScreenState extends ConsumerState<AddSentenceScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class SentenceDetailsScreen extends ConsumerStatefulWidget {
+  const SentenceDetailsScreen({super.key, required this.sentenceId});
+
+  final String sentenceId;
+
+  @override
+  ConsumerState<SentenceDetailsScreen> createState() =>
+      _SentenceDetailsScreenState();
+}
+
+class _SentenceDetailsScreenState extends ConsumerState<SentenceDetailsScreen> {
+  final _notesCtrl = TextEditingController();
+  var _notesReady = false;
+
+  @override
+  void dispose() {
+    _notesCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    _saveNotes();
+    super.deactivate();
+  }
+
+  Future<void> _saveNotes() async {
+    if (!_notesReady) return;
+    final db = ref.read(appDatabaseProvider);
+    final text = _notesCtrl.text.trim();
+    await (db.update(db.sentences)
+          ..where((row) => row.id.equals(widget.sentenceId)))
+        .write(
+      SentencesCompanion(
+        notes: Value(text.isEmpty ? null : text),
+        updatedAt: Value(DateTime.now()),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final db = ref.watch(appDatabaseProvider);
+    final stream = (db.select(db.sentences)
+          ..where((row) => row.id.equals(widget.sentenceId)))
+        .watchSingleOrNull();
+
+    return StreamBuilder<SentenceRow?>(
+      stream: stream,
+      builder: (context, snapshot) {
+        final sentence = snapshot.data;
+        if (snapshot.connectionState == ConnectionState.waiting &&
+            sentence == null) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (sentence == null) {
+          return Scaffold(
+            appBar: AppBar(),
+            body: EmptyState(
+              title: l10n.errorGeneric,
+              message: '',
+              actionLabel: l10n.backToHome,
+              onAction: () => context.go('/home'),
+            ),
+          );
+        }
+        if (!_notesReady) {
+          _notesCtrl.text = sentence.notes ?? '';
+          _notesReady = true;
+        }
+        final pronunciation = ref.watch(pronunciationServiceProvider);
+        final settings = ref.watch(settingsProvider);
+
+        return Scaffold(
+          appBar: AppBar(title: Text(l10n.sentences)),
+          body: ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              LtrText(
+                sentence.sentence,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 12),
+              RtlText(
+                sentence.arabicTranslation,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 12),
+              CefrBadge(level: sentence.cefrLevel),
+              const SizedBox(height: 20),
+              LexoraPrimaryButton(
+                label: l10n.listen,
+                icon: Icons.volume_up_rounded,
+                onPressed: () => pronunciation.speak(
+                  sentence.sentence,
+                  accent: settings.accent,
+                  speed: settings.playbackSpeed,
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(l10n.notes, style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 8),
+              TextField(
+                controller: _notesCtrl,
+                minLines: 3,
+                maxLines: 8,
+                decoration: InputDecoration(
+                  hintText: l10n.noNotesYet,
+                  alignLabelWithHint: true,
+                ),
+                onEditingComplete: _saveNotes,
+                onTapOutside: (_) => _saveNotes(),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

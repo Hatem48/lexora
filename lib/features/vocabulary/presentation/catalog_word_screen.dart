@@ -43,7 +43,8 @@ class CatalogWordScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final word = ref.watch(catalogWordProvider(entryId));
     final pronunciation = ref.watch(pronunciationServiceProvider);
-    final accent = ref.watch(settingsProvider).accent;
+    final settings = ref.watch(settingsProvider);
+    final accent = settings.accent;
 
     return Scaffold(
       appBar: AppBar(
@@ -74,6 +75,7 @@ class CatalogWordScreen extends ConsumerWidget {
                     onPressed: () => pronunciation.speak(
                       entry.lemma,
                       accent: accent,
+                      speed: settings.playbackSpeed,
                     ),
                     icon: const Icon(Icons.volume_up_rounded),
                   ),

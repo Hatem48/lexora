@@ -25,6 +25,18 @@
       "total": { "type": "int" }
     }
   },
+  "paintingWordsCount": "{count} / {total} كلمة",
+  "@paintingWordsCount": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "whatsNewTitle": "ما الجديد",
+  "whatsNewThisVersion": "في هذا الإصدار",
+  "whatsNewPreviousVersion": "في الإصدار السابق",
+  "whatsNewCurrentBody": "لوحات المستويات تتلون الآن بالكلمات التي يتعرف عليها Lexora عند إضافة كلمة أو جملة. كل مستوى له لوحته. الضغط على الجملة يفتحها ويعرض ملاحظاتك. النطق أصبح أبطأ، واللوحة الفارغة لم تعد صفحة بيضاء.",
+  "whatsNewPreviousBody": "تم تثبيت قاموس المفردات الكامل دون مسح كلماتك أو جملك أو تقدمك. حلقات CEFR تعرض الكلمات التي قابلتها فعلًا.",
   "wordsRemainingCount": "{count} لم تُتقن بعد",
   "@wordsRemainingCount": {
     "placeholders": {
@@ -63,6 +75,7 @@
   "exampleSentence": "جملة مثال",
   "arabicTranslation": "الترجمة العربية",
   "notes": "ملاحظات",
+  "noNotesYet": "لا توجد ملاحظات بعد",
   "addToReviewSystem": "أضف إلى نظام المراجعة",
   "requiredField": "هذا الحقل مطلوب",
   "wordAlreadyExists": "هذه الكلمة موجودة مسبقاً في مكتبتك",

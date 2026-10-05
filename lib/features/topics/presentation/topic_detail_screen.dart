@@ -12,6 +12,8 @@ import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/topics/topic_repository.dart';
 import '../../../core/services/vocabulary/vocabulary_discovery_repository.dart';
 import '../../../core/widgets/lexora_widgets.dart';
+import '../../home/presentation/dashboard_providers.dart';
+import '../../progress/presentation/catalog_progress_section.dart';
 import 'topic_icons.dart';
 import 'topic_providers.dart';
 
@@ -137,7 +139,8 @@ class _WordsTab extends ConsumerWidget {
       topicWordsProvider((id: topicId, cefr: cefr, filter: filter)),
     );
     final pronunciation = ref.watch(pronunciationServiceProvider);
-    final accent = ref.watch(settingsProvider).accent;
+    final settings = ref.watch(settingsProvider);
+    final accent = settings.accent;
 
     return words.when(
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -179,6 +182,7 @@ class _WordsTab extends ConsumerWidget {
                     onPressed: () => pronunciation.speak(
                       word.lemma,
                       accent: accent,
+                      speed: settings.playbackSpeed,
                     ),
                     icon: const Icon(Icons.volume_up_rounded),
                   ),
@@ -205,7 +209,8 @@ class _SentencesTab extends ConsumerWidget {
       topicSentencesProvider((id: topicId, cefr: cefr)),
     );
     final pronunciation = ref.watch(pronunciationServiceProvider);
-    final accent = ref.watch(settingsProvider).accent;
+    final settings = ref.watch(settingsProvider);
+    final accent = settings.accent;
 
     return sentences.when(
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -236,6 +241,7 @@ class _SentencesTab extends ConsumerWidget {
                         onPressed: () => pronunciation.speak(
                           sentence.sentenceEn,
                           accent: accent,
+                          speed: settings.playbackSpeed,
                         ),
                         icon: const Icon(Icons.volume_up_rounded),
                       ),
@@ -425,6 +431,8 @@ class _QuestionsTabState extends ConsumerState<_QuestionsTab> {
       sourceId: question.id,
     );
     if (!mounted) return;
+    ref.invalidate(catalogProgressProvider);
+    ref.invalidate(dashboardStatsProvider);
     setState(() {
       _found = summary.newlyDiscovered.map((word) => word.lemma).toList();
     });

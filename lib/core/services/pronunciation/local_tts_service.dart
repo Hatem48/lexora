@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 import '../../constants/enums.dart';
@@ -26,7 +27,9 @@ class LocalTtsService implements PronunciationService {
     await _ensureReady();
     final locale = accent == PronunciationAccent.british ? 'en-GB' : 'en-US';
     await _tts.setLanguage(locale);
-    await _tts.setSpeechRate(speed.rate);
+    await _tts.setSpeechRate(
+      speechRateFor(speed, platform: defaultTargetPlatform),
+    );
     await _tts.setPitch(1.0);
     await _tts.speak(text);
   }

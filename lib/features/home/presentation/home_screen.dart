@@ -78,11 +78,15 @@ class HomeScreen extends ConsumerWidget {
             final next = stats.currentLevel.next;
             final art = ref.watch(catalogProgressProvider).asData?.value;
             final code = stats.currentLevel.code;
-            final mastered = art?.masteredByLevel[code] ?? 0;
+            final recognized = art?.recognizedFor(code) ?? 0;
             final total = art?.totals[code] ?? 0;
+            final painted = paintingWordCount(recognized: recognized, total: total);
 
             return RefreshIndicator(
-              onRefresh: () async => ref.invalidate(dashboardStatsProvider),
+              onRefresh: () async {
+                ref.invalidate(dashboardStatsProvider);
+                ref.invalidate(catalogProgressProvider);
+              },
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(
                   AppSpacing.screenPadding,
@@ -116,7 +120,7 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: AppSpacing.lg),
                   CefrArtworkCard(
                     level: code,
-                    mastered: mastered,
+                    mastered: painted,
                     total: total,
                     onTap: () => context.push(levelArtPath(code)),
                     help: true,

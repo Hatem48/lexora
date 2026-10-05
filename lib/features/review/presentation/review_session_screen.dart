@@ -262,7 +262,8 @@ class ReviewSessionScreen extends ConsumerWidget {
     final state = ref.watch(reviewSessionProvider);
     final theme = Theme.of(context);
     final pronunciation = ref.watch(pronunciationServiceProvider);
-    final accent = ref.watch(settingsProvider).accent;
+    final settings = ref.watch(settingsProvider);
+    final accent = settings.accent;
 
     if (state.loading) {
       return const Scaffold(
@@ -374,7 +375,11 @@ class ReviewSessionScreen extends ConsumerWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                       onPressed: () =>
-                          pronunciation.speak(card.prompt, accent: accent),
+                          pronunciation.speak(
+                            card.prompt,
+                            accent: accent,
+                            speed: settings.playbackSpeed,
+                          ),
                       icon: const Icon(Icons.volume_up_rounded),
                       color: AppColors.primary,
                     ),

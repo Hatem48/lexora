@@ -77,6 +77,28 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String paintingWordsCount(int count, int total) {
+    return '$count / $total words';
+  }
+
+  @override
+  String get whatsNewTitle => 'What\'s new';
+
+  @override
+  String get whatsNewThisVersion => 'In this version';
+
+  @override
+  String get whatsNewPreviousVersion => 'In the previous version';
+
+  @override
+  String get whatsNewCurrentBody =>
+      'Level paintings now fill from the words Lexora recognizes when you add a word or a sentence. Each level has its own painting. Tapping a sentence opens it and shows your notes. Pronunciation is slower, and an empty painting is a calm canvas instead of a white block.';
+
+  @override
+  String get whatsNewPreviousBody =>
+      'The full vocabulary catalog was installed without erasing your words, sentences, or progress. The CEFR rings count words you have actually met.';
+
+  @override
   String wordsRemainingCount(int count) {
     return '$count still to master';
   }
@@ -166,6 +188,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notes => 'Notes';
+
+  @override
+  String get noNotesYet => 'No notes yet';
 
   @override
   String get addToReviewSystem => 'Add to review system';

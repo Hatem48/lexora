@@ -47,7 +47,7 @@ class QualityTtsService implements PronunciationService {
   }
 
   String _fileKey(String text, PronunciationAccent accent, PlaybackSpeed speed) {
-    final raw = '$text|${accent.storageValue}|${speed.name}';
+    final raw = '$text|${accent.storageValue}|${speed.name}|calm-rate';
     return base64Url.encode(utf8.encode(raw)).replaceAll('=', '');
   }
 
@@ -83,7 +83,9 @@ class QualityTtsService implements PronunciationService {
       return existing.path;
     }
     await _ensureReady(accent);
-    await _tts.setSpeechRate(speed.rate);
+    await _tts.setSpeechRate(
+      speechRateFor(speed, platform: defaultTargetPlatform),
+    );
     final result = await _tts.synthesizeToFile(text, existing.path);
     if (existing.existsSync() && existing.lengthSync() > 0) {
       return existing.path;
@@ -105,7 +107,9 @@ class QualityTtsService implements PronunciationService {
       return;
     }
     await _ensureReady(accent);
-    await _tts.setSpeechRate(speed.rate);
+    await _tts.setSpeechRate(
+      speechRateFor(speed, platform: defaultTargetPlatform),
+    );
     await _tts.setPitch(1.0);
     await _tts.speak(text);
   }

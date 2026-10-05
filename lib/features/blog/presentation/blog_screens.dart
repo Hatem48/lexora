@@ -13,6 +13,8 @@ import '../../../core/widgets/lexora_widgets.dart';
 import '../../topics/presentation/topic_icons.dart';
 import '../../topics/presentation/topic_providers.dart';
 import '../../vocabulary/presentation/discovery_summary_dialog.dart';
+import '../../home/presentation/dashboard_providers.dart';
+import '../../progress/presentation/catalog_progress_section.dart';
 import '../data/blog_repository.dart';
 
 class BlogListScreen extends ConsumerWidget {
@@ -178,6 +180,8 @@ class _BlogEditorScreenState extends ConsumerState<BlogEditorScreen> {
           content: _content.text.trim(),
         );
     if (!mounted) return;
+    ref.invalidate(catalogProgressProvider);
+    ref.invalidate(dashboardStatsProvider);
     setState(() => _saving = false);
     await showDiscoverySummary(context, summary);
     if (mounted) context.pop();
