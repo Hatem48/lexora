@@ -11,7 +11,6 @@ import '../../../core/services/progress/learning_activity_store.dart';
 import '../../../core/help/context_help_icon.dart';
 import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
-import '../domain/cefr_artwork.dart';
 import 'catalog_progress_section.dart';
 import 'cefr_artwork_card.dart';
 
@@ -127,10 +126,6 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
         data: (data) {
           final total = data.totals[code] ?? 0;
           final mastered = data.masteredByLevel[code] ?? 0;
-          final painted = paintingWordCount(
-            recognized: data.recognizedFor(code),
-            total: total,
-          );
           final discovered = data.discovered[code] ?? 0;
           final learning = data.learning[code] ?? 0;
           final remaining = total - mastered < 0 ? 0 : total - mastered;
@@ -147,9 +142,14 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
                   delegate: SliverChildListDelegate([
                     CefrArtworkCard(
                       level: code,
-                      mastered: painted,
+                      mastered: mastered,
                       total: total,
+                      masteredEntryIds: data.masteredIdsFor(code),
                     ),
+                    if (total > 0 && mastered >= total) ...[
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(l10n.masterpieceCompleted(code)),
+                    ],
                     const SizedBox(height: AppSpacing.md),
                     Text(l10n.collectionNotOfficialLevel),
                     const SizedBox(height: AppSpacing.md),

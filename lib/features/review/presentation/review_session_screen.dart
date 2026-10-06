@@ -18,6 +18,7 @@ import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/review/review_engine.dart';
 import '../../../core/help/context_help_icon.dart';
 import '../../../core/help/help_catalog.dart';
+import '../../progress/presentation/catalog_progress_section.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 
 class ReviewCardData {
@@ -224,6 +225,7 @@ class ReviewSessionController extends Notifier<ReviewSessionState> {
           lastUsedAt: Value(now),
         ),
       );
+      ref.invalidate(catalogProgressProvider);
     } else if (item.itemType == ReviewItemType.sentence.storageValue) {
       await (db.update(db.sentences)..where((t) => t.id.equals(item.itemId)))
           .write(

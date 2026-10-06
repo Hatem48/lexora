@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "everyday_english",
+      "name": {
+        "en": "Everyday English",
+        "ar": "الإنجليزية اليومية"
+      }
+    },
+    {
+      "id": "professional_english",
+      "name": {
+        "en": "Professional English",
+        "ar": "الإنجليزية المهنية"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "id": "daily_life",
+      "categoryId": "everyday_english",
+      "name": {
+        "en": "Daily Life",
+        "ar": "الحياة اليومية"
+      },
+      "description": {
+        "en": "Common English for everyday situations.",
+        "ar": "الإنجليزية الشائعة للمواقف اليومية."
+      },
+      "vocabulary": [
+        "breakfast",
+        "routine"
+      ],
+      "sentences": [
+        {
+          "id": "daily_life_sentence_001",
+          "en": "Breakfast is part of my daily routine.",
+          "ar": "الإفطار جزء من روتيني اليومي.",
+          "cefr": "A2",
+          "wordIds": [
+            "breakfast",
+            "routine"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "daily_life_question_001",
+          "type": "conversation",
+          "question": {
+            "en": "What do you usually do in the morning?",
+            "ar": "ماذا تفعل عادةً في الصباح؟"
+          },
+          "answer": {
+            "en": "I usually have breakfast and start my day.",
+            "ar": "عادةً أتناول الإفطار وأبدأ يومي."
+          },
+          "cefr": "A2",
+          "wordIds": [
+            "breakfast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "job_interview",
+      "categoryId": "professional_english",
+      "name": {
+        "en": "Job Interview",
+        "ar": "مقابلة العمل"
+      },
+      "description": {
+        "en": "Common questions and expressions used in job interviews.",
+        "ar": "أسئلة وتعبيرات شائعة في مقابلات العمل."
+      },
+      "vocabulary": [],
+      "sentences": [],
+      "questions": [
+        {
+          "id": "job_interview_question_001",
+          "type": "conversation",
+          "question": {
+            "en": "Tell me about yourself.",
+            "ar": "حدثني عن نفسك."
+          },
+          "answer": {
+            "en": "I am a software engineering graduate.",
+            "ar": "أنا خريج هندسة برمجيات."
+          },
+          "cefr": "A2",
+          "wordIds": []
+        }
+      ]
+    }
+  ]
+}

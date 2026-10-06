@@ -263,7 +263,7 @@ abstract class AppLocalizations {
   /// No description provided for @masterpieceCompleted.
   ///
   /// In en, this message translates to:
-  /// **'{level} masterpiece completed'**
+  /// **'{level} Vocabulary Masterpiece Completed'**
   String masterpieceCompleted(String level);
 
   /// No description provided for @collectionNotOfficialLevel.
@@ -2347,6 +2347,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Word forms'**
   String get wordForms;
+
+  /// No description provided for @todayPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s plan'**
+  String get todayPlan;
+
+  /// No description provided for @todayPlanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s learning'**
+  String get todayPlanTitle;
+
+  /// No description provided for @gotIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get gotIt;
+
+  /// No description provided for @todayTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s tasks'**
+  String get todayTasks;
+
+  /// No description provided for @journeyStep.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {total}'**
+  String journeyStep(int current, int total);
+
+  /// No description provided for @todayJourneyFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, stay with {level}. Review what is due, meet a few new words, then practice a sentence or a topic.'**
+  String todayJourneyFocus(String level);
+
+  /// No description provided for @todayJourneyReview.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items are due today. Reviewing them keeps yesterday\'s words with you.'**
+  String todayJourneyReview(int count);
+
+  /// No description provided for @todayJourneyReviewClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is due yet. A short look at your words still keeps the habit.'**
+  String get todayJourneyReviewClear;
+
+  /// No description provided for @todayJourneyList.
+  ///
+  /// In en, this message translates to:
+  /// **'This is today\'s work. When you finish a task it stays on the list, with a check and a line through it. Tomorrow the list starts again.'**
+  String get todayJourneyList;
+
+  /// No description provided for @taskReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review what is due'**
+  String get taskReview;
+
+  /// No description provided for @taskReviewDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items'**
+  String taskReviewDetail(int count);
+
+  /// No description provided for @taskWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn {level} words'**
+  String taskWords(String level);
+
+  /// No description provided for @taskWordsDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Open your level\'s words and keep going.'**
+  String get taskWordsDetail;
+
+  /// No description provided for @taskSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice a sentence'**
+  String get taskSentence;
+
+  /// No description provided for @taskSentenceDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a sentence and listen to it.'**
+  String get taskSentenceDetail;
+
+  /// No description provided for @taskTopic.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a topic'**
+  String get taskTopic;
+
+  /// No description provided for @taskTopicDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer one question in a topic.'**
+  String get taskTopicDetail;
+
+  /// No description provided for @importTopicContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Import topics'**
+  String get importTopicContent;
+
+  /// No description provided for @importTopicContentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add categories, topics, sentences, and questions from a JSON file.'**
+  String get importTopicContentHint;
+
+  /// No description provided for @importTopicContentDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Import completed'**
+  String get importTopicContentDone;
+
+  /// No description provided for @importTopicCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories: {added} added, {updated} updated'**
+  String importTopicCategories(int added, int updated);
+
+  /// No description provided for @importTopicTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'Topics: {added} added, {updated} updated'**
+  String importTopicTopics(int added, int updated);
+
+  /// No description provided for @importTopicVocabulary.
+  ///
+  /// In en, this message translates to:
+  /// **'Vocabulary links: {added} added, {unresolved} unresolved'**
+  String importTopicVocabulary(int added, int unresolved);
+
+  /// No description provided for @importTopicSentences.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentences: {added} added, {updated} updated'**
+  String importTopicSentences(int added, int updated);
+
+  /// No description provided for @importTopicQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions: {added} added, {updated} updated'**
+  String importTopicQuestions(int added, int updated);
+
+  /// No description provided for @importTopicWarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Warnings: {count}'**
+  String importTopicWarnings(int count);
+
+  /// No description provided for @importTopicMalformed.
+  ///
+  /// In en, this message translates to:
+  /// **'This file is not valid JSON.'**
+  String get importTopicMalformed;
+
+  /// No description provided for @importTopicUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'This topics file uses an unsupported version.'**
+  String get importTopicUnsupported;
+
+  /// No description provided for @importTopicInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'This topics file is missing required fields.'**
+  String get importTopicInvalid;
 }
 
 class _AppLocalizationsDelegate

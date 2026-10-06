@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:lexora/l10n/app_localizations.dart';
 
 import '../../../app/theme/app_spacing.dart';
-import '../../../core/constants/enums.dart';
 import '../../../core/help/context_help_icon.dart';
 import '../../../core/help/help_catalog.dart';
 import '../domain/cefr_artwork.dart';
@@ -15,6 +14,7 @@ class CefrArtworkCard extends StatefulWidget {
     required this.level,
     required this.mastered,
     required this.total,
+    this.masteredEntryIds = const [],
     this.compact = false,
     this.help = false,
     this.onTap,
@@ -23,6 +23,7 @@ class CefrArtworkCard extends StatefulWidget {
   final String level;
   final int mastered;
   final int total;
+  final List<String> masteredEntryIds;
   final bool compact;
   final bool help;
   final VoidCallback? onTap;
@@ -33,42 +34,50 @@ class CefrArtworkCard extends StatefulWidget {
 
 class _CefrArtworkCardState extends State<CefrArtworkCard>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _reveal;
-  int _from = 0;
-  int _to = 0;
+  late final AnimationController _appear;
+  List<String> _ids = const [];
+  String? _appearingId;
 
   @override
   void initState() {
     super.initState();
-    final visible = visibleArtRegions(mastered: widget.mastered, total: widget.total);
-    _from = visible;
-    _to = visible;
-    _reveal = AnimationController(
+    _ids = List<String>.of(widget.masteredEntryIds);
+    _appear = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 560),
+      duration: const Duration(milliseconds: 450),
       value: 1,
     );
+    _appear.addStatusListener((status) {
+      if (status == AnimationStatus.completed && _appearingId != null && mounted) {
+        setState(() => _appearingId = null);
+      }
+    });
   }
 
   @override
   void didUpdateWidget(CefrArtworkCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final next = visibleArtRegions(mastered: widget.mastered, total: widget.total);
-    final reduce = MediaQuery.disableAnimationsOf(context);
-    if (!reduce && next > _to) {
-      _from = _to;
-      _to = next;
-      _reveal.forward(from: 0);
-    } else if (next != _to) {
-      _from = next;
-      _to = next;
-      _reveal.value = 1;
+    final next = widget.masteredEntryIds;
+    if (_sameIds(_ids, next)) return;
+    final previous = _ids.toSet();
+    final added = [
+      for (final id in next)
+        if (!previous.contains(id)) id,
+    ];
+    _ids = List<String>.of(next);
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    if (!reduceMotion && added.length == 1) {
+      _appearingId = added.single;
+      _appear.forward(from: 0);
+    } else {
+      _appearingId = null;
+      _appear.value = 1;
     }
   }
 
   @override
   void dispose() {
-    _reveal.dispose();
+    _appear.dispose();
     super.dispose();
   }
 
@@ -80,7 +89,8 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
       total: widget.total,
     );
     final percent = (fraction * 100).round();
-    final label = _bandLabel(l10n, widget.level);
+    const title = Color(0xFF06135F);
+    const muted = Color(0xFF071D83);
 
     final card = ClipRRect(
       borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -88,34 +98,31 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
         height: widget.compact ? 168 : 188,
         width: double.infinity,
         child: AnimatedBuilder(
-          animation: _reveal,
+          animation: _appear,
           builder: (context, _) {
-            final shown = _from + ((_to - _from) * _reveal.value).round();
-            final dark = Theme.of(context).brightness == Brightness.dark;
-            final title = dark ? Colors.white : const Color(0xFF12233F);
-            final muted = title.withValues(alpha: 0.82);
             return Stack(
               fit: StackFit.expand,
               children: [
-                CustomPaint(
-                  painter: CefrArtworkPainter(
-                    level: widget.level,
-                    visibleRegions: shown,
-                    dark: dark,
+                RepaintBoundary(
+                  child: CustomPaint(
+                    painter: CefrWordArtPainter(
+                      level: widget.level,
+                      entryIds: widget.masteredEntryIds,
+                      appearingId: _appearingId,
+                      appearProgress: _appearingId == null ? 1 : _appear.value,
+                    ),
                   ),
                 ),
-                DecoratedBox(
+                const DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        (dark ? Colors.black : Colors.white).withValues(
-                          alpha: dark ? 0.42 : 0.78,
-                        ),
+                        Color(0xD9FFF5E5),
                       ],
-                      stops: const [0.45, 1],
+                      stops: [0.62, 1],
                     ),
                   ),
                 ),
@@ -139,8 +146,9 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
                             ),
                       ),
                       Text(
-                        label,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        '${_grouped(widget.mastered)} / ${_grouped(widget.total)} ${l10n.mastered}',
+                        textDirection: TextDirection.ltr,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: muted,
                             ),
                       ),
@@ -152,13 +160,6 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
                               fontWeight: FontWeight.w700,
                             ),
                       ),
-                      if (!widget.compact)
-                        Text(
-                          l10n.paintingWordsCount(widget.mastered, widget.total),
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: muted,
-                              ),
-                        ),
                     ],
                   ),
                 ),
@@ -179,114 +180,130 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
       ),
     );
   }
-
-  String _bandLabel(AppLocalizations l10n, String level) {
-    return switch (CefrLevel.fromCode(level)) {
-      CefrLevel.a1 || CefrLevel.a2 => l10n.beginner,
-      CefrLevel.b1 || CefrLevel.b2 => l10n.intermediate,
-      CefrLevel.c1 || CefrLevel.c2 => l10n.advanced,
-    };
-  }
 }
 
-class CefrArtworkPainter extends CustomPainter {
-  const CefrArtworkPainter({
+bool _sameIds(List<String> left, List<String> right) {
+  if (left.length != right.length) return false;
+  for (var index = 0; index < left.length; index++) {
+    if (left[index] != right[index]) return false;
+  }
+  return true;
+}
+
+String _grouped(int value) {
+  final text = value.toString();
+  final buffer = StringBuffer();
+  for (var index = 0; index < text.length; index++) {
+    if (index > 0 && (text.length - index) % 3 == 0) buffer.write(',');
+    buffer.write(text[index]);
+  }
+  return buffer.toString();
+}
+
+class CefrWordArtPainter extends CustomPainter {
+  CefrWordArtPainter({
     required this.level,
-    required this.visibleRegions,
-    required this.dark,
-  });
+    required List<String> entryIds,
+    this.appearingId,
+    this.appearProgress = 1,
+  }) : entryIds = List<String>.unmodifiable(entryIds);
 
   final String level;
-  final int visibleRegions;
-  final bool dark;
+  final List<String> entryIds;
+  final String? appearingId;
+  final double appearProgress;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
-    final paper = dark
-        ? const Color(0xFF1A2740)
-        : const Color(0xFFE7EEF6);
-    canvas.drawRect(rect, Paint()..color = paper);
-    canvas.saveLayer(
-      rect,
-      Paint()
-        ..color = Colors.white.withValues(alpha: dark ? 0.34 : 0.55),
-    );
-    _paintScene(canvas, size);
-    canvas.restore();
-    if (visibleRegions <= 0) return;
-    canvas.saveLayer(rect, Paint());
-    _paintScene(canvas, size);
-    canvas.saveLayer(rect, Paint()..blendMode = BlendMode.dstIn);
-    final regions = artRegionsFor(level);
-    final brush = Paint()..color = Colors.white;
-    if (visibleRegions >= regions.length && regions.isNotEmpty) {
-      canvas.drawRect(rect, brush);
-    } else {
-      for (final region in regions) {
-        if (region.order >= visibleRegions) continue;
-        canvas.save();
-        canvas.translate(region.x * size.width, region.y * size.height);
-        canvas.rotate(region.rotation);
-        canvas.drawOval(
-          Rect.fromCenter(
-            center: Offset.zero,
-            width: region.rx * size.width * 2.4,
-            height: region.ry * size.height * 2.6,
-          ),
-          brush,
-        );
-        canvas.restore();
-      }
-    }
-    canvas.restore();
-    canvas.restore();
-  }
-
-  void _paintScene(Canvas canvas, Size size) {
-    for (final anchor in sceneAnchorsFor(level)) {
-      final paint = Paint()..color = anchor.color;
-      final box = Rect.fromLTWH(
-        anchor.x * size.width,
-        anchor.y * size.height,
-        anchor.w * size.width,
-        anchor.h * size.height,
+    canvas.drawRect(Offset.zero & size, Paint()..color = artCanvasColor);
+    if (entryIds.isEmpty || size.isEmpty) return;
+    final blobs = paintBlobsFor(level: level, masteredEntryIds: entryIds);
+    for (final blob in blobs) {
+      final appearing = blob.entryId == appearingId;
+      final progress = appearing ? appearProgress.clamp(0.0, 1.0) : 1.0;
+      if (progress <= 0) continue;
+      final path = _blobPath(blob, size);
+      final center = Offset(blob.x * size.width, blob.y * size.height);
+      canvas.save();
+      canvas.translate(center.dx, center.dy);
+      canvas.scale(progress);
+      canvas.translate(-center.dx, -center.dy);
+      canvas.drawPath(
+        path,
+        Paint()
+          ..color = blob.color.withValues(alpha: blob.opacity * progress)
+          ..isAntiAlias = true,
       );
-      switch (anchor.kind) {
-        case 1:
-          canvas.drawCircle(box.center, math.min(box.width, box.height) / 2, paint);
-        case 2:
-          final path = Path()
-            ..moveTo(box.left, box.bottom)
-            ..quadraticBezierTo(
-              box.center.dx,
-              box.top,
-              box.right,
-              box.bottom,
-            )
-            ..close();
-          canvas.drawPath(path, paint);
-        case 3:
-          canvas.drawRRect(
-            RRect.fromRectAndRadius(box, const Radius.circular(4)),
-            paint,
-          );
-        case 4:
-          canvas.drawLine(
-            box.centerLeft,
-            box.centerRight,
-            paint..strokeWidth = math.max(2, box.height),
-          );
-        default:
-          canvas.drawRect(box, paint);
-      }
+      canvas.save();
+      canvas.translate(center.dx, center.dy);
+      canvas.scale(0.38);
+      canvas.translate(-center.dx - blob.baseSize * 0.12, -center.dy + blob.baseSize * 0.16);
+      canvas.drawPath(
+        path,
+        Paint()..color = const Color(0x38FFFFFF),
+      );
+      canvas.restore();
+      canvas.restore();
     }
   }
 
   @override
-  bool shouldRepaint(CefrArtworkPainter oldDelegate) {
-    return oldDelegate.level != level ||
-        oldDelegate.visibleRegions != visibleRegions ||
-        oldDelegate.dark != dark;
+  bool shouldRepaint(CefrWordArtPainter oldDelegate) {
+    if (oldDelegate.level != level ||
+        oldDelegate.appearingId != appearingId ||
+        oldDelegate.appearProgress != appearProgress ||
+        oldDelegate.entryIds.length != entryIds.length) {
+      return true;
+    }
+    for (var index = 0; index < entryIds.length; index++) {
+      if (oldDelegate.entryIds[index] != entryIds[index]) return true;
+    }
+    return false;
   }
+}
+
+final Map<String, Path> _blobPathCache = {};
+
+Path _blobPath(PaintBlob blob, Size size) {
+  final key =
+      '${blob.level}:${blob.entryId}:${size.width.toStringAsFixed(1)}x${size.height.toStringAsFixed(1)}';
+  return _blobPathCache.putIfAbsent(key, () => _buildBlobPath(blob, size));
+}
+
+Path _buildBlobPath(PaintBlob blob, Size size) {
+  final scale = (math.min(size.width, size.height) / 180).clamp(0.7, 1.8);
+  final center = Offset(blob.x * size.width, blob.y * size.height);
+  final base = blob.baseSize * scale;
+  final count = blob.pointCount;
+  final points = <Offset>[];
+  for (var index = 0; index < count; index++) {
+    final angle = index / count * math.pi * 2;
+    final localX = math.cos(angle) * base * blob.stretch * blob.noiseX[index];
+    final localY = math.sin(angle) * base * blob.noiseY[index];
+    final cosR = math.cos(blob.rotation);
+    final sinR = math.sin(blob.rotation);
+    points.add(
+      Offset(
+        center.dx + localX * cosR - localY * sinR,
+        center.dy + localX * sinR + localY * cosR,
+      ),
+    );
+  }
+  final path = Path();
+  final firstMid = Offset(
+    (points.last.dx + points.first.dx) / 2,
+    (points.last.dy + points.first.dy) / 2,
+  );
+  path.moveTo(firstMid.dx, firstMid.dy);
+  for (var index = 0; index < points.length; index++) {
+    final current = points[index];
+    final next = points[(index + 1) % points.length];
+    final mid = Offset(
+      (current.dx + next.dx) / 2,
+      (current.dy + next.dy) / 2,
+    );
+    path.quadraticBezierTo(current.dx, current.dy, mid.dx, mid.dy);
+  }
+  path.close();
+  return path;
 }

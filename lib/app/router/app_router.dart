@@ -9,6 +9,7 @@ import '../../features/auth/presentation/sign_in_screen.dart';
 import '../../features/categories/presentation/categories_screen.dart';
 import '../../features/grammar/presentation/grammar_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
+import '../../features/home/presentation/today_plan_screen.dart';
 import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/patterns/presentation/patterns_screen.dart';
 import '../../features/notifications/presentation/notification_center_screen.dart';
@@ -152,6 +153,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         parentNavigatorKey: _rootNavigatorKey,
         path: '/notifications',
         builder: (context, state) => const NotificationCenterScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/today',
+        builder: (context, state) => const TodayPlanScreen(),
       ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,

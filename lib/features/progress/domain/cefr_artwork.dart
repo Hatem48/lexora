@@ -1,16 +1,32 @@
 import 'dart:math' as math;
 import 'dart:ui';
 
-/// How many organic reveal regions a level painting uses.
-/// Enough to feel gradual, few enough to paint in one canvas pass.
-const cefrArtRegionCount = 180;
+const artCanvasColor = Color(0xFFFFF5E5);
 
-/// How many catalog words of a level should color its painting.
-int paintingWordCount({required int recognized, required int total}) {
-  if (recognized <= 0 || total <= 0) return 0;
-  if (recognized >= total) return total;
-  return recognized;
-}
+const paintPalette = <Color>[
+  Color(0xFF06135F),
+  Color(0xFF071D83),
+  Color(0xFF0036B5),
+  Color(0xFF0057D9),
+  Color(0xFF0089E6),
+  Color(0xFF00B6DF),
+  Color(0xFF32CDE5),
+  Color(0xFF72DFEB),
+  Color(0xFFFFE32C),
+  Color(0xFFFFD000),
+  Color(0xFFFFB300),
+  Color(0xFFFF9400),
+  Color(0xFFFF7200),
+  Color(0xFFFF4A18),
+  Color(0xFFF32625),
+  Color(0xFFEF164F),
+  Color(0xFFEE006D),
+  Color(0xFFF01583),
+  Color(0xFFC00082),
+  Color(0xFF8E007B),
+  Color(0xFF60007D),
+  Color(0xFF35106F),
+];
 
 double artProgressFraction({required int mastered, required int total}) {
   if (mastered <= 0 || total <= 0) return 0;
@@ -18,20 +34,7 @@ double artProgressFraction({required int mastered, required int total}) {
   return mastered / total;
 }
 
-/// Regions revealed for [mastered] of [total]. Same inputs always match.
-int visibleArtRegions({
-  required int mastered,
-  required int total,
-  int regions = cefrArtRegionCount,
-}) {
-  if (regions <= 0 || mastered <= 0 || total <= 0) return 0;
-  if (mastered >= total) return regions;
-  final count = (regions * mastered / total).round();
-  if (count < 1) return 1;
-  if (count > regions) return regions;
-  return count;
-}
-
+/// FNV-1a. Stable across runs and platforms, unlike [String.hashCode].
 int stableHash(String value) {
   var hash = 2166136261;
   for (final unit in value.codeUnits) {
@@ -41,164 +44,143 @@ int stableHash(String value) {
   return hash;
 }
 
-class ArtRegion {
-  const ArtRegion({
-    required this.order,
-    required this.x,
-    required this.y,
-    required this.rx,
-    required this.ry,
-    required this.rotation,
+class CatalogWordPaintStatus {
+  const CatalogWordPaintStatus({
+    required this.id,
+    required this.level,
+    required this.status,
   });
 
-  final int order;
-  final double x;
-  final double y;
-  final double rx;
-  final double ry;
-  final double rotation;
+  final String id;
+  final String level;
+  final String status;
 }
 
-/// Scattered soft masks. Order is shuffled by the level seed, not left to right.
-List<ArtRegion> artRegionsFor(String level) {
-  return _regionCache.putIfAbsent(level.toUpperCase(), () {
-    final code = level.toUpperCase();
-    final random = math.Random(stableHash('lexora-art-mask-$code'));
-    const columns = 15;
-    const rows = 12;
-    final drafted = <ArtRegion>[];
-    for (var row = 0; row < rows; row++) {
-      for (var column = 0; column < columns; column++) {
-        final jitterX = (random.nextDouble() - 0.5) * 0.045;
-        final jitterY = (random.nextDouble() - 0.5) * 0.05;
-        drafted.add(
-          ArtRegion(
-            order: 0,
-            x: ((column + 0.5) / columns + jitterX).clamp(0.02, 0.98),
-            y: ((row + 0.5) / rows + jitterY).clamp(0.02, 0.98),
-            rx: 0.055 + random.nextDouble() * 0.03,
-            ry: 0.06 + random.nextDouble() * 0.035,
-            rotation: (random.nextDouble() - 0.5) * 1.2,
-          ),
-        );
-      }
-    }
-    final ranked = [...drafted]..sort((a, b) {
-        final left = stableHash('$code:${a.x.toStringAsFixed(4)}:${a.y.toStringAsFixed(4)}');
-        final right = stableHash('$code:${b.x.toStringAsFixed(4)}:${b.y.toStringAsFixed(4)}');
-        return left.compareTo(right);
-      });
-    return [
-      for (var index = 0; index < ranked.length; index++)
-        ArtRegion(
-          order: index,
-          x: ranked[index].x,
-          y: ranked[index].y,
-          rx: ranked[index].rx,
-          ry: ranked[index].ry,
-          rotation: ranked[index].rotation,
-        ),
-    ];
-  });
-}
-
-final Map<String, List<ArtRegion>> _regionCache = {};
-
-/// Scene anchors are the swappable art content. The reveal mask does not change
-/// when a level's shapes are replaced, or later when a local image is used.
-class SceneAnchor {
-  const SceneAnchor({
-    required this.x,
-    required this.y,
-    required this.w,
-    required this.h,
-    required this.kind,
-    required this.color,
-  });
-
-  final double x;
-  final double y;
-  final double w;
-  final double h;
-  final int kind;
-  final Color color;
-}
-
-List<SceneAnchor> sceneAnchorsFor(String level) {
+/// Mastered catalog words of [level] only. Discovered and learning add nothing.
+List<String> masteredIdsForLevel(
+  String level,
+  Iterable<CatalogWordPaintStatus> words,
+) {
   final code = level.toUpperCase();
-  return switch (code) {
-    'A1' => _a1,
-    'A2' => _a2,
-    'B1' => _b1,
-    'B2' => _b2,
-    'C1' => _c1,
-    _ => _c2,
-  };
+  final ids = [
+    for (final word in words)
+      if (word.level.toUpperCase() == code && word.status == 'mastered') word.id,
+  ];
+  ids.sort();
+  return ids;
 }
 
-const _sky = Color(0xFF8EB6FF);
-const _sun = Color(0xFFFFD37A);
-const _hill = Color(0xFF3D8F6E);
-const _deep = Color(0xFF1E3A8A);
-const _water = Color(0xFF5BA7D6);
-const _stone = Color(0xFF64748B);
-const _dusk = Color(0xFF6D5BD0);
+class PaintBlob {
+  const PaintBlob({
+    required this.entryId,
+    required this.level,
+    required this.x,
+    required this.y,
+    required this.color,
+    required this.baseSize,
+    required this.stretch,
+    required this.rotation,
+    required this.opacity,
+    required this.noiseX,
+    required this.noiseY,
+    required this.layer,
+  });
 
-const _a1 = [
-  SceneAnchor(x: 0, y: 0, w: 1, h: 0.72, kind: 0, color: Color(0xFFD7E7FF)),
-  SceneAnchor(x: 0.68, y: 0.16, w: 0.22, h: 0.22, kind: 1, color: _sun),
-  SceneAnchor(x: 0, y: 0.62, w: 1, h: 0.38, kind: 2, color: _hill),
-];
+  final String entryId;
+  final String level;
+  final double x;
+  final double y;
+  final Color color;
+  final double baseSize;
+  final double stretch;
+  final double rotation;
+  final double opacity;
+  final List<double> noiseX;
+  final List<double> noiseY;
+  final int layer;
 
-const _a2 = [
-  SceneAnchor(x: 0, y: 0, w: 1, h: 0.62, kind: 0, color: _sky),
-  SceneAnchor(x: 0.12, y: 0.18, w: 0.16, h: 0.16, kind: 1, color: _sun),
-  SceneAnchor(x: -0.05, y: 0.48, w: 0.7, h: 0.28, kind: 2, color: Color(0xFF2F8F62)),
-  SceneAnchor(x: 0.4, y: 0.52, w: 0.7, h: 0.24, kind: 2, color: _hill),
-  SceneAnchor(x: 0, y: 0.72, w: 1, h: 0.28, kind: 0, color: _water),
-];
+  int get pointCount => noiseX.length;
+}
 
-const _b1 = [
-  SceneAnchor(x: 0, y: 0, w: 1, h: 0.55, kind: 0, color: Color(0xFFB9D4FF)),
-  SceneAnchor(x: 0.08, y: 0.38, w: 0.12, h: 0.34, kind: 3, color: _stone),
-  SceneAnchor(x: 0.24, y: 0.28, w: 0.16, h: 0.44, kind: 3, color: _deep),
-  SceneAnchor(x: 0.44, y: 0.34, w: 0.14, h: 0.38, kind: 3, color: Color(0xFF334155)),
-  SceneAnchor(x: 0.62, y: 0.22, w: 0.18, h: 0.5, kind: 3, color: Color(0xFF2F6BFF)),
-  SceneAnchor(x: 0.84, y: 0.4, w: 0.12, h: 0.32, kind: 3, color: _stone),
-  SceneAnchor(x: 0, y: 0.72, w: 1, h: 0.28, kind: 0, color: _water),
-];
+PaintBlob paintBlobFor({required String level, required String entryId}) {
+  final code = level.toUpperCase();
+  final key = '$code:$entryId';
+  return _blobCache.putIfAbsent(key, () => _createBlob(code, entryId));
+}
 
-const _b2 = [
-  SceneAnchor(x: 0, y: 0, w: 1, h: 0.7, kind: 0, color: _dusk),
-  SceneAnchor(x: 0.7, y: 0.1, w: 0.18, h: 0.18, kind: 1, color: Color(0xFFFFC46B)),
-  SceneAnchor(x: 0.06, y: 0.3, w: 0.14, h: 0.4, kind: 3, color: Color(0xFF1E293B)),
-  SceneAnchor(x: 0.24, y: 0.22, w: 0.18, h: 0.48, kind: 3, color: Color(0xFF312E81)),
-  SceneAnchor(x: 0.46, y: 0.26, w: 0.2, h: 0.44, kind: 3, color: Color(0xFF1D4ED8)),
-  SceneAnchor(x: 0.7, y: 0.34, w: 0.16, h: 0.36, kind: 3, color: Color(0xFF0F172A)),
-  SceneAnchor(x: 0.05, y: 0.68, w: 0.9, h: 0.05, kind: 4, color: Color(0xFFE2E8F0)),
-  SceneAnchor(x: 0, y: 0.74, w: 1, h: 0.26, kind: 0, color: Color(0xFF1E3A5F)),
-];
+/// One blob per mastered catalog entry. Duplicate ids still count once.
+List<PaintBlob> paintBlobsFor({
+  required String level,
+  required List<String> masteredEntryIds,
+}) {
+  final unique = masteredEntryIds.toSet().toList()..sort();
+  final blobs = [
+    for (final id in unique) paintBlobFor(level: level, entryId: id),
+  ];
+  blobs.sort((a, b) {
+    final byLayer = a.layer.compareTo(b.layer);
+    if (byLayer != 0) return byLayer;
+    return a.entryId.compareTo(b.entryId);
+  });
+  return blobs;
+}
 
-const _c1 = [
-  SceneAnchor(x: 0, y: 0, w: 1, h: 0.58, kind: 0, color: Color(0xFF1E40AF)),
-  SceneAnchor(x: 0.62, y: 0.08, w: 0.2, h: 0.2, kind: 1, color: Color(0xFFFDE68A)),
-  SceneAnchor(x: -0.08, y: 0.4, w: 0.55, h: 0.28, kind: 2, color: Color(0xFF334155)),
-  SceneAnchor(x: 0.28, y: 0.34, w: 0.6, h: 0.32, kind: 2, color: Color(0xFF475569)),
-  SceneAnchor(x: 0.5, y: 0.46, w: 0.6, h: 0.22, kind: 2, color: Color(0xFF1F6B4A)),
-  SceneAnchor(x: 0, y: 0.68, w: 1, h: 0.32, kind: 0, color: Color(0xFF0F2744)),
-];
+final Map<String, PaintBlob> _blobCache = {};
 
-const _c2 = [
-  SceneAnchor(x: 0, y: 0, w: 1, h: 0.62, kind: 0, color: Color(0xFF172554)),
-  SceneAnchor(x: 0.58, y: 0.06, w: 0.16, h: 0.16, kind: 1, color: Color(0xFFFBBF24)),
-  SceneAnchor(x: 0.08, y: 0.18, w: 0.7, h: 0.02, kind: 4, color: Color(0x66FDE68A)),
-  SceneAnchor(x: -0.05, y: 0.36, w: 0.5, h: 0.26, kind: 2, color: Color(0xFF334155)),
-  SceneAnchor(x: 0.22, y: 0.24, w: 0.14, h: 0.42, kind: 3, color: Color(0xFF1E3A8A)),
-  SceneAnchor(x: 0.4, y: 0.16, w: 0.18, h: 0.5, kind: 3, color: Color(0xFF312E81)),
-  SceneAnchor(x: 0.62, y: 0.28, w: 0.16, h: 0.38, kind: 3, color: Color(0xFF1D4ED8)),
-  SceneAnchor(x: 0.82, y: 0.34, w: 0.12, h: 0.32, kind: 3, color: Color(0xFF0F172A)),
-  SceneAnchor(x: 0, y: 0.66, w: 1, h: 0.34, kind: 0, color: Color(0xFF0B1F33)),
-];
+PaintBlob _createBlob(String level, String entryId) {
+  final rng = _StableRng(stableHash('$level:$entryId'));
+  final towardCenter = rng.nextDouble() < 0.18;
+  var x = 0.02 + rng.nextDouble() * 0.96;
+  var y = 0.02 + rng.nextDouble() * 0.96;
+  if (towardCenter) {
+    x = 0.5 + (x - 0.5) * 0.72;
+    y = 0.5 + (y - 0.5) * 0.72;
+  }
+  final color = paintPalette[(rng.nextDouble() * paintPalette.length).floor()];
+  final baseSize = 5 + rng.nextDouble() * 11;
+  final stretch = 0.8 + rng.nextDouble() * 2.3;
+  final rotation = rng.nextDouble() * math.pi * 2;
+  final opacity = 0.86 + rng.nextDouble() * 0.14;
+  final pointCount = 8 + (rng.nextDouble() * 5).floor();
+  final noiseX = List<double>.generate(
+    pointCount,
+    (_) => 0.78 + rng.nextDouble() * 0.42,
+  );
+  final noiseY = List<double>.generate(
+    pointCount,
+    (_) => 0.78 + rng.nextDouble() * 0.42,
+  );
+  return PaintBlob(
+    entryId: entryId,
+    level: level,
+    x: x,
+    y: y,
+    color: color,
+    baseSize: baseSize,
+    stretch: stretch,
+    rotation: rotation,
+    opacity: opacity,
+    noiseX: noiseX,
+    noiseY: noiseY,
+    layer: stableHash('$level:$entryId:layer'),
+  );
+}
+
+class _StableRng {
+  _StableRng(int seed) : _state = seed & 0x7fffffff;
+
+  int _state;
+
+  double nextDouble() {
+    var x = _state == 0 ? 1 : _state;
+    x ^= (x << 13) & 0x7fffffff;
+    x ^= x >> 17;
+    x = (x ^ ((x << 5) & 0x7fffffff)) & 0x7fffffff;
+    if (x == 0) x = 1;
+    _state = x;
+    return x / 2147483648.0;
+  }
+}
 
 String levelArtPath(String level) => '/progress/level/${level.toUpperCase()}';
 

@@ -18,6 +18,7 @@ class CatalogProgress {
     required this.learning,
     required this.masteredByLevel,
     required this.personalByLevel,
+    this.masteredIdsByLevel = const {},
     required this.mastered,
     required this.academic,
     required this.ielts,
@@ -30,6 +31,7 @@ class CatalogProgress {
   final Map<String, int> learning;
   final Map<String, int> masteredByLevel;
   final Map<String, int> personalByLevel;
+  final Map<String, List<String>> masteredIdsByLevel;
   final int mastered;
   final int academic;
   final int ielts;
@@ -45,6 +47,29 @@ class CatalogProgress {
         (personalByLevel[level] ?? 0);
     return count < 0 ? 0 : count;
   }
+
+  List<String> masteredIdsFor(String level) =>
+      masteredIdsByLevel[level] ?? const [];
+}
+
+Future<Map<String, List<String>>> queryMasteredEntryIds(AppDatabase db) async {
+  final rows = await db.customSelect(
+    '''
+    SELECT e.cefr_level AS level, e.id AS id
+    FROM user_vocabulary u
+    JOIN vocabulary_entries e ON e.id = u.entry_id
+    WHERE u.status = 'mastered'
+    ORDER BY e.id
+    ''',
+    readsFrom: {db.vocabularyEntries, db.userVocabulary},
+  ).get();
+  final byLevel = <String, List<String>>{};
+  for (final row in rows) {
+    byLevel
+        .putIfAbsent(row.read<String>('level'), () => [])
+        .add(row.read<String>('id'));
+  }
+  return byLevel;
 }
 
 final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
@@ -99,6 +124,7 @@ final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
   final personalByLevel = {
     for (final row in personalRows) row.read<String>('level'): row.read<int>('c'),
   };
+  final masteredIdsByLevel = await queryMasteredEntryIds(db);
 
   Future<int> count(String sql, {List<Variable> variables = const []}) async {
     final row = await db.customSelect(
@@ -115,6 +141,7 @@ final catalogProgressProvider = FutureProvider<CatalogProgress>((ref) async {
     learning: learning,
     masteredByLevel: masteredByLevel,
     personalByLevel: personalByLevel,
+    masteredIdsByLevel: masteredIdsByLevel,
     mastered: await count(
       "SELECT COUNT(*) AS c FROM user_vocabulary WHERE status = 'mastered'",
     ),

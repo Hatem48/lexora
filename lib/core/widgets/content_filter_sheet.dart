@@ -49,6 +49,23 @@ class ContentFilterState {
       sort != ContentSort.recentlyAdded;
 }
 
+/// Ignores extra taps while a filter sheet is already opening.
+class ContentFilterLaunch {
+  bool _busy = false;
+
+  bool get busy => _busy;
+
+  bool tryEnter() {
+    if (_busy) return false;
+    _busy = true;
+    return true;
+  }
+
+  void leave() {
+    _busy = false;
+  }
+}
+
 Future<ContentFilterState?> showContentFilterSheet({
   required BuildContext context,
   required ContentFilterState initial,
@@ -57,6 +74,7 @@ Future<ContentFilterState?> showContentFilterSheet({
 }) {
   return showModalBottomSheet<ContentFilterState>(
     context: context,
+    useRootNavigator: true,
     isScrollControlled: true,
     builder: (context) {
       return _ContentFilterSheet(

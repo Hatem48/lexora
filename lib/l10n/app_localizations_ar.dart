@@ -108,7 +108,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String masterpieceCompleted(String level) {
-    return 'اكتملت لوحة $level';
+    return 'اكتملت لوحة مفردات $level';
   }
 
   @override
@@ -1205,4 +1205,116 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get wordForms => 'صيغ الكلمة';
+
+  @override
+  String get todayPlan => 'مهام اليوم';
+
+  @override
+  String get todayPlanTitle => 'تعلم اليوم';
+
+  @override
+  String get gotIt => 'فهمت';
+
+  @override
+  String get todayTasks => 'مهام اليوم';
+
+  @override
+  String journeyStep(int current, int total) {
+    return '$current / $total';
+  }
+
+  @override
+  String todayJourneyFocus(String level) {
+    return 'اليوم نبقى مع $level. راجع ما استحق، قابل كلمات جديدة، ثم تدرّب على جملة أو موضوع.';
+  }
+
+  @override
+  String todayJourneyReview(int count) {
+    return '$count عناصر مستحقة اليوم. مراجعتها تُبقي كلمات الأمس معك.';
+  }
+
+  @override
+  String get todayJourneyReviewClear =>
+      'لا توجد مراجعة مستحقة الآن. نظرة قصيرة على كلماتك تُبقي العادة.';
+
+  @override
+  String get todayJourneyList =>
+      'هذه قائمة عمل اليوم. لما تخلص مهمة تبقى ظاهرة بعلامة صح وخط يشطبها، ولا تُحذف. غدًا تتجدد القائمة.';
+
+  @override
+  String get taskReview => 'راجع ما استحق';
+
+  @override
+  String taskReviewDetail(int count) {
+    return '$count عناصر';
+  }
+
+  @override
+  String taskWords(String level) {
+    return 'تعلّم كلمات $level';
+  }
+
+  @override
+  String get taskWordsDetail => 'افتح كلمات مستواك وتابع ما بدأته.';
+
+  @override
+  String get taskSentence => 'تدرّب على جملة';
+
+  @override
+  String get taskSentenceDetail => 'افتح جملة واستمع إليها.';
+
+  @override
+  String get taskTopic => 'افتح موضوعًا';
+
+  @override
+  String get taskTopicDetail => 'أجب عن سؤال واحد في موضوع.';
+
+  @override
+  String get importTopicContent => 'استيراد المواضيع';
+
+  @override
+  String get importTopicContentHint =>
+      'أضف التصنيفات والمواضيع والجمل والأسئلة من ملف JSON.';
+
+  @override
+  String get importTopicContentDone => 'اكتمل الاستيراد';
+
+  @override
+  String importTopicCategories(int added, int updated) {
+    return 'التصنيفات: $added جديد، $updated محدّث';
+  }
+
+  @override
+  String importTopicTopics(int added, int updated) {
+    return 'المواضيع: $added جديد، $updated محدّث';
+  }
+
+  @override
+  String importTopicVocabulary(int added, int unresolved) {
+    return 'روابط المفردات: $added جديد، $unresolved غير موجود';
+  }
+
+  @override
+  String importTopicSentences(int added, int updated) {
+    return 'الجمل: $added جديد، $updated محدّث';
+  }
+
+  @override
+  String importTopicQuestions(int added, int updated) {
+    return 'الأسئلة: $added جديد، $updated محدّث';
+  }
+
+  @override
+  String importTopicWarnings(int count) {
+    return 'تنبيهات: $count';
+  }
+
+  @override
+  String get importTopicMalformed => 'هذا الملف ليس JSON صالحًا.';
+
+  @override
+  String get importTopicUnsupported => 'إصدار ملف المواضيع غير مدعوم.';
+
+  @override
+  String get importTopicInvalid => 'ملف المواضيع ينقصه حقول مطلوبة.';
 }

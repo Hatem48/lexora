@@ -161,8 +161,8 @@ class AchievementCatalog {
       final level = id.substring('level-'.length).toUpperCase();
       return AchievementDefinition(
         id: id,
-        titleEn: '$level masterpiece completed',
-        titleAr: 'اكتملت لوحة $level',
+        titleEn: '$level Vocabulary Masterpiece Completed',
+        titleAr: 'اكتملت لوحة مفردات $level',
         detailEn:
             'You mastered every $level catalog word in Lexora. This is a collection milestone, not an official CEFR level.',
         detailAr:

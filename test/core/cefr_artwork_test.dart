@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:drift/drift.dart' hide isNotNull, isNull;
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
@@ -42,84 +40,130 @@ const _catalogUpdated = '''
 ''';
 
 void main() {
-  test('artwork progress follows mastered words only', () {
+  test('mastered words are the only paint blobs', () {
     expect(artProgressFraction(mastered: 0, total: 2422), 0);
-    expect(visibleArtRegions(mastered: 0, total: 2422), 0);
     expect(artProgressFraction(mastered: 1211, total: 2422), closeTo(0.5, 0.001));
-    expect(visibleArtRegions(mastered: 50, total: 100), 90);
     expect(artProgressFraction(mastered: 2422, total: 2422), 1);
-    expect(visibleArtRegions(mastered: 2422, total: 2422), cefrArtRegionCount);
-    expect(artProgressFraction(mastered: 0, total: 0), 0);
-    expect(visibleArtRegions(mastered: 4, total: 0), 0);
-    expect(artProgressFraction(mastered: 3, total: 2), 1);
+
+    const none = <CatalogWordPaintStatus>[];
+    expect(paintBlobsFor(level: 'B1', masteredEntryIds: masteredIdsForLevel('B1', none)), isEmpty);
+
+    final one = masteredIdsForLevel('B1', const [
+      CatalogWordPaintStatus(id: 'b1-city', level: 'B1', status: 'mastered'),
+    ]);
+    expect(paintBlobsFor(level: 'B1', masteredEntryIds: one), hasLength(1));
+
+    final hundred = [
+      for (var index = 0; index < 100; index++) 'b1-$index',
+    ];
+    expect(paintBlobsFor(level: 'B1', masteredEntryIds: hundred), hasLength(100));
+
+    final all = [
+      for (var index = 0; index < 2422; index++) 'b1-$index',
+    ];
+    expect(paintBlobsFor(level: 'B1', masteredEntryIds: all), hasLength(2422));
   });
 
-  test('words added in sentences and the word list color that level only', () {
-    const progress = CatalogProgress(
-      totals: {'A1': 4, 'B1': 10},
-      discovered: {'B1': 3},
-      learning: {'A1': 1},
-      masteredByLevel: {'B1': 1},
-      personalByLevel: {'A1': 2},
-      mastered: 1,
-      academic: 0,
-      ielts: 0,
-      toefl: 0,
-      discoveredThisWeek: 0,
-    );
-    expect(progress.recognizedFor('B1'), 4);
-    expect(progress.recognizedFor('A1'), 3);
-    expect(progress.recognizedFor('A2'), 0);
-    expect(paintingWordCount(recognized: 4, total: 10), 4);
+  test('discovered and learning add no blob; mastered adds exactly one', () {
+    const words = [
+      CatalogWordPaintStatus(id: 'b1-seen', level: 'B1', status: 'discovered'),
+      CatalogWordPaintStatus(id: 'b1-study', level: 'B1', status: 'learning'),
+      CatalogWordPaintStatus(id: 'b1-done', level: 'B1', status: 'mastered'),
+      CatalogWordPaintStatus(id: 'a1-done', level: 'A1', status: 'mastered'),
+    ];
+    final b1 = masteredIdsForLevel('B1', words);
+    expect(b1, ['b1-done']);
+    expect(paintBlobsFor(level: 'B1', masteredEntryIds: b1).single.entryId, 'b1-done');
     expect(
-      visibleArtRegions(mastered: progress.recognizedFor('B1'), total: 10),
-      greaterThan(0),
+      paintBlobsFor(level: 'B1', masteredEntryIds: b1).any((blob) => blob.entryId == 'a1-done'),
+      isFalse,
     );
-    expect(shouldShowWhatsNew(seen: null, current: '1.0.0+15'), isTrue);
-    expect(shouldShowWhatsNew(seen: '1.0.0+14', current: '1.0.0+15'), isTrue);
-    expect(shouldShowWhatsNew(seen: '1.0.0+15', current: '1.0.0+15'), isFalse);
   });
 
-  test('each level is an independent painting', () {
+  test('a catalog word keeps one stable blob across rebuilds', () {
+    final first = paintBlobFor(level: 'B1', entryId: 'develop');
+    final again = paintBlobFor(level: 'B1', entryId: 'develop');
+    expect(identical(first, again), isTrue);
+    expect(again.x, first.x);
+    expect(again.y, first.y);
+    expect(again.color, first.color);
+    expect(again.baseSize, first.baseSize);
+    expect(again.stretch, first.stretch);
+    expect(again.rotation, first.rotation);
+    expect(first.x, inInclusiveRange(0.02, 0.98));
+    expect(first.y, inInclusiveRange(0.02, 0.98));
+    expect(first.baseSize, inInclusiveRange(5, 16));
+    expect(first.stretch, inInclusiveRange(0.8, 3.1));
+    expect(first.pointCount, inInclusiveRange(8, 12));
+    expect(first.noiseX.toSet().length, greaterThan(1));
+
+    final otherLevel = paintBlobFor(level: 'A1', entryId: 'develop');
+    expect(
+      otherLevel.x != first.x || otherLevel.y != first.y || otherLevel.color != first.color,
+      isTrue,
+    );
+    expect(stableHash('B1:develop'), stableHash('B1:develop'));
+    expect(stableHash('B1:develop'), isNot(stableHash('A1:develop')));
+  });
+
+  test('blobs spread across the canvas and mix colors', () {
+    final blobs = [
+      for (var index = 0; index < 400; index++)
+        paintBlobFor(level: 'C1', entryId: 'word-$index'),
+    ];
+    expect(blobs.where((blob) => blob.x < 0.2).length, greaterThan(20));
+    expect(blobs.where((blob) => blob.x > 0.8).length, greaterThan(20));
+    expect(blobs.where((blob) => blob.y < 0.2).length, greaterThan(20));
+    expect(blobs.where((blob) => blob.y > 0.8).length, greaterThan(20));
+    expect(blobs.map((blob) => blob.color).toSet().length, greaterThan(8));
+  });
+
+  test('each level is an independent painting and stays open', () {
     expect(artProgressFraction(mastered: 10, total: 10), 1);
     expect(artProgressFraction(mastered: 4, total: 100), closeTo(0.04, 0.001));
-    expect(sceneAnchorsFor('A1').length, isNot(sceneAnchorsFor('C2').length));
-    expect(artRegionsFor('A1').first.x, isNot(artRegionsFor('B2').first.x));
-  });
-
-  test('previous levels stay open and completed art stays fully revealed', () {
+    final shared = paintBlobFor(level: 'A1', entryId: 'city');
+    final other = paintBlobFor(level: 'B1', entryId: 'city');
+    expect(shared.x, isNot(other.x));
     for (final level in ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']) {
       expect(levelArtIsOpen(level), isTrue);
       expect(levelArtPath(level.toLowerCase()), '/progress/level/$level');
     }
-    expect(
-      visibleArtRegions(mastered: 80, total: 80),
-      cefrArtRegionCount,
-    );
   });
 
-  test('reveal masks are deterministic and not a left-to-right bar', () {
-    final first = artRegionsFor('B1');
-    final again = artRegionsFor('B1');
-    expect(identical(first, again), isTrue);
-    expect(first.length, cefrArtRegionCount);
-    expect(stableHash('B1:city'), stableHash('B1:city'));
-    expect(stableHash('B1:city'), isNot(stableHash('A1:city')));
-
-    final random = math.Random(stableHash('lexora-art-mask-B1'));
-    final jitterX = (random.nextDouble() - 0.5) * 0.045;
-    final expectedX = ((0.5) / 15 + jitterX).clamp(0.02, 0.98);
+  test('the painter repaints only when the mastered words or animation change', () {
+    final painter = CefrWordArtPainter(
+      level: 'B1',
+      entryIds: const ['city', 'town'],
+    );
     expect(
-      first.any((region) => (region.x - expectedX).abs() < 0.000001),
+      painter.shouldRepaint(
+        CefrWordArtPainter(level: 'B1', entryIds: const ['city', 'town']),
+      ),
+      isFalse,
+    );
+    expect(
+      painter.shouldRepaint(
+        CefrWordArtPainter(level: 'B1', entryIds: const ['town', 'city']),
+      ),
       isTrue,
     );
-
-    final ordered = [...first]..sort((a, b) => a.order.compareTo(b.order));
-    var inversions = 0;
-    for (var index = 1; index < ordered.length; index++) {
-      if (ordered[index].x < ordered[index - 1].x) inversions++;
-    }
-    expect(inversions, greaterThan(40));
+    expect(
+      painter.shouldRepaint(
+        CefrWordArtPainter(
+          level: 'B1',
+          entryIds: const ['city', 'town'],
+          appearingId: 'town',
+          appearProgress: 0.4,
+        ),
+      ),
+      isTrue,
+    );
+    expect(
+      painter.shouldRepaint(
+        CefrWordArtPainter(level: 'A1', entryIds: const ['city', 'town']),
+      ),
+      isTrue,
+    );
   });
 
   test('discovered and learning do not complete a level; mastered does', () async {
@@ -183,10 +227,10 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     final en = await AppLocalizations.delegate.load(const Locale('en'));
     final ar = await AppLocalizations.delegate.load(const Locale('ar'));
-    expect(en.masterpieceCompleted('B1'), 'B1 masterpiece completed');
+    expect(en.masterpieceCompleted('B1'), 'B1 Vocabulary Masterpiece Completed');
     expect(en.masteredCountOfTotal(1211, 2422), '1211 / 2422 mastered');
     expect(en.collectionNotOfficialLevel.toLowerCase(), contains('not an official'));
-    expect(ar.masterpieceCompleted('B1'), 'اكتملت لوحة B1');
+    expect(ar.masterpieceCompleted('B1'), 'اكتملت لوحة مفردات B1');
     expect(ar.vocabularyJourney, 'رحلة المفردات');
     expect(ar.collectionNotOfficialLevel, contains('CEFR'));
   });
@@ -227,6 +271,59 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('opened-A2'), findsOneWidget);
     expect(find.text('0%'), findsNothing);
+  });
+
+  testWidgets('thousands of mastered words stay on one canvas', (tester) async {
+    final ids = [for (var index = 0; index < 1000; index++) 'b1-$index'];
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: CefrArtworkCard(
+            level: 'B1',
+            mastered: 1000,
+            total: 2422,
+            masteredEntryIds: ids,
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('1,000 / 2,422 Mastered'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is CustomPaint && widget.painter is CefrWordArtPainter,
+      ),
+      findsOneWidget,
+    );
+    expect(find.byType(Positioned), findsNothing);
+    expect(find.byType(AnimatedContainer), findsNothing);
+  });
+
+  test('a new version note still shows once', () {
+    expect(shouldShowWhatsNew(seen: null, current: '1.0.0+16'), isTrue);
+    expect(shouldShowWhatsNew(seen: '1.0.0+15', current: '1.0.0+16'), isTrue);
+    expect(shouldShowWhatsNew(seen: '1.0.0+16', current: '1.0.0+16'), isFalse);
+  });
+
+  test('the database paints only mastered ids of that level', () async {
+    final db = AppDatabase(NativeDatabase.memory());
+    addTearDown(db.close);
+    await VocabularyCatalogImporter(db).importJson(_catalog);
+    final now = DateTime.utc(2026, 10, 5);
+    await _status(db, 'a1-one', 'discovered', now);
+    await _status(db, 'a1-two', 'learning', now);
+    await _status(db, 'b1-one', 'mastered', now);
+    final ids = await queryMasteredEntryIds(db);
+    expect(ids['A1'], isNull);
+    expect(ids['B1'], ['b1-one']);
+    expect(
+      paintBlobsFor(level: 'B1', masteredEntryIds: ids['B1']!).single.entryId,
+      'b1-one',
+    );
+    expect(paintBlobsFor(level: 'A1', masteredEntryIds: ids['A1'] ?? const []), isEmpty);
   });
 }
 

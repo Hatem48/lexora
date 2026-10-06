@@ -108,7 +108,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String masterpieceCompleted(String level) {
-    return '$level masterpiece completed';
+    return '$level Vocabulary Masterpiece Completed';
   }
 
   @override
@@ -1214,4 +1214,118 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wordForms => 'Word forms';
+
+  @override
+  String get todayPlan => 'Today\'s plan';
+
+  @override
+  String get todayPlanTitle => 'Today\'s learning';
+
+  @override
+  String get gotIt => 'Got it';
+
+  @override
+  String get todayTasks => 'Today\'s tasks';
+
+  @override
+  String journeyStep(int current, int total) {
+    return '$current / $total';
+  }
+
+  @override
+  String todayJourneyFocus(String level) {
+    return 'Today, stay with $level. Review what is due, meet a few new words, then practice a sentence or a topic.';
+  }
+
+  @override
+  String todayJourneyReview(int count) {
+    return '$count items are due today. Reviewing them keeps yesterday\'s words with you.';
+  }
+
+  @override
+  String get todayJourneyReviewClear =>
+      'Nothing is due yet. A short look at your words still keeps the habit.';
+
+  @override
+  String get todayJourneyList =>
+      'This is today\'s work. When you finish a task it stays on the list, with a check and a line through it. Tomorrow the list starts again.';
+
+  @override
+  String get taskReview => 'Review what is due';
+
+  @override
+  String taskReviewDetail(int count) {
+    return '$count items';
+  }
+
+  @override
+  String taskWords(String level) {
+    return 'Learn $level words';
+  }
+
+  @override
+  String get taskWordsDetail => 'Open your level\'s words and keep going.';
+
+  @override
+  String get taskSentence => 'Practice a sentence';
+
+  @override
+  String get taskSentenceDetail => 'Open a sentence and listen to it.';
+
+  @override
+  String get taskTopic => 'Open a topic';
+
+  @override
+  String get taskTopicDetail => 'Answer one question in a topic.';
+
+  @override
+  String get importTopicContent => 'Import topics';
+
+  @override
+  String get importTopicContentHint =>
+      'Add categories, topics, sentences, and questions from a JSON file.';
+
+  @override
+  String get importTopicContentDone => 'Import completed';
+
+  @override
+  String importTopicCategories(int added, int updated) {
+    return 'Categories: $added added, $updated updated';
+  }
+
+  @override
+  String importTopicTopics(int added, int updated) {
+    return 'Topics: $added added, $updated updated';
+  }
+
+  @override
+  String importTopicVocabulary(int added, int unresolved) {
+    return 'Vocabulary links: $added added, $unresolved unresolved';
+  }
+
+  @override
+  String importTopicSentences(int added, int updated) {
+    return 'Sentences: $added added, $updated updated';
+  }
+
+  @override
+  String importTopicQuestions(int added, int updated) {
+    return 'Questions: $added added, $updated updated';
+  }
+
+  @override
+  String importTopicWarnings(int count) {
+    return 'Warnings: $count';
+  }
+
+  @override
+  String get importTopicMalformed => 'This file is not valid JSON.';
+
+  @override
+  String get importTopicUnsupported =>
+      'This topics file uses an unsupported version.';
+
+  @override
+  String get importTopicInvalid =>
+      'This topics file is missing required fields.';
 }

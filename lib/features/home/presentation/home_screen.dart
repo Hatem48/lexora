@@ -19,6 +19,8 @@ import '../../notifications/presentation/notification_center_screen.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/account_avatar.dart';
 import '../domain/dashboard_stats.dart';
+import '../domain/daily_plan.dart';
+import 'daily_plan_controller.dart';
 import 'dashboard_providers.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -78,9 +80,11 @@ class HomeScreen extends ConsumerWidget {
             final next = stats.currentLevel.next;
             final art = ref.watch(catalogProgressProvider).asData?.value;
             final code = stats.currentLevel.code;
-            final recognized = art?.recognizedFor(code) ?? 0;
+            final mastered = art?.masteredByLevel[code] ?? 0;
             final total = art?.totals[code] ?? 0;
-            final painted = paintingWordCount(recognized: recognized, total: total);
+            final entryIds = art?.masteredIdsFor(code) ?? const <String>[];
+            final today = ref.watch(dailyPlanProvider).asData?.value;
+            final openTasks = today == null ? 0 : unfinishedDailyTasks(today);
 
             return RefreshIndicator(
               onRefresh: () async {
@@ -103,6 +107,15 @@ class HomeScreen extends ConsumerWidget {
                           style: theme.textTheme.headlineMedium,
                         ),
                       ),
+                      IconButton(
+                        tooltip: l10n.todayPlan,
+                        onPressed: () => context.push('/today'),
+                        icon: Badge(
+                          isLabelVisible: openTasks > 0,
+                          label: Text('$openTasks'),
+                          child: const Icon(Icons.route_outlined),
+                        ),
+                      ),
                       NotificationBell(
                         unread: unreadNoticeCount(
                           ref.watch(inAppNoticesProvider).asData?.value ??
@@ -120,8 +133,9 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: AppSpacing.lg),
                   CefrArtworkCard(
                     level: code,
-                    mastered: painted,
+                    mastered: mastered,
                     total: total,
+                    masteredEntryIds: entryIds,
                     onTap: () => context.push(levelArtPath(code)),
                     help: true,
                   ).animate().fadeIn(delay: 80.ms).slideY(begin: 0.05, end: 0),

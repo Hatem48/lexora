@@ -44,7 +44,7 @@
     }
   },
   "remaining": "المتبقي",
-  "masterpieceCompleted": "اكتملت لوحة {level}",
+  "masterpieceCompleted": "اكتملت لوحة مفردات {level}",
   "@masterpieceCompleted": {
     "placeholders": {
       "level": { "type": "String" }
@@ -444,5 +444,34 @@
   "learningTimeValue": "{hours} س {minutes} د",
   "developmentSample": "عينة تطوير",
   "definition": "التعريف",
-  "wordForms": "صيغ الكلمة"
+  "wordForms": "صيغ الكلمة",
+  "todayPlan": "مهام اليوم",
+  "todayPlanTitle": "تعلم اليوم",
+  "gotIt": "فهمت",
+  "todayTasks": "مهام اليوم",
+  "journeyStep": "{current} / {total}",
+  "todayJourneyFocus": "اليوم نبقى مع {level}. راجع ما استحق، قابل كلمات جديدة، ثم تدرّب على جملة أو موضوع.",
+  "todayJourneyReview": "{count} عناصر مستحقة اليوم. مراجعتها تُبقي كلمات الأمس معك.",
+  "todayJourneyReviewClear": "لا توجد مراجعة مستحقة الآن. نظرة قصيرة على كلماتك تُبقي العادة.",
+  "todayJourneyList": "هذه قائمة عمل اليوم. لما تخلص مهمة تبقى ظاهرة بعلامة صح وخط يشطبها، ولا تُحذف. غدًا تتجدد القائمة.",
+  "taskReview": "راجع ما استحق",
+  "taskReviewDetail": "{count} عناصر",
+  "taskWords": "تعلّم كلمات {level}",
+  "taskWordsDetail": "افتح كلمات مستواك وتابع ما بدأته.",
+  "taskSentence": "تدرّب على جملة",
+  "taskSentenceDetail": "افتح جملة واستمع إليها.",
+  "taskTopic": "افتح موضوعًا",
+  "taskTopicDetail": "أجب عن سؤال واحد في موضوع.",
+  "importTopicContent": "استيراد المواضيع",
+  "importTopicContentHint": "أضف التصنيفات والمواضيع والجمل والأسئلة من ملف JSON.",
+  "importTopicContentDone": "اكتمل الاستيراد",
+  "importTopicCategories": "التصنيفات: {added} جديد، {updated} محدّث",
+  "importTopicTopics": "المواضيع: {added} جديد، {updated} محدّث",
+  "importTopicVocabulary": "روابط المفردات: {added} جديد، {unresolved} غير موجود",
+  "importTopicSentences": "الجمل: {added} جديد، {updated} محدّث",
+  "importTopicQuestions": "الأسئلة: {added} جديد، {updated} محدّث",
+  "importTopicWarnings": "تنبيهات: {count}",
+  "importTopicMalformed": "هذا الملف ليس JSON صالحًا.",
+  "importTopicUnsupported": "إصدار ملف المواضيع غير مدعوم.",
+  "importTopicInvalid": "ملف المواضيع ينقصه حقول مطلوبة."
 }

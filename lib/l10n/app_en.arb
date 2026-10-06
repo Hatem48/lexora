@@ -64,7 +64,7 @@
     }
   },
   "remaining": "Remaining",
-  "masterpieceCompleted": "{level} masterpiece completed",
+  "masterpieceCompleted": "{level} Vocabulary Masterpiece Completed",
   "@masterpieceCompleted": {
     "placeholders": {
       "level": { "type": "String" }
@@ -512,5 +512,95 @@
   },
   "developmentSample": "Development sample",
   "definition": "Definition",
-  "wordForms": "Word forms"
+  "wordForms": "Word forms",
+  "todayPlan": "Today's plan",
+  "todayPlanTitle": "Today's learning",
+  "gotIt": "Got it",
+  "todayTasks": "Today's tasks",
+  "journeyStep": "{current} / {total}",
+  "@journeyStep": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "todayJourneyFocus": "Today, stay with {level}. Review what is due, meet a few new words, then practice a sentence or a topic.",
+  "@todayJourneyFocus": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "todayJourneyReview": "{count} items are due today. Reviewing them keeps yesterday's words with you.",
+  "@todayJourneyReview": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "todayJourneyReviewClear": "Nothing is due yet. A short look at your words still keeps the habit.",
+  "todayJourneyList": "This is today's work. When you finish a task it stays on the list, with a check and a line through it. Tomorrow the list starts again.",
+  "taskReview": "Review what is due",
+  "taskReviewDetail": "{count} items",
+  "@taskReviewDetail": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "taskWords": "Learn {level} words",
+  "@taskWords": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "taskWordsDetail": "Open your level's words and keep going.",
+  "taskSentence": "Practice a sentence",
+  "taskSentenceDetail": "Open a sentence and listen to it.",
+  "taskTopic": "Open a topic",
+  "taskTopicDetail": "Answer one question in a topic.",
+  "importTopicContent": "Import topics",
+  "importTopicContentHint": "Add categories, topics, sentences, and questions from a JSON file.",
+  "importTopicContentDone": "Import completed",
+  "importTopicCategories": "Categories: {added} added, {updated} updated",
+  "@importTopicCategories": {
+    "placeholders": {
+      "added": { "type": "int" },
+      "updated": { "type": "int" }
+    }
+  },
+  "importTopicTopics": "Topics: {added} added, {updated} updated",
+  "@importTopicTopics": {
+    "placeholders": {
+      "added": { "type": "int" },
+      "updated": { "type": "int" }
+    }
+  },
+  "importTopicVocabulary": "Vocabulary links: {added} added, {unresolved} unresolved",
+  "@importTopicVocabulary": {
+    "placeholders": {
+      "added": { "type": "int" },
+      "unresolved": { "type": "int" }
+    }
+  },
+  "importTopicSentences": "Sentences: {added} added, {updated} updated",
+  "@importTopicSentences": {
+    "placeholders": {
+      "added": { "type": "int" },
+      "updated": { "type": "int" }
+    }
+  },
+  "importTopicQuestions": "Questions: {added} added, {updated} updated",
+  "@importTopicQuestions": {
+    "placeholders": {
+      "added": { "type": "int" },
+      "updated": { "type": "int" }
+    }
+  },
+  "importTopicWarnings": "Warnings: {count}",
+  "@importTopicWarnings": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "importTopicMalformed": "This file is not valid JSON.",
+  "importTopicUnsupported": "This topics file uses an unsupported version.",
+  "importTopicInvalid": "This topics file is missing required fields."
 }

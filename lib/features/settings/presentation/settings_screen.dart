@@ -24,11 +24,14 @@ import '../../../core/services/account/account_deletion.dart';
 import '../../../core/services/account/profile_image_store.dart';
 import '../../../core/services/backup/lexora_backup.dart';
 import '../../../core/services/backup/lexora_backup_store.dart';
+import '../../../core/providers/startup_provider.dart';
+import '../../../core/services/topics/topic_content_importer.dart';
 import '../../../core/services/topics/topic_catalog_importer.dart';
 import '../../../core/services/vocabulary/vocabulary_catalog_importer.dart';
 import '../../../core/providers/settings_reminder_helpers.dart';
 import '../../../core/services/notifications/reminder_scheduler.dart';
 import '../../../core/widgets/lexora_widgets.dart';
+import '../../topics/presentation/topic_providers.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/account_avatar.dart';
 
@@ -116,6 +119,58 @@ class SettingsScreen extends ConsumerWidget {
     } catch (_) {
       messenger.showSnackBar(SnackBar(content: Text(l10n.importFailed)));
     }
+  }
+
+  Future<void> _importTopicContent(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final picked = await FilePicker.pickFile(
+      type: FileType.custom,
+      allowedExtensions: const ['json'],
+    );
+    if (picked == null || !context.mounted) return;
+    try {
+      final raw = utf8.decode(await picked.readAsBytes());
+      final summary = await TopicContentImporter(
+        ref.read(appDatabaseProvider),
+      ).importJson(raw);
+      ref.read(startupTickProvider.notifier).bump();
+      ref.invalidate(topicBoardProvider);
+      if (!context.mounted) return;
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(l10n.importTopicContentDone),
+          content: Text(_topicContentSummary(l10n, summary)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.done),
+            ),
+          ],
+        ),
+      );
+    } on TopicContentException catch (error) {
+      final message = switch (error.failure) {
+        TopicContentFailure.malformed => l10n.importTopicMalformed,
+        TopicContentFailure.unsupportedSchema => l10n.importTopicUnsupported,
+        TopicContentFailure.invalid => l10n.importTopicInvalid,
+      };
+      messenger.showSnackBar(SnackBar(content: Text(message)));
+    } catch (_) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.importTopicInvalid)));
+    }
+  }
+
+  String _topicContentSummary(AppLocalizations l10n, TopicContentSummary summary) {
+    return [
+      l10n.importTopicCategories(summary.categoriesAdded, summary.categoriesUpdated),
+      l10n.importTopicTopics(summary.topicsAdded, summary.topicsUpdated),
+      l10n.importTopicVocabulary(summary.vocabularyLinksAdded, summary.vocabularyUnresolved),
+      l10n.importTopicSentences(summary.sentencesAdded, summary.sentencesUpdated),
+      l10n.importTopicQuestions(summary.questionsAdded, summary.questionsUpdated),
+      l10n.importTopicWarnings(summary.warnings),
+    ].join('\n');
   }
 
   Future<void> _openPage(BuildContext context, String url) async {
@@ -511,6 +566,13 @@ class SettingsScreen extends ConsumerWidget {
                   title: Text(l10n.importData),
                   trailing: const Icon(Icons.file_open_outlined),
                   onTap: () => _import(context, ref),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(l10n.importTopicContent),
+                  subtitle: Text(l10n.importTopicContentHint),
+                  trailing: const Icon(Icons.topic_outlined),
+                  onTap: () => _importTopicContent(context, ref),
                 ),
               ],
             ),

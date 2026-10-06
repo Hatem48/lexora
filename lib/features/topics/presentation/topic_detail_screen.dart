@@ -9,6 +9,7 @@ import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/services/topics/topic_question_payload.dart';
 import '../../../core/services/topics/topic_repository.dart';
 import '../../../core/services/vocabulary/vocabulary_discovery_repository.dart';
 import '../../../core/widgets/lexora_widgets.dart';
@@ -355,6 +356,41 @@ class _QuestionsTabState extends ConsumerState<_QuestionsTab> {
   TextEditingController _controller(String id) =>
       _answers.putIfAbsent(id, TextEditingController.new);
 
+  List<Widget> _questionBody(
+    BuildContext context,
+    AppLocalizations l10n,
+    TopicQuestionRow question,
+    bool arabic,
+  ) {
+    final payload = TopicQuestionPayload.parse(question.suggestedAnswer);
+    final answer = payload.answerFor(arabic: arabic);
+    return [
+      if (payload.type == 'multiple_choice')
+        for (final option in payload.options)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Text(
+              '${option.id}. ${arabic && option.ar.isNotEmpty ? option.ar : option.en}',
+              textDirection: arabic ? TextDirection.rtl : TextDirection.ltr,
+            ),
+          ),
+      TextField(
+        controller: _controller(question.id),
+        textDirection: TextDirection.ltr,
+        minLines: 2,
+        maxLines: 4,
+        decoration: InputDecoration(labelText: l10n.yourAnswer),
+      ),
+      const SizedBox(height: 8),
+      LexoraPrimaryButton(
+        label: l10n.submitAnswer,
+        onPressed: () => _submit(question),
+      ),
+      const SizedBox(height: 8),
+      Text('${l10n.suggestedAnswer}: $answer'),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -386,23 +422,7 @@ class _QuestionsTabState extends ConsumerState<_QuestionsTab> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
-              TextField(
-                controller: _controller(question.id),
-                textDirection: TextDirection.ltr,
-                minLines: 2,
-                maxLines: 4,
-                decoration: InputDecoration(labelText: l10n.yourAnswer),
-              ),
-              const SizedBox(height: 8),
-              LexoraPrimaryButton(
-                label: l10n.submitAnswer,
-                onPressed: () => _submit(question),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                '${l10n.suggestedAnswer}: ${question.suggestedAnswer}',
-                textDirection: TextDirection.ltr,
-              ),
+              ..._questionBody(context, l10n, question, arabic),
               const SizedBox(height: 16),
             ],
             if (_found.isNotEmpty)
