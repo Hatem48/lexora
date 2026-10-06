@@ -504,5 +504,9 @@
   "importTopicWarnings": "تنبيهات: {count}",
   "importTopicMalformed": "هذا الملف ليس JSON صالحًا.",
   "importTopicUnsupported": "إصدار ملف المواضيع غير مدعوم.",
-  "importTopicInvalid": "ملف المواضيع ينقصه حقول مطلوبة."
+  "importTopicInvalid": "ملف المواضيع ينقصه حقول مطلوبة.",
+  "contentNew": "جديد",
+  "searchTopics": "البحث في المواضيع",
+  "noTopicsFound": "لم يتم العثور على مواضيع",
+  "clearSearch": "مسح البحث"
 }

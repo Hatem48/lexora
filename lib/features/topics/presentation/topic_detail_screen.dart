@@ -15,6 +15,7 @@ import '../../../core/services/vocabulary/vocabulary_discovery_repository.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../home/presentation/dashboard_providers.dart';
 import '../../progress/presentation/catalog_progress_section.dart';
+import 'imported_content_providers.dart';
 import 'topic_icons.dart';
 import 'topic_providers.dart';
 import 'topic_question_card.dart';
@@ -31,6 +32,17 @@ class TopicDetailScreen extends ConsumerStatefulWidget {
 class _TopicDetailScreenState extends ConsumerState<TopicDetailScreen> {
   String? _cefr;
   TopicWordFilter _filter = TopicWordFilter.all;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      ref
+          .read(importedContentMarksProvider.notifier)
+          .markTopicSeen(widget.topicId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

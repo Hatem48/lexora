@@ -31,6 +31,7 @@ import '../../../core/services/vocabulary/vocabulary_catalog_importer.dart';
 import '../../../core/providers/settings_reminder_helpers.dart';
 import '../../../core/services/notifications/reminder_scheduler.dart';
 import '../../../core/widgets/lexora_widgets.dart';
+import '../../topics/presentation/imported_content_providers.dart';
 import '../../topics/presentation/topic_providers.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/account_avatar.dart';
@@ -136,6 +137,7 @@ class SettingsScreen extends ConsumerWidget {
       ).importJson(raw);
       ref.read(startupTickProvider.notifier).bump();
       ref.invalidate(topicBoardProvider);
+      ref.invalidate(importedContentMarksProvider);
       if (!context.mounted) return;
       await showDialog<void>(
         context: context,

@@ -2677,6 +2677,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This topics file is missing required fields.'**
   String get importTopicInvalid;
+
+  /// No description provided for @contentNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get contentNew;
+
+  /// No description provided for @searchTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'Search topics'**
+  String get searchTopics;
+
+  /// No description provided for @noTopicsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No topics found'**
+  String get noTopicsFound;
+
+  /// No description provided for @clearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get clearSearch;
 }
 
 class _AppLocalizationsDelegate

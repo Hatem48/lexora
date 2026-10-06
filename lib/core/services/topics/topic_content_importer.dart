@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 
 import '../../constants/enums.dart';
 import '../../database/app_database.dart';
+import 'imported_content_marks.dart';
 import 'topic_question_payload.dart';
 
 const topicContentSchemaVersion = 1;
@@ -113,6 +114,9 @@ class TopicContentImporter {
       (max, row) => row.sortOrder > max ? row.sortOrder : max,
     );
 
+    final createdCategoryIds = <String>[];
+    final createdTopicIds = <String>[];
+
     await _db.transaction(() async {
       var groupOrder = nextGroupOrder;
       for (final category in document.categories) {
@@ -121,6 +125,7 @@ class TopicContentImporter {
           categoriesUpdated++;
         } else {
           categoriesAdded++;
+          createdCategoryIds.add(category.id);
           groupOrder++;
         }
         final current = exists
@@ -142,6 +147,7 @@ class TopicContentImporter {
         final current = knownTopics[topic.id];
         if (current == null) {
           topicsAdded++;
+          createdTopicIds.add(topic.id);
           topicOrder++;
         } else {
           topicsUpdated++;
@@ -230,6 +236,11 @@ class TopicContentImporter {
               );
         }
       }
+
+      await ImportedContentStore(_db).rememberCreated(
+        topicIds: createdTopicIds,
+        categoryIds: createdCategoryIds,
+      );
 
       if (abortBeforeCommit) {
         throw const TopicContentException(TopicContentFailure.invalid);

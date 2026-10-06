@@ -1409,4 +1409,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get importTopicInvalid => 'ملف المواضيع ينقصه حقول مطلوبة.';
+
+  @override
+  String get contentNew => 'جديد';
+
+  @override
+  String get searchTopics => 'البحث في المواضيع';
+
+  @override
+  String get noTopicsFound => 'لم يتم العثور على مواضيع';
+
+  @override
+  String get clearSearch => 'مسح البحث';
 }

@@ -1421,4 +1421,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get importTopicInvalid =>
       'This topics file is missing required fields.';
+
+  @override
+  String get contentNew => 'New';
+
+  @override
+  String get searchTopics => 'Search topics';
+
+  @override
+  String get noTopicsFound => 'No topics found';
+
+  @override
+  String get clearSearch => 'Clear search';
 }

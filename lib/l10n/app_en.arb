@@ -664,5 +664,9 @@
   },
   "importTopicMalformed": "This file is not valid JSON.",
   "importTopicUnsupported": "This topics file uses an unsupported version.",
-  "importTopicInvalid": "This topics file is missing required fields."
+  "importTopicInvalid": "This topics file is missing required fields.",
+  "contentNew": "New",
+  "searchTopics": "Search topics",
+  "noTopicsFound": "No topics found",
+  "clearSearch": "Clear search"
 }
