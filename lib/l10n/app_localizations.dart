@@ -2108,6 +2108,102 @@ abstract class AppLocalizations {
   /// **'Needs completion'**
   String get needsCompletion;
 
+  /// No description provided for @wordNeedsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs review'**
+  String get wordNeedsReview;
+
+  /// No description provided for @wordReviewNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review words'**
+  String get wordReviewNoticeTitle;
+
+  /// No description provided for @wordReviewNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'We found {count} words in your list that may need a correction.'**
+  String wordReviewNotice(int count);
+
+  /// No description provided for @wordReviewProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {total}'**
+  String wordReviewProgress(int current, int total);
+
+  /// No description provided for @wordMayBeMisspelled.
+  ///
+  /// In en, this message translates to:
+  /// **'This word may be misspelled'**
+  String get wordMayBeMisspelled;
+
+  /// No description provided for @wordDidYouMean.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you mean?'**
+  String get wordDidYouMean;
+
+  /// No description provided for @wordMeaningImprovement.
+  ///
+  /// In en, this message translates to:
+  /// **'We found a better meaning for this word'**
+  String get wordMeaningImprovement;
+
+  /// No description provided for @wordCurrentMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Current translation'**
+  String get wordCurrentMeaning;
+
+  /// No description provided for @wordSuggestedMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested translation'**
+  String get wordSuggestedMeaning;
+
+  /// No description provided for @wordCurrentExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Current example'**
+  String get wordCurrentExample;
+
+  /// No description provided for @wordSuggestedExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested example'**
+  String get wordSuggestedExample;
+
+  /// No description provided for @wordKeepOriginal.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep {word}'**
+  String wordKeepOriginal(String word);
+
+  /// No description provided for @wordReviewDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Word review is complete.'**
+  String get wordReviewDone;
+
+  /// No description provided for @wordReviewSpellingFixed.
+  ///
+  /// In en, this message translates to:
+  /// **'Corrected {count} words.'**
+  String wordReviewSpellingFixed(int count);
+
+  /// No description provided for @wordReviewMeaningsImproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Improved {count} translations.'**
+  String wordReviewMeaningsImproved(int count);
+
+  /// No description provided for @wordReviewKept.
+  ///
+  /// In en, this message translates to:
+  /// **'Kept {count} words unchanged.'**
+  String wordReviewKept(int count);
+
   /// No description provided for @needsCompletionCount.
   ///
   /// In en, this message translates to:
@@ -2269,6 +2365,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Submit answer'**
   String get submitAnswer;
+
+  /// No description provided for @showAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Answer'**
+  String get showAnswer;
+
+  /// No description provided for @hideAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide Answer'**
+  String get hideAnswer;
+
+  /// No description provided for @englishQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'English question'**
+  String get englishQuestion;
+
+  /// No description provided for @arabicQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic question'**
+  String get arabicQuestion;
+
+  /// No description provided for @englishAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'English answer'**
+  String get englishAnswer;
+
+  /// No description provided for @arabicAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic translation'**
+  String get arabicAnswer;
+
+  /// No description provided for @artJourneyLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'{level} Journey'**
+  String artJourneyLevel(String level);
+
+  /// No description provided for @artMasteredWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered Words'**
+  String get artMasteredWords;
+
+  /// No description provided for @artRemainingWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Words'**
+  String get artRemainingWords;
+
+  /// No description provided for @artPaintingGrows.
+  ///
+  /// In en, this message translates to:
+  /// **'Your painting grows as you master new words.'**
+  String get artPaintingGrows;
 
   /// No description provided for @wordsFound.
   ///

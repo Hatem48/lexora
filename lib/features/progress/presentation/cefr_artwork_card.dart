@@ -17,6 +17,7 @@ class CefrArtworkCard extends StatefulWidget {
     this.masteredEntryIds = const [],
     this.compact = false,
     this.help = false,
+    this.languageCode,
     this.onTap,
   });
 
@@ -26,6 +27,9 @@ class CefrArtworkCard extends StatefulWidget {
   final List<String> masteredEntryIds;
   final bool compact;
   final bool help;
+
+  /// Art Journey copy only. Null follows the app locale.
+  final String? languageCode;
   final VoidCallback? onTap;
 
   @override
@@ -83,7 +87,10 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final language = widget.languageCode ??
+        Localizations.localeOf(context).languageCode;
+    final arabic = language == 'ar';
+    final l10n = lookupAppLocalizations(Locale(arabic ? 'ar' : 'en'));
     final fraction = artProgressFraction(
       mastered: widget.mastered,
       total: widget.total,
@@ -120,47 +127,52 @@ class _CefrArtworkCardState extends State<CefrArtworkCard>
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        Color(0xD9FFF5E5),
+                        artCanvasScrim,
                       ],
                       stops: [0.62, 1],
                     ),
                   ),
                 ),
                 if (widget.help)
-                  const Align(
+                  Align(
                     alignment: AlignmentDirectional.topEnd,
-                    child: ContextHelpIcon(topic: HelpTopic.levelArtwork),
+                    child: ContextHelpIcon(
+                      topic: HelpTopic.levelArtwork,
+                      languageCode: arabic ? 'ar' : 'en',
+                    ),
                   ),
                 Padding(
                   padding: const EdgeInsets.all(AppSpacing.md),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Spacer(),
-                      Text(
-                        widget.level.toUpperCase(),
-                        textDirection: TextDirection.ltr,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              color: title,
-                              fontWeight: FontWeight.w700,
-                            ),
-                      ),
-                      Text(
-                        '${_grouped(widget.mastered)} / ${_grouped(widget.total)} ${l10n.mastered}',
-                        textDirection: TextDirection.ltr,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: muted,
-                            ),
-                      ),
-                      Text(
-                        '$percent%',
-                        textDirection: TextDirection.ltr,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: title,
-                              fontWeight: FontWeight.w700,
-                            ),
-                      ),
-                    ],
+                  child: Directionality(
+                    textDirection: arabic ? TextDirection.rtl : TextDirection.ltr,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Spacer(),
+                        Text(
+                          widget.level.toUpperCase(),
+                          textDirection: TextDirection.ltr,
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                color: title,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                        Text(
+                          '${_grouped(widget.mastered)} / ${_grouped(widget.total)} ${l10n.mastered}',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: muted,
+                              ),
+                        ),
+                        Text(
+                          '$percent%',
+                          textDirection: TextDirection.ltr,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: title,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

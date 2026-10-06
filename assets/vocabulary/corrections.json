@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hints": [
+    {"written": "bick", "lemmas": ["bike"]},
+    {"written": "gard", "lemmas": ["grade", "guard"]}
+  ],
+  "content": [
+    {
+      "lemma": "problem",
+      "meaningAr": "مشكلة",
+      "exampleEn": "The problem is that the door will not open.",
+      "exampleAr": "المشكلة أن الباب لا يفتح."
+    }
+  ]
+}

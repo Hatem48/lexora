@@ -89,15 +89,26 @@ class TopicQuestionPayload {
   }
 
   String answerFor({required bool arabic}) {
-    if (type == 'multiple_choice') {
-      for (final option in options) {
-        if (option.id == correctOptionId) {
-          final text = arabic && option.ar.isNotEmpty ? option.ar : option.en;
-          return text;
-        }
+    final answers = suggestedAnswers;
+    if (arabic && answers.ar.isNotEmpty) return answers.ar;
+    return answers.en;
+  }
+
+  bool get hasSuggestedAnswer {
+    final answers = suggestedAnswers;
+    return answers.en.isNotEmpty || answers.ar.isNotEmpty;
+  }
+
+  /// English and Arabic suggested answers. Multiple choice falls back to the correct option.
+  ({String en, String ar}) get suggestedAnswers {
+    if (answerEn.trim().isNotEmpty || answerAr.trim().isNotEmpty) {
+      return (en: answerEn.trim(), ar: answerAr.trim());
+    }
+    for (final option in options) {
+      if (option.id == correctOptionId) {
+        return (en: option.en.trim(), ar: option.ar.trim());
       }
     }
-    if (arabic && answerAr.isNotEmpty) return answerAr;
-    return answerEn;
+    return (en: '', ar: '');
   }
 }

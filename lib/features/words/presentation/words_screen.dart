@@ -23,6 +23,7 @@ import '../../../core/services/vocabulary/mastery_policy.dart';
 import '../../categories/data/category_repository.dart';
 import '../../categories/presentation/categories_screen.dart';
 import '../data/learning_words.dart';
+import 'vocabulary_review_screen.dart';
 
 class WordsScreen extends ConsumerStatefulWidget {
   const WordsScreen({super.key});
@@ -54,25 +55,28 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
   }
 
   Future<void> _openFilters() async {
-    if (!_filterLaunch.tryEnter()) return;
-    setState(() {});
-    try {
-      final cached = ref.read(categoriesListProvider).asData?.value;
-      final categories = cached ??
-          await ref
-              .read(categoriesListProvider.future)
-              .catchError((_) => <CategoryRow>[]);
-      if (!mounted) return;
-      final next = await showContentFilterSheet(
-        context: context,
-        initial: _filters,
-        categories: categories,
-      );
-      if (next != null && mounted) setState(() => _filters = next);
-    } finally {
-      _filterLaunch.leave();
-      if (mounted) setState(() {});
-    }
+    final cached = ref.read(categoriesListProvider).asData?.value;
+    final next = await openContentFilters(
+      launch: _filterLaunch,
+      cached: cached,
+      loadCategories: () async {
+        try {
+          return await ref.read(categoriesListProvider.future);
+        } catch (_) {
+          return const <CategoryRow>[];
+        }
+      },
+      show: (categories, categoriesFuture) {
+        if (!mounted) return Future<ContentFilterState?>.value();
+        return showContentFilterSheet(
+          context: context,
+          initial: _filters,
+          categories: categories,
+          categoriesFuture: categoriesFuture,
+        );
+      },
+    );
+    if (next != null && mounted) setState(() => _filters = next);
   }
 
   @override
@@ -97,7 +101,7 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
         actions: [
           IconButton(
             tooltip: l10n.filters,
-            onPressed: _filterLaunch.busy ? null : _openFilters,
+            onPressed: _openFilters,
             icon: Badge(
               isLabelVisible: _filters.hasActiveFilters,
               child: const Icon(Icons.tune_rounded),
@@ -188,6 +192,13 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
                 onAction: () => ref.invalidate(learningWordsProvider(query)),
               ),
               data: (words) {
+                final reviewIds = ref
+                        .watch(vocabularyReviewQueueProvider)
+                        .asData
+                        ?.value
+                        .map((issue) => issue.wordId)
+                        .toSet() ??
+                    const <String>{};
                 if (words.isEmpty) {
                   return EmptyState(
                     title: l10n.noWordsYet,
@@ -248,6 +259,21 @@ class _WordsScreenState extends ConsumerState<WordsScreen> {
                                           .labelMedium,
                                     ),
                                     Text(word.status),
+                                    if (reviewIds.contains(word.id))
+                                      TextButton(
+                                        onPressed: () =>
+                                            context.push('/words/review'),
+                                        style: TextButton.styleFrom(
+                                          visualDensity: VisualDensity.compact,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                          ),
+                                          minimumSize: Size.zero,
+                                          tapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                        ),
+                                        child: Text(l10n.wordNeedsReview),
+                                      ),
                                     if (word.needsCompletion)
                                       Row(
                                         mainAxisSize: MainAxisSize.min,

@@ -8,6 +8,7 @@ import 'package:lexora/core/services/progress/achievement_catalog.dart';
 import 'package:lexora/core/services/progress/learning_activity_store.dart';
 import 'package:lexora/core/services/vocabulary/vocabulary_catalog_importer.dart';
 import 'package:lexora/features/home/domain/whats_new.dart';
+import 'package:lexora/features/progress/domain/art_journey_language.dart';
 import 'package:lexora/features/progress/domain/cefr_artwork.dart';
 import 'package:lexora/features/progress/presentation/catalog_progress_section.dart';
 import 'package:lexora/features/progress/presentation/cefr_artwork_card.dart';
@@ -221,6 +222,23 @@ void main() {
       'SELECT COUNT(*) AS c FROM vocabulary_entries',
     ).getSingle();
     expect(totals.read<int>('c'), 4);
+  });
+
+  test('art journey language and canvas color do not change the painting', () {
+    expect(artCanvasColor, const Color(0xFFF4F7FB));
+    expect(artCanvasScrim.toARGB32() & 0x00FFFFFF, 0x00F4F7FB);
+    expect(artJourneyLanguageOrDefault(stored: null, appLanguage: 'ar'), 'ar');
+    expect(artJourneyLanguageOrDefault(stored: null, appLanguage: 'en'), 'en');
+    expect(artJourneyLanguageOrDefault(stored: 'en', appLanguage: 'ar'), 'en');
+    expect(artJourneyLanguageOrDefault(stored: 'ar', appLanguage: 'en'), 'ar');
+
+    const ids = ['b1-city', 'b1-town'];
+    final english = paintBlobsFor(level: 'B1', masteredEntryIds: ids);
+    final arabic = paintBlobsFor(level: 'B1', masteredEntryIds: ids);
+    expect(english, hasLength(2));
+    expect(arabic.map((blob) => (blob.x, blob.y, blob.baseSize, blob.rotation, blob.color)),
+        english.map((blob) => (blob.x, blob.y, blob.baseSize, blob.rotation, blob.color)));
+    expect(artProgressFraction(mastered: 2, total: 4), 0.5);
   });
 
   test('English and Arabic name the collection, not an official level', () async {

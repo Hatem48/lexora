@@ -446,6 +446,53 @@
   "deleteAccountMessage": "This erases your words, sentences, blogs, reviews, and settings on this device. The shared vocabulary catalog stays. This cannot be undone.",
   "linkOpenFailed": "Could not open the page",
   "needsCompletion": "Needs completion",
+  "wordNeedsReview": "Needs review",
+  "wordReviewNoticeTitle": "Review words",
+  "wordReviewNotice": "We found {count} words in your list that may need a correction.",
+  "@wordReviewNotice": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "wordReviewProgress": "{current} / {total}",
+  "@wordReviewProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "wordMayBeMisspelled": "This word may be misspelled",
+  "wordDidYouMean": "Did you mean?",
+  "wordMeaningImprovement": "We found a better meaning for this word",
+  "wordCurrentMeaning": "Current translation",
+  "wordSuggestedMeaning": "Suggested translation",
+  "wordCurrentExample": "Current example",
+  "wordSuggestedExample": "Suggested example",
+  "wordKeepOriginal": "Keep {word}",
+  "@wordKeepOriginal": {
+    "placeholders": {
+      "word": { "type": "String" }
+    }
+  },
+  "wordReviewDone": "Word review is complete.",
+  "wordReviewSpellingFixed": "Corrected {count} words.",
+  "@wordReviewSpellingFixed": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "wordReviewMeaningsImproved": "Improved {count} translations.",
+  "@wordReviewMeaningsImproved": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "wordReviewKept": "Kept {count} words unchanged.",
+  "@wordReviewKept": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "needsCompletionCount": "Needs completion ({count})",
   "@needsCompletionCount": {
     "placeholders": {
@@ -478,6 +525,21 @@
   "yourAnswer": "Your answer",
   "suggestedAnswer": "Suggested answer",
   "submitAnswer": "Submit answer",
+  "showAnswer": "Show Answer",
+  "hideAnswer": "Hide Answer",
+  "englishQuestion": "English question",
+  "arabicQuestion": "Arabic question",
+  "englishAnswer": "English answer",
+  "arabicAnswer": "Arabic translation",
+  "artJourneyLevel": "{level} Journey",
+  "@artJourneyLevel": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "artMasteredWords": "Mastered Words",
+  "artRemainingWords": "Remaining Words",
+  "artPaintingGrows": "Your painting grows as you master new words.",
   "wordsFound": "Words found",
   "masteredProgress": "Mastered: {mastered} / {total}",
   "@masteredProgress": {

@@ -250,6 +250,81 @@ void main() {
     expect(unresolved.warnings, 1);
     expect(await TopicRepository(db).words(topicId: 'daily_life'), isEmpty);
   });
+
+  test('question English and Arabic prompts and answers are stored and updated in place', () async {
+    final db = AppDatabase(NativeDatabase.memory());
+    addTearDown(db.close);
+    const raw = '''
+{
+  "schemaVersion": 1,
+  "categories": [
+    {"id": "study", "name": {"en": "Study", "ar": "دراسة"}}
+  ],
+  "topics": [
+    {
+      "id": "job-interviews",
+      "categoryId": "study",
+      "name": {"en": "Job interviews", "ar": "مقابلات العمل"},
+      "vocabulary": [],
+      "sentences": [],
+      "questions": [
+        {
+          "id": "job-interviews_question_001",
+          "type": "conversation",
+          "question": {
+            "en": "Why do you want to study cybersecurity?",
+            "ar": "لماذا تريد دراسة الأمن السيبراني؟"
+          },
+          "answer": {
+            "en": "I want to study cybersecurity because I am interested in protecting systems and data.",
+            "ar": "أريد دراسة الأمن السيبراني لأنني مهتم بحماية الأنظمة والبيانات."
+          },
+          "cefr": "B1",
+          "wordIds": ["cybersecurity"]
+        }
+      ]
+    }
+  ]
+}
+''';
+    final importer = TopicContentImporter(db);
+    final first = await importer.importJson(raw);
+    expect(first.questionsAdded, 1);
+    final stored = await (db.select(db.topicQuestions)
+          ..where((row) => row.id.equals('job-interviews_question_001')))
+        .getSingle();
+    expect(stored.promptEn, 'Why do you want to study cybersecurity?');
+    expect(stored.promptAr, 'لماذا تريد دراسة الأمن السيبراني؟');
+    final payload = TopicQuestionPayload.parse(stored.suggestedAnswer);
+    expect(
+      payload.answerEn,
+      'I want to study cybersecurity because I am interested in protecting systems and data.',
+    );
+    expect(
+      payload.answerAr,
+      'أريد دراسة الأمن السيبراني لأنني مهتم بحماية الأنظمة والبيانات.',
+    );
+    expect(stored.suggestedAnswer, contains('"answerEn"'));
+    expect(stored.suggestedAnswer, contains('"answerAr"'));
+
+    final updated = raw
+        .replaceFirst(
+          'protecting systems and data.',
+          'protecting networks.',
+        )
+        .replaceFirst(
+          'حماية الأنظمة والبيانات.',
+          'حماية الشبكات.',
+        );
+    final second = await importer.importJson(updated);
+    expect(second.questionsAdded, 0);
+    expect(second.questionsUpdated, 1);
+    final rows = await db.select(db.topicQuestions).get();
+    expect(rows, hasLength(1));
+    final again = TopicQuestionPayload.parse(rows.single.suggestedAnswer);
+    expect(again.answerEn, contains('protecting networks'));
+    expect(again.answerAr, contains('حماية الشبكات'));
+  });
 }
 
 Future<void> _entry(AppDatabase db, String id) {

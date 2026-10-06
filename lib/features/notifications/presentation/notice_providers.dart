@@ -5,6 +5,7 @@ import '../../../core/constants/enums.dart';
 import '../../../core/database/app_database.dart';
 import '../../../core/services/progress/activity_policy.dart';
 import '../../../core/services/progress/learning_activity_store.dart';
+import '../../words/data/vocabulary_correction_store.dart';
 import '../data/notice_read_store.dart';
 import '../domain/in_app_notice.dart';
 
@@ -62,6 +63,7 @@ final inAppNoticesProvider = FutureProvider<List<InAppNotice>>((ref) async {
         ..where((row) => row.celebrated.equals(false)))
       .get();
   final reads = await NoticeReadStore(db).readIds();
+  final reviewCount = await VocabularyCorrectionStore(db).pendingCount();
   return applyReadState(
     buildInAppNotices(
       dueWords: dueWords,
@@ -72,6 +74,7 @@ final inAppNoticesProvider = FutureProvider<List<InAppNotice>>((ref) async {
         for (final row in achievements) (id: row.id, unlockedAt: row.unlockedAt),
       ],
       now: now,
+      reviewCount: reviewCount,
     ),
     reads,
   );

@@ -147,7 +147,10 @@ Stream<List<LearningWordItem>> watchLearningWords(
               WHEN COALESCE(u.user_arabic_meaning, '') = '' AND COALESCE(e.arabic_meaning, '') = '' THEN 1
               ELSE 0
             END AS needs,
-            0 AS favorite,
+            CASE WHEN EXISTS (
+              SELECT 1 FROM words fav
+              WHERE lower(fav.word) = lower(e.lemma) AND fav.is_favorite = 1
+            ) THEN 1 ELSE 0 END AS favorite,
             u.first_discovered_at AS sort_at
           FROM user_vocabulary u
           JOIN vocabulary_entries e ON e.id = u.entry_id

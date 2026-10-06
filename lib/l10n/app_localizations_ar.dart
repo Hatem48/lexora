@@ -1074,6 +1074,66 @@ class AppLocalizationsAr extends AppLocalizations {
   String get needsCompletion => 'تحتاج إكمال';
 
   @override
+  String get wordNeedsReview => 'تحتاج مراجعة';
+
+  @override
+  String get wordReviewNoticeTitle => 'مراجعة الكلمات';
+
+  @override
+  String wordReviewNotice(int count) {
+    return 'وجدنا $count كلمات في قائمتك قد تحتاج إلى تصحيح.';
+  }
+
+  @override
+  String wordReviewProgress(int current, int total) {
+    return '$current / $total';
+  }
+
+  @override
+  String get wordMayBeMisspelled => 'قد تكون هذه الكلمة مكتوبة بشكل غير صحيح';
+
+  @override
+  String get wordDidYouMean => 'هل تقصد؟';
+
+  @override
+  String get wordMeaningImprovement => 'وجدنا تحسينًا لمعنى هذه الكلمة';
+
+  @override
+  String get wordCurrentMeaning => 'الترجمة الحالية';
+
+  @override
+  String get wordSuggestedMeaning => 'الترجمة المقترحة';
+
+  @override
+  String get wordCurrentExample => 'المثال الحالي';
+
+  @override
+  String get wordSuggestedExample => 'المثال المقترح';
+
+  @override
+  String wordKeepOriginal(String word) {
+    return 'الاحتفاظ بـ $word';
+  }
+
+  @override
+  String get wordReviewDone => 'تمت مراجعة الكلمات.';
+
+  @override
+  String wordReviewSpellingFixed(int count) {
+    return 'تم تصحيح $count كلمات.';
+  }
+
+  @override
+  String wordReviewMeaningsImproved(int count) {
+    return 'تم تحسين $count ترجمة.';
+  }
+
+  @override
+  String wordReviewKept(int count) {
+    return 'تم الاحتفاظ بـ $count كلمات دون تغيير.';
+  }
+
+  @override
   String needsCompletionCount(int count) {
     return 'تحتاج إكمال ($count)';
   }
@@ -1157,6 +1217,38 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get submitAnswer => 'إرسال الإجابة';
+
+  @override
+  String get showAnswer => 'أظهر الإجابة';
+
+  @override
+  String get hideAnswer => 'أخفِ الإجابة';
+
+  @override
+  String get englishQuestion => 'السؤال بالإنجليزية';
+
+  @override
+  String get arabicQuestion => 'السؤال بالعربية';
+
+  @override
+  String get englishAnswer => 'الإجابة بالإنجليزية';
+
+  @override
+  String get arabicAnswer => 'الترجمة العربية';
+
+  @override
+  String artJourneyLevel(String level) {
+    return 'رحلة $level';
+  }
+
+  @override
+  String get artMasteredWords => 'الكلمات المتقنة';
+
+  @override
+  String get artRemainingWords => 'الكلمات المتبقية';
+
+  @override
+  String get artPaintingGrows => 'تنمو لوحتك كلما أتقنت كلمات جديدة.';
 
   @override
   String get wordsFound => 'كلمات وُجدت';

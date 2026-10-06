@@ -32,7 +32,12 @@ class HelpEntry {
 class HelpCatalog {
   const HelpCatalog._();
 
-  static HelpEntry of(HelpTopic topic) => _entries[topic]!;
+  static HelpEntry of(HelpTopic topic, {String? languageCode}) {
+    if (languageCode == 'en') {
+      return _english[topic] ?? _entries[topic]!;
+    }
+    return _entries[topic]!;
+  }
 
   static final Map<HelpTopic, HelpEntry> _entries = {
     HelpTopic.cefr: const HelpEntry(
@@ -134,6 +139,14 @@ class HelpCatalog {
       title: 'ماذا يحفظ النسخ الاحتياطي؟',
       body:
           'النسخ الاحتياطي يحفظ بياناتك على جهازك، مثل كلماتك وجملك وتقدمك، حتى تتمكن من استعادتها لاحقًا. لا يُرسل هذا النسخ إلى خادم.',
+    ),
+  };
+
+  static final Map<HelpTopic, HelpEntry> _english = {
+    HelpTopic.levelArtwork: const HelpEntry(
+      title: 'How does the level painting grow?',
+      body:
+          'Each mastered word adds one paint blob to that level. A discovered or learning word is not painted. Every blob keeps the same place and color for that word. Finishing the painting completes a vocabulary collection, not an official language level.',
     ),
   };
 }

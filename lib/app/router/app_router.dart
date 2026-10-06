@@ -24,6 +24,7 @@ import '../../features/topics/presentation/topic_detail_screen.dart';
 import '../../features/topics/presentation/topics_screen.dart';
 import '../../features/vocabulary/presentation/catalog_word_screen.dart';
 import '../../features/shell/presentation/main_shell.dart';
+import '../../features/words/presentation/vocabulary_review_screen.dart';
 import '../../features/words/presentation/words_screen.dart';
 import '../../core/providers/settings_provider.dart';
 
@@ -105,6 +106,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     parentNavigatorKey: _rootNavigatorKey,
                     path: 'add',
                     builder: (context, state) => const AddWordScreen(),
+                  ),
+                  GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
+                    path: 'review',
+                    builder: (context, state) => const VocabularyReviewScreen(),
                   ),
                   GoRoute(
                     parentNavigatorKey: _rootNavigatorKey,

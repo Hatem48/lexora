@@ -4,6 +4,7 @@ enum NoticeKind {
   dailyLearning,
   streak,
   achievement,
+  vocabularyReview,
 }
 
 class InAppNotice {
@@ -46,6 +47,7 @@ List<InAppNotice> buildInAppNotices({
   required int currentStreak,
   required List<({String id, DateTime unlockedAt})> uncelebrated,
   required DateTime now,
+  int reviewCount = 0,
 }) {
   final day = '${now.year}-${now.month}-${now.day}';
   final notices = <InAppNotice>[];
@@ -91,6 +93,17 @@ List<InAppNotice> buildInAppNotices({
       ),
     );
   }
+  if (reviewCount > 0) {
+    notices.add(
+      InAppNotice(
+        id: 'vocabulary-review-$reviewCount',
+        kind: NoticeKind.vocabularyReview,
+        createdAt: now,
+        route: '/words/review',
+        count: reviewCount,
+      ),
+    );
+  }
   for (final item in uncelebrated) {
     notices.add(
       InAppNotice(
@@ -114,7 +127,10 @@ String routeForAchievement(String id) {
 
 /// Only known in-app routes may be opened from a notice or a local reminder.
 String notificationRoute(String? payload) {
-  if (payload == '/home' || payload == '/review' || payload == '/progress') {
+  if (payload == '/home' ||
+      payload == '/review' ||
+      payload == '/progress' ||
+      payload == '/words/review') {
     return payload!;
   }
   if (payload != null && payload.startsWith('/progress/level/')) {

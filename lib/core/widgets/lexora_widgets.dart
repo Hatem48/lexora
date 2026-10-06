@@ -248,11 +248,13 @@ class SectionHeader extends StatelessWidget {
     required this.title,
     this.trailing,
     this.help,
+    this.helpLanguageCode,
   });
 
   final String title;
   final Widget? trailing;
   final HelpTopic? help;
+  final String? helpLanguageCode;
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +263,8 @@ class SectionHeader extends StatelessWidget {
         Expanded(
           child: Text(title, style: Theme.of(context).textTheme.headlineSmall),
         ),
-        if (help != null) ContextHelpIcon(topic: help!),
+        if (help != null)
+          ContextHelpIcon(topic: help!, languageCode: helpLanguageCode),
         ?trailing,
       ],
     );

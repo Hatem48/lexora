@@ -1083,6 +1083,67 @@ class AppLocalizationsEn extends AppLocalizations {
   String get needsCompletion => 'Needs completion';
 
   @override
+  String get wordNeedsReview => 'Needs review';
+
+  @override
+  String get wordReviewNoticeTitle => 'Review words';
+
+  @override
+  String wordReviewNotice(int count) {
+    return 'We found $count words in your list that may need a correction.';
+  }
+
+  @override
+  String wordReviewProgress(int current, int total) {
+    return '$current / $total';
+  }
+
+  @override
+  String get wordMayBeMisspelled => 'This word may be misspelled';
+
+  @override
+  String get wordDidYouMean => 'Did you mean?';
+
+  @override
+  String get wordMeaningImprovement =>
+      'We found a better meaning for this word';
+
+  @override
+  String get wordCurrentMeaning => 'Current translation';
+
+  @override
+  String get wordSuggestedMeaning => 'Suggested translation';
+
+  @override
+  String get wordCurrentExample => 'Current example';
+
+  @override
+  String get wordSuggestedExample => 'Suggested example';
+
+  @override
+  String wordKeepOriginal(String word) {
+    return 'Keep $word';
+  }
+
+  @override
+  String get wordReviewDone => 'Word review is complete.';
+
+  @override
+  String wordReviewSpellingFixed(int count) {
+    return 'Corrected $count words.';
+  }
+
+  @override
+  String wordReviewMeaningsImproved(int count) {
+    return 'Improved $count translations.';
+  }
+
+  @override
+  String wordReviewKept(int count) {
+    return 'Kept $count words unchanged.';
+  }
+
+  @override
   String needsCompletionCount(int count) {
     return 'Needs completion ($count)';
   }
@@ -1166,6 +1227,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get submitAnswer => 'Submit answer';
+
+  @override
+  String get showAnswer => 'Show Answer';
+
+  @override
+  String get hideAnswer => 'Hide Answer';
+
+  @override
+  String get englishQuestion => 'English question';
+
+  @override
+  String get arabicQuestion => 'Arabic question';
+
+  @override
+  String get englishAnswer => 'English answer';
+
+  @override
+  String get arabicAnswer => 'Arabic translation';
+
+  @override
+  String artJourneyLevel(String level) {
+    return '$level Journey';
+  }
+
+  @override
+  String get artMasteredWords => 'Mastered Words';
+
+  @override
+  String get artRemainingWords => 'Remaining Words';
+
+  @override
+  String get artPaintingGrows => 'Your painting grows as you master new words.';
 
   @override
   String get wordsFound => 'Words found';

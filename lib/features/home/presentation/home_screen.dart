@@ -11,6 +11,7 @@ import '../../../core/providers/settings_provider.dart';
 import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
 import '../../progress/domain/cefr_artwork.dart';
+import '../../progress/presentation/art_journey_language_controller.dart';
 import '../../progress/presentation/catalog_progress_section.dart';
 import '../../progress/presentation/cefr_artwork_card.dart';
 import '../../notifications/domain/in_app_notice.dart';
@@ -136,6 +137,8 @@ class HomeScreen extends ConsumerWidget {
                     mastered: mastered,
                     total: total,
                     masteredEntryIds: entryIds,
+                    languageCode: ref.watch(artJourneyLanguageProvider).asData?.value ??
+                        settings.localeCode,
                     onTap: () => context.push(levelArtPath(code)),
                     help: true,
                   ).animate().fadeIn(delay: 80.ms).slideY(begin: 0.05, end: 0),

@@ -4,13 +4,14 @@ import '../../app/theme/app_spacing.dart';
 import 'help_catalog.dart';
 
 class ContextHelpIcon extends StatelessWidget {
-  const ContextHelpIcon({super.key, required this.topic});
+  const ContextHelpIcon({super.key, required this.topic, this.languageCode});
 
   final HelpTopic topic;
+  final String? languageCode;
 
   @override
   Widget build(BuildContext context) {
-    final entry = HelpCatalog.of(topic);
+    final entry = HelpCatalog.of(topic, languageCode: languageCode);
     return IconButton(
       tooltip: entry.title,
       visualDensity: VisualDensity.compact,
@@ -21,19 +22,24 @@ class ContextHelpIcon extends StatelessWidget {
         size: 18,
         color: Theme.of(context).colorScheme.onSurfaceVariant,
       ),
-      onPressed: () => showHelpSheet(context, topic),
+      onPressed: () => showHelpSheet(context, topic, languageCode: languageCode),
     );
   }
 }
 
-Future<void> showHelpSheet(BuildContext context, HelpTopic topic) {
-  final entry = HelpCatalog.of(topic);
+Future<void> showHelpSheet(
+  BuildContext context,
+  HelpTopic topic, {
+  String? languageCode,
+}) {
+  final entry = HelpCatalog.of(topic, languageCode: languageCode);
+  final english = languageCode == 'en';
   return showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
     builder: (context) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: english ? TextDirection.ltr : TextDirection.rtl,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(

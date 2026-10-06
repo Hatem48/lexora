@@ -66,10 +66,33 @@ class ContentFilterLaunch {
   }
 }
 
+/// Opens the filter sheet without waiting for [loadCategories].
+///
+/// Category rows already in memory are shown immediately. Otherwise the sheet
+/// opens on the first frame and fills the category section when the future completes.
+Future<ContentFilterState?> openContentFilters({
+  required ContentFilterLaunch launch,
+  required List<CategoryRow>? cached,
+  required Future<List<CategoryRow>> Function() loadCategories,
+  required Future<ContentFilterState?> Function(
+    List<CategoryRow> categories,
+    Future<List<CategoryRow>>? categoriesFuture,
+  ) show,
+}) async {
+  if (!launch.tryEnter()) return null;
+  try {
+    final pending = cached == null ? loadCategories() : null;
+    return await show(cached ?? const [], pending);
+  } finally {
+    launch.leave();
+  }
+}
+
 Future<ContentFilterState?> showContentFilterSheet({
   required BuildContext context,
   required ContentFilterState initial,
   required List<CategoryRow> categories,
+  Future<List<CategoryRow>>? categoriesFuture,
   bool showMastery = true,
 }) {
   return showModalBottomSheet<ContentFilterState>(
@@ -77,10 +100,16 @@ Future<ContentFilterState?> showContentFilterSheet({
     useRootNavigator: true,
     isScrollControlled: true,
     builder: (context) {
-      return _ContentFilterSheet(
-        initial: initial,
-        categories: categories,
-        showMastery: showMastery,
+      return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.sizeOf(context).height * 0.92,
+        ),
+        child: _ContentFilterSheet(
+          initial: initial,
+          categories: categories,
+          categoriesFuture: categoriesFuture,
+          showMastery: showMastery,
+        ),
       );
     },
   );
@@ -90,11 +119,13 @@ class _ContentFilterSheet extends StatefulWidget {
   const _ContentFilterSheet({
     required this.initial,
     required this.categories,
+    required this.categoriesFuture,
     required this.showMastery,
   });
 
   final ContentFilterState initial;
   final List<CategoryRow> categories;
+  final Future<List<CategoryRow>>? categoriesFuture;
   final bool showMastery;
 
   @override
@@ -103,11 +134,27 @@ class _ContentFilterSheet extends StatefulWidget {
 
 class _ContentFilterSheetState extends State<_ContentFilterSheet> {
   late ContentFilterState _state;
+  late List<CategoryRow> _categories;
+  var _loadingCategories = false;
 
   @override
   void initState() {
     super.initState();
     _state = widget.initial;
+    _categories = widget.categories;
+    final pending = widget.categoriesFuture;
+    if (pending == null) return;
+    _loadingCategories = true;
+    pending.then((rows) {
+      if (!mounted) return;
+      setState(() {
+        _categories = rows;
+        _loadingCategories = false;
+      });
+    }, onError: (_, _) {
+      if (!mounted) return;
+      setState(() => _loadingCategories = false);
+    });
   }
 
   String _sortLabel(AppLocalizations l10n, ContentSort sort) {
@@ -198,7 +245,16 @@ class _ContentFilterSheetState extends State<_ContentFilterSheet> {
                       () => _state = _state.copyWith(clearCategory: true),
                     ),
                   ),
-                  ...widget.categories.map((c) {
+                  if (_loadingCategories)
+                    const Padding(
+                      padding: EdgeInsets.only(top: 4),
+                      child: SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    ),
+                  ..._categories.map((c) {
                     final label = isRtl && (c.nameAr?.isNotEmpty ?? false)
                         ? c.nameAr!
                         : c.name;

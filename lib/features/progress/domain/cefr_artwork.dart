@@ -1,7 +1,10 @@
 import 'dart:math' as math;
 import 'dart:ui';
 
-const artCanvasColor = Color(0xFFFFF5E5);
+const artCanvasColor = Color(0xFFF4F7FB);
+
+/// Bottom fade uses the same canvas color so an empty painting stays cool neutral.
+const artCanvasScrim = Color(0xD9F4F7FB);
 
 const paintPalette = <Color>[
   Color(0xFF06135F),

@@ -13,6 +13,9 @@ import 'core/services/notifications/reminder_scheduler.dart';
 import 'core/services/learning/development_samples.dart';
 import 'core/services/topics/topic_catalog_importer.dart';
 import 'core/services/vocabulary/vocabulary_catalog_importer.dart';
+import 'features/notifications/presentation/notice_providers.dart';
+import 'features/words/data/vocabulary_correction_store.dart';
+import 'features/words/presentation/vocabulary_review_screen.dart';
 
 const _splashLimit = Duration(seconds: 5);
 
@@ -40,6 +43,20 @@ Future<void> main() async {
       child: const LexoraApp(),
     ),
   );
+  unawaited(_scanVocabularyCorrections(container));
+}
+
+Future<void> _scanVocabularyCorrections(ProviderContainer container) async {
+  try {
+    final ran = await VocabularyCorrectionStore(
+      container.read(appDatabaseProvider),
+    ).ensureScanned();
+    if (!ran) return;
+    container.invalidate(inAppNoticesProvider);
+    container.invalidate(vocabularyReviewQueueProvider);
+  } catch (error, stack) {
+    debugPrint('Vocabulary correction scan failed: $error\n$stack');
+  }
 }
 
 Future<void> _startLexora(ProviderContainer container) async {

@@ -120,25 +120,28 @@ class _SentencesScreenState extends ConsumerState<SentencesScreen> {
   }
 
   Future<void> _openFilters() async {
-    if (!_filterLaunch.tryEnter()) return;
-    setState(() {});
-    try {
-      final cached = ref.read(categoriesListProvider).asData?.value;
-      final categories = cached ??
-          await ref
-              .read(categoriesListProvider.future)
-              .catchError((_) => <CategoryRow>[]);
-      if (!mounted) return;
-      final next = await showContentFilterSheet(
-        context: context,
-        initial: _filters,
-        categories: categories,
-      );
-      if (next != null && mounted) setState(() => _filters = next);
-    } finally {
-      _filterLaunch.leave();
-      if (mounted) setState(() {});
-    }
+    final cached = ref.read(categoriesListProvider).asData?.value;
+    final next = await openContentFilters(
+      launch: _filterLaunch,
+      cached: cached,
+      loadCategories: () async {
+        try {
+          return await ref.read(categoriesListProvider.future);
+        } catch (_) {
+          return const <CategoryRow>[];
+        }
+      },
+      show: (categories, categoriesFuture) {
+        if (!mounted) return Future<ContentFilterState?>.value();
+        return showContentFilterSheet(
+          context: context,
+          initial: _filters,
+          categories: categories,
+          categoriesFuture: categoriesFuture,
+        );
+      },
+    );
+    if (next != null && mounted) setState(() => _filters = next);
   }
 
   @override
@@ -163,7 +166,7 @@ class _SentencesScreenState extends ConsumerState<SentencesScreen> {
         actions: [
           IconButton(
             tooltip: l10n.filters,
-            onPressed: _filterLaunch.busy ? null : _openFilters,
+            onPressed: _openFilters,
             icon: Badge(
               isLabelVisible: _filters.hasActiveFilters,
               child: const Icon(Icons.tune_rounded),

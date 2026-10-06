@@ -6,11 +6,14 @@ import 'package:lexora/l10n/app_localizations.dart';
 
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/database/app_database.dart';
+import '../../../core/providers/settings_provider.dart';
 import '../../../core/providers/startup_provider.dart';
 import '../../../core/services/progress/learning_activity_store.dart';
 import '../../../core/help/context_help_icon.dart';
 import '../../../core/help/help_catalog.dart';
 import '../../../core/widgets/lexora_widgets.dart';
+import 'art_journey_language_controller.dart';
+import 'art_journey_language_toggle.dart';
 import 'catalog_progress_section.dart';
 import 'cefr_artwork_card.dart';
 
@@ -84,18 +87,26 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
           ..where((item) => item.id.equals(id)))
         .getSingleOrNull();
     if (row == null || row.celebrated || !mounted) return;
+    final language = ref.read(artJourneyLanguageProvider).asData?.value ??
+        (ref.read(settingsProvider).localeCode == 'ar' ? 'ar' : 'en');
+    final journey = lookupAppLocalizations(Locale(language));
     final l10n = AppLocalizations.of(context);
     await showDialog<void>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.masterpieceCompleted(widget.level.toUpperCase())),
-        content: Text(l10n.collectionNotOfficialLevel),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.done),
+      builder: (context) => Directionality(
+        textDirection: language == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+        child: AlertDialog(
+          title: Text(
+            journey.masterpieceCompleted('\u200E${widget.level.toUpperCase()}\u200E'),
           ),
-        ],
+          content: Text(journey.collectionNotOfficialLevel),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.done),
+            ),
+          ],
+        ),
       ),
     );
     await AchievementService(db).markCelebrated(id);
@@ -104,6 +115,10 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final language = ref.watch(artJourneyLanguageProvider).asData?.value ??
+        (ref.watch(settingsProvider).localeCode == 'ar' ? 'ar' : 'en');
+    final journey = lookupAppLocalizations(Locale(language));
+    final journeyRtl = language == 'ar';
     final code = widget.level.toUpperCase();
     final progress = ref.watch(catalogProgressProvider);
     final words = ref.watch(cefrLevelWordsProvider(code));
@@ -111,8 +126,11 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(code, textDirection: TextDirection.ltr),
-        actions: const [
-          ContextHelpIcon(topic: HelpTopic.levelArtwork),
+        actions: [
+          ContextHelpIcon(
+            topic: HelpTopic.levelArtwork,
+            languageCode: language,
+          ),
         ],
       ),
       body: progress.when(
@@ -140,28 +158,68 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
                 padding: const EdgeInsets.all(AppSpacing.screenPadding),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
+                    const Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: ArtJourneyLanguageToggle(),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
                     CefrArtworkCard(
                       level: code,
                       mastered: mastered,
                       total: total,
                       masteredEntryIds: data.masteredIdsFor(code),
+                      languageCode: language,
                     ),
-                    if (total > 0 && mastered >= total) ...[
-                      const SizedBox(height: AppSpacing.sm),
-                      Text(l10n.masterpieceCompleted(code)),
-                    ],
                     const SizedBox(height: AppSpacing.md),
-                    Text(l10n.collectionNotOfficialLevel),
-                    const SizedBox(height: AppSpacing.md),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        Chip(label: Text(l10n.masteredCountOfTotal(mastered, total))),
-                        Chip(label: Text(l10n.wordsRemainingCount(remaining))),
-                        Chip(label: Text('${l10n.statusDiscovered} $discovered')),
-                        Chip(label: Text('${l10n.statusLearning} $learning')),
-                      ],
+                    Directionality(
+                      textDirection:
+                          journeyRtl ? TextDirection.rtl : TextDirection.ltr,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            journey.artJourneyLevel('\u200E$code\u200E'),
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          const SizedBox(height: AppSpacing.sm),
+                          Text(journey.artPaintingGrows),
+                          if (mastered == 0) ...[
+                            const SizedBox(height: AppSpacing.sm),
+                            Text(journey.artNotStarted),
+                          ],
+                          if (total > 0 && mastered >= total) ...[
+                            const SizedBox(height: AppSpacing.sm),
+                            Text(journey.masterpieceCompleted('\u200E$code\u200E')),
+                          ],
+                          const SizedBox(height: AppSpacing.sm),
+                          Text(journey.collectionNotOfficialLevel),
+                          const SizedBox(height: AppSpacing.md),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              Chip(
+                                label: Text(
+                                  '${journey.artMasteredWords}: $mastered / $total',
+                                ),
+                              ),
+                              Chip(
+                                label: Text(
+                                  '${journey.artRemainingWords}: $remaining',
+                                ),
+                              ),
+                              Chip(
+                                label: Text(
+                                  '${journey.statusDiscovered} $discovered',
+                                ),
+                              ),
+                              Chip(
+                                label: Text('${journey.statusLearning} $learning'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.md),
                     TextField(
@@ -185,7 +243,7 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
                           'remaining',
                         ])
                           FilterChip(
-                            label: Text(_filterLabel(l10n, filter)),
+                            label: Text(_filterLabel(journey, filter)),
                             selected: _filter == filter,
                             onSelected: (_) => setState(() => _filter = filter),
                           ),
@@ -235,13 +293,13 @@ class _CefrLevelScreenState extends ConsumerState<CefrLevelScreen> {
     };
   }
 
-  String _filterLabel(AppLocalizations l10n, String filter) {
+  String _filterLabel(AppLocalizations journey, String filter) {
     return switch (filter) {
-      'mastered' => l10n.statusMastered,
-      'learning' => l10n.statusLearning,
-      'discovered' => l10n.statusDiscovered,
-      'remaining' => l10n.remaining,
-      _ => l10n.all,
+      'mastered' => journey.statusMastered,
+      'learning' => journey.statusLearning,
+      'discovered' => journey.statusDiscovered,
+      'remaining' => journey.remaining,
+      _ => journey.all,
     };
   }
 }

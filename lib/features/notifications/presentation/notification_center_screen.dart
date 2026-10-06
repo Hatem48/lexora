@@ -168,6 +168,10 @@ class NotificationCenterBody extends StatelessWidget {
         l10n.streakNoticeTitle,
         l10n.streakNotice(notice.count),
       ),
+    NoticeKind.vocabularyReview => (
+        l10n.wordReviewNoticeTitle,
+        l10n.wordReviewNotice(notice.count),
+      ),
     NoticeKind.achievement => () {
         final definition = AchievementCatalog.byId(notice.achievementId ?? '');
         if (definition == null) {

@@ -17,6 +17,7 @@ import '../../home/presentation/dashboard_providers.dart';
 import '../../progress/presentation/catalog_progress_section.dart';
 import 'topic_icons.dart';
 import 'topic_providers.dart';
+import 'topic_question_card.dart';
 
 class TopicDetailScreen extends ConsumerStatefulWidget {
   const TopicDetailScreen({super.key, required this.topicId});
@@ -356,46 +357,10 @@ class _QuestionsTabState extends ConsumerState<_QuestionsTab> {
   TextEditingController _controller(String id) =>
       _answers.putIfAbsent(id, TextEditingController.new);
 
-  List<Widget> _questionBody(
-    BuildContext context,
-    AppLocalizations l10n,
-    TopicQuestionRow question,
-    bool arabic,
-  ) {
-    final payload = TopicQuestionPayload.parse(question.suggestedAnswer);
-    final answer = payload.answerFor(arabic: arabic);
-    return [
-      if (payload.type == 'multiple_choice')
-        for (final option in payload.options)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Text(
-              '${option.id}. ${arabic && option.ar.isNotEmpty ? option.ar : option.en}',
-              textDirection: arabic ? TextDirection.rtl : TextDirection.ltr,
-            ),
-          ),
-      TextField(
-        controller: _controller(question.id),
-        textDirection: TextDirection.ltr,
-        minLines: 2,
-        maxLines: 4,
-        decoration: InputDecoration(labelText: l10n.yourAnswer),
-      ),
-      const SizedBox(height: 8),
-      LexoraPrimaryButton(
-        label: l10n.submitAnswer,
-        onPressed: () => _submit(question),
-      ),
-      const SizedBox(height: 8),
-      Text('${l10n.suggestedAnswer}: $answer'),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final db = ref.watch(appDatabaseProvider);
-    final arabic = Localizations.localeOf(context).languageCode == 'ar';
     final query = db.select(db.topicQuestions)
       ..where((row) => row.topicId.equals(widget.topicId));
     if (widget.cefr != null) {
@@ -417,12 +382,13 @@ class _QuestionsTabState extends ConsumerState<_QuestionsTab> {
           children: [
             for (final question in questions) ...[
               if (question.isDevelopmentSample) Text(l10n.developmentSample),
-              Text(
-                arabic ? question.promptAr : question.promptEn,
-                style: Theme.of(context).textTheme.titleMedium,
+              TopicQuestionCard(
+                promptEn: question.promptEn,
+                promptAr: question.promptAr,
+                payload: TopicQuestionPayload.parse(question.suggestedAnswer),
+                answerController: _controller(question.id),
+                onSubmit: () => _submit(question),
               ),
-              const SizedBox(height: 8),
-              ..._questionBody(context, l10n, question, arabic),
               const SizedBox(height: 16),
             ],
             if (_found.isNotEmpty)

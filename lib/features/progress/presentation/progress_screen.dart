@@ -13,7 +13,10 @@ import '../../../core/services/progress/activity_policy.dart';
 import '../../../core/services/progress/streak.dart';
 import '../../../core/help/context_help_icon.dart';
 import '../../../core/help/help_catalog.dart';
+import '../../../core/providers/settings_provider.dart';
 import '../../../core/widgets/lexora_widgets.dart';
+import 'art_journey_language_controller.dart';
+import 'art_journey_language_toggle.dart';
 import 'catalog_progress_section.dart';
 import 'cefr_artwork_card.dart';
 import '../domain/cefr_artwork.dart';
@@ -130,6 +133,10 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final language = ref.watch(artJourneyLanguageProvider).asData?.value ??
+        (ref.watch(settingsProvider).localeCode == 'ar' ? 'ar' : 'en');
+    final journey = lookupAppLocalizations(Locale(language));
+    final journeyRtl = language == 'ar';
     final snapshot = ref.watch(progressSnapshotProvider(_level?.code));
 
     return Scaffold(
@@ -151,9 +158,22 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
           return ListView(
             padding: const EdgeInsets.all(AppSpacing.screenPadding),
             children: [
-              SectionHeader(
-                title: l10n.vocabularyJourney,
-                help: HelpTopic.levelArtwork,
+              Directionality(
+                textDirection:
+                    journeyRtl ? TextDirection.rtl : TextDirection.ltr,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SectionHeader(
+                      title: journey.vocabularyJourney,
+                      help: HelpTopic.levelArtwork,
+                      helpLanguageCode: language,
+                      trailing: const ArtJourneyLanguageToggle(),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(journey.artPaintingGrows),
+                  ],
+                ),
               ),
               const SizedBox(height: AppSpacing.md),
               SizedBox(
@@ -174,6 +194,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
                         mastered: mastered,
                         total: total,
                         masteredEntryIds: art?.masteredIdsFor(level.code) ?? const [],
+                        languageCode: language,
                         compact: true,
                         onTap: levelArtIsOpen(level.code)
                             ? () => context.push(levelArtPath(level.code))
